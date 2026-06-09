@@ -1,0 +1,43 @@
+<svg viewBox="0 0 256 256" width="512" height="512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Back ring gradient (darker) -->
+    <linearGradient id="atom-back" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.65" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.5" />
+    </linearGradient>
+    
+    <!-- Front ring gradient (brighter) -->
+    <linearGradient id="atom-front" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Back ring (rotated 45 degrees) -->
+  <ellipse
+    cx="128"
+    cy="128"
+    rx="88"
+    ry="40"
+    stroke="url(#atom-back)"
+    stroke-width="12"
+    stroke-linecap="round"
+    fill="none"
+    transform="rotate(45 128 128)"
+  />
+  
+  <!-- Front ring (rotated -45 degrees) -->
+  <ellipse
+    cx="128"
+    cy="128"
+    rx="88"
+    ry="40"
+    stroke="url(#atom-front)"
+    stroke-width="12"
+    stroke-linecap="round"
+    fill="none"
+    transform="rotate(-45 128 128)"
+  />
+</svg>

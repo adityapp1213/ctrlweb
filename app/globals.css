@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Handlee&family=Shadows+Into+Light&display=swap");
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Handlee", cursive;
+  --font-mono: "Courier New", Courier, monospace;
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    margin: 0;
+  }
+}
+
+.handlee-regular {
+  font-family: "Handlee", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.shadows-into-light-regular {
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
