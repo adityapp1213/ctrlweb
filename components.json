@@ -24,6 +24,7 @@
   "registries": {
     "@tailark": "https://tailark.com/r/{name}.json",
     "@motion-primitives": "https://motion-primitives.com/c/{name}.json",
-    "@shadcn-space": "https://shadcnspace.com/r/{name}.json"
+    "@shadcn-space": "https://shadcnspace.com/r/{name}.json",
+    "@skiper-ui": "https://skiper-ui.com/registry/{name}.json"
   }
 }

@@ -1,10 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Handlee&family=Shadows+Into+Light&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 @import "tailwindcss";
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Handlee", cursive;
+  --font-sans: var(--font-palatino), "Palatino Linotype", Palatino, Georgia,
+    serif;
   --font-mono: "Courier New", Courier, monospace;
 }
 
@@ -17,6 +18,8 @@
   html,
   body {
     @apply bg-background text-foreground;
+    max-width: 100%;
+    overflow-x: clip;
   }
   html {
     @apply font-sans;
@@ -26,14 +29,19 @@
   }
 }
 
-.handlee-regular {
-  font-family: "Handlee", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
 .shadows-into-light-regular {
   font-family: "Shadows Into Light", cursive;
   font-weight: 400;
   font-style: normal;
+}
+
+@keyframes butterfly-flap {
+  0%,
+  24.99% {
+    opacity: 1;
+  }
+  25%,
+  100% {
+    opacity: 0;
+  }
 }

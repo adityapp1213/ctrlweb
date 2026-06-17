@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 
-export const handee = localFont({
-  src: "../public/fonts/Handlee-Regular.ttf",
+export const palatino = localFont({
+  src: "../public/fonts/Palatino/palr45w.ttf",
   display: "swap",
-  variable: "--font-handee",
+  variable: "--font-palatino",
 });

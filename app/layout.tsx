@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { palatino } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full bg-white antialiased">
+    <html
+      lang="en"
+      className={`${palatino.variable} ${palatino.className} h-full bg-white antialiased`}
+    >
       <body className="min-h-full bg-white text-black">{children}</body>
     </html>
   );
