@@ -4,6 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import {
+  FlappingButterfly,
+  InvertedFlappingButterfly,
+} from "@/components/flapping-butterfly";
 import { AtomLogo } from "@/components/logo";
 import Button7 from "@/components/ui/button-7";
 
@@ -16,64 +20,32 @@ const navTargets: Partial<Record<(typeof menuItems)[number], string>> = {
   "About Us": "about-us",
 };
 
-const butterflyFrames = [
-  "/assets/butterfly1.svg",
-  "/assets/butterfly2.svg",
-  "/assets/butterfly3.svg",
-  "/assets/butterfly4.svg",
-];
-
-const invertedButterflyFrames = [
-  "/assets/butterfly1(inverted).svg",
-  "/assets/butterfly2(inverted).svg",
-  "/assets/butterfly3(inverted).svg",
-  "/assets/butterfly4(inverted).svg",
-];
-
-function FlappingButterfly({
-  className,
-  frameDelay = 0,
-  inverted = false,
-}: {
-  className: string;
-  frameDelay?: number;
-  inverted?: boolean;
-}) {
-  const frames = inverted ? invertedButterflyFrames : butterflyFrames;
-
-  return (
-    <div
-      className={["pointer-events-none absolute z-[70]", className].join(" ")}
-    >
-      {frames.map((frame, index) => (
-        <Image
-          key={frame}
-          src={frame}
-          alt=""
-          width={160}
-          height={160}
-          aria-hidden="true"
-          className="absolute inset-0 size-full object-contain opacity-0 [animation:butterfly-flap_640ms_steps(1,end)_infinite]"
-          style={{
-            animationDelay: `${frameDelay + index * 160}ms`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 const navButterflies = [
   {
-    className: "-left-20 -top-16 size-24 -rotate-12 sm:size-32",
+    className: "z-[70] -left-20 -top-16 size-24 -rotate-12 sm:size-32",
     inverted: false,
   },
   {
-    className: "-left-7 -top-20 size-20 rotate-6 sm:size-28",
+    className: "z-[70] -left-7 -top-20 size-20 rotate-6 sm:size-28",
     inverted: false,
   },
   {
-    className: "-right-16 -bottom-16 size-24 -rotate-12 sm:size-32",
+    className: "z-[70] -right-16 -bottom-16 size-24 -rotate-12 sm:size-32",
+    inverted: true,
+  },
+];
+
+const heroCtaButterflies = [
+  {
+    className: "z-[20] -left-14 -top-12 size-20 rotate-12 sm:hidden",
+    inverted: false,
+  },
+  {
+    className: "z-[20] -right-16 -top-10 size-24 -rotate-12 sm:hidden",
+    inverted: true,
+  },
+  {
+    className: "z-[20] -right-3 -bottom-14 size-20 rotate-6 sm:hidden",
     inverted: true,
   },
 ];
@@ -122,11 +94,17 @@ function ButterflyCta({
             butterfliesVisible ? "opacity-100" : "opacity-0",
           ].join(" ")}
         >
-          <FlappingButterfly
-            className={butterfly.className}
-            frameDelay={index * 120}
-            inverted={butterfly.inverted}
-          />
+          {butterfly.inverted ? (
+            <InvertedFlappingButterfly
+              className={butterfly.className}
+              frameDelay={index * 120}
+            />
+          ) : (
+            <FlappingButterfly
+              className={butterfly.className}
+              frameDelay={index * 120}
+            />
+          )}
         </span>
       ))}
       <button type="button" onClick={onClick} className={className}>
@@ -293,7 +271,7 @@ export function Hero() {
               className="hidden object-cover object-center sm:block"
             />
             <Image
-              src="/assets/mainback(mobile).svg"
+              src="/assets/mobileback1.svg"
               alt="Hero background"
               fill
               sizes="(max-width: 639px) 100vw, 0vw"
@@ -304,18 +282,35 @@ export function Hero() {
 
           <div className="absolute inset-0 flex items-end justify-center px-4 pb-36 pt-24 sm:px-6 sm:pb-40 sm:pt-28 md:pb-36 lg:pb-42">
             <div className="mx-auto flex w-full max-w-4xl justify-center">
-              <Button7
-                onClick={() => {
-                  window.open(
-                    "https://forms.gle/NYkQTh2EeLP3Jc5Z9",
-                    "_blank",
-                    "noopener,noreferrer"
-                  );
-                }}
-                className="h-[58px] w-[178px] rounded-xl bg-black px-0 text-[1.12rem] font-semibold text-white shadow-none hover:bg-black/85 sm:h-[60px] sm:w-[150px] sm:px-0"
-              >
-                See Research
-              </Button7>
+              <span className="relative inline-flex overflow-visible">
+                {heroCtaButterflies.map((butterfly, index) => (
+                  butterfly.inverted ? (
+                    <InvertedFlappingButterfly
+                      key={butterfly.className}
+                      className={butterfly.className}
+                      frameDelay={index * 90}
+                    />
+                  ) : (
+                    <FlappingButterfly
+                      key={butterfly.className}
+                      className={butterfly.className}
+                      frameDelay={index * 90}
+                    />
+                  )
+                ))}
+                <Button7
+                  onClick={() => {
+                    window.open(
+                      "https://forms.gle/NYkQTh2EeLP3Jc5Z9",
+                      "_blank",
+                      "noopener,noreferrer"
+                    );
+                  }}
+                  className="relative z-10 h-[58px] w-[178px] rounded-xl bg-black px-0 text-[1.12rem] font-semibold text-white shadow-none hover:bg-black/85 sm:h-[60px] sm:w-[150px] sm:px-0"
+                >
+                  See Research
+                </Button7>
+              </span>
             </div>
           </div>
         </section>

@@ -61,7 +61,7 @@ const section3Images = [
   },
 ];
 
-export function Section3() {
+export function FeaturesSection() {
   const [activeIndex, setActiveIndex] = useState(1);
   const activeFeature = section3Images[activeIndex];
 
@@ -104,6 +104,6 @@ export function Section3() {
   );
 }
 
-export default function Section3Page() {
-  return <Section3 />;
+export default function FeaturesPage() {
+  return <FeaturesSection />;
 }

@@ -3,23 +3,28 @@ import Link from "next/link";
 
 const socialLinks = [
   {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/aditya-prasad-panigrahi/",
+    icon: "/assets/linkedin.svg",
+  },
+  {
     label: "GitHub",
-    href: "#",
+    href: "https://github.com/adityapp1213",
     icon: "/assets/github.svg",
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/why.adi_tya",
     icon: "/assets/instagram.svg",
   },
   {
     label: "Gmail",
-    href: "mailto:",
+    href: "mailto:adityappanigrahi@gmail.com",
     icon: "/assets/gmail.svg",
   },
 ];
 
-export function Section6() {
+export function AboutUsSection() {
   return (
     <section
       id="about-us"
@@ -46,13 +51,19 @@ export function Section6() {
             </p>
           </div>
 
-          <div className="mx-auto mt-9 flex w-full max-w-xs items-center justify-center gap-9 lg:mx-0 lg:justify-start">
+          <div className="mx-auto mt-9 flex w-full max-w-sm items-center justify-center gap-7 lg:mx-0 lg:justify-start">
             {socialLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 className="inline-flex size-12 items-center justify-center rounded-xl text-black transition-colors hover:bg-black/[0.03]"
                 aria-label={link.label}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  link.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
               >
                 <Image
                   src={link.icon}
@@ -87,6 +98,6 @@ export function Section6() {
   );
 }
 
-export default function Section6Page() {
-  return <Section6 />;
+export default function AboutUsPage() {
+  return <AboutUsSection />;
 }

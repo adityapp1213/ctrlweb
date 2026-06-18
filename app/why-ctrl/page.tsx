@@ -2,67 +2,26 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import {
+  FlappingButterfly,
+  InvertedFlappingButterfly,
+} from "@/components/flapping-butterfly";
 import Button7 from "@/components/ui/button-7";
-
-const butterflyFrames = [
-  "/assets/butterfly1.svg",
-  "/assets/butterfly2.svg",
-  "/assets/butterfly3.svg",
-  "/assets/butterfly4.svg",
-];
-
-const invertedButterflyFrames = [
-  "/assets/butterfly1(inverted).svg",
-  "/assets/butterfly2(inverted).svg",
-  "/assets/butterfly3(inverted).svg",
-  "/assets/butterfly4(inverted).svg",
-];
 
 const cloudyCtaButterflies = [
   {
-    className: "-left-14 -bottom-14 size-20 rotate-12 sm:size-28",
+    className: "z-30 -left-14 -bottom-14 size-20 rotate-12 sm:size-28",
     inverted: false,
   },
   {
-    className: "-right-16 -top-14 size-24 -rotate-12 sm:size-32",
+    className: "z-30 -right-16 -top-14 size-24 -rotate-12 sm:size-32",
     inverted: true,
   },
   {
-    className: "-right-5 -bottom-16 size-20 rotate-6 sm:size-28",
+    className: "z-30 -right-5 -bottom-16 size-20 rotate-6 sm:size-28",
     inverted: true,
   },
 ];
-
-function FlappingButterfly({
-  className,
-  frameDelay = 0,
-  inverted = false,
-}: {
-  className: string;
-  frameDelay?: number;
-  inverted?: boolean;
-}) {
-  const frames = inverted ? invertedButterflyFrames : butterflyFrames;
-
-  return (
-    <span className={["pointer-events-none absolute z-30", className].join(" ")}>
-      {frames.map((frame, index) => (
-        <Image
-          key={frame}
-          src={frame}
-          alt=""
-          width={160}
-          height={160}
-          aria-hidden="true"
-          className="absolute inset-0 size-full object-contain opacity-0 [animation:butterfly-flap_640ms_steps(1,end)_infinite]"
-          style={{
-            animationDelay: `${frameDelay + index * 160}ms`,
-          }}
-        />
-      ))}
-    </span>
-  );
-}
 
 function CloudyCta() {
   const ctaRef = useRef<HTMLSpanElement>(null);
@@ -114,11 +73,17 @@ function CloudyCta() {
             showButterflies ? "opacity-100" : "opacity-0",
           ].join(" ")}
         >
-          <FlappingButterfly
-            className={butterfly.className}
-            frameDelay={index * 90}
-            inverted={butterfly.inverted}
-          />
+          {butterfly.inverted ? (
+            <InvertedFlappingButterfly
+              className={butterfly.className}
+              frameDelay={index * 90}
+            />
+          ) : (
+            <FlappingButterfly
+              className={butterfly.className}
+              frameDelay={index * 90}
+            />
+          )}
         </span>
       ))}
       <Button7
@@ -137,7 +102,7 @@ function CloudyCta() {
   );
 }
 
-export function Section4() {
+export function WhyCtrlSection() {
   return (
     <section
       id="why-ctrl"
@@ -182,6 +147,6 @@ export function Section4() {
   );
 }
 
-export default function Section4Page() {
-  return <Section4 />;
+export default function WhyCtrlPage() {
+  return <WhyCtrlSection />;
 }

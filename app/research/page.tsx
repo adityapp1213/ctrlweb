@@ -30,7 +30,7 @@ const section5Images = [
   },
 ];
 
-export function Section5() {
+export function ResearchSection() {
   return (
     <section
       id="research"
@@ -48,6 +48,6 @@ export function Section5() {
   );
 }
 
-export default function Section5Page() {
-  return <Section5 />;
+export default function ResearchPage() {
+  return <ResearchSection />;
 }

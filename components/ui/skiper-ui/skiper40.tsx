@@ -1,38 +1,28 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
+import {
+  FlappingButterfly,
+  InvertedFlappingButterfly,
+} from "@/components/flapping-butterfly";
 import { cn } from "@/lib/utils";
 import Button7 from "@/components/ui/button-7";
 
-const butterflyFrames = [
-  "/assets/butterfly1.svg",
-  "/assets/butterfly2.svg",
-  "/assets/butterfly3.svg",
-  "/assets/butterfly4.svg",
-];
-
-const invertedButterflyFrames = [
-  "/assets/butterfly1(inverted).svg",
-  "/assets/butterfly2(inverted).svg",
-  "/assets/butterfly3(inverted).svg",
-  "/assets/butterfly4(inverted).svg",
-];
-
 const monarchCtaButterflies = [
   {
-    className: "-right-20 -top-16 size-24 rotate-12 sm:size-32",
+    className: "z-10 -right-20 -top-16 size-24 rotate-12 sm:size-32",
     inverted: true,
   },
   {
-    className: "-right-7 -top-20 size-20 -rotate-6 sm:size-28",
+    className: "z-10 -right-7 -top-20 size-20 -rotate-6 sm:size-28",
     inverted: true,
   },
   {
-    className: "-left-16 -bottom-16 size-24 rotate-12 sm:size-32",
+    className: "z-10 -left-16 -bottom-16 size-24 rotate-12 sm:size-32",
     inverted: false,
   },
 ];
@@ -50,37 +40,6 @@ const Skiper40 = () => {
     </section>
   );
 };
-
-function FlappingButterfly({
-  className,
-  frameDelay = 0,
-  inverted = false,
-}: {
-  className: string;
-  frameDelay?: number;
-  inverted?: boolean;
-}) {
-  const frames = inverted ? invertedButterflyFrames : butterflyFrames;
-
-  return (
-    <span className={cn("pointer-events-none absolute z-10", className)}>
-      {frames.map((frame, index) => (
-        <Image
-          key={frame}
-          src={frame}
-          alt=""
-          width={160}
-          height={160}
-          aria-hidden="true"
-          className="absolute inset-0 size-full object-contain opacity-0 [animation:butterfly-flap_640ms_steps(1,end)_infinite]"
-          style={{
-            animationDelay: `${frameDelay + index * 160}ms`,
-          }}
-        />
-      ))}
-    </span>
-  );
-}
 
 export {
   Link000,
@@ -423,14 +382,21 @@ const LinkDottedArrow = ({
               </span>
               <span className="my-4 block h-px w-full bg-black/10 sm:my-6" />
               <span className="relative inline-flex w-full overflow-visible">
-                {monarchCtaButterflies.map((butterfly, index) => (
-                  <FlappingButterfly
-                    key={butterfly.className}
-                    className={butterfly.className}
-                    frameDelay={index * 90}
-                    inverted={butterfly.inverted}
-                  />
-                ))}
+                {monarchCtaButterflies.map((butterfly, index) =>
+                  butterfly.inverted ? (
+                    <InvertedFlappingButterfly
+                      key={butterfly.className}
+                      className={butterfly.className}
+                      frameDelay={index * 90}
+                    />
+                  ) : (
+                    <FlappingButterfly
+                      key={butterfly.className}
+                      className={butterfly.className}
+                      frameDelay={index * 90}
+                    />
+                  ),
+                )}
                 <Button7
                   onClick={() => {
                     window.location.href = href;
