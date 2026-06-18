@@ -49,7 +49,7 @@ export function FooterSection() {
         <div className="mt-3 flex w-full flex-col items-start gap-5 text-sm font-medium uppercase leading-tight tracking-[-0.04em] text-white sm:mt-0 sm:flex-row sm:items-end sm:justify-between sm:text-base lg:text-lg">
           <div className="flex w-full items-start justify-between gap-8 sm:w-fit sm:justify-start sm:gap-16">
             <p>
-              Designer adita & co-designer supriya
+              Designer aditya & co-designer supriya
             </p>
              
           </div>

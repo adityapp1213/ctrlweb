@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scaling Synthetic Data ; Atom Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0d;
+    --ink-2: #3a3a36;
+    --ink-3: #7a7a72;
+    --surface: #f8f7f3;
+    --surface-3: #e4e1d8;
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --gray-light: #f1efe8;
+    --rule: #d3d1c7;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'Geist', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 0 24px 120px; }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 24px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .site-header .wordmark { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .08em; color: var(--ink-3); text-transform: uppercase; }
+  .site-header .tag { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: .06em; }
+
+  .hero { margin-bottom: 64px; }
+  .hero-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 24px; }
+  .hero-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--teal); }
+
+  h1 { font-family: var(--serif); font-size: clamp(30px, 6vw, 56px); font-weight: 400; line-height: 1.08; letter-spacing: -.01em; color: var(--ink); margin-bottom: 28px; }
+  h1 em { font-style: italic; color: var(--ink-2); }
+
+  .hero-meta { display: flex; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+  .hero-meta span { font-family: var(--mono); font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+  .hero-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--rule); }
+
+  .lede { font-size: clamp(15px, 2.5vw, 19px); font-weight: 300; line-height: 1.65; color: var(--ink-2); margin-bottom: 28px; }
+
+  h2 { font-family: var(--serif); font-size: clamp(22px, 4vw, 30px); font-weight: 400; line-height: 1.2; color: var(--ink); margin: 64px 0 20px; letter-spacing: -.01em; }
+  h3 { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 40px 0 14px; }
+
+  p { margin-bottom: 22px; font-size: clamp(14px, 2vw, 16.5px); color: var(--ink-2); }
+  strong { font-weight: 500; color: var(--ink); }
+  a { color: var(--teal); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
+  a:hover { border-bottom-color: var(--teal); }
+
+  .section-rule { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
+
+  .diagram-wrap { margin: 36px 0 44px; border: 1px solid var(--rule); border-radius: 18px; background: linear-gradient(180deg, #fff 0%, #fcfbf8 100%); padding: 24px 18px 18px; overflow: hidden; box-shadow: 0 14px 34px rgba(14,14,13,.05); }
+  .diagram-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; padding: 6px 10px; border: 1px solid var(--surface-3); border-radius: 999px; background: rgba(248,247,243,.9); }
+  .diagram-label::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--ink-3); opacity: .65; }
+  .diagram-wrap svg { display: block; width: 100%; height: auto; }
+
+  .callout { border-left: 2px solid var(--teal); background: var(--teal-light); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 28px 0; }
+  .callout p { font-size: 14.5px; color: var(--ink-2); margin: 0; }
+  .callout strong { color: var(--teal); }
+  .callout-purple { border-left-color: var(--purple); background: var(--purple-light); }
+  .callout-purple strong { color: var(--purple); }
+  .callout-amber { border-left-color: var(--amber); background: var(--amber-light); }
+  .callout-amber strong { color: var(--amber); }
+
+  .table-wrap { overflow-x: auto; margin: 28px 0; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 440px; }
+  th { font-family: var(--mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); background: var(--gray-light); }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--surface-3); color: var(--ink-2); vertical-align: top; }
+  td:first-child { font-weight: 500; color: var(--ink); }
+  tr:last-child td { border-bottom: none; }
+
+  .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+  .path-card { border: 1px solid var(--rule); border-radius: 10px; padding: 20px; background: #fff; }
+  .path-card .path-num { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-3); margin-bottom: 8px; text-transform: uppercase; }
+  .path-card h4 { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+  .path-card p { font-size: 13px; margin: 0; color: var(--ink-3); line-height: 1.55; }
+
+  .sources { margin-top: 60px; }
+  .sources h2 { font-size: 22px; margin-top: 0; }
+  .source-list { list-style: none; }
+  .source-list li { display: flex; align-items: flex-start; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--surface-3); font-size: 13.5px; }
+  .source-list li:last-child { border-bottom: none; }
+  .source-num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); min-width: 24px; margin-top: 2px; }
+
+  .article-footer { margin-top: 88px; padding-top: 28px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .article-footer span { font-family: var(--mono); font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+
+  code { font-family: var(--mono); font-size: 13px; background: var(--gray-light); padding: 2px 6px; border-radius: 4px; }
+
+  @media (max-width: 580px) {
+    .page-wrap { padding: 0 16px 80px; }
+    .path-grid { grid-template-columns: 1fr; }
+    h2 { margin-top: 48px; }
+    .diagram-wrap { padding: 18px 10px 14px; border-radius: 8px; }
+    .hero-meta .dot { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header">
+    <span class="wordmark">Atom Technologies</span>
+    <span class="tag">Research · 2025</span>
+  </header>
+
+  <article>
+
+    <div class="hero">
+      <div class="hero-label">Synthetic Data</div>
+      <h1>Scaling Synthetic Data ; <em>Rephrasing the Web Before Training Begins</em></h1>
+      <p class="lede">Most small models are bottlenecked not by architecture, but by the quality of the data they see at pretraining. By using LLaMA-3 to rephrase raw web text into clean, structured batches before any training begins, the resulting synthetic corpus is far denser in signal ; setting up a compact model to punch well above its weight class.</p>
+      <div class="hero-meta">
+        <span>Research Brief</span>
+        <div class="dot"></div>
+        <span>Data Pipeline</span>
+        <div class="dot"></div>
+        <span>July 28th 2025</span>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         FIG 1 ; PIPELINE OVERVIEW
+         viewBox: 560 × 320
+         3 boxes: 260 wide × 72 tall, centred at x=280
+         left=150, right=410
+         Box 1 top=16,  centre-y=52
+         Box 2 top=128, centre-y=164
+         Box 3 top=240, centre-y=276
+         Arrows: y=88→128, y=200→240
+         Caption y=312
+    ════════════════════════════════════════ -->
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 1 ; Synthesis pipeline overview</div>
+      <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="p1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <rect x="134" y="8" width="292" height="304" rx="18" fill="#fbfaf6" stroke="#e4e1d8" stroke-width="0.8"/>
+        <!-- Box 1: OpenWebText -->
+        <rect x="150" y="16" width="260" height="72" rx="14" fill="#f6f3ea" stroke="#b4b2a9" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#2c2c2a"
+              x="280" y="44" text-anchor="middle" dominant-baseline="central">OpenWebText Corpus</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780"
+              x="280" y="68" text-anchor="middle" dominant-baseline="central">Raw web text · streamed as .jsonl.gz</text>
+
+        <!-- Arrow 1→2 -->
+        <line x1="280" y1="88" x2="280" y2="120" stroke="#b4b2a9" stroke-width="1.3" marker-end="url(#p1)"/>
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#b4b2a9"
+              x="292" y="104" dominant-baseline="central">50–500 line chunks</text>
+
+        <!-- Box 2: LLaMA-3 Rephraser -->
+        <rect x="150" y="128" width="260" height="72" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041"
+              x="280" y="156" text-anchor="middle" dominant-baseline="central">LLaMA-3 Rephraser</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56"
+              x="280" y="180" text-anchor="middle" dominant-baseline="central">Rewrites each batch into Q/A pairs</text>
+
+        <!-- Arrow 2→3 -->
+        <line x1="280" y1="200" x2="280" y2="232" stroke="#1d9e75" stroke-width="1.3" marker-end="url(#p1)"/>
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#1d9e75"
+              x="292" y="216" dominant-baseline="central">rephrased Q/A output</text>
+
+        <!-- Box 3: Synthetic Dataset -->
+        <rect x="150" y="240" width="260" height="72" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041"
+              x="280" y="268" text-anchor="middle" dominant-baseline="central">Synthetic Dataset</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56"
+              x="280" y="292" text-anchor="middle" dominant-baseline="central">batch_data00001.jsonl · 00002 · …</text>
+
+        <!-- Side label -->
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#0f6e56"
+              x="142" y="196" text-anchor="end" dominant-baseline="central">synthesis</text>
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#0f6e56"
+              x="142" y="210" text-anchor="end" dominant-baseline="central">stage</text>
+
+        <!-- Footer caption -->
+        
+      </svg>
+    </div>
+
+    <p>The pipeline has two discrete stages before any model work begins. Raw web text is streamed in manageable chunks and passed to LLaMA-3, which rewrites each batch into a clean, structured Q/A format. The resulting synthetic corpus is saved as numbered batch files ; ready for downstream use with no further transformation required.</p>
+
+    <!-- ── BACKGROUND ── -->
+    <h2>Background ; The BeyondWeb Result</h2>
+    <p>The DatalogyAI team's <a href="https://arxiv.org/pdf/2508.10975" target="_blank">BeyondWeb paper</a> demonstrated that language models trained on synthetic datasets can be up to <strong>6× more efficient</strong> than those trained solely on raw web text. Their approach focused on building synthetic corpora as a drop-in replacement for standard pretraining data ; same model architecture, markedly better data quality.</p>
+    <p>This project takes that insight one step earlier in the stack. Instead of swapping the corpus after the fact, the raw text is rephrased by a large model at the preprocessing stage ; before any vocabulary or tokenizer decisions are made. The synthetic signal is injected at the very root of the pipeline, shaping everything downstream.</p>
+
+    <div class="callout">
+      <p><strong>The hypothesis:</strong> A model trained on this synthetic corpus should reach the capability of a model 3–4× its size trained on raw web text ; because the corpus presents cleaner, denser signal per token from the very first gradient step.</p>
+    </div>
+
+    <!-- ── PIPELINE ── -->
+    <h2>The Synthesis Pipeline</h2>
+    <p>The pipeline is implemented as a streaming batch processor. OpenWebText is read in compressed <strong>.jsonl.gz</strong> format and divided into chunks of 50–500 lines. Each chunk is passed as a prompt to a locally running LLaMA-3 instance, which rewrites the raw passages into a structured Q/A format. The refined output is written out as sequentially numbered <code>.jsonl</code> batch files.</p>
+
+    <!-- ══════════════════════════════════════
+         FIG 2 ; BATCH REPHRASING DETAIL
+         viewBox: 560 × 172
+         3 horizontal boxes, each 154 wide × 76 tall
+         Gaps between boxes: ~28px each → arrows span that gap
+         Box 1: x=8,   centre-x=85,  y=30→106, centre-y=68
+         Box 2: x=196, centre-x=280, y=30→106, centre-y=68
+         Box 3: x=398, centre-x=475, y=30→106, centre-y=68
+         Arrow 1→2: x1=162 → x2=196
+         Arrow 2→3: x1=350 → x2=398
+         Caption: y=160
+    ════════════════════════════════════════ -->
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 2 ; Batch rephrasing detail</div>
+      <svg viewBox="0 0 560 172" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="p2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- Box 1: Raw batch -->
+        <rect x="8" y="30" width="154" height="76" rx="14" fill="#f6f3ea" stroke="#b4b2a9" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a"
+              x="85" y="58" text-anchor="middle" dominant-baseline="central">Raw batch</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#888780"
+              x="85" y="79" text-anchor="middle" dominant-baseline="central">50–500 lines</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#888780"
+              x="85" y="96" text-anchor="middle" dominant-baseline="central">from OpenWebText</text>
+
+        <!-- Arrow 1→2 -->
+        <line x1="162" y1="68" x2="192" y2="68" stroke="#b4b2a9" stroke-width="1.3" marker-end="url(#p2)"/>
+
+        <!-- Box 2: LLaMA-3 -->
+        <rect x="196" y="30" width="168" height="76" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#085041"
+              x="280" y="56" text-anchor="middle" dominant-baseline="central">LLaMA-3 Rephrase</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+              x="280" y="76" text-anchor="middle" dominant-baseline="central">Local GPU inference</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+              x="280" y="95" text-anchor="middle" dominant-baseline="central">15 GB+ VRAM required</text>
+
+        <!-- Arrow 2→3 -->
+        <line x1="364" y1="68" x2="394" y2="68" stroke="#1d9e75" stroke-width="1.3" marker-end="url(#p2)"/>
+
+        <!-- Box 3: Refined output -->
+        <rect x="398" y="30" width="154" height="76" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#085041"
+              x="475" y="56" text-anchor="middle" dominant-baseline="central">Refined batch</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+              x="475" y="76" text-anchor="middle" dominant-baseline="central">{"q": "…", "a": "…"}</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+              x="475" y="95" text-anchor="middle" dominant-baseline="central">saved as .jsonl</text>
+
+        <!-- Caption -->
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#b4b2a9"
+              x="280" y="158" text-anchor="middle">Batches are processed sequentially · pipeline is resumable at any point</text>
+      </svg>
+    </div>
+
+    <p>Each refined entry follows the schema <code>{"q": "…", "a": "…"}</code>. The question field captures the topic or intent extracted from the raw passage; the answer field contains the rephrased, structured explanation produced by LLaMA-3. This format is deliberate ; it imposes consistent structure that a smaller model can absorb far more efficiently than the inconsistently structured prose characteristic of raw web text.</p>
+
+    <div class="callout callout-purple">
+      <p><strong>Why rephrase at this stage?</strong> Raw web text carries HTML scraping artifacts, broken sentence structure, and significant noise. Running LLaMA-3 rephrasing before any tokenizer training means the vocabulary the tokenizer learns is shaped by clean, structured prose ; not noisy web output. Every downstream step benefits from this earlier intervention.</p>
+    </div>
+
+    <!-- ── OUTPUT FORMAT ── -->
+    <h2>Output Format &amp; Structure</h2>
+    <p>The repository organises output into two directories. The <strong>raw/</strong> folder holds the original OpenWebText files unchanged. The <strong>refined/</strong> folder contains the LLaMA-rephrased output in sequentially numbered batch files ; each one self-contained and independently resumable. Processing can be paused and restarted at any batch boundary without re-processing earlier output.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Description</th>
+            <th>Format / Spec</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OpenWebText input</td>
+            <td>Raw corpus sourced from Common Crawl web text</td>
+            <td>.jsonl.gz · streamed</td>
+          </tr>
+          <tr>
+            <td>Batch size</td>
+            <td>Lines per chunk passed to LLaMA-3 per call</td>
+            <td>50–500 lines</td>
+          </tr>
+          <tr>
+            <td>LLaMA-3 rephraser</td>
+            <td>Local inference model; rewrites each batch into Q/A pairs</td>
+            <td>15 GB+ VRAM · Colab T4 / A100</td>
+          </tr>
+          <tr>
+            <td>Refined batch files</td>
+            <td>Structured Q/A output, one file per processed chunk</td>
+            <td>batch_data00001.jsonl …</td>
+          </tr>
+          <tr>
+            <td>Entry schema</td>
+            <td>Each line is a valid JSON object with question and answer fields</td>
+            <td>{"q": "…", "a": "…"}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── REPHRASING QUALITY ── -->
+    <h2>What Rephrasing Actually Does</h2>
+
+    <h3>Noise removal</h3>
+    <p>Raw OpenWebText contains HTML residue, broken sentence fragments, promotional boilerplate, and encoding artifacts inherited from Common Crawl scraping. LLaMA-3 rephrasing strips these implicitly ; the model produces grammatically coherent, well-formed prose regardless of how malformed the input passage was.</p>
+
+    <h3>Structure imposition</h3>
+    <p>The Q/A output format imposes a consistent structure across the entire corpus. Every entry has a clear topic (the question) and a focused explanation (the answer). This is fundamentally different from the stream-of-consciousness structure of most web prose ; and it is a structure that models learn to reproduce and reason within far more reliably.</p>
+
+    <h3>Information density</h3>
+    <p>LLaMA-3 compresses and distils each raw passage when rephrasing. Redundant or low-information sentences are dropped. The rephrased answer conveys the core content of the original passage in fewer tokens ; meaning the corpus contains more distinct concepts per training token than the equivalent raw web text.</p>
+
+    <div class="callout callout-amber">
+      <p><strong>Grounding in prior work:</strong> DatalogyAI's BeyondWeb paper reports up to 6× efficiency from purely synthetic corpora. This project targets a more conservative 3× figure because the synthetic data is derived from real web text rather than generated from scratch ; but the rephrasing stage operates earlier in the stack, before any tokenizer decisions, giving the entire downstream pipeline a cleaner foundation to build on.</p>
+    </div>
+
+    <hr class="section-rule">
+
+    <h2>Technical Notes</h2>
+
+    <p><strong>Batch size selection.</strong> Batches of 50–500 lines balance context length against LLaMA-3's effective rephrasing coherence. Very small batches lose the inter-sentence context needed for well-formed Q/A output; very large batches exceed the model's effective attention window. 200-line batches are the practical sweet spot for most OpenWebText passages.</p>
+
+    <p><strong>GPU requirements.</strong> LLaMA-3 rephrasing requires a minimum of 15 GB VRAM. Google Colab T4 (16 GB) is sufficient for smaller batch sizes; A100 access is recommended for production-scale corpus generation. The preprocessing script (<code>dataset.py</code>) runs locally with any compatible GPU and does not require Colab specifically ; Colab is used here for convenience and storage mounting.</p>
+
+    <p><strong>Resumability.</strong> Each batch file is written atomically before the next batch begins. If the pipeline is interrupted, it can be restarted from the last successfully written batch with no data loss and no re-processing of earlier output. The sequential naming convention (<code>batch_data00001.jsonl</code>, <code>batch_data00002.jsonl</code>, …) makes gap detection straightforward.</p>
+
+    <p><strong>Output validation.</strong> Each line in a refined batch file should parse as valid JSON with non-empty <code>q</code> and <code>a</code> fields. The repository includes sample output across <code>qa_batch_00001.txt</code> through <code>qa_batch_00019.txt</code> ; useful for inspecting rephrasing quality across a range of source passages before committing to full-corpus processing.</p>
+
+    <hr class="section-rule">
+
+    <div class="sources">
+      <h2>References</h2>
+      <ul class="source-list">
+        <li><span class="source-num">[1]</span><span>DatalogyAI ; <a href="https://arxiv.org/pdf/2508.10975" target="_blank">BeyondWeb: Synthetic Data Can Make Language Models Up to 6× More Efficient</a>, 2025.</span></li>
+        <li><span class="source-num">[2]</span><span>adityapp1213 ; <a href="https://github.com/adityapp1213/Dataset" target="_blank">Dataset: OpenWebText → LLaMA-3 refined batches pipeline</a>. GitHub, 2025.</span></li>
+        <li><span class="source-num">[3]</span><span>Gao et al. ; <a href="https://huggingface.co/datasets/Skylion007/openwebtext" target="_blank">OpenWebText Corpus</a>. Replication of OpenAI's WebText dataset from Common Crawl.</span></li>
+        <li><span class="source-num">[4]</span><span>Meta AI ; <a href="https://ai.meta.com/blog/meta-llama-3/" target="_blank">Introducing Meta LLaMA 3</a>. The rephrasing backbone used in the synthesis stage.</span></li>
+        <li><span class="source-num">[5]</span><span>Kudo &amp; Richardson ; <a href="https://arxiv.org/abs/1808.06226" target="_blank">SentencePiece: A simple and language independent subword tokenizer and detokenizer</a>, 2018.</span></li>
+      </ul>
+    </div>
+
+  </article>
+
+  <footer class="article-footer">
+    <span>Scaling Synthetic Data ; Research Brief</span>
+    <span>Atom Technologies · 2025</span>
+  </footer>
+
+</div>
+</body>
+</html>

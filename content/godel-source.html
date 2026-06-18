@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gödel 1.6 ; Shared Intelligence Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0d;
+    --ink-2: #3a3a36;
+    --ink-3: #7a7a72;
+    --surface: #f8f7f3;
+    --surface-3: #e4e1d8;
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --gray-light: #f1efe8;
+    --rule: #d3d1c7;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'Geist', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 0 24px 120px; }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 24px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .site-header .wordmark { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .08em; color: var(--ink-3); text-transform: uppercase; }
+  .site-header .tag { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: .06em; }
+
+  .hero { margin-bottom: 64px; }
+  .hero-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 24px; }
+  .hero-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--teal); }
+
+  h1 { font-family: var(--serif); font-size: clamp(30px, 6vw, 56px); font-weight: 400; line-height: 1.08; letter-spacing: -.01em; color: var(--ink); margin-bottom: 28px; }
+  h1 em { font-style: italic; color: var(--ink-2); }
+
+  .hero-meta { display: flex; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+  .hero-meta span { font-family: var(--mono); font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+  .hero-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--rule); }
+
+  .lede { font-size: clamp(15px, 2.5vw, 19px); font-weight: 300; line-height: 1.65; color: var(--ink-2); margin-bottom: 28px; }
+
+  h2 { font-family: var(--serif); font-size: clamp(22px, 4vw, 30px); font-weight: 400; line-height: 1.2; color: var(--ink); margin: 64px 0 20px; letter-spacing: -.01em; }
+  h3 { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 40px 0 14px; }
+
+  p { margin-bottom: 22px; font-size: clamp(14px, 2vw, 16.5px); color: var(--ink-2); }
+  strong { font-weight: 500; color: var(--ink); }
+  a { color: var(--teal); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
+  a:hover { border-bottom-color: var(--teal); }
+
+  .section-rule { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
+
+  .diagram-wrap { margin: 36px 0 44px; border: 1px solid var(--rule); border-radius: 18px; background: linear-gradient(180deg, #fff 0%, #fcfbf8 100%); padding: 24px 18px 18px; overflow: hidden; box-shadow: 0 14px 34px rgba(14,14,13,.05); }
+  .diagram-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; padding: 6px 10px; border: 1px solid var(--surface-3); border-radius: 999px; background: rgba(248,247,243,.9); }
+  .diagram-label::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--ink-3); opacity: .65; }
+  .diagram-wrap svg { display: block; width: 100%; height: auto; }
+
+  .callout { border-left: 2px solid var(--teal); background: var(--teal-light); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 28px 0; }
+  .callout p { font-size: 14.5px; color: var(--ink-2); margin: 0; }
+  .callout strong { color: var(--teal); }
+  .callout-purple { border-left-color: var(--purple); background: var(--purple-light); }
+  .callout-purple strong { color: var(--purple); }
+  .callout-amber { border-left-color: var(--amber); background: var(--amber-light); }
+  .callout-amber strong { color: var(--amber); }
+
+  .table-wrap { overflow-x: auto; margin: 28px 0; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 440px; }
+  th { font-family: var(--mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule); background: var(--gray-light); }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--surface-3); color: var(--ink-2); vertical-align: top; }
+  td:first-child { font-weight: 500; color: var(--ink); }
+  tr:last-child td { border-bottom: none; }
+
+  .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+  .path-card { border: 1px solid var(--rule); border-radius: 10px; padding: 20px; background: #fff; }
+  .path-card .path-num { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-3); margin-bottom: 8px; text-transform: uppercase; }
+  .path-card h4 { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+  .path-card p { font-size: 13px; margin: 0; color: var(--ink-3); line-height: 1.55; }
+
+  .sources { margin-top: 60px; }
+  .sources h2 { font-size: 22px; margin-top: 0; }
+  .source-list { list-style: none; }
+  .source-list li { display: flex; align-items: flex-start; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--surface-3); font-size: 13.5px; }
+  .source-list li:last-child { border-bottom: none; }
+  .source-num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); min-width: 24px; margin-top: 2px; }
+
+  .article-footer { margin-top: 88px; padding-top: 28px; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .article-footer span { font-family: var(--mono); font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+
+  @media (max-width: 580px) {
+    .page-wrap { padding: 0 16px 80px; }
+    .path-grid { grid-template-columns: 1fr; }
+    h2 { margin-top: 48px; }
+    .diagram-wrap { padding: 18px 10px 14px; border-radius: 8px; }
+    .hero-meta .dot { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header">
+    <span class="wordmark">Atom Technologies</span>
+    <span class="tag">Architecture · 2026</span>
+  </header>
+
+  <article>
+
+    <div class="hero">
+      <div class="hero-label">Shared Intelligence</div>
+      <h1>Gödel 1.6 ; <em>A Hybrid Local-Cloud LLM Architecture</em></h1>
+      <p class="lede">Most AI products route every prompt through remote infrastructure regardless of complexity, sensitivity, or cost. Gödel 1.6 proposes a different model: run locally by default through the Core, escalate to Doors only when required, and let a lightweight Router decide which path to take.</p>
+      <div class="hero-meta">
+        <span>Architecture Brief</span>
+        <div class="dot"></div>
+        <span>Four-Layer System</span>
+        <div class="dot"></div>
+        <span>Aug 20th 2025</span>
+      </div>
+    </div>
+
+    <!-- ── FIG 1 ── -->
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 1 ; Full pipeline overview</div>
+      <svg viewBox="0 0 560 382" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <rect x="120" y="2" width="320" height="364" rx="18" fill="#fbfaf6" stroke="#e4e1d8" stroke-width="0.8"/>
+        <rect x="16" y="16" width="88" height="332" rx="16" fill="#f5fbf7" stroke="#cfe6dd" stroke-width="0.8"/>
+        <rect x="456" y="16" width="88" height="332" rx="16" fill="#f6f5fe" stroke="#d8d4f6" stroke-width="0.8"/>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="60" y="38" text-anchor="middle" letter-spacing=".08em">LOCAL</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="60" y="54" text-anchor="middle" letter-spacing=".08em">ZONE</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="500" y="38" text-anchor="middle" letter-spacing=".08em">CLOUD</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="500" y="54" text-anchor="middle" letter-spacing=".08em">ZONE</text>
+
+        <!-- 1. User Input -->
+        <rect x="146" y="12" width="268" height="54" rx="14" fill="#f6f3ea" stroke="#b4b2a9" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#2c2c2a" x="280" y="32" text-anchor="middle" dominant-baseline="central">User Input</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#888780" x="280" y="54" text-anchor="middle" dominant-baseline="central">Raw text prompt</text>
+        <line x1="280" y1="66" x2="280" y2="86" stroke="#b4b2a9" stroke-width="1.2" marker-end="url(#a1)"/>
+
+        <!-- 2. Tokenizer -->
+        <rect x="146" y="86" width="268" height="54" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#085041" x="280" y="104" text-anchor="middle" dominant-baseline="central">Tokenizer</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#0f6e56" x="280" y="126" text-anchor="middle" dominant-baseline="central">Local · SentencePiece / BPE</text>
+        <line x1="280" y1="140" x2="280" y2="160" stroke="#1d9e75" stroke-width="1.2" marker-end="url(#a1)"/>
+
+        <!-- 3. Core -->
+        <rect x="146" y="160" width="268" height="54" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#085041" x="280" y="178" text-anchor="middle" dominant-baseline="central">Core</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#0f6e56" x="280" y="200" text-anchor="middle" dominant-baseline="central">Local LLM · Gemma / MoE</text>
+        <line x1="280" y1="214" x2="280" y2="234" stroke="#ba7517" stroke-width="1.2" marker-end="url(#a1)"/>
+
+        <!-- 4. Router -->
+        <rect x="146" y="234" width="268" height="54" rx="14" fill="#fcf1dd" stroke="#ba7517" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#633806" x="280" y="252" text-anchor="middle" dominant-baseline="central">Router</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#854f0b" x="280" y="274" text-anchor="middle" dominant-baseline="central">Core handles · or · Doors activate</text>
+        <line x1="280" y1="288" x2="280" y2="308" stroke="#534ab7" stroke-width="1.2" marker-end="url(#a1)"/>
+
+        <!-- 5. Doors -->
+        <rect x="146" y="308" width="268" height="50" rx="14" fill="#f4f3fe" stroke="#534ab7" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#26215c" x="280" y="326" text-anchor="middle" dominant-baseline="central">Doors</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#3c3489" x="280" y="346" text-anchor="middle" dominant-baseline="central">Cloud · specialists · tools</text>
+
+        <!-- Footer note -->
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#b4b2a9" x="280" y="378" text-anchor="middle">Most requests resolve in Core ; Doors activate only when required</text>
+      </svg>
+    </div>
+
+    <p>The architecture consists of four discrete layers operating in sequence. Each is independently replaceable. The system is designed so that the majority of user interactions, casual conversation, short-form Q&amp;A, summarization ; never leave the device. Doors are reserved for tasks demanding external access or deep specialist reasoning.</p>
+
+    <!-- ── LAYER 1 ── -->
+    <h2>Layer 1 ; The Tokenizer</h2>
+    <p>The tokenizer converts raw input text into a sequence of numerical token IDs that the Core can process. It operates entirely on-device and is the first component in the pipeline.</p>
+    <p>Two practical options exist depending on the chosen Core model. If the Gemma 3 270M path is taken, <strong>SentencePiece</strong> is already bundled no separate tokenization layer is required. For the MoE pruning path, a standalone tokenizer such as <strong>TikToken</strong> or Hugging Face's BPE implementation can be used independently, adding roughly 100KB to the local footprint.</p>
+
+    <div class="callout">
+      <p><strong>Important:</strong> The tokenizer serves the Core only. When the Router sends a request to Doors, raw decoded text is transmitted ; not token IDs. Each cloud model maintains its own internal vocabulary. Sending local token IDs to a remote model produces malformed output.</p>
+    </div>
+
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 2 ; Tokenizer layer</div>
+      <svg viewBox="0 0 560 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <rect x="10" y="44" width="150" height="60" rx="10" fill="#f1efe8" stroke="#b4b2a9" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#2c2c2a" x="85" y="66" text-anchor="middle" dominant-baseline="central">Raw text</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="85" y="88" text-anchor="middle" dominant-baseline="central">"What time is it?"</text>
+        <line x1="160" y1="74" x2="190" y2="74" stroke="#b4b2a9" stroke-width="1.2" marker-end="url(#a2)"/>
+
+        <rect x="190" y="44" width="168" height="60" rx="10" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="274" y="64" text-anchor="middle" dominant-baseline="central">Tokenizer</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="274" y="82" text-anchor="middle" dominant-baseline="central">SentencePiece / BPE</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="274" y="98" text-anchor="middle" dominant-baseline="central">~100KB on disk</text>
+        <line x1="358" y1="74" x2="386" y2="74" stroke="#1d9e75" stroke-width="1.2" marker-end="url(#a2)"/>
+
+        <rect x="386" y="44" width="162" height="60" rx="10" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="467" y="64" text-anchor="middle" dominant-baseline="central">Token IDs</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="467" y="82" text-anchor="middle" dominant-baseline="central">[1724, 501, 338…]</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="467" y="98" text-anchor="middle" dominant-baseline="central">→ Core only</text>
+
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#b4b2a9" x="280" y="140" text-anchor="middle">Doors path receives raw text ; tokenizer bypassed entirely</text>
+      </svg>
+    </div>
+
+    <!-- ── LAYER 2 ── -->
+    <h2>Layer 2 ; The Core</h2>
+    <p>The Core is the local brain of Gödel 1.6. It is a compact language model focused on reasoning, planning, and understanding user intent. Its design keeps it fast, low-cost to run, and capable of operating entirely on local hardware without network dependency. Two construction paths exist.</p>
+
+    <div class="path-grid">
+      <div class="path-card">
+        <div class="path-num">Path A</div>
+        <h4>Gemma 3 270M fine-tuned</h4>
+        <p>A pre-trained dense model with native SentencePiece tokenizer. Fine-tuned on domain data using LoRA or full fine-tuning. Runs on CPU at roughly 540MB in 4-bit quantized form.</p>
+      </div>
+      <div class="path-card">
+        <div class="path-num">Path B</div>
+        <h4>MoE expert pruning</h4>
+        <p>Start with a 1B+ Mixture-of-Experts model. Profile expert activation across a diverse text corpus, remove dormant experts, then quantize. Produces a structurally leaner model not just compressed.</p>
+      </div>
+    </div>
+
+    <h3>On expert pruning</h3>
+    <p>MoE architectures like Mixtral and DeepSeek-MoE route each token through only a subset of available expert sub-networks. For text-only, tool-free inference ; exactly what the Core handles ; many experts never activate. The process: run 500–1,000 diverse prompts through the base model, log which expert networks fire, remove those that remain dormant, then apply INT4 or INT8 quantization to the remaining weights. The result is structurally leaner ; fewer compute paths per token, translating directly to faster inference rather than just reduced memory.</p>
+
+    <div class="callout callout-amber">
+      <p><strong>Caution:</strong> Expert activation patterns are domain-sensitive. Experts dormant on general prompts may activate on structured outputs, rare vocabulary, or mathematical notation. A minimum of 500 diverse prompts is the practical lower bound before any pruning decisions are finalized.</p>
+    </div>
+
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 3 ; Two paths to the Core</div>
+      <svg viewBox="0 0 560 272" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#3a3a36" x="280" y="22" text-anchor="middle">Two paths to the Core</text>
+
+        <rect x="10" y="38" width="258" height="220" rx="16" fill="#edf9f3" stroke="#1d9e75" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#085041" x="139" y="60" text-anchor="middle">Path A ; direct fine-tune</text>
+        <rect x="24" y="74" width="230" height="52" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="139" y="94" text-anchor="middle" dominant-baseline="central">Gemma 3 270M base</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="139" y="114" text-anchor="middle" dominant-baseline="central">SentencePiece built in</text>
+        <line x1="139" y1="126" x2="139" y2="148" stroke="#1d9e75" stroke-width="1" marker-end="url(#a3)"/>
+        <rect x="24" y="148" width="230" height="52" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="139" y="168" text-anchor="middle" dominant-baseline="central">Fine-tune on domain data</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="139" y="188" text-anchor="middle" dominant-baseline="central">LoRA or full fine-tuning</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#0f6e56" x="139" y="232" text-anchor="middle">~540MB quantized (INT4)</text>
+
+        <rect x="292" y="38" width="258" height="220" rx="16" fill="#f4f3fe" stroke="#534ab7" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#26215c" x="421" y="60" text-anchor="middle">Path B ; MoE pruning</text>
+        <rect x="306" y="74" width="230" height="52" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="421" y="94" text-anchor="middle" dominant-baseline="central">1B+ MoE base model</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="421" y="114" text-anchor="middle" dominant-baseline="central">Mixtral / DeepSeek-MoE</text>
+        <line x1="421" y1="126" x2="421" y2="148" stroke="#534ab7" stroke-width="1" marker-end="url(#a3)"/>
+        <rect x="306" y="148" width="230" height="52" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="421" y="168" text-anchor="middle" dominant-baseline="central">Profile → prune → quantize</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="421" y="188" text-anchor="middle" dominant-baseline="central">Keep only active experts</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#3c3489" x="421" y="232" text-anchor="middle">Structurally leaner · faster</text>
+      </svg>
+    </div>
+
+    <!-- ── LAYER 3 ── -->
+    <h2>Layer 3 ; The Router</h2>
+    <p>The Router is the decision node of the entire system. It receives signals from the Core and determines whether Core execution is sufficient or whether a Door is required. In the Gödel architecture, the Router selects the smallest set of specialists needed ; keeping the system efficient even as the number of Doors grows.</p>
+    <p>Having the Core self-route by evaluating its own confidence is self-defeating: that reasoning pass consumes the same local resources the architecture is trying to preserve. A dedicated, standalone Router sidesteps this entirely. Routing strategies can evolve from simple rule-based decisions, to classifiers trained from usage logs, to reinforcement learning when sufficient data is available.</p>
+
+    <h3>What the Router evaluates</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Signal</th><th>Description</th><th>Example trigger</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Intent type</td><td>Casual vs. research vs. tool-use</td><td>"search for", "buy", "find me"</td></tr>
+          <tr><td>Query complexity</td><td>Entity count, reasoning depth, ambiguity</td><td>Multi-hop questions, named entities</td></tr>
+          <tr><td>Explicit triggers</td><td>Keyword patterns for tool-required actions</td><td>"watch", "browse", "shop", "run"</td></tr>
+          <tr><td>Core confidence</td><td>Output logit entropy from Core pass</td><td>High entropy = uncertain = escalate</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The Router itself must be extremely lightweight ; a fine-tuned BERT-tiny or a rule-based keyword system is sufficient for an initial implementation. Target inference time is under 5ms.</p>
+
+    <div class="callout callout-purple">
+      <p><strong>Design note:</strong> A two-stage approach is more efficient. A pre-Router (keyword/rule-based, sub-millisecond) intercepts obvious Door-bound requests before the Core runs at all. The Core's output confidence score then serves as a secondary signal for borderline cases ; eliminating wasted local compute on requests that will always be escalated.</p>
+    </div>
+
+    <!-- ── FIG 4 ; Router ── -->
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 4 ; Router decision flow</div>
+      <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- Core output -->
+        <rect x="155" y="10" width="250" height="56" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#085041" x="280" y="30" text-anchor="middle" dominant-baseline="central">Core output</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#0f6e56" x="280" y="52" text-anchor="middle" dominant-baseline="central">Response + confidence signal</text>
+        <line x1="280" y1="66" x2="280" y2="90" stroke="#b4b2a9" stroke-width="1.2" marker-end="url(#a4)"/>
+
+        <!-- Router -->
+        <rect x="155" y="90" width="250" height="56" rx="14" fill="#fcf1dd" stroke="#ba7517" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="16" font-weight="500" fill="#633806" x="280" y="110" text-anchor="middle" dominant-baseline="central">Router</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#854f0b" x="280" y="132" text-anchor="middle" dominant-baseline="central">Rule-based · classifier · RL</text>
+
+        <!-- Left: Core handles -->
+        <path d="M210 146 L95 196" fill="none" stroke="#1d9e75" stroke-width="1.5" marker-end="url(#a4)"/>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="134" y="182" text-anchor="middle">simple</text>
+        <rect x="10" y="196" width="170" height="62" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="95" y="218" text-anchor="middle" dominant-baseline="central">Core responds</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#0f6e56" x="95" y="242" text-anchor="middle" dominant-baseline="central">Local · private · fast</text>
+
+        <!-- Right: Doors -->
+        <path d="M350 146 L465 196" fill="none" stroke="#534ab7" stroke-width="1.5" marker-end="url(#a4)"/>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#3c3489" x="426" y="182" text-anchor="middle">complex</text>
+        <rect x="380" y="196" width="170" height="62" rx="14" fill="#f4f3fe" stroke="#534ab7" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#26215c" x="465" y="218" text-anchor="middle" dominant-baseline="central">Doors activate</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#3c3489" x="465" y="242" text-anchor="middle" dominant-baseline="central">Search · tools · agents</text>
+
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#b4b2a9" x="280" y="285" text-anchor="middle">Router selects the smallest set of Doors needed per task</text>
+      </svg>
+    </div>
+
+    <!-- ── LAYER 4 ── -->
+    <h2>Layer 4 ; Doors</h2>
+    <p>Doors are where domain intelligence lives. Each Door is a cluster of specialist models ; or tool interfaces ; trained on focused, real-world data. Rather than building one giant model capable of everything, Gödel 1.6 lets many smaller experts handle different jobs. Each Door has its own internal logic, tools, and validators, and returns concrete, validated outputs rather than raw text. This makes the system modular: a Door can be upgraded or replaced without touching the Core or Router.</p>
+    <p>Groq is a well-suited provider for Door workloads ; specifically because of its <strong>LPU (Language Processing Unit)</strong> hardware, which achieves 300–500 tokens per second on Llama 3.3 70B and Mixtral 8x7B. This is critical for maintaining a seamless experience after the local Core phase.</p>
+
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 5 ; Doors layer capabilities</div>
+      <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="540" height="166" rx="18" fill="#f4f3fe" stroke="#534ab7" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#26215c" x="280" y="36" text-anchor="middle">Doors ; Groq LPU cloud</text>
+
+        <rect x="24" y="52" width="116" height="60" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="82" y="74" text-anchor="middle" dominant-baseline="central">Web search</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="82" y="96" text-anchor="middle" dominant-baseline="central">Real-time data</text>
+
+        <rect x="154" y="52" width="116" height="60" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="212" y="74" text-anchor="middle" dominant-baseline="central">Browser agent</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="212" y="96" text-anchor="middle" dominant-baseline="central">Fetch, navigate</text>
+
+        <rect x="284" y="52" width="116" height="60" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="342" y="74" text-anchor="middle" dominant-baseline="central">Video / media</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="342" y="96" text-anchor="middle" dominant-baseline="central">YT summarization</text>
+
+        <rect x="414" y="52" width="120" height="60" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="474" y="74" text-anchor="middle" dominant-baseline="central">Shopping</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="474" y="96" text-anchor="middle" dominant-baseline="central">Product lookup</text>
+
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#3c3489" x="280" y="140" text-anchor="middle">Receives raw text ; not token IDs from the local tokenizer</text>
+        <text font-family="'DM Mono',monospace" font-size="12" fill="#3c3489" x="280" y="158" text-anchor="middle">300–500 tokens/sec · Groq LPU</text>
+      </svg>
+    </div>
+
+    <!-- ── FIG 6 ; FULL ARCH ── -->
+    <h2>Full Architecture ; End to End</h2>
+    <p>The four layers compose into a single coherent system. The local zone ; Tokenizer, Core, and Router ; handles the vast majority of interactions autonomously. Doors are a contingency, not a dependency. The system remains functional and private without a network connection for most use cases.</p>
+
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 6 ; Complete system, both execution paths</div>
+      <svg viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- LOCAL ZONE -->
+        <rect x="8" y="8" width="544" height="388" rx="18" fill="#edf9f3" stroke="#1d9e75" stroke-width="0.8"/>
+        <text font-family="'DM Mono',monospace" font-size="11" font-weight="500" fill="#0f6e56" x="280" y="30" text-anchor="middle" letter-spacing=".08em">LOCAL DEVICE ; CORE ZONE</text>
+
+        <!-- User Input -->
+        <rect x="180" y="46" width="200" height="50" rx="14" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.7"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#2c2c2a" x="280" y="65" text-anchor="middle" dominant-baseline="central">User input</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="280" y="86" text-anchor="middle" dominant-baseline="central">Raw text prompt</text>
+        <line x1="280" y1="96" x2="280" y2="116" stroke="#1d9e75" stroke-width="1.2" marker-end="url(#a6)"/>
+
+        <!-- Tokenizer -->
+        <rect x="180" y="116" width="200" height="50" rx="14" fill="#fffdfa" stroke="#1d9e75" stroke-width="0.7"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="280" y="135" text-anchor="middle" dominant-baseline="central">Tokenizer</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="280" y="156" text-anchor="middle" dominant-baseline="central">SentencePiece / BPE</text>
+        <line x1="280" y1="166" x2="280" y2="186" stroke="#1d9e75" stroke-width="1.2" marker-end="url(#a6)"/>
+
+        <!-- Core -->
+        <rect x="180" y="186" width="200" height="50" rx="14" fill="#fffdfa" stroke="#1d9e75" stroke-width="0.7"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="280" y="205" text-anchor="middle" dominant-baseline="central">Core</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="280" y="226" text-anchor="middle" dominant-baseline="central">Gemma 270M / pruned MoE</text>
+        <line x1="280" y1="236" x2="280" y2="256" stroke="#ba7517" stroke-width="1.2" marker-end="url(#a6)"/>
+
+        <!-- Router -->
+        <rect x="140" y="256" width="280" height="50" rx="14" fill="#fcf1dd" stroke="#ba7517" stroke-width="0.8"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#633806" x="280" y="275" text-anchor="middle" dominant-baseline="central">Router</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#854f0b" x="280" y="296" text-anchor="middle" dominant-baseline="central">Simple → Core  ·  Complex → Doors</text>
+
+        <!-- Local response branch -->
+        <path d="M190 306 L90 344" fill="none" stroke="#1d9e75" stroke-width="1.4" marker-end="url(#a6)"/>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="122" y="332">simple</text>
+        <rect x="16" y="344" width="148" height="42" rx="12" fill="#fffdfa" stroke="#1d9e75" stroke-width="0.7"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#085041" x="90" y="360" text-anchor="middle" dominant-baseline="central">Core responds</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56" x="90" y="378" text-anchor="middle" dominant-baseline="central">Local · private</text>
+
+        <!-- Doors branch ; raw text, no tokenizer -->
+        <path d="M370 306 L470 344" fill="none" stroke="#534ab7" stroke-width="1.4" marker-end="url(#a6)"/>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#3c3489" x="436" y="330">complex</text>
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#3c3489" x="436" y="343">(raw text)</text>
+
+        <!-- DOORS ZONE -->
+        <rect x="8" y="408" width="544" height="140" rx="18" fill="#f4f3fe" stroke="#534ab7" stroke-width="0.8"/>
+        <text font-family="'DM Mono',monospace" font-size="11" font-weight="500" fill="#3c3489" x="280" y="428" text-anchor="middle" letter-spacing=".08em">DOORS ; CLOUD ZONE</text>
+
+        <!-- Arrow down into Doors zone -->
+        <line x1="470" y1="386" x2="470" y2="440" stroke="#534ab7" stroke-width="1.4" marker-end="url(#a6)"/>
+
+        <!-- Door boxes -->
+        <rect x="18" y="440" width="116" height="52" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="76" y="460" text-anchor="middle" dominant-baseline="central">Web search</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="76" y="480" text-anchor="middle" dominant-baseline="central">Real-time data</text>
+
+        <rect x="148" y="440" width="116" height="52" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="206" y="460" text-anchor="middle" dominant-baseline="central">Browser agent</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="206" y="480" text-anchor="middle" dominant-baseline="central">Fetch, navigate</text>
+
+        <rect x="278" y="440" width="116" height="52" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="336" y="460" text-anchor="middle" dominant-baseline="central">Video / media</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="336" y="480" text-anchor="middle" dominant-baseline="central">YT summary</text>
+
+        <rect x="408" y="440" width="136" height="52" rx="12" fill="#fffdfa" stroke="#cdc9bc" stroke-width="0.6"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a" x="476" y="460" text-anchor="middle" dominant-baseline="central">Shopping</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780" x="476" y="480" text-anchor="middle" dominant-baseline="central">Product lookup</text>
+
+        <!-- Return arrow: Doors → user -->
+        <path d="M18 492 L18 530 L280 530" fill="none" stroke="#534ab7" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#a6)"/>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#3c3489" x="145" y="524">Doors response → user</text>
+      </svg>
+    </div>
+
+    <!-- ── WHY IT MATTERS ── -->
+    <h2>Why This Architecture Matters</h2>
+
+    <h3>For users</h3>
+    <p>Unlimited local usage with no rate limits or subscription requirement for standard interactions. Sensitive conversations never leave the device. The system functions offline for the majority of use cases, with Doors intelligence available on demand and transparently invoked.</p>
+
+    <h3>For providers</h3>
+    <p>Cloud API costs are incurred only for the subset of requests ; estimated at 15–30% ; that genuinely require escalation to Doors. Local devices absorb the compute cost of all remaining interactions. This fundamentally changes the unit economics of serving intelligence at scale. The modular Doors design also means individual specialist clusters can be upgraded independently as requirements evolve.</p>
+
+    <hr class="section-rule">
+
+    <h2>Technical Notes</h2>
+
+    <p><strong>Tokenizer on the Doors path.</strong> Token IDs generated by the local tokenizer must not be sent to Doors. Cloud-hosted models maintain their own internal vocabularies ; Groq's Llama 3 tokenizer and a locally-run SentencePiece tokenizer share no vocabulary. Raw decoded text must be transmitted, and each cloud model handles its own tokenization internally.</p>
+
+    <p><strong>MoE pruning test corpus size.</strong> Expert utilization is domain-sensitive. Experts dormant on general-purpose prompts may activate on structured outputs, code, or rare vocabulary. A minimum of 500 diverse prompts is the practical lower bound before pruning decisions are made.</p>
+
+    <p><strong>Router placement.</strong> Positioning the Router after the Core means local compute has already been spent before the routing decision is made. A two-stage approach is more efficient: a pre-Router using keyword and intent rules intercepts obvious Doors-bound requests before the Core even runs, with Core output confidence as a secondary signal.</p>
+
+    <p><strong>Groq model selection for Doors.</strong> For agentic and tool-calling workloads, Llama 3.3 70B or Mixtral 8x7B are the appropriate choices. Smaller Groq-hosted models offer lower latency but reduced capability for multi-step reasoning and structured tool use.</p>
+
+    <hr class="section-rule">
+
+    <div class="sources">
+      <h2>References</h2>
+      <ul class="source-list">
+        <li><span class="source-num">[1]</span><span>Frantar et al. ; <a href="https://arxiv.org/abs/2301.00774" target="_blank">SparseGPT: Massive Language Models Can Be Accurately Pruned in One Shot</a>, 2023.</span></li>
+        <li><span class="source-num">[2]</span><span>Shazeer et al. ; <a href="https://arxiv.org/abs/1701.06538" target="_blank">Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer</a>, 2017.</span></li>
+        <li><span class="source-num">[3]</span><span>Jiang et al. ; <a href="https://arxiv.org/abs/2401.04088" target="_blank">Mixtral of Experts</a>, 2024.</span></li>
+        <li><span class="source-num">[4]</span><span>Google DeepMind ; <a href="https://ai.google.dev/gemma" target="_blank">Gemma 3 Model Card</a>. Specifications, SentencePiece integration, quantization guidance.</span></li>
+        <li><span class="source-num">[5]</span><span>Groq ; <a href="https://console.groq.com/docs" target="_blank">Groq API Documentation</a>. Models, LPU hardware specifications, tool-calling reference.</span></li>
+        <li><span class="source-num">[6]</span><span>OpenAI ; <a href="https://platform.openai.com/docs/guides/function-calling" target="_blank">Function Calling in LLMs</a>. Tool-calling interface patterns for the Doors layer.</span></li>
+        <li><span class="source-num">[7]</span><span>Ggerganov et al. ; <a href="https://github.com/ggerganov/llama.cpp" target="_blank">llama.cpp</a>. Quantized local model inference runtime for the Core.</span></li>
+        <li><span class="source-num">[8]</span><span>MLC Team ; <a href="https://mlc.ai/mlc-llm" target="_blank">MLC-LLM</a>. On-device LLM serving with WebGPU and native backends.</span></li>
+      </ul>
+    </div>
+
+  </article>
+
+  <footer class="article-footer">
+    <span>Gödel 1.6 ; Architecture Brief</span>
+    <span>Atom Technologies · 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

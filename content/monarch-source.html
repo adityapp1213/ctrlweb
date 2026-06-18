@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monarch ; Thought-Grounded Multimodal Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0d;
+    --ink-2: #3a3a36;
+    --ink-3: #7a7a72;
+    --surface: #f8f7f3;
+    --surface-3: #e4e1d8;
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --purple: #3c3489;
+    --purple-light: #eeedfe;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --rose: #e2687d;
+    --rose-light: #fbe6eb;
+    --gray-light: #f1efe8;
+    --rule: #d3d1c7;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'Geist', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 0 24px 120px; }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 24px;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .site-header .wordmark {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  .site-header .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: .06em;
+  }
+
+  .hero { margin-bottom: 64px; }
+
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 24px;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--rose);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(30px, 6vw, 56px);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  h1 em { font-style: italic; color: var(--ink-2); }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+
+  .hero-meta span {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+  }
+
+  .hero-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .lede {
+    font-size: clamp(15px, 2.5vw, 19px);
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin-bottom: 28px;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 64px 0 20px;
+    letter-spacing: -.01em;
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 40px 0 14px;
+  }
+
+  p { margin-bottom: 22px; font-size: clamp(14px, 2vw, 16.5px); color: var(--ink-2); }
+  strong { font-weight: 500; color: var(--ink); }
+
+  a {
+    color: var(--rose);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color .15s;
+  }
+
+  a:hover { border-bottom-color: var(--rose); }
+
+  .section-rule { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
+
+  .diagram-wrap {
+    margin: 36px 0 44px;
+    border: 1px solid var(--rule);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fff 0%, #fcfbf8 100%);
+    padding: 24px 18px 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 34px rgba(14,14,13,.05);
+  }
+
+  .diagram-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+    padding: 6px 10px;
+    border: 1px solid var(--surface-3);
+    border-radius: 999px;
+    background: rgba(248,247,243,.9);
+  }
+
+  .diagram-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--ink-3);
+    opacity: .65;
+  }
+
+  .diagram-wrap svg { display: block; width: 100%; height: auto; }
+
+  .callout {
+    border-left: 2px solid var(--rose);
+    background: var(--rose-light);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 28px 0;
+  }
+
+  .callout p { font-size: 14.5px; color: var(--ink-2); margin: 0; }
+  .callout strong { color: var(--rose); }
+  .callout-purple { border-left-color: var(--purple); background: var(--purple-light); }
+  .callout-purple strong { color: var(--purple); }
+  .callout-amber { border-left-color: var(--amber); background: var(--amber-light); }
+  .callout-amber strong { color: var(--amber); }
+  .callout-teal { border-left-color: var(--teal); background: var(--teal-light); }
+  .callout-teal strong { color: var(--teal); }
+
+  .table-wrap { overflow-x: auto; margin: 28px 0; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 440px; }
+  th {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--gray-light);
+  }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--surface-3); color: var(--ink-2); vertical-align: top; }
+  td:first-child { font-weight: 500; color: var(--ink); }
+  tr:last-child td { border-bottom: none; }
+
+  .sources { margin-top: 60px; }
+  .sources h2 { font-size: 22px; margin-top: 0; }
+  .source-list { list-style: none; }
+  .source-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--surface-3);
+    font-size: 13.5px;
+  }
+  .source-list li:last-child { border-bottom: none; }
+  .source-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    min-width: 24px;
+    margin-top: 2px;
+  }
+
+  .article-footer {
+    margin-top: 88px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .article-footer span {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: .04em;
+  }
+
+  @media (max-width: 580px) {
+    .page-wrap { padding: 0 16px 80px; }
+    h2 { margin-top: 48px; }
+    .diagram-wrap { padding: 18px 10px 14px; border-radius: 8px; }
+    .hero-meta .dot { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header">
+    <span class="wordmark">Atom Technologies</span>
+    <span class="tag">Monarch · TGMI · 2026</span>
+  </header>
+
+  <article>
+
+    <div class="hero">
+      <div class="hero-label">Model Overview</div>
+      <h1>Monarch ; <em>Thought-Grounded Multimodal Intelligence</em></h1>
+      <p class="lede">Monarch is not positioned as a language model with extra adapters. The central claim of TGMI is that the model should form a structured thought before it ever emits text. Language is only one possible output surface. Underneath it is a concept-native system that binds experience into meaning, reasons over that meaning, updates an active sense of self, and then decides how to answer.</p>
+      <div class="hero-meta">
+        <span>Thought-grounded model</span>
+        <div class="dot"></div>
+        <span>Multimodal reasoning</span>
+        <div class="dot"></div>
+        <span>June 18th 2026</span>
+      </div>
+    </div>
+
+    <!-- FIG 1 -->
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 1 ; Monarch full architecture overview</div>
+      <svg viewBox="0 0 560 520" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="m1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <rect x="12" y="12" width="536" height="70" rx="18" fill="#fbe6eb" stroke="#e2687d" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#8e3141" x="280" y="35" text-anchor="middle">Sensory layer</text>
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#8e3141" x="280" y="58" text-anchor="middle">text · image · audio · video · touch · structured data → shared vector space</text>
+
+        <line x1="280" y1="82" x2="280" y2="104" stroke="#b4b2a9" stroke-width="1.2" marker-end="url(#m1)"/>
+
+        <rect x="32" y="104" width="496" height="78" rx="18" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="280" y="129" text-anchor="middle">Thought formation layer</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="151" text-anchor="middle">multi-slot binding · refinement loop · halting gate · collapse prevention</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="167" text-anchor="middle">visual · linguistic · abstract · emotional · relational · motor</text>
+
+        <line x1="280" y1="182" x2="280" y2="204" stroke="#b4b2a9" stroke-width="1.2" marker-end="url(#m1)"/>
+
+        <rect x="20" y="204" width="250" height="94" rx="18" fill="#f4f3fe" stroke="#534ab7" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#26215c" x="145" y="229" text-anchor="middle">Self layer</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="145" y="251" text-anchor="middle">persistent self vector</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="145" y="267" text-anchor="middle">L0 sensory · L1 working · L2 episodic</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="145" y="283" text-anchor="middle">L3 semantic · L4 self state</text>
+
+        <rect x="290" y="204" width="250" height="94" rx="18" fill="#fcf1dd" stroke="#ba7517" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#633806" x="415" y="229" text-anchor="middle">Emotional analog layer</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#854f0b" x="415" y="251" text-anchor="middle">valence · arousal · novelty</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#854f0b" x="415" y="267" text-anchor="middle">social · threat</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#854f0b" x="415" y="283" text-anchor="middle">modulates retrieval, compute, tone, caution</text>
+
+        <line x1="280" y1="298" x2="280" y2="322" stroke="#b4b2a9" stroke-width="1.2" marker-end="url(#m1)"/>
+
+        <rect x="32" y="322" width="496" height="78" rx="18" fill="#fbe6eb" stroke="#e2687d" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#8e3141" x="280" y="347" text-anchor="middle">Global workspace</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#8e3141" x="280" y="369" text-anchor="middle">16 specialists compete · top-3 gain access · winners cross-attend</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#8e3141" x="280" y="385" text-anchor="middle">workspace state is then broadcast back across the system</text>
+
+        <line x1="280" y1="400" x2="280" y2="424" stroke="#b4b2a9" stroke-width="1.2" marker-end="url(#m1)"/>
+
+        <rect x="32" y="424" width="496" height="80" rx="18" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="280" y="449" text-anchor="middle">Reasoning and output</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="471" text-anchor="middle">task vector · problem classification · recurrent passes · metacognitive monitor</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="487" text-anchor="middle">language · image · action · structured output + self update after response</text>
+      </svg>
+    </div>
+
+    <p>The broad TGMI claim is that meaning should come before language. Existing models usually move from symbols to statistical pattern completion. Monarch instead claims a path from experience to meaning, then to thought, then to reasoning, and only after that to output. That shift is what all five feature topics are really describing from different angles.</p>
+
+    <h2>Overview</h2>
+    <p>The architecture breaks down into a stack. First, a sensory layer projects all modalities into a shared space. Second, a thought formation layer binds those signals into a structured thought vector. Third, a self layer and memory stack give the system continuity across the current moment, the active conversation, recent episodes, stable knowledge, and its own evolving self-state. Fourth, an emotional analog layer applies continuous control signals that change how much compute, retrieval, and caution the system should use. Fifth, a global workspace lets specialists compete for access and then share their results. Finally, a recurrent reasoning layer keeps refining the current problem until a halt gate decides the answer is good enough.</p>
+    <p>What makes Monarch interesting is not any one module by itself, but how the modules interact. A thought is not just stored. It is queried by self state, modulated by emotional state, routed through specialist competition, and then improved through repeated reasoning passes. That is the system-level picture behind the model.</p>
+    <p>The TGMI notes also gesture toward concrete research ingredients behind this stack. The multimodal projection layer aligns well with <a href="https://ai.google.dev/gemini-api/docs/embeddings">Gemini Embedding 2</a> and its companion paper <a href="https://arxiv.org/abs/2605.27295">Gemini Embedding 2: A Native Multimodal Embedding Model from Gemini</a>. The image-side grounding resembles <a href="https://github.com/mlfoundations/open_clip">OpenCLIP</a> and its scaling report <a href="https://arxiv.org/abs/2212.07143">Reproducible Scaling Laws for Contrastive Language-Image Learning</a>. The collapse-prevention idea in thought formation directly matches <a href="https://arxiv.org/abs/2105.04906">VICReg</a>, while fast adaptation ideas map most closely to <a href="https://arxiv.org/abs/1703.03400">MAML</a> and <a href="https://arxiv.org/abs/1909.04630">iMAML</a>. On the systems side, memory indexing lines up with <a href="https://faiss.ai/">FAISS</a>, and the text pipeline matches <a href="https://arxiv.org/abs/1808.06226">SentencePiece</a>.</p>
+
+    <div class="callout">
+      <p><strong>Core idea:</strong> Monarch is trying to reason from an internal structured thought, not only from text patterns about that thought.</p>
+    </div>
+
+    <h2>Thought Vectors</h2>
+    <p>This is the first feature and also the deepest conceptual claim in the model. Monarch does not want raw embeddings to move straight into generation. Instead, raw multimodal signals are bound into a <strong>ThoughtVector</strong> that has slots for different kinds of meaning: visual, linguistic, abstract, emotional, relational, and motor. The purpose of this layer is to turn mixed sensory input into one coherent internal object before reasoning begins.</p>
+    <p>The notes describe this as a refinement loop rather than a single projection. The vector begins in an uninformed state, then repeatedly pulls in the relevant slots until a halting gate decides the thought has stabilized. That means the thought is adaptive: simple problems can settle quickly, while abstract or novel problems may need more refinement steps before they are ready for reasoning.</p>
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 2 ; Thought vector formation</div>
+      <svg viewBox="0 0 920 1180" xmlns="http://www.w3.org/2000/svg">
+        <image href="/assets/tv.png" x="0" y="0" width="920" height="1180" preserveAspectRatio="xMidYMid meet" />
+      </svg>
+    </div>
+    <p>The example in the notes makes this tangible. A photo of a broken bridge and the question “how do we fix this?” do not stay as image plus text. They become one unified thought whose structure already contains damaged infrastructure, public safety, causal failure, and repair intent. That is the strongest version of the claim: the model is supposed to hold one coherent internal meaning rather than parallel modality-specific fragments.</p>
+
+    <div class="callout callout-teal">
+      <p><strong>Why it matters:</strong> the thought vector is where Monarch tries to stop being a model that predicts text about concepts and start being a model that reasons from concepts themselves.</p>
+    </div>
+
+    <h2>Multimodal Input</h2>
+    <p>The second feature is that all modalities are intended to enter one shared vector space with no privileged input type. Text, image, audio, video, touch, and structured data are treated as different routes into the same internal dimensional space. In the architecture sketch this is done through unified projectors layered on top of modality-specific encoders.</p>
+    <p>This matters because multimodality is not being treated as a bolt-on captioning trick. The model is supposed to fuse modalities before reasoning rather than reasoning about them separately and stitching them back together later. That makes the architecture especially interesting for tasks like visual puzzles, real-world problem solving, and mixed symbolic plus perceptual tasks.</p>
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 3 ; Shared multimodal space</div>
+      <svg viewBox="0 0 920 1180" xmlns="http://www.w3.org/2000/svg">
+        <image href="/assets/multimodal.png" x="0" y="0" width="920" height="1180" preserveAspectRatio="xMidYMid meet" />
+      </svg>
+    </div>
+    <p>The ARC-style example in the notes shows why this matters. Current text-first models often fail these tasks because grids become tokens and lose their spatial character too early. Monarch’s intended advantage is that visual pattern, abstract rule, and spatial relation can all live natively inside the same thought instead of being forced into a text bottleneck first.</p>
+
+    <h2>Persistent Self and Memory</h2>
+    <p>The third feature is the self layer. Monarch keeps a persistent self vector that queries every memory level and updates after each output. In the architecture notes, memory is not one flat store. It is layered. L0 is the sensory buffer for the current moment. L1 is working memory for the active conversation. L2 is episodic memory, such as recent past interaction records. L3 is semantic memory for distilled knowledge. L4 is self state, which stores the model’s own evolving view of who it is and how it is doing.</p>
+    <p>This is important because it gives the model continuity without pretending that continuity is the same as human consciousness. The self vector is practical: it queries memory, tracks capability, checks performance, and proposes updates. The architecture is trying to make the model aware of its current task, recent experience, and own strengths or weaknesses while it reasons.</p>
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 4 ; Persistent self and layered memory</div>
+      <svg viewBox="0 0 920 1180" xmlns="http://www.w3.org/2000/svg">
+        <image href="/assets/ps.png" x="0" y="0" width="920" height="1180" preserveAspectRatio="xMidYMid meet" />
+      </svg>
+    </div>
+    <p>The bridge example shows how this would work in use. The self layer can retrieve prior engineering-like episodes, semantic knowledge about structure and materials, and its own estimate of whether this is a problem domain it handles well. That gives the model a much richer context than a blank-state prompt completion system.</p>
+
+    <div class="callout callout-purple">
+      <p><strong>Important distinction:</strong> this self layer is not a mystical claim. It is a control and memory architecture that lets the model know what it is currently doing, what it knows, and how well it has done before.</p>
+    </div>
+
+    <h2>Reasoning Signals and Emotional Modulation</h2>
+    <p>The fourth feature is reasoning control. Before the reasoning loop even begins, Monarch forms a task vector by comparing the current state with a goal state. It then classifies the problem type and decides how much compute the problem deserves. Easy problems may take only a few passes. Hard problems may take many more. A halt gate stops the loop when the answer is good enough.</p>
+    <p>But the more unusual claim is the emotional analog layer. The model tracks continuous values like valence, arousal, novelty, social importance, and threat. These are not treated as output mood labels. They directly modulate the rest of the system: which memories get retrieved, how strict the metacognitive monitor becomes, how much compute is allocated, and what tone the output takes.</p>
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 5 ; Reasoning control signals</div>
+      <svg viewBox="0 0 920 1180" xmlns="http://www.w3.org/2000/svg">
+        <image href="/assets/rs.png" x="0" y="0" width="920" height="1180" preserveAspectRatio="xMidYMid meet" />
+      </svg>
+    </div>
+    <p>This layer is what makes the city-for-blind-people example compelling. A highly novel, socially meaningful, open-ended problem receives more compute and more creative search because novelty, social relevance, and arousal are all high. The system is not just continuing text longer; it is explicitly deciding that the problem deserves more internal work.</p>
+
+    <h2>Layered Memory</h2>
+    <p>The fifth feature is really an extension of the self layer, but it deserves to be explicit because it changes how the model carries knowledge over time. Monarch separates the current moment, current conversation, recent episodes, distilled semantic knowledge, and its own self-state into distinct memory levels. That means not all memory is treated the same way. Immediate context can be volatile, episodic context can be similarity-retrieved, semantic knowledge can be distilled and stable, and self state can remain persistent even as tasks change.</p>
+    <p>This design is one answer to a common weakness in current systems: either everything is stuffed into a long context window, or everything is offloaded into retrieval. Monarch is trying to make memory structural instead of flat.</p>
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 6 ; Memory across time scales</div>
+      <svg viewBox="0 0 920 1180" xmlns="http://www.w3.org/2000/svg">
+        <image href="/assets/ms.png" x="0" y="0" width="920" height="1180" preserveAspectRatio="xMidYMid meet" />
+      </svg>
+    </div>
+    <p>This matters because it gives the model different temporal tools. What it just saw should not be stored and accessed in the same way as what it learned last month. What it knows about itself should not be collapsed into generic semantic recall. The TGMI notes repeatedly come back to this difference in timescales.</p>
+
+    <h2>Global Workspace and Specialist Competition</h2>
+    <p>Outside the five feature cards, the single biggest architectural idea is the global workspace. The notes list sixteen specialists: vision, language, math, causal, spatial, social, temporal, abstract, planning, motor, self-model, memory, emotion, logic, creative, and metacognition. All of them score the thought. Only the top few win access to the shared workspace. The winning specialists then compute together and their result is broadcast back out to the rest of the system.</p>
+    <p>This is important because it tries to avoid one monolithic reasoning path. Different problems recruit different internal coalitions. A visual puzzle should not activate the system the same way as a social dilemma or a planning task. The bridge example in the notes uses spatial, causal, and planning specialists; an abstract justice question emphasizes abstract, language, and social specialists; a city-design task recruits planning, spatial, social, causal, and creative specialists.</p>
+
+    <div class="diagram-wrap">
+      <div class="diagram-label">Fig. 7 ; Workspace competition and broadcast</div>
+      <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="20" width="82" height="38" rx="10" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <rect x="112" y="20" width="82" height="38" rx="10" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <rect x="206" y="20" width="82" height="38" rx="10" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <rect x="300" y="20" width="82" height="38" rx="10" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <rect x="394" y="20" width="82" height="38" rx="10" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+        <rect x="488" y="20" width="54" height="38" rx="10" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.8"/>
+
+        <text font-family="'DM Mono',monospace" font-size="9.8" fill="#0f6e56" x="59" y="43" text-anchor="middle">vision</text>
+        <text font-family="'DM Mono',monospace" font-size="9.8" fill="#0f6e56" x="153" y="43" text-anchor="middle">language</text>
+        <text font-family="'DM Mono',monospace" font-size="9.8" fill="#0f6e56" x="247" y="43" text-anchor="middle">spatial</text>
+        <text font-family="'DM Mono',monospace" font-size="9.8" fill="#0f6e56" x="341" y="43" text-anchor="middle">causal</text>
+        <text font-family="'DM Mono',monospace" font-size="9.8" fill="#0f6e56" x="435" y="43" text-anchor="middle">planning</text>
+        <text font-family="'DM Mono',monospace" font-size="9.8" fill="#0f6e56" x="515" y="43" text-anchor="middle">…</text>
+
+        <line x1="59" y1="58" x2="220" y2="124" stroke="#d3d1c7" stroke-width="1.1"/>
+        <line x1="153" y1="58" x2="260" y2="124" stroke="#d3d1c7" stroke-width="1.1"/>
+        <line x1="247" y1="58" x2="300" y2="124" stroke="#e2687d" stroke-width="2"/>
+        <line x1="341" y1="58" x2="340" y2="124" stroke="#e2687d" stroke-width="2"/>
+        <line x1="435" y1="58" x2="380" y2="124" stroke="#e2687d" stroke-width="2"/>
+        <line x1="515" y1="58" x2="420" y2="124" stroke="#d3d1c7" stroke-width="1.1"/>
+
+        <rect x="172" y="124" width="216" height="58" rx="16" fill="#fbe6eb" stroke="#e2687d" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#8e3141" x="280" y="148" text-anchor="middle">Global workspace</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#8e3141" x="280" y="168" text-anchor="middle">top specialists win, then compute together</text>
+
+        <line x1="280" y1="182" x2="280" y2="214" stroke="#b4b2a9" stroke-width="1.2"/>
+        <rect x="124" y="214" width="312" height="28" rx="10" fill="#f4f3fe" stroke="#534ab7" stroke-width="0.8"/>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="280" y="232" text-anchor="middle">broadcast result back across the full system</text>
+      </svg>
+    </div>
+
+    <h2>Reasoning, Benchmarks, and Failure Modes</h2>
+    <p>The reasoning layer takes the current state and a target state and iteratively closes the gap. The notes explicitly describe recurrent reasoning blocks with dynamic depth, from only a few passes for easy problems up to dozens for harder ones. Each pass updates the current workspace state, and a metacognitive monitor can reject a poor line of reasoning and restart. This is where TGMI claims to outperform plain next-token architectures on novel or structured reasoning tasks.</p>
+    <p>The benchmark expectations in the notes are careful rather than exaggerated. TGMI is expected to be roughly competitive on broad knowledge and math tasks, significantly stronger on ARC-style or genuinely novel reasoning problems, and especially stronger on multimodal reasoning tasks where visual, abstract, causal, and planning signals need to stay fused. At the same time, the notes are explicit about tradeoffs: TGMI is likely worse at pure recall, slower than a same-sized plain LLM, and weaker on very long verbatim context retention or highly formulaic generation tasks where statistical pattern matching already works well.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Area</th><th>Expected strength</th><th>Reason given in the notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ARC-style abstraction</td><td>Much stronger than plain LLMs</td><td>rules can stay spatial and abstract instead of collapsing into tokens</td></tr>
+          <tr><td>Novel multimodal reasoning</td><td>Major advantage</td><td>thoughts are cross-modal before reasoning starts</td></tr>
+          <tr><td>Math and structured problem solving</td><td>Competitive to strong</td><td>causal, logical, and multi-pass reasoning are built in</td></tr>
+          <tr><td>Pure factual recall</td><td>Weaker</td><td>architecture prioritizes reasoning over memorization</td></tr>
+          <tr><td>Speed</td><td>Weaker</td><td>refinement, workspace competition, and iterative passes add latency</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-amber">
+      <p><strong>The honest picture:</strong> Monarch is not supposed to be a faster or more retrieval-heavy LLM. It is supposed to be a different reasoning machine, with the main gains showing up when a problem is novel, cross-modal, or structurally deep.</p>
+    </div>
+
+    <hr class="section-rule">
+
+    <h2>Final Take</h2>
+    <p>The five feature topics on the site are accurate, but they are only slices of a larger claim. Thought vectors explain how meaning is formed. Multimodal input explains where that meaning comes from. Persistent self and layered memory explain how continuity is carried. Emotional analog signals explain how reasoning is modulated. Workspace competition explains how different faculties are recruited. The reasoning and output layers explain how all of that becomes an answer.</p>
+    <p>Put together, Monarch is trying to be a model that reasons from unified internal meaning rather than from language statistics alone. Whether that full claim holds in practice would depend on training and evaluation, but as a design, it is comprehensive: perception, thought formation, self state, memory, emotional modulation, specialist competition, iterative reasoning, and output are all treated as first-class parts of one machine.</p>
+
+    <div class="sources">
+      <h2>References</h2>
+      <ul class="source-list">
+        <li><span class="source-num">[1]</span><span>Internal design document, <strong>Thought-Grounded Multimodal Intelligence (TGMI)</strong>, covering the full architecture, problem walkthroughs, benchmark expectations, failure modes, and the TGMI-Tiny build plan.</span></li>
+        <li><span class="source-num">[2]</span><span><a href="https://ai.google.dev/gemini-api/docs/embeddings">Gemini Embedding 2 documentation</a> and the paper <a href="https://arxiv.org/abs/2605.27295">Gemini Embedding 2: A Native Multimodal Embedding Model from Gemini</a>, used here as the closest cited analogue for the shared multimodal projection space described in the TGMI notes.</span></li>
+        <li><span class="source-num">[3]</span><span><a href="https://arxiv.org/abs/2105.04906">VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning</a>, which matches the collapse-prevention language used in the thought-formation layer.</span></li>
+        <li><span class="source-num">[4]</span><span><a href="https://github.com/mlfoundations/open_clip">OpenCLIP</a> and <a href="https://arxiv.org/abs/2212.07143">Reproducible Scaling Laws for Contrastive Language-Image Learning</a>, relevant to the visual grounding and frozen CLIP-style encoder assumptions in the source notes.</span></li>
+        <li><span class="source-num">[5]</span><span><a href="https://arxiv.org/abs/1703.03400">MAML</a> and <a href="https://arxiv.org/abs/1909.04630">iMAML</a>, linked as the most direct meta-learning references for the fast-adaptation ideas mentioned in the TGMI material.</span></li>
+        <li><span class="source-num">[6]</span><span><a href="https://arxiv.org/abs/1808.06226">SentencePiece</a> for subword tokenization and <a href="https://faiss.ai/">FAISS</a> for vector retrieval, both of which map cleanly onto implementation details called out in the deeper TGMI build notes.</span></li>
+        <li><span class="source-num">[7]</span><span>Feature visuals reused from the existing site feature section: thought vectors, multimodal input, persistent self, reasoning signals, and layered memory.</span></li>
+      </ul>
+    </div>
+
+  </article>
+
+  <footer class="article-footer">
+    <span>Monarch ; TGMI architecture brief</span>
+    <span>Atom Technologies · 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

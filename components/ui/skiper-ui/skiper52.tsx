@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -69,7 +70,13 @@ const HoverExpand_001 = ({
   images,
   className,
 }: {
-  images: { src: string; alt: string; code: string; title?: string }[];
+  images: {
+    src: string;
+    alt: string;
+    code: string;
+    title?: string;
+    href?: string;
+  }[];
   className?: string;
 }) => {
   const [activeImage, setActiveImage] = useState<number | null>(1);
@@ -82,7 +89,7 @@ const HoverExpand_001 = ({
         duration: 0.3,
         delay: 0.5,
       }}
-      className={cn("relative w-full max-w-6xl px-5", className)}
+      className={cn("relative w-full max-w-6xl px-0 sm:px-5", className)}
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -102,7 +109,7 @@ const HoverExpand_001 = ({
               animate={{
                 width:
                   activeImage === index
-                    ? "min(24rem, calc(100vw - 7rem))"
+                    ? "min(24rem, calc(100vw - 3.5rem))"
                     : "clamp(2.25rem, 10vw, 5rem)",
                 height: "clamp(18rem, 70vw, 24rem)",
               }}
@@ -146,14 +153,14 @@ const HoverExpand_001 = ({
                     <p className="max-w-[48%] text-left text-xl font-medium leading-[0.95] tracking-[-0.04em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)] sm:max-w-[58%] sm:text-3xl">
                       {image.title}
                     </p>
-                    <button
-                      type="button"
+                    <Link
+                      href={image.href ?? "#"}
                       onClick={(event) => event.stopPropagation()}
                       className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-black px-3 py-2.5 text-sm font-medium text-white shadow-[0_14px_30px_rgba(0,0,0,0.24)] transition-colors hover:bg-black/85 sm:gap-2 sm:px-5 sm:py-3 sm:text-base"
                     >
                       See blog
                       <ArrowUpRight className="size-4" aria-hidden="true" />
-                    </button>
+                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>

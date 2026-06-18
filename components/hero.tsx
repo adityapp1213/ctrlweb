@@ -9,16 +9,16 @@ import {
   InvertedFlappingButterfly,
 } from "@/components/flapping-butterfly";
 import { AtomLogo } from "@/components/logo";
+import { SectionNavLink } from "@/components/section-nav-link";
 import Button7 from "@/components/ui/button-7";
 
-const menuItems = ["Features", "Why Ctrl", "Research", "About Us"];
-
-const navTargets: Partial<Record<(typeof menuItems)[number], string>> = {
-  Features: "features",
-  "Why Ctrl": "why-ctrl",
-  Research: "research",
-  "About Us": "about-us",
-};
+const menuItems = [
+  { label: "Description", sectionId: "description" },
+  { label: "Features", sectionId: "features" },
+  { label: "Why Ctrl", sectionId: "why-ctrl" },
+  { label: "Research", sectionId: "research" },
+  { label: "About Us", sectionId: "about-us" },
+] as const;
 
 const navButterflies = [
   {
@@ -127,6 +127,41 @@ export function Hero() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    let retryTimeout: number | null = null;
+
+    const normalizeNestedHash = () => {
+      const currentHash = window.location.hash;
+
+      if (!currentHash.startsWith("##")) {
+        return;
+      }
+
+      const sectionId = currentHash.slice(2);
+      const target = document.getElementById(sectionId);
+
+      if (!target) {
+        retryTimeout = window.setTimeout(normalizeNestedHash, 60);
+        return;
+      }
+
+      target.scrollIntoView({
+        behavior: "auto",
+        block: "start",
+      });
+
+      window.history.replaceState(null, "", `/#${sectionId}`);
+    };
+
+    normalizeNestedHash();
+
+    return () => {
+      if (retryTimeout) {
+        window.clearTimeout(retryTimeout);
+      }
+    };
+  }, []);
+
   const navShellClass = [
     "mx-auto mt-3 w-full max-w-7xl overflow-visible rounded-[1.35rem] border border-transparent transition-[max-width,background-color,border-color,box-shadow,backdrop-filter] duration-300",
     isScrolled
@@ -135,19 +170,6 @@ export function Hero() {
   ]
     .filter(Boolean)
     .join(" ");
-
-  const handleNavClick = (item: (typeof menuItems)[number]) => {
-    const targetId = navTargets[item];
-
-    if (!targetId) {
-      return;
-    }
-
-    document.getElementById(targetId)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
 
   return (
     <>
@@ -189,14 +211,13 @@ export function Hero() {
               <div className="absolute inset-0 m-auto hidden size-fit lg:block">
                 <ul className="flex gap-10 text-[0.98rem]">
                   {menuItems.map((item) => (
-                    <li key={item}>
-                      <button
-                        type="button"
-                        onClick={() => handleNavClick(item)}
+                    <li key={item.label}>
+                      <SectionNavLink
+                        sectionId={item.sectionId}
                         className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                       >
-                        <span>{item}</span>
-                      </button>
+                        <span>{item.label}</span>
+                      </SectionNavLink>
                     </li>
                   ))}
                 </ul>
@@ -207,7 +228,7 @@ export function Hero() {
                   showButterflies={!isScrolled}
                   onClick={() => {
                     window.open(
-                      "https://forms.gle/NYkQTh2EeLP3Jc5Z9",
+                      "https://form.typeform.com/to/nMrMD9Wh",
                       "_blank",
                       "noopener,noreferrer"
                     );
@@ -222,17 +243,14 @@ export function Hero() {
                 <div className="space-y-6">
                   <ul className="space-y-5 text-base">
                     {menuItems.map((item) => (
-                      <li key={item}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            handleNavClick(item);
-                            setMenuOpen(false);
-                          }}
+                      <li key={item.label}>
+                        <SectionNavLink
+                          sectionId={item.sectionId}
+                          onNavigate={() => setMenuOpen(false)}
                           className="block font-normal text-black/60 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                         >
-                          <span>{item}</span>
-                        </button>
+                          <span>{item.label}</span>
+                        </SectionNavLink>
                       </li>
                     ))}
                   </ul>
@@ -243,7 +261,7 @@ export function Hero() {
                     onClick={() => {
                       setMenuOpen(false);
                       window.open(
-                        "https://forms.gle/NYkQTh2EeLP3Jc5Z9",
+                        "https://form.typeform.com/to/nMrMD9Wh",
                         "_blank",
                         "noopener,noreferrer"
                       );
@@ -260,7 +278,10 @@ export function Hero() {
       </header>
 
       <main className="sticky top-0 z-0 min-h-screen bg-white text-black">
-        <section className="relative min-h-screen overflow-hidden bg-white">
+        <section
+          id="hero"
+          className="relative min-h-screen scroll-mt-28 overflow-hidden bg-white"
+        >
           <div className="absolute inset-0">
             <Image
               src="/assets/mainback3.png"
@@ -300,11 +321,10 @@ export function Hero() {
                 ))}
                 <Button7
                   onClick={() => {
-                    window.open(
-                      "https://forms.gle/NYkQTh2EeLP3Jc5Z9",
-                      "_blank",
-                      "noopener,noreferrer"
-                    );
+                    document.getElementById("research")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
                   }}
                   className="relative z-10 h-[58px] w-[178px] rounded-xl bg-black px-0 text-[1.16rem] font-medium text-white shadow-none hover:bg-black/85 sm:h-[60px] sm:w-[150px] sm:px-0"
                 >

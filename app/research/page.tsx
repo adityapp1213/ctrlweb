@@ -9,24 +9,28 @@ const section5Images = [
     alt: "Ctrl horizontal gallery study one",
     code: "# 01",
     title: "Monarch",
+    href: "/monarch",
   },
   {
     src: "/assets/is1.svg",
     alt: "Ctrl horizontal gallery study two",
     code: "# 02",
     title: "Interaction system",
+    href: "/interaction-systems",
   },
   {
     src: "/assets/gm1.svg",
     alt: "Ctrl horizontal gallery study three",
     code: "# 03",
     title: "Godel model",
+    href: "/godel-model",
   },
   {
     src: "/assets/scl.svg",
     alt: "Ctrl horizontal gallery study four",
     code: "# 04",
     title: "Scaling synthetic data",
+    href: "/scaling-synthetic-data",
   },
 ];
 

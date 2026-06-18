@@ -89,7 +89,7 @@ function CloudyCta() {
       <Button7
         onClick={() => {
           window.open(
-            "https://forms.gle/NYkQTh2EeLP3Jc5Z9",
+            "https://form.typeform.com/to/nMrMD9Wh",
             "_blank",
             "noopener,noreferrer",
           );
