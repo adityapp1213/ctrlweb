@@ -271,7 +271,7 @@ export function Hero() {
               className="hidden object-cover object-center sm:block"
             />
             <Image
-              src="/assets/mobileback6.svg"
+              src="/assets/mobileback.svg"
               alt="Hero background"
               fill
               sizes="(max-width: 639px) 100vw, 0vw"
@@ -306,7 +306,7 @@ export function Hero() {
                       "noopener,noreferrer"
                     );
                   }}
-                  className="relative z-10 h-[58px] w-[178px] rounded-xl bg-black px-0 text-[1.12rem] font-semibold text-white shadow-none hover:bg-black/85 sm:h-[60px] sm:w-[150px] sm:px-0"
+                  className="relative z-10 h-[58px] w-[178px] rounded-xl bg-black px-0 text-[1.16rem] font-medium text-white shadow-none hover:bg-black/85 sm:h-[60px] sm:w-[150px] sm:px-0"
                 >
                   See Research
                 </Button7>
