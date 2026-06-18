@@ -271,7 +271,7 @@ export function Hero() {
               className="hidden object-cover object-center sm:block"
             />
             <Image
-              src="/assets/mobileback2.svg"
+              src="/assets/mobileback6.svg"
               alt="Hero background"
               fill
               sizes="(max-width: 639px) 100vw, 0vw"
