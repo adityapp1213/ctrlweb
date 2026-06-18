@@ -45,3 +45,23 @@
     opacity: 0;
   }
 }
+
+@keyframes loader-logo-sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(4deg);
+  }
+}
+
+@keyframes loader-butterfly-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-6deg);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0) rotate(6deg);
+  }
+}
