@@ -3,14 +3,16 @@ import { SitePreloader } from "@/components/site-preloader";
 import { palatino } from "./fonts";
 import "./globals.css";
 
+const siteDescription =
+  "Ctrl is atom's natural-language interface for thought-grounded multimodal intelligence, memory systems, and research.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://atomctrl.com"),
   title: {
     default: "Ctrl by atom",
     template: "%s | Ctrl by atom",
   },
-  description:
-    "Ctrl is atom's natural-language interface for thought-grounded multimodal intelligence, memory systems, and research.",
+  description: siteDescription,
   applicationName: "Ctrl",
   keywords: [
     "Atom Ctrl",
@@ -88,15 +90,13 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Ctrl by atom",
     title: "Ctrl by atom",
-    description:
-      "A calm natural-language interface for thought-grounded multimodal intelligence, memory, voice, and research.",
+    description: siteDescription,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Ctrl by atom",
-    description:
-      "A calm natural-language interface for thought-grounded multimodal intelligence, memory, voice, and research.",
+    description: siteDescription,
     creator: "@adityapp1213",
   },
 };
