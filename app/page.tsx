@@ -4,6 +4,7 @@ import { FeaturesSection } from "@/app/features/page";
 import { WhyCtrlSection } from "@/app/why-ctrl/page";
 import { ResearchSection } from "@/app/research/page";
 import { AboutUsSection } from "@/app/about-us/page";
+import { FaqSection } from "@/app/faq/page";
 import { FooterSection } from "@/app/footer/page";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <WhyCtrlSection />
       <ResearchSection />
       <AboutUsSection />
+      <FaqSection />
       <FooterSection />
     </>
   );

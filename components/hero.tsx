@@ -18,6 +18,7 @@ const menuItems = [
   { label: "Why Ctrl", sectionId: "why-ctrl" },
   { label: "Research", sectionId: "research" },
   { label: "About Us", sectionId: "about-us" },
+  { label: "FAQ", sectionId: "faq" },
 ] as const;
 
 const navButterflies = [

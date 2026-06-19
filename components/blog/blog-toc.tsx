@@ -11,42 +11,54 @@ export function BlogToc({ items }: { items: TocItem[] }) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "introduction");
 
   useEffect(() => {
+    let animationFrame = 0;
+
+    const getHeadingNodes = () =>
+      items
+        .map((item) => document.getElementById(item.id))
+        .filter((node): node is HTMLElement => Boolean(node));
+
+    const updateFromScroll = () => {
+      const nodes = getHeadingNodes();
+
+      if (!nodes.length) {
+        return;
+      }
+
+      const activationLine = 150;
+      const nextActive =
+        [...nodes]
+          .reverse()
+          .find((node) => node.getBoundingClientRect().top <= activationLine)
+          ?.id ?? nodes[0].id;
+
+      setActiveId(nextActive);
+    };
+
+    const requestScrollUpdate = () => {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = window.requestAnimationFrame(updateFromScroll);
+    };
+
     const updateFromHash = () => {
       const hash = window.location.hash.replace("#", "");
 
       if (hash) {
         setActiveId(hash);
+        requestScrollUpdate();
       }
     };
 
-    updateFromHash();
+    requestScrollUpdate();
     window.addEventListener("hashchange", updateFromHash);
-
-    const observers = items
-      .map((item) => document.getElementById(item.id))
-      .filter((node): node is HTMLElement => Boolean(node));
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-
-        if (visibleEntry?.target?.id) {
-          setActiveId(visibleEntry.target.id);
-        }
-      },
-      {
-        rootMargin: "-20% 0px -65% 0px",
-        threshold: [0, 0.1, 0.3, 0.6],
-      },
-    );
-
-    observers.forEach((node) => observer.observe(node));
+    window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+    window.addEventListener("resize", requestScrollUpdate);
 
     return () => {
+      window.cancelAnimationFrame(animationFrame);
       window.removeEventListener("hashchange", updateFromHash);
-      observer.disconnect();
+      window.removeEventListener("scroll", requestScrollUpdate);
+      window.removeEventListener("resize", requestScrollUpdate);
     };
   }, [items]);
 
@@ -60,7 +72,7 @@ export function BlogToc({ items }: { items: TocItem[] }) {
               onClick={() => setActiveId(item.id)}
               className={[
                 "transition-colors hover:text-black",
-                activeId === item.id ? "font-medium text-black" : "",
+                activeId === item.id ? "text-black" : "",
               ].join(" ")}
             >
               {item.label}
