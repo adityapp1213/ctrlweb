@@ -153,7 +153,7 @@ const HoverExpand_002 = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.22 }}
-                    className="mb-3 mt-2 w-full max-w-[24rem] px-2 text-left md:hidden"
+                    className="mb-3 mt-2 w-full max-w-[24rem] px-5 text-left sm:px-3 md:hidden"
                   >
                     <p className="text-xs uppercase tracking-[0.24em] text-black/35">
                       {image.eyebrow}

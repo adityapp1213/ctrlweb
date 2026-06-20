@@ -82,7 +82,7 @@ const Skiper89 = () => {
   return (
     <div
       className={cn(
-        "relative mx-auto flex w-full max-w-5xl flex-col items-center px-2 pb-10 pt-14 text-center sm:px-6 sm:pb-12 sm:pt-18",
+        "relative mx-auto flex w-full max-w-5xl flex-col items-center px-4 pb-10 pt-14 text-center sm:px-6 sm:pb-12 sm:pt-18",
       )}
     >
       <motion.div
@@ -144,7 +144,7 @@ const Skiper89 = () => {
             range={[index / stanzas.length, (index + 1) / stanzas.length]}
             dottedWords={{ Monarch: "/monarch" }}
             textOpacity="medium"
-            className="mx-auto w-full max-w-[700px] p-4 text-justify font-sans text-2xl leading-snug text-black"
+            className="mx-auto w-full max-w-[700px] px-5 py-4 text-justify font-sans text-2xl leading-snug text-black sm:p-4"
           />
         ))}
       </div>

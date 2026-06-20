@@ -68,7 +68,7 @@ export function FaqSection() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <div className="mx-auto w-full max-w-4xl">
+      <div className="mx-auto w-full max-w-4xl px-2 sm:px-0">
         <div className="mb-10 flex flex-col items-center text-center sm:mb-12">
           
           <h2 className="max-w-3xl text-4xl font-medium leading-tight text-black sm:text-5xl lg:text-6xl">

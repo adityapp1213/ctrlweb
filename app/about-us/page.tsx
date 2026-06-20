@@ -87,7 +87,7 @@ export function AboutUsSection() {
           <h2 className="mt-5 text-[3.45rem] font-medium leading-[0.92] tracking-[-0.06em] text-black sm:text-6xl lg:text-7xl">
             Built close to the problem.
           </h2>
-          <div className="mx-auto mt-7 grid max-w-xl gap-5 text-pretty text-lg leading-relaxed tracking-[-0.02em] text-black/62 sm:text-xl lg:mx-0">
+          <div className="mx-auto mt-7 grid max-w-xl gap-5 px-3 text-justify text-lg leading-relaxed tracking-[-0.02em] text-black/62 sm:px-0 sm:text-xl lg:mx-0">
             <p>
               I&apos;m aditya panigrahi (Chief Everything Officer  
               ), about to turn 18 have been working on atom tech since last year
@@ -150,7 +150,7 @@ export function AboutUsSection() {
           <h2 className="mt-5 text-[3.45rem] font-medium leading-[0.92] tracking-[-0.06em] text-black sm:text-6xl lg:text-7xl">
             The person who kept believing.
           </h2>
-          <div className="mx-auto mt-7 grid max-w-xl gap-5 text-pretty text-lg leading-relaxed tracking-[-0.02em] text-black/62 sm:text-xl lg:mx-0">
+          <div className="mx-auto mt-7 grid max-w-xl gap-5 px-3 text-justify text-lg leading-relaxed tracking-[-0.02em] text-black/62 sm:px-0 sm:text-xl lg:mx-0">
             <p>
               Anjali panigrahi (Adviser ), also my sister :) is the one who has been my constant support and adviser throughout this journey.
             </p>

@@ -22,7 +22,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
         return (
           <div
             key={item.id}
-            className="rounded-none bg-black/[0.035] px-6 transition-colors duration-300 data-[open=true]:bg-black/[0.055]"
+            className="rounded-none bg-black/[0.035] px-5 transition-colors duration-300 data-[open=true]:bg-black/[0.055] sm:px-6"
             data-open={isActive}
           >
             <button

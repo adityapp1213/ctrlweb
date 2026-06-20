@@ -114,7 +114,7 @@ export function WhyCtrlSection() {
           <h2 className="mt-5 max-w-xl text-5xl font-medium leading-[0.96] tracking-[-0.055em] text-black sm:text-6xl lg:text-7xl">
             Hi from Cloudy 
           </h2>
-          <div className="mt-8 max-w-xl text-xl leading-relaxed tracking-[-0.02em] text-black/62">
+          <div className="mt-8 max-w-xl px-3 text-xl leading-relaxed tracking-[-0.02em] text-black/62 sm:px-0">
             <p>
               Ctrl is the app where the models live, but Cloudy is the part that
               makes it feel approachable. It is the personality layer of the
