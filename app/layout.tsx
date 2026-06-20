@@ -4,7 +4,7 @@ import { palatino } from "./fonts";
 import "./globals.css";
 
 const siteDescription =
-  "Ctrl is atom's natural-language interface for thought-grounded multimodal intelligence, memory systems, and research.";
+  "Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://atomctrl.com"),
