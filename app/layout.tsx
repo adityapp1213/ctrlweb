@@ -9,8 +9,8 @@ const siteDescription =
 export const metadata: Metadata = {
   metadataBase: new URL("https://atomctrl.com"),
   title: {
-    default: "Ctrl by atom",
-    template: "%s | Ctrl by atom",
+    default: "atom ctrl",
+    template: "%s | atom ctrl",
   },
   description: siteDescription,
   applicationName: "Ctrl",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Aditya Prasad Panigrahi", url: "https://atomctrl.com" }],
   creator: "Aditya Prasad Panigrahi",
   publisher: "atom",
-  category: "technology",
+  category: "tech",
   alternates: {
     canonical: "/",
   },
@@ -88,14 +88,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "Ctrl by atom",
-    title: "Ctrl by atom",
+    siteName: "atom ctrl",
+    title: "atom ctrl",
     description: siteDescription,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ctrl by atom",
+    title: "atom ctrl",
     description: siteDescription,
     creator: "@adityapp1213",
   },

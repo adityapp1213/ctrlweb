@@ -10,7 +10,7 @@ export const size = {
 export const contentType = "image/png";
 
 const siteDescription =
-  "Ctrl is atom's natural-language interface for thought-grounded multimodal intelligence, memory systems, and research.";
+  "Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.";
 
 export default function OpenGraphImage() {
   return new ImageResponse(
