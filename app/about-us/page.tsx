@@ -89,8 +89,7 @@ export function AboutUsSection() {
           </h2>
           <div className="mx-auto mt-7 grid max-w-xl gap-5 px-3 text-justify text-lg leading-relaxed tracking-[-0.02em] text-black/62 sm:px-0 sm:text-xl lg:mx-0">
             <p>
-              I&apos;m aditya panigrahi (Chief Everything Officer  
-              ), about to turn 18 have been working on atom tech since last year
+              I&apos;m aditya panigrahi (Chief Everything Officer), about to turn 18 have been working on atom tech since last year
               have built, ideated and shipped multiple things.
             </p>
             <p>
