@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   FlappingButterfly,
   InvertedFlappingButterfly,
-} from "@/components/flapping-butterfly";
+} from "@/components/butterfly/flapping-butterfly";
 import Button7 from "@/components/ui/button-7";
 
 const cloudyCtaButterflies = [

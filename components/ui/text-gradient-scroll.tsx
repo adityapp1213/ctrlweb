@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 
 import { cn } from "@/lib/utils";
-import { LinkDottedArrow } from "@/components/ui/skiper-ui/skiper40";
+import { LinkDottedArrow } from "@/components/ui/main/animated-link";
 
 type TextOpacity = "none" | "soft" | "medium";
 type ViewType = "word" | "letter";

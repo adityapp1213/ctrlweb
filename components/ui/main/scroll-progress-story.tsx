@@ -13,7 +13,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 
-const Skiper89 = () => {
+const ScrollProgressStory = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
   const [loaderTravelDistance, setLoaderTravelDistance] = useState(0);
@@ -152,4 +152,4 @@ const Skiper89 = () => {
   );
 };
 
-export { Skiper89 };
+export { ScrollProgressStory };

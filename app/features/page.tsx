@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { HoverExpand_002 } from "@/components/ui/skiper-ui/skiper53";
+import { StackedFeatureGallery } from "@/components/ui/main/stacked-feature-gallery";
 
 const section3Images = [
   {
@@ -82,7 +82,7 @@ export function FeaturesSection() {
           </div>
         </div>
 
-        <HoverExpand_002
+        <StackedFeatureGallery
           images={section3Images}
           activeIndex={activeIndex}
           onActiveChange={setActiveIndex}

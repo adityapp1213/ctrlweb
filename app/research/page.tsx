@@ -1,6 +1,6 @@
 "use client";
 
-import { HoverExpand_001 } from "@/components/ui/skiper-ui/skiper52";
+import { ExpandableResearchGallery } from "@/components/ui/main/expandable-research-gallery";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 
 const section5Images = [
@@ -46,7 +46,7 @@ export function ResearchSection() {
           textOpacity="medium"
           className="mx-auto max-w-3xl text-center text-4xl font-medium leading-none tracking-[-0.055em] text-black sm:text-5xl lg:text-6xl"
         />
-        <HoverExpand_001 images={section5Images} className="mx-auto" />
+        <ExpandableResearchGallery images={section5Images} className="mx-auto" />
       </div>
     </section>
   );

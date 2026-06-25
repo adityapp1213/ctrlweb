@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import React, { useRef } from "react";
 
-const Skiper19 = () => {
+const ScrollDrawnPathDemo = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -57,7 +57,7 @@ const Skiper19 = () => {
   );
 };
 
-export { Skiper19 };
+export { ScrollDrawnPathDemo };
 
 const LinePath = ({
   className,

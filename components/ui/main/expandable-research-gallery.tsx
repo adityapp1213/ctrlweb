@@ -8,7 +8,7 @@ import React, { useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-const Skiper52 = () => {
+const ExpandableResearchGalleryDemo = () => {
   const images = [
     {
       src: "/images/x.com/13.jpeg",
@@ -59,14 +59,14 @@ const Skiper52 = () => {
 
   return (
     <div className="flex h-full w-full items-center justify-center overflow-hidden bg-[#f5f4f3]">
-      <HoverExpand_001 className="" images={images} />{" "}
+      <ExpandableResearchGallery className="" images={images} />{" "}
     </div>
   );
 };
 
-export { Skiper52 };
+export { ExpandableResearchGalleryDemo };
 
-const HoverExpand_001 = ({
+const ExpandableResearchGallery = ({
   images,
   className,
 }: {
@@ -172,7 +172,7 @@ const HoverExpand_001 = ({
   );
 };
 
-export { HoverExpand_001 };
+export { ExpandableResearchGallery };
 
 /**
  * Skiper 52 HoverExpand_001 — React + Framer Motion

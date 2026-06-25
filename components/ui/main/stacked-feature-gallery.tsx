@@ -16,7 +16,7 @@ type HoverExpandImage = {
   detail?: string;
 };
 
-const Skiper53 = () => {
+const StackedFeatureGalleryDemo = () => {
   const images = [
     {
       src: "/images/x.com/13.jpeg",
@@ -53,14 +53,14 @@ const Skiper53 = () => {
 
   return (
     <div className="flex h-full w-full items-center justify-center overflow-hidden bg-[#f5f4f3]">
-      <HoverExpand_002 className="" images={images} />
+      <StackedFeatureGallery className="" images={images} />
     </div>
   );
 };
 
-export { Skiper53 };
+export { StackedFeatureGalleryDemo };
 
-const HoverExpand_002 = ({
+const StackedFeatureGallery = ({
   images,
   className,
   activeIndex,
@@ -175,7 +175,7 @@ const HoverExpand_002 = ({
   );
 };
 
-export { HoverExpand_002 };
+export { StackedFeatureGallery };
 
 /**
  * Skiper 53 HoverExpand_002 — React + Framer Motion

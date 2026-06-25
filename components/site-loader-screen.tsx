@@ -4,7 +4,7 @@ import { AtomLogo } from "@/components/logo";
 import {
   FlappingButterfly,
   InvertedFlappingButterfly,
-} from "@/components/flapping-butterfly";
+} from "@/components/butterfly/flapping-butterfly";
 
 export function SiteLoaderScreen({
   progress,

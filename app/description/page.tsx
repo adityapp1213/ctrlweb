@@ -1,4 +1,4 @@
-import { Skiper89 } from "@/components/ui/skiper-ui/skiper89";
+import { ScrollProgressStory } from "@/components/ui/main/scroll-progress-story";
 
 export function DescriptionSection() {
   return (
@@ -6,7 +6,7 @@ export function DescriptionSection() {
       id="description"
       className="relative z-30 -mt-24 min-h-screen scroll-mt-28 overflow-visible bg-white px-4 py-16 sm:px-6"
     >
-      <Skiper89 />
+      <ScrollProgressStory />
     </section>
   );
 }

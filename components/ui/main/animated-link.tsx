@@ -8,7 +8,7 @@ import Image from "next/image";
 import {
   FlappingButterfly,
   InvertedFlappingButterfly,
-} from "@/components/flapping-butterfly";
+} from "@/components/butterfly/flapping-butterfly";
 import { cn } from "@/lib/utils";
 import Button7 from "@/components/ui/button-7";
 
@@ -27,7 +27,7 @@ const monarchCtaButterflies = [
   },
 ];
 
-const Skiper40 = () => {
+const AnimatedLinkDemo = () => {
   return (
     <section className="h-full snap-y snap-mandatory overflow-y-scroll">
       <div className="relative flex h-full w-full flex-col items-center justify-center gap-5">
@@ -49,7 +49,7 @@ export {
   Link004,
   Link005,
   LinkDottedArrow,
-  Skiper40,
+  AnimatedLinkDemo,
 };
 
 const Link000 = ({

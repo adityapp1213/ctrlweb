@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import {
   FlappingButterfly,
   InvertedFlappingButterfly,
-} from "@/components/flapping-butterfly";
+} from "@/components/butterfly/flapping-butterfly";
 import { AtomLogo } from "@/components/logo";
 import { SectionNavLink } from "@/components/section-nav-link";
 import Button7 from "@/components/ui/button-7";

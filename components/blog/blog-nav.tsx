@@ -8,7 +8,7 @@ import { SectionNavLink } from "@/components/section-nav-link";
 import {
   FlappingButterfly,
   InvertedFlappingButterfly,
-} from "@/components/flapping-butterfly";
+} from "@/components/butterfly/flapping-butterfly";
 
 const menuItems = [
   { label: "Description", sectionId: "description" },
