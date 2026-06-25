@@ -1,5 +1,5 @@
-```md
-# Atom ctrl 
+
+# Atom ctrl :)
 
 this is the source code for my startup site, `https://www.atomctrl.com/`
 
@@ -190,4 +190,4 @@ the research/blog pages are powered by source HTML files inside `content/`
 - tighten some copy and casing across sections
 - clean up the section/page structure a little more
 - add analytics later if i want to track clicks and signups
-```
+
