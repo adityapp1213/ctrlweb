@@ -12,36 +12,41 @@ export const metadata: Metadata = {
 
 const faqItems = [
   {
-    id: "item-1",
-    question: "What is Ctrl by atom?",
+    id: "item-0",
+    question: "What is atom ctrl ?",
     answer:
       "Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.",
   },
-  {
-    id: "item-2",
-    question: "What is Monarch?",
-    answer:
-      "Monarch is atom's thought-grounded models family. We believe future AI systems should reason through problems instead of relying solely on pattern matching. Thought-grounded intelligence combines multimodal understanding, and world knowledge to enable more reliable and adaptable AI.",
-  },
-  {
-    id: "item-3",
-    question: "What makes Ctrl different from a normal chatbot?",
-    answer:
-      "Many AI systems are just next word predictors, which can be unreliable and struggle with complex tasks. Ctrl's thought-grounded models are designed to reason through problems, understand context, and learn from interactions, making them more useful for real-world applications.",
-  },
-  {
-    id: "item-4",
-    question: "What is the long-term vision for Atom Ctrl?",
-    answer:
-      "Our mission is to build thinking machines that can learn continuously, adapt to new environments, and collaborate naturally with people across research, work, and everyday life. ",
-    
-  },
-  {
-    id: "item-5",
-    question: "How can I request access?",
-    answer:
-      "You can join the waitlist or request access from the site. Early access is focused on people interested in research, productivity, and natural-language AI workflows.",
-  },
+{
+  id: "item-1",
+  question: "What is atom ctrl?",
+  answer:
+    "Atom Ctrl is an AI research lab building thought-grounded AI systems that reason, learn, and understand the world instead of relying only on next-token prediction.",
+},
+{
+  id: "item-2",
+  question: "What is Project Monarch?",
+  answer:
+    "Monarch is Atom Ctrl's flagship research project and the name of our family of thought-grounded AI models. It explores new approaches to reasoning, memory, multimodal understanding, and world models to build more capable AI systems.",
+},
+{
+  id: "item-3",
+  question: "What are thought grounded AI?",
+  answer:
+    "Thought grounded ai models are designed to build internal representations before producing an answer. Project Monarch explores this approach to make AI more reliable, adaptable, and useful in real-world situations.",
+},
+{
+  id: "item-4",
+  question: "How can I use atom ctrl?",
+  answer:
+    "Atom Ctrl is currently in development. You can join the waitlist to receive updates and early access as new releases become available.",
+},
+{
+  id: "item-5",
+  question: "How can I get early access to Atom Ctrl?",
+  answer:
+    "Join the Atom Ctrl waitlist through our website. Early access is rolling out gradually to researchers, developers, students, and early adopters.",
+},
 ];
 
 const faqJsonLd = {

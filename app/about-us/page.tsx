@@ -19,7 +19,7 @@ const socialLinks = [
   },
   {
     label: "Gmail",
-    href: "mailto:adityappanigrahi@gmail.com",
+    href: "mailto:aditya@atomctrl.com",
     icon: "/assets/gmail.svg",
   },
 ];
