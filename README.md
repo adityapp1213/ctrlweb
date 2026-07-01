@@ -1,7 +1,7 @@
 
 # Atom ctrl :)
 
-this is the source code for my startup site, `https://www.atomctrl.com/`
+this is the source code for my startup site, https://www.atomctrl.com/
 
 i use this site to put everything in one place:
 my research, my ideas around machine learning and thinking machines, the stuff i am building, and my blog-style research pages too. it is basically the home for what i am doing with atom ctrl (my tiny startup)
