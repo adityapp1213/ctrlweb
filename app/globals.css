@@ -82,14 +82,14 @@
 
 .site-loader-butterfly-left {
   animation:
-    loader-butterfly-appear 180ms ease-out 160ms forwards,
-    loader-butterfly-drift 2.8s ease-in-out 160ms infinite;
+    loader-butterfly-appear 180ms ease-out 600ms forwards,
+    loader-butterfly-drift 2.8s ease-in-out 600ms infinite;
 }
 
 .site-loader-butterfly-right {
   animation:
-    loader-butterfly-appear 180ms ease-out 240ms forwards,
-    loader-butterfly-drift 3.2s ease-in-out 240ms infinite;
+    loader-butterfly-appear 180ms ease-out 680ms forwards,
+    loader-butterfly-drift 3.2s ease-in-out 680ms infinite;
 }
 
 @keyframes site-loader-spin {

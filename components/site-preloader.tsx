@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SiteLoaderScreen } from "@/components/site-loader-screen";
 import { siteAssetManifest } from "@/lib/site-assets";
 
-const MIN_LOADER_MS = 900;
+const MIN_LOADER_MS = 1600;
 
 function preloadImage(src: string) {
   return new Promise<void>((resolve) => {
@@ -29,15 +29,6 @@ function preloadImage(src: string) {
       resolve();
     }
   });
-}
-
-export function Spin() {
-  return (
-    <div className="relative aspect-square w-[65px]">
-      <span className="site-loader-spin absolute rounded-[50px] shadow-[inset_0_0_0_3px] shadow-gray-800 dark:shadow-gray-100" />
-      <span className="site-loader-spin site-loader-spin-delay absolute rounded-[50px] shadow-[inset_0_0_0_3px] shadow-gray-800 dark:shadow-gray-100" />
-    </div>
-  );
 }
 
 export function SitePreloader({
