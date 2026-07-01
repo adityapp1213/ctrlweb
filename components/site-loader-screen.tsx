@@ -22,14 +22,14 @@ export function SiteLoaderScreen({
       aria-busy={visible}
     >
       <div className="relative flex items-center justify-center">
-        <span className="absolute -left-16 -top-12 [animation:loader-butterfly-drift_2.8s_ease-in-out_infinite]">
+        <span className="site-loader-butterfly-left absolute -left-16 -top-12">
           <FlappingButterfly
             className="size-20 rotate-[-14deg] opacity-80"
             frameDelay={80}
           />
         </span>
 
-        <span className="absolute -right-16 top-10 [animation:loader-butterfly-drift_3.2s_ease-in-out_infinite_180ms]">
+        <span className="site-loader-butterfly-right absolute -right-16 top-10">
           <InvertedFlappingButterfly
             className="size-20 rotate-[10deg] opacity-75"
             frameDelay={180}
