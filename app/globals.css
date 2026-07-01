@@ -124,6 +124,7 @@
 
 .site-loader-spin {
   animation: site-loader-spin 2.5s infinite;
+  box-shadow: inset 0 0 0 3px #1f2937;
 }
 
 .site-loader-spin-delay {

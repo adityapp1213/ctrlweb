@@ -8,8 +8,8 @@ import {
 function Spin() {
   return (
     <div className="relative aspect-square w-[65px]">
-      <span className="site-loader-spin absolute rounded-[50px] shadow-[inset_0_0_0_3px] shadow-gray-800 dark:shadow-gray-100" />
-      <span className="site-loader-spin site-loader-spin-delay absolute rounded-[50px] shadow-[inset_0_0_0_3px] shadow-gray-800 dark:shadow-gray-100" />
+      <span className="site-loader-spin absolute rounded-[50px]" />
+      <span className="site-loader-spin site-loader-spin-delay absolute rounded-[50px]" />
     </div>
   );
 }
