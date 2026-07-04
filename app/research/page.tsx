@@ -38,7 +38,7 @@ export function ResearchSection() {
   return (
     <section
       id="research"
-      className="relative z-10 scroll-mt-28 overflow-hidden bg-white px-4 pb-12 pt-2 sm:px-6 sm:pt-4 lg:pb-14 lg:pt-2"
+      className="relative z-10 scroll-mt-28 overflow-hidden bg-white px-4 pb-4 pt-2 sm:px-6 sm:pb-5 sm:pt-4 lg:pb-6 lg:pt-2"
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-12">
         <TextGradientScroll
