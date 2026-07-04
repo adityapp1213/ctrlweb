@@ -140,3 +140,53 @@
 .site-loader-spin-delay {
   animation-delay: -1.25s;
 }
+
+@keyframes research-frame-cycle {
+  0% {
+    opacity: 0;
+  }
+  4.167%,
+  20.833% {
+    opacity: 1;
+  }
+  25%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.research-frame {
+  opacity: 0;
+  transform: translate3d(
+    var(--research-frame-x, 0),
+    var(--research-frame-y, 0),
+    0
+  );
+  will-change: opacity, transform;
+  animation: none;
+}
+
+@media (min-width: 640px) {
+  .research-sequence-desktop-active .research-frame {
+    animation: research-frame-cycle 2400ms linear infinite;
+    animation-delay: var(--research-frame-delay, 0ms);
+  }
+}
+
+@media (max-width: 639px) {
+  .research-sequence-mobile-active .research-frame {
+    animation: research-frame-cycle 2400ms linear infinite;
+    animation-delay: var(--research-frame-delay, 0ms);
+  }
+}
+
+.research-frame:first-child {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .research-frame {
+    animation: none;
+  }
+
+}

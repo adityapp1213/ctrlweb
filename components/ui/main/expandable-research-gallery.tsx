@@ -1,10 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -76,10 +76,74 @@ const ExpandableResearchGallery = ({
     code: string;
     title?: string;
     href?: string;
+    frames?: string[];
+    frameOffsets?: { x: number; y: number }[];
   }[];
   className?: string;
 }) => {
-  const [activeImage, setActiveImage] = useState<number | null>(1);
+  const [periodicIndex, setPeriodicIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [mobileCenteredIndex, setMobileCenteredIndex] = useState(0);
+  const railRef = useRef<HTMLDivElement>(null);
+  const activeIndex = hoveredIndex ?? periodicIndex;
+
+  useEffect(() => {
+    if (hoveredIndex !== null) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setPeriodicIndex((current) => (current + 1) % images.length);
+    }, 3200);
+
+    return () => window.clearInterval(interval);
+  }, [hoveredIndex, images.length]);
+
+  useEffect(() => {
+    const rail = railRef.current;
+
+    if (!rail) {
+      return;
+    }
+
+    let animationFrame = 0;
+    const updateCenteredCard = () => {
+      animationFrame = 0;
+      const railCenter = rail.getBoundingClientRect().left + rail.clientWidth / 2;
+      const cards = rail.querySelectorAll<HTMLElement>("[data-research-card]");
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      cards.forEach((card, index) => {
+        const bounds = card.getBoundingClientRect();
+        const distance = Math.abs(bounds.left + bounds.width / 2 - railCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      setMobileCenteredIndex(closestIndex);
+    };
+    const scheduleUpdate = () => {
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(updateCenteredCard);
+      }
+    };
+
+    updateCenteredCard();
+    rail.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+      }
+      rail.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
 
   return (
     <motion.div
@@ -89,7 +153,7 @@ const ExpandableResearchGallery = ({
         duration: 0.3,
         delay: 0.5,
       }}
-      className={cn("relative w-full max-w-6xl px-0 sm:px-5", className)}
+      className={cn("relative w-full max-w-[80rem] px-0", className)}
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -97,75 +161,81 @@ const ExpandableResearchGallery = ({
         transition={{ duration: 0.3 }}
         className="w-full"
       >
-        <div className="flex w-full items-center justify-center gap-1">
+        <div
+          ref={railRef}
+          className="overflow-x-auto px-1 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-2"
+        >
+          <div className="flex w-max snap-x snap-mandatory items-center gap-3.5 sm:gap-4 lg:gap-[1.125rem]">
           {images.map((image, index) => (
             <motion.div
-              key={index}
-              className="relative cursor-pointer overflow-hidden rounded-3xl"
-              initial={{
-                width: "clamp(2.25rem, 10vw, 5rem)",
-                height: "clamp(18rem, 70vw, 24rem)",
-              }}
-              animate={{
-                width:
-                  activeImage === index
-                    ? "min(24rem, calc(100vw - 3.5rem))"
-                    : "clamp(2.25rem, 10vw, 5rem)",
-                height: "clamp(18rem, 70vw, 24rem)",
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              onClick={() => setActiveImage(index)}
-              onHoverStart={() => setActiveImage(index)}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                sizes="(min-width: 768px) 384px, 70vw"
-                className={cn(
-                  "object-cover transition-[filter,opacity,transform] duration-500 ease-out",
-                  activeImage === index
-                    ? "scale-100 opacity-100 blur-0"
-                    : "scale-[1.02] opacity-70 blur-[1.5px]",
-                )}
-              />
-              {activeImage !== index && (
-                <div className="absolute inset-0 bg-white/8" aria-hidden="true" />
+              key={image.href ?? `${image.src}-${index}`}
+              className={cn(
+                "relative h-[22rem] w-[15.25rem] shrink-0 snap-start overflow-hidden rounded-3xl bg-[#fbf8f2] transition-[filter,opacity] duration-500 ease-out sm:h-[23.5rem] sm:w-[16.25rem]",
+                hoveredIndex !== null && hoveredIndex !== index
+                  ? "opacity-60 blur-[1.5px]"
+                  : "opacity-100 blur-0",
+                mobileCenteredIndex !== index
+                  ? "max-sm:opacity-60 max-sm:blur-[1.5px]"
+                  : "max-sm:opacity-100 max-sm:blur-0",
               )}
-              <AnimatePresence>
-                {activeImage === index && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 via-black/18 to-transparent backdrop-blur-[2px]"
+              data-research-card
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              onFocusCapture={() => setHoveredIndex(index)}
+              onBlurCapture={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                  setHoveredIndex(null);
+                }
+              }}
+            >
+              <div
+                className={cn(
+                  "research-sequence-mobile absolute inset-x-0 bottom-[5.75rem] top-0",
+                  activeIndex === index && "research-sequence-desktop-active",
+                  mobileCenteredIndex === index &&
+                    "research-sequence-mobile-active",
+                )}
+                aria-hidden="true"
+              >
+                {(image.frames ?? [image.src]).map((frame, frameIndex) => (
+                  <Image
+                    key={frame}
+                    src={frame}
+                    alt=""
+                    fill
+                    sizes="(min-width: 640px) 260px, 244px"
+                    className="research-frame object-contain"
+                    style={
+                      {
+                        "--research-frame-delay": `${
+                          -(((200 - frameIndex * 400) % 2400 + 2400) % 2400)
+                        }ms`,
+                        "--research-frame-x": `${image.frameOffsets?.[frameIndex]?.x ?? 0}%`,
+                        "--research-frame-y": `${image.frameOffsets?.[frameIndex]?.y ?? 0}%`,
+                      } as React.CSSProperties
+                    }
                   />
-                )}
-              </AnimatePresence>
-              <AnimatePresence>
-                {activeImage === index && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute inset-x-3 bottom-4 z-10 flex items-end justify-between gap-2 sm:inset-x-5 sm:bottom-5 sm:gap-4"
-                  >
-                    <p className="max-w-[48%] text-left text-xl font-medium leading-[0.95] tracking-[-0.04em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)] sm:max-w-[58%] sm:text-3xl">
-                      {image.title}
-                    </p>
-                    <Link
-                      href={image.href ?? "#"}
-                      onClick={(event) => event.stopPropagation()}
-                      className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-black px-3 py-2.5 text-sm font-medium text-white shadow-[0_14px_30px_rgba(0,0,0,0.24)] transition-colors hover:bg-black/85 sm:gap-2 sm:px-5 sm:py-3 sm:text-base"
-                    >
-                      See blog
-                      <ArrowUpRight className="size-4" aria-hidden="true" />
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                ))}
+              </div>
+
+              <div className="absolute inset-x-4 bottom-4 z-10 flex items-center justify-between gap-2 sm:bottom-5">
+                <p className="min-w-0 max-w-[calc(100%-5.75rem)] break-words text-left text-xl font-medium leading-[0.95] tracking-[-0.04em] text-black sm:text-[1.55rem]">
+                  {image.title}
+                </p>
+                <Link
+                  href={image.href ?? "#"}
+                  className="inline-flex shrink-0 items-center gap-1 rounded-xl bg-black px-2.5 py-2.5 text-xs font-medium text-white shadow-[0_14px_30px_rgba(0,0,0,0.18)] transition-colors hover:bg-black/85 sm:px-3 sm:py-2.5 sm:text-xs"
+                >
+                  See blog
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                </Link>
+              </div>
             </motion.div>
           ))}
+          </div>
         </div>
       </motion.div>
     </motion.div>
