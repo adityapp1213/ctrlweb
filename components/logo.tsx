@@ -1,4 +1,4 @@
-// Atom Ctrl logo component used across the app (header, sidebar, chat)
+// Atom Ctrl logo component used across the site.
 import { useId } from 'react'
 
 interface AtomLogoProps {

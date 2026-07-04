@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "atom ctrl";
+export const alt = "Atom Ctrl, AI research lab";
 
 export const size = {
   width: 1200,
@@ -100,7 +100,7 @@ export default function OpenGraphImage() {
                 letterSpacing: "-0.055em",
               }}
             >
-              atom ctrl
+              Atom Ctrl
             </div>
             <div
               style={{

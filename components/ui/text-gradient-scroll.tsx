@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useRef } from "react";
+import { createContext, Fragment, useContext, useRef } from "react";
 import {
   motion,
   type MotionValue,
@@ -43,6 +43,12 @@ function useGradientScroll() {
   return useContext(TextGradientScrollContext);
 }
 
+function getRestingOpacity(textOpacity: TextOpacity) {
+  if (textOpacity === "none") return 0;
+  if (textOpacity === "medium") return 0.3;
+  return 0.1;
+}
+
 function TextGradientScroll({
   text,
   className,
@@ -75,29 +81,34 @@ function TextGradientScroll({
 
           if (dottedHref) {
             return (
-              <SpecialWord
-                key={`${word}-${index}`}
-                progress={activeProgress}
-                range={range}
-                href={dottedHref}
-              >
-                {word}
-              </SpecialWord>
+              <Fragment key={`${word}-${index}`}>
+                <SpecialWord
+                  progress={activeProgress}
+                  range={range}
+                  href={dottedHref}
+                >
+                  {word}
+                </SpecialWord>{" "}
+              </Fragment>
             );
           }
 
-          return type === "word" ? (
-            <Word key={`${word}-${index}`} progress={activeProgress} range={range}>
-              {word}
-            </Word>
-          ) : (
-            <Letter
-              key={`${word}-${index}`}
-              progress={activeProgress}
-              range={range}
-            >
-              {word}
-            </Letter>
+          const segment =
+            type === "word" ? (
+              <Word progress={activeProgress} range={range}>
+                {word}
+              </Word>
+            ) : (
+              <Letter progress={activeProgress} range={range}>
+                {word}
+              </Letter>
+            );
+
+          return (
+            <Fragment key={`${word}-${index}`}>
+              {segment}
+              {" "}
+            </Fragment>
           );
         })}
       </p>
@@ -106,15 +117,17 @@ function TextGradientScroll({
 }
 
 const Word = ({ children, progress, range }: SegmentProps) => {
-  const opacity = useTransform(progress, range, [0, 1]);
+  const { textOpacity } = useGradientScroll();
+  const opacity = useTransform(
+    progress,
+    range,
+    [getRestingOpacity(textOpacity), 1],
+  );
 
   return (
-    <span className="relative me-3 mt-2 inline-flex">
-      <span className="absolute opacity-10">{children}</span>
-      <motion.span style={{ transition: "all .5s", opacity }}>
-        {children}
-      </motion.span>
-    </span>
+    <motion.span className="mt-2 inline-block" style={{ transition: "all .5s", opacity }}>
+      {children}
+    </motion.span>
   );
 };
 
@@ -124,31 +137,17 @@ const SpecialWord = ({
   range,
   href,
 }: SegmentProps & { href: string }) => {
-  const opacity = useTransform(progress, range, [0, 1]);
   const { textOpacity } = useGradientScroll();
+  const opacity = useTransform(
+    progress,
+    range,
+    [getRestingOpacity(textOpacity), 1],
+  );
 
   return (
-    <span className="relative me-3 mt-2 inline-flex">
-      <span
-        className={cn("absolute", {
-          "opacity-0": textOpacity === "none",
-          "opacity-10": textOpacity === "soft",
-          "opacity-30": textOpacity === "medium",
-        })}
-      >
-        <LinkDottedArrow
-          href={href}
-          preview={false}
-          aria-hidden="true"
-          className="pointer-events-none"
-        >
-          {children}
-        </LinkDottedArrow>
-      </span>
-      <motion.span style={{ transition: "all .5s", opacity }}>
-        <LinkDottedArrow href={href}>{children}</LinkDottedArrow>
-      </motion.span>
-    </span>
+    <motion.span className="mt-2 inline-block" style={{ transition: "all .5s", opacity }}>
+      <LinkDottedArrow href={href}>{children}</LinkDottedArrow>
+    </motion.span>
   );
 };
 
@@ -157,7 +156,7 @@ const Letter = ({ children, progress, range }: SegmentProps) => {
   const step = amount / children.length;
 
   return (
-    <span className="relative me-3 mt-2 inline-flex">
+    <span className="mt-2 inline-block">
       {children.split("").map((char, index) => {
         const start = range[0] + index * step;
         const end = range[0] + (index + 1) * step;
@@ -173,24 +172,17 @@ const Letter = ({ children, progress, range }: SegmentProps) => {
 };
 
 const Char = ({ children, progress, range }: SegmentProps) => {
-  const opacity = useTransform(progress, range, [0, 1]);
   const { textOpacity } = useGradientScroll();
+  const opacity = useTransform(
+    progress,
+    range,
+    [getRestingOpacity(textOpacity), 1],
+  );
 
   return (
-    <span className="relative inline-block">
-      <span
-        className={cn("absolute", {
-          "opacity-0": textOpacity === "none",
-          "opacity-10": textOpacity === "soft",
-          "opacity-30": textOpacity === "medium",
-        })}
-      >
-        {children}
-      </span>
-      <motion.span style={{ transition: "all .5s", opacity }}>
-        {children}
-      </motion.span>
-    </span>
+    <motion.span className="inline-block" style={{ transition: "all .5s", opacity }}>
+      {children}
+    </motion.span>
   );
 };
 

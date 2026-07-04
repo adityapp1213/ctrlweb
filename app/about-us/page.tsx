@@ -134,7 +134,7 @@ export function AboutUsSection() {
             />
             <Image
               src="/assets/me.svg"
-              alt="Portrait of the Ctrl founder"
+              alt="Aditya Prasad Panigrahi, founder of Atom Ctrl"
               width={810}
               height={1012}
               className="relative w-full rounded-xl object-contain"
@@ -198,7 +198,7 @@ export function AboutUsSection() {
             />
             <Image
               src="/assets/anjali.png"
-              alt="Portrait of the adviser"
+              alt="Anjali Panigrahi, adviser to Atom Ctrl"
               width={810}
               height={1012}
               className="relative w-full rounded-xl object-cover"

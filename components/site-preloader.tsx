@@ -95,8 +95,8 @@ export function SitePreloader({
       <SiteLoaderScreen progress={progress} visible={!isReady} />
       <div
         className={[
-          "transition-opacity duration-500 ease-out",
-          isReady ? "opacity-100" : "pointer-events-none opacity-0",
+          "opacity-100",
+          isReady ? "" : "pointer-events-none",
         ].join(" ")}
       >
         {children}

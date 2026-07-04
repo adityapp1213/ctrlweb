@@ -49,12 +49,20 @@
 }
 
 .article .diagram-wrap {
-  margin: 2rem 0 2.6rem;
+  margin: 2.4rem 0 3rem;
   overflow: hidden;
-  border-radius: 1rem;
-  border: 1px solid rgba(17, 17, 17, 0.08);
-  background: #ffffff;
-  padding: 1rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(17, 17, 17, 0.09);
+  background-color: #fbfbfa;
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  padding: 1.25rem;
+}
+
+.article .diagram-wrap > span {
+  display: block;
 }
 
 .article .diagram-label {
@@ -70,6 +78,54 @@
   display: block;
   width: 100%;
   height: auto;
+  overflow: visible;
+  font-family: inherit;
+}
+
+.article svg rect {
+  stroke-width: 1.1;
+  filter: drop-shadow(0 5px 9px rgba(17, 17, 17, 0.035));
+}
+
+.article svg line,
+.article svg path[fill="none"] {
+  stroke: rgba(17, 17, 17, 0.34);
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.article svg line {
+  stroke-dasharray: none;
+}
+
+.article svg marker path {
+  fill: rgba(17, 17, 17, 0.5);
+  stroke: none;
+}
+
+.article svg text {
+  font-family: inherit;
+}
+
+.article svg :global(.svg-title) {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.article svg :global(.svg-label) {
+  font-size: 12px;
+  letter-spacing: 0.015em;
+}
+
+.article :global(.diagram-caption) {
+  margin: 1rem 0 0;
+  border-top: 1px solid rgba(17, 17, 17, 0.07);
+  padding: 0.9rem 0.2rem 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: rgba(17, 17, 17, 0.5);
 }
 
 .article .callout {
@@ -176,6 +232,142 @@
   font-weight: 500;
 }
 
+.article .block {
+  margin: 1.85rem 0;
+  border: 1px solid rgba(17, 17, 17, 0.065);
+  border-radius: 1rem;
+  background: rgba(17, 17, 17, 0.012);
+  padding: 1.35rem 1.45rem 1.45rem;
+}
+
+.article .block-blue {
+  background: rgba(111, 145, 223, 0.032);
+}
+
+.article .block-teal {
+  background: rgba(73, 169, 135, 0.032);
+}
+
+.article .block-purple {
+  background: rgba(126, 111, 207, 0.03);
+}
+
+.article .block-amber {
+  background: rgba(217, 154, 78, 0.034);
+}
+
+.article .block-rose {
+  background: rgba(226, 104, 125, 0.03);
+}
+
+.article .block h3 {
+  margin: 0.5rem 0 0.9rem;
+  font-family: inherit;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+
+.article .block p {
+  margin-bottom: 1.1rem;
+}
+
+.article .block p:last-child {
+  margin-bottom: 0;
+}
+
+.article .section-index {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: rgba(17, 17, 17, 0.46);
+  font-weight: 500;
+}
+
+.article .flow-line {
+  margin: 1.15rem 0 0;
+  border-top: 1px solid rgba(17, 17, 17, 0.08);
+  padding-top: 0.9rem;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  font-family: inherit;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: rgba(17, 17, 17, 0.68);
+}
+
+.article code {
+  font-family: inherit;
+  font-size: 0.96em;
+}
+
+.diagram-section {
+  margin: 3.4rem 0;
+}
+
+.research-diagram {
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 1.15rem;
+  background-color: #fbfbfa;
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.028) 1px, transparent 1px);
+  background-size: 30px 30px;
+  padding: 1.2rem 1.25rem 0.75rem;
+}
+
+.research-diagram-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.07);
+  padding-bottom: 0.9rem;
+}
+
+.research-diagram-heading span {
+  flex: 0 0 auto;
+  color: rgba(17, 17, 17, 0.4);
+  font-size: 0.88rem;
+}
+
+.article .research-diagram-heading h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.diagram-connector {
+  stroke: rgba(17, 17, 17, 0.28);
+  stroke-width: 1;
+  stroke-dasharray: none;
+}
+
+.diagram-arrow {
+  fill: none;
+  stroke: rgba(17, 17, 17, 0.36);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.diagram-stage-text {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.diagram-explanation {
+  margin-top: 1.25rem;
+  padding: 0 0.25rem;
+}
+
+.article .diagram-explanation p:last-child {
+  margin-bottom: 0;
+}
+
 .article .path-card p {
   margin: 0;
   font-size: 0.98rem;
@@ -186,6 +378,7 @@
   .article .path-grid {
     grid-template-columns: 1fr;
   }
+
 }
 
 @media (max-width: 640px) {
@@ -200,10 +393,39 @@
 
   .article .diagram-wrap {
     border-radius: 0.85rem;
-    padding: 0.9rem;
+    background-size: 22px 22px;
+    padding: 0.8rem;
   }
 
   .article .table-wrap {
     border-radius: 0.85rem;
+  }
+
+  .article .block {
+    margin: 1.45rem 0;
+    padding: 1.15rem;
+  }
+
+  .article .flow-line {
+    font-size: 0.96rem;
+  }
+
+  .diagram-section {
+    margin: 2.6rem 0;
+  }
+
+  .research-diagram {
+    margin-inline: -0.25rem;
+    padding: 1rem 0.75rem 0.45rem;
+  }
+
+  .research-diagram-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .diagram-stage-text {
+    font-size: 12px;
   }
 }

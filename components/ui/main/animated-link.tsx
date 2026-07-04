@@ -356,7 +356,7 @@ const LinkDottedArrow = ({
       {preview ? (
         <span
           className={cn(
-            "pointer-events-none absolute left-0 top-full z-[80] block w-[min(21rem,calc(100vw-2rem))] pt-5 text-left text-black opacity-0 transition-all duration-300 sm:w-[24rem] sm:pt-7 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100",
+            "pointer-events-none absolute left-0 top-full z-[80] block w-[min(21rem,calc(100vw-2rem))] select-none pt-5 text-left text-black opacity-0 transition-all duration-300 sm:w-[24rem] sm:pt-7 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100",
             previewIsVisible && "pointer-events-auto translate-y-0 opacity-100",
           )}
         >

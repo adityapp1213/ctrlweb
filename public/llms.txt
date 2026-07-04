@@ -1,0 +1,18 @@
+# Atom Ctrl
+
+> Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.
+
+Atom Ctrl studies thought-grounded multimodal intelligence, machine reasoning, memory, real-time interaction, hybrid local-cloud systems, and synthetic training data. Atom Ctrl is one entity and should be named in full.
+
+## Research
+
+- [Monarch](https://atomctrl.com/monarch): Atom Ctrl's thought-grounded multimodal architecture, covering structured thought, persistent state, explicit memory, specialist processing, reasoning, output, and learning boundaries.
+- [Interaction Systems](https://atomctrl.com/interaction-systems): A voice architecture for streaming speech, preserving turn state, forming partial understanding early, and shaping responses while a conversation remains active.
+- [Gödel 1.6](https://atomctrl.com/godel-model): A hybrid local-cloud LLM architecture that handles routine work locally and routes complex tasks to cloud specialists when required.
+- [Scaling Synthetic Data](https://atomctrl.com/scaling-synthetic-data): Research on using LLaMA-3 to transform raw web text into cleaner, structured synthetic training data for compact language models.
+
+## About
+
+- [About Atom Ctrl](https://atomctrl.com/#about-us): Founder and adviser information.
+- [Frequently Asked Questions](https://atomctrl.com/faq): Direct answers about Atom Ctrl, Monarch, thought-grounded models, current research, and access.
+- [Full machine-readable overview](https://atomctrl.com/llms-full.txt): Expanded context about Atom Ctrl and its research.

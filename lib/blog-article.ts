@@ -27,6 +27,18 @@ function extractSingle(html: string, pattern: RegExp, fallback = "") {
   return html.match(pattern)?.[1]?.trim() ?? fallback;
 }
 
+function extractFirstMatch(html: string, patterns: RegExp[], fallback = "") {
+  for (const pattern of patterns) {
+    const match = html.match(pattern)?.[1]?.trim();
+
+    if (match) {
+      return match;
+    }
+  }
+
+  return fallback;
+}
+
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -50,13 +62,19 @@ export async function getBlogArticle(sourceFile: string): Promise<BlogArticle> {
   const sourcePath = join(process.cwd(), "content", sourceFile);
   const html = normalizeHtml(await readFile(sourcePath, "utf8"));
   const articleInner = extractSingle(html, /<article>([\s\S]*?)<\/article>/);
-  const heroInner = extractSingle(
+  const heroInner = extractFirstMatch(
     articleInner,
-    /<div class="hero">([\s\S]*?)<\/div>\s*<!--/,
+    [
+      /<header class="hero">([\s\S]*?)<\/header>/,
+      /<div class="hero">([\s\S]*?)<\/div>\s*<!--/,
+    ],
   );
-  const sourcesInner = extractSingle(
+  const sourcesInner = extractFirstMatch(
     articleInner,
-    /<div class="sources">([\s\S]*?)<\/div>\s*$/,
+    [
+      /<section class="sources">([\s\S]*?)<\/section>/,
+      /<div class="sources">([\s\S]*?)<\/div>\s*$/,
+    ],
   );
 
   const heroLabel = extractSingle(heroInner, /<div class="hero-label">([\s\S]*?)<\/div>/);
@@ -70,7 +88,10 @@ export async function getBlogArticle(sourceFile: string): Promise<BlogArticle> {
   const seenIds = new Set<string>(["introduction"]);
 
   let bodyHtml = articleInner
+    .replace(/<header class="hero">[\s\S]*?<\/header>/, "")
     .replace(/<div class="hero">[\s\S]*?<\/div>\s*<!--/, "<!--")
+    .replace(/<nav class="toc"[\s\S]*?<\/nav>/, "")
+    .replace(/<section class="sources">[\s\S]*?<\/section>/, "")
     .replace(/<div class="sources">[\s\S]*?<\/div>\s*$/, "");
 
   bodyHtml = bodyHtml.replace(/<h2>([\s\S]*?)<\/h2>/g, (_, rawHeading) => {
@@ -91,7 +112,7 @@ export async function getBlogArticle(sourceFile: string): Promise<BlogArticle> {
 
   const references: ReferenceItem[] = [
     ...sourcesInner.matchAll(
-      /<li><span class="source-num">(.*?)<\/span><span>([\s\S]*?)<\/span><\/li>/g,
+      /<li>\s*<span class="source-num">(.*?)<\/span>\s*<span>([\s\S]*?)<\/span>\s*<\/li>/g,
     ),
   ].map((match, index) => ({
     id: `reference-${index + 1}`,

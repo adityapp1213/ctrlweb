@@ -19,11 +19,17 @@ export function BlogContent({
   heroImageAlt,
   heroImageSrc,
   plainTitle,
+  highlights,
 }: {
   article: BlogArticle;
   heroImageAlt: string;
   heroImageSrc: string;
   plainTitle: string;
+  highlights?: Array<{
+    title: string;
+    description: string;
+    tone: "rose" | "blue" | "teal" | "amber";
+  }>;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const articleTrackRef = useRef<HTMLDivElement>(null);
@@ -97,6 +103,36 @@ export function BlogContent({
           className="aspect-[16/8.8] w-full object-cover"
         />
       </div>
+
+      {highlights?.length ? (
+        <div className="mx-auto mt-6 grid max-w-4xl gap-px overflow-hidden rounded-[1.1rem] border border-black/[0.07] bg-black/[0.07] sm:grid-cols-2 lg:grid-cols-4">
+          {highlights.map((highlight) => (
+            <div
+              key={highlight.title}
+              className="group min-h-40 bg-white px-5 py-5 transition-colors duration-300 hover:bg-[#fbfaf8]"
+            >
+              <span
+                aria-hidden="true"
+                className={`mb-6 block size-2 rounded-full ${
+                  highlight.tone === "rose"
+                    ? "bg-[#e2687d]"
+                    : highlight.tone === "blue"
+                      ? "bg-[#6f91df]"
+                      : highlight.tone === "teal"
+                        ? "bg-[#49a987]"
+                        : "bg-[#d99a4e]"
+                }`}
+              />
+              <h2 className="text-[1.05rem] font-medium leading-tight tracking-[-0.02em] text-black">
+                {highlight.title}
+              </h2>
+              <p className="mt-2 text-[0.84rem] leading-[1.55] text-black/55">
+                {highlight.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      ) : null}
 
       <div
         ref={articleTrackRef}

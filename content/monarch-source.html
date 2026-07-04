@@ -3,32 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monarch ; Thought-Grounded Multimodal Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+
+<title>Monarch: Thought-Grounded Multimodal Intelligence</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --ink: #0e0e0d;
     --ink-2: #3a3a36;
-    --ink-3: #7a7a72;
+    --ink-3: #74736c;
     --surface: #f8f7f3;
+    --surface-2: #ffffff;
     --surface-3: #e4e1d8;
+    --rule: #d3d1c7;
+
     --teal: #0f6e56;
     --teal-light: #e1f5ee;
+
     --purple: #3c3489;
     --purple-light: #eeedfe;
+
     --amber: #854f0b;
     --amber-light: #faeeda;
-    --rose: #e2687d;
+
+    --rose: #c84e66;
     --rose-light: #fbe6eb;
+
+    --blue: #285d8f;
+    --blue-light: #e7f1fa;
+
     --gray-light: #f1efe8;
-    --rule: #d3d1c7;
-    --mono: 'DM Mono', monospace;
-    --serif: 'Instrument Serif', serif;
-    --sans: 'Geist', sans-serif;
+
+    --mono: "DM Mono", monospace;
+    --serif: "Instrument Serif", serif;
+    --sans: "Geist", sans-serif;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 16px; scroll-behavior: smooth; }
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
 
   body {
     background: var(--surface);
@@ -39,7 +62,11 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .page-wrap { max-width: 760px; margin: 0 auto; padding: 0 24px 120px; }
+  .page-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 26px 120px;
+  }
 
   .site-header {
     border-bottom: 1px solid var(--rule);
@@ -48,12 +75,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     flex-wrap: wrap;
-    gap: 8px;
   }
 
-  .site-header .wordmark {
+  .wordmark,
+  .header-tag,
+  .hero-label,
+  .diagram-label,
+  .section-index,
+  .metric-label,
+  .source-num,
+  .footer-text {
     font-family: var(--mono);
+  }
+
+  .wordmark {
     font-size: 13px;
     font-weight: 500;
     letter-spacing: .08em;
@@ -61,101 +98,112 @@
     text-transform: uppercase;
   }
 
-  .site-header .tag {
-    font-family: var(--mono);
+  .header-tag {
     font-size: 11px;
-    color: var(--ink-3);
     letter-spacing: .06em;
+    color: var(--ink-3);
   }
 
-  .hero { margin-bottom: 64px; }
+  .hero {
+    margin-bottom: 64px;
+  }
 
   .hero-label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--mono);
+    margin-bottom: 24px;
+    color: var(--rose);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: var(--rose);
-    margin-bottom: 24px;
   }
 
   .hero-label::before {
-    content: '';
-    display: block;
+    content: "";
     width: 20px;
     height: 1px;
     background: var(--rose);
   }
 
   h1 {
-    font-family: var(--serif);
-    font-size: clamp(30px, 6vw, 56px);
-    font-weight: 400;
-    line-height: 1.08;
-    letter-spacing: -.01em;
-    color: var(--ink);
+    max-width: 760px;
     margin-bottom: 28px;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(40px, 7vw, 66px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -.025em;
   }
 
-  h1 em { font-style: italic; color: var(--ink-2); }
+  h1 em {
+    color: var(--ink-2);
+    font-style: italic;
+  }
+
+  .lede {
+    max-width: 740px;
+    margin-bottom: 28px;
+    color: var(--ink-2);
+    font-size: clamp(16px, 2.4vw, 20px);
+    line-height: 1.65;
+  }
 
   .hero-meta {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+    flex-wrap: wrap;
     padding-top: 24px;
     border-top: 1px solid var(--rule);
-    flex-wrap: wrap;
   }
 
   .hero-meta span {
-    font-family: var(--mono);
-    font-size: 12px;
     color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 11px;
     letter-spacing: .04em;
   }
 
-  .hero-meta .dot {
+  .dot {
     width: 3px;
     height: 3px;
-    border-radius: 50%;
+    border-radius: 999px;
     background: var(--rule);
   }
 
-  .lede {
-    font-size: clamp(15px, 2.5vw, 19px);
-    font-weight: 300;
-    line-height: 1.65;
-    color: var(--ink-2);
-    margin-bottom: 28px;
-  }
-
   h2 {
-    font-family: var(--serif);
-    font-size: clamp(22px, 4vw, 30px);
-    font-weight: 400;
-    line-height: 1.2;
+    margin: 72px 0 20px;
     color: var(--ink);
-    margin: 64px 0 20px;
-    letter-spacing: -.01em;
+    font-family: var(--serif);
+    font-size: clamp(27px, 4vw, 36px);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -.015em;
   }
 
   h3 {
+    margin: 40px 0 14px;
+    color: var(--ink-3);
     font-family: var(--sans);
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: var(--ink-3);
-    margin: 40px 0 14px;
   }
 
-  p { margin-bottom: 22px; font-size: clamp(14px, 2vw, 16.5px); color: var(--ink-2); }
-  strong { font-weight: 500; color: var(--ink); }
+  p {
+    margin-bottom: 22px;
+    color: var(--ink-2);
+    font-size: clamp(14.5px, 2vw, 16.5px);
+  }
+
+  strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
 
   a {
     color: var(--rose);
@@ -164,39 +212,53 @@
     transition: border-color .15s;
   }
 
-  a:hover { border-bottom-color: var(--rose); }
+  a:hover {
+    border-bottom-color: var(--rose);
+  }
 
-  .section-rule { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
+  code {
+    padding: 2px 5px;
+    border-radius: 5px;
+    background: var(--gray-light);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: .88em;
+  }
+
+  .section-rule {
+    margin: 64px 0;
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
 
   .diagram-wrap {
-    margin: 36px 0 44px;
+    margin: 36px 0 46px;
+    padding: 24px 18px 18px;
+    overflow: hidden;
     border: 1px solid var(--rule);
     border-radius: 18px;
     background: linear-gradient(180deg, #fff 0%, #fcfbf8 100%);
-    padding: 24px 18px 18px;
-    overflow: hidden;
-    box-shadow: 0 14px 34px rgba(14,14,13,.05);
+    box-shadow: 0 14px 34px rgba(14, 14, 13, .05);
   }
 
   .diagram-label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--mono);
+    margin-bottom: 16px;
+    padding: 6px 10px;
+    border: 1px solid var(--surface-3);
+    border-radius: 999px;
+    background: rgba(248, 247, 243, .92);
+    color: var(--ink-3);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: .08em;
     text-transform: uppercase;
-    color: var(--ink-3);
-    margin-bottom: 14px;
-    padding: 6px 10px;
-    border: 1px solid var(--surface-3);
-    border-radius: 999px;
-    background: rgba(248,247,243,.9);
   }
 
   .diagram-label::before {
-    content: '';
+    content: "";
     width: 6px;
     height: 6px;
     border-radius: 999px;
@@ -204,65 +266,279 @@
     opacity: .65;
   }
 
-  .diagram-wrap svg { display: block; width: 100%; height: auto; }
+  .diagram-wrap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
   .diagram-wrap svg text {
     font-family: var(--mono);
     dominant-baseline: middle;
   }
+
   .diagram-wrap svg .svg-title {
     font-family: var(--sans);
-    font-size: 18px;
-    font-weight: 520;
+    font-size: 17px;
+    font-weight: 600;
   }
+
   .diagram-wrap svg .svg-label {
-    font-size: 12px;
-    letter-spacing: 0.02em;
+    font-size: 11px;
+    letter-spacing: .015em;
   }
+
   .diagram-caption {
-    font-family: var(--mono);
-    font-size: 11.5px;
+    margin-top: 13px;
     color: var(--ink-3);
-    margin-top: 12px;
-    line-height: 1.6;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.65;
   }
 
   .callout {
-    border-left: 2px solid var(--rose);
-    background: var(--rose-light);
-    padding: 16px 20px;
-    border-radius: 0 8px 8px 0;
     margin: 28px 0;
+    padding: 17px 20px;
+    border-left: 2px solid var(--rose);
+    border-radius: 0 9px 9px 0;
+    background: var(--rose-light);
   }
 
-  .callout p { font-size: 14.5px; color: var(--ink-2); margin: 0; }
-  .callout strong { color: var(--rose); }
-  .callout-purple { border-left-color: var(--purple); background: var(--purple-light); }
-  .callout-purple strong { color: var(--purple); }
-  .callout-amber { border-left-color: var(--amber); background: var(--amber-light); }
-  .callout-amber strong { color: var(--amber); }
-  .callout-teal { border-left-color: var(--teal); background: var(--teal-light); }
-  .callout-teal strong { color: var(--teal); }
+  .callout p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 14.5px;
+  }
 
-  .table-wrap { overflow-x: auto; margin: 28px 0; -webkit-overflow-scrolling: touch; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 440px; }
-  th {
+  .callout strong {
+    color: var(--rose);
+  }
+
+  .callout-teal {
+    border-left-color: var(--teal);
+    background: var(--teal-light);
+  }
+
+  .callout-teal strong {
+    color: var(--teal);
+  }
+
+  .callout-purple {
+    border-left-color: var(--purple);
+    background: var(--purple-light);
+  }
+
+  .callout-purple strong {
+    color: var(--purple);
+  }
+
+  .callout-amber {
+    border-left-color: var(--amber);
+    background: var(--amber-light);
+  }
+
+  .callout-amber strong {
+    color: var(--amber);
+  }
+
+  .callout-blue {
+    border-left-color: var(--blue);
+    background: var(--blue-light);
+  }
+
+  .callout-blue strong {
+    color: var(--blue);
+  }
+
+  .toc {
+    margin: 42px 0 52px;
+    padding: 22px;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    background: rgba(255,255,255,.55);
+  }
+
+  .toc-title {
+    margin-bottom: 13px;
+    color: var(--ink-3);
     font-family: var(--mono);
     font-size: 11px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+  }
+
+  .toc ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px 24px;
+    padding-left: 19px;
+  }
+
+  .toc li {
+    color: var(--ink-3);
+    font-size: 13px;
+  }
+
+  .toc a {
+    color: var(--ink-2);
+    border: 0;
+  }
+
+  .block {
+    position: relative;
+    margin: 34px 0;
+    padding: 26px 24px 24px;
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    background: rgba(255,255,255,.58);
+  }
+
+  .block::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    border-radius: 14px 0 0 14px;
+    background: var(--block-accent, var(--teal));
+  }
+
+  .block-teal { --block-accent: var(--teal); }
+  .block-purple { --block-accent: var(--purple); }
+  .block-amber { --block-accent: var(--amber); }
+  .block-rose { --block-accent: var(--rose); }
+  .block-blue { --block-accent: var(--blue); }
+
+  .section-index {
+    margin-bottom: 8px;
+    color: var(--block-accent, var(--teal));
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .block h3 {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 25px;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    text-transform: none;
+  }
+
+  .block p:last-child {
+    margin-bottom: 0;
+  }
+
+  .flow-line {
+    margin: 18px 0;
+    padding: 14px 16px;
+    overflow-x: auto;
+    border-radius: 9px;
+    background: var(--gray-light);
+    color: var(--ink-2);
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 30px 0;
+  }
+
+  .metric {
+    padding: 18px;
+    border-top: 2px solid var(--metric-accent, var(--teal));
+    background: rgba(255,255,255,.58);
+  }
+
+  .metric-value {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .metric-label {
+    color: var(--ink-3);
+    font-size: 10px;
+    line-height: 1.5;
     letter-spacing: .07em;
     text-transform: uppercase;
-    color: var(--ink-3);
-    text-align: left;
-    padding: 10px 14px;
+  }
+
+  .table-wrap {
+    margin: 28px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    min-width: 580px;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  th {
+    padding: 10px 13px;
     border-bottom: 1px solid var(--rule);
     background: var(--gray-light);
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .07em;
+    text-align: left;
+    text-transform: uppercase;
   }
-  td { padding: 11px 14px; border-bottom: 1px solid var(--surface-3); color: var(--ink-2); vertical-align: top; }
-  td:first-child { font-weight: 500; color: var(--ink); }
-  tr:last-child td { border-bottom: none; }
 
-  .sources { margin-top: 60px; }
-  .sources h2 { font-size: 22px; margin-top: 0; }
-  .source-list { list-style: none; }
+  td {
+    padding: 11px 13px;
+    border-bottom: 1px solid var(--surface-3);
+    color: var(--ink-2);
+    vertical-align: top;
+  }
+
+  td:first-child {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .status-done {
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  .status-plan {
+    color: var(--amber);
+    font-weight: 500;
+  }
+
+  .sources {
+    margin-top: 70px;
+  }
+
+  .sources h2 {
+    margin-top: 0;
+    font-size: 25px;
+  }
+
+  .source-list {
+    list-style: none;
+  }
+
   .source-list li {
     display: flex;
     align-items: flex-start;
@@ -271,431 +547,1283 @@
     border-bottom: 1px solid var(--surface-3);
     font-size: 13.5px;
   }
-  .source-list li:last-child { border-bottom: none; }
+
+  .source-list li:last-child {
+    border-bottom: 0;
+  }
+
   .source-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    min-width: 24px;
+    min-width: 26px;
     margin-top: 2px;
+    color: var(--ink-3);
+    font-size: 11px;
   }
 
   .article-footer {
-    margin-top: 88px;
-    padding-top: 28px;
-    border-top: 1px solid var(--rule);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
     flex-wrap: wrap;
-    gap: 8px;
+    margin-top: 88px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
   }
 
-  .article-footer span {
-    font-family: var(--mono);
-    font-size: 12px;
+  .footer-text {
     color: var(--ink-3);
+    font-size: 11px;
     letter-spacing: .04em;
   }
 
-  @media (max-width: 580px) {
-    .page-wrap { padding: 0 16px 80px; }
-    h2 { margin-top: 48px; }
-    .diagram-wrap { padding: 18px 10px 14px; border-radius: 8px; }
-    .hero-meta .dot { display: none; }
+  @media (max-width: 680px) {
+    .page-wrap {
+      padding: 0 16px 80px;
+    }
+
+    .site-header {
+      margin-bottom: 46px;
+    }
+
+    h2 {
+      margin-top: 54px;
+    }
+
+    .toc ol {
+      grid-template-columns: 1fr;
+    }
+
+    .metric-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .diagram-wrap {
+      padding: 18px 10px 14px;
+      border-radius: 10px;
+    }
+
+    .block {
+      padding: 22px 18px 20px;
+    }
+
+    .hero-meta .dot {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 </style>
 </head>
+
 <body>
 <div class="page-wrap">
 
   <header class="site-header">
     <span class="wordmark">Atom Technologies</span>
-    <span class="tag">Monarch · TGMI · 2026</span>
+    <span class="header-tag">Monarch · TGMI · Architecture v2</span>
   </header>
 
-  <article>
+  <main>
+    <article>
 
-    <div class="hero">
-      <div class="hero-label">Build Log</div>
-      <h1>Monarch ;</h1>
-      <p class="lede">Monarch is Atom's thought-grounded model family. We believe future AI systems should reason through problems, understand context, and learn from interactions instead of relying only on pattern matching. Thought-grounded intelligence combines multimodal understanding and world knowledge to make AI more reliable, adaptable, and useful in real applications. This post walks through the architecture end to end, including how TGMI-Tiny forms thoughts, remembers, reasons, and handles math and code while staying small enough to run on a single consumer GPU.</p>
-      <div class="hero-meta">
-        <span>Thought-Grounded Multimodal Intelligence</span>
-        <div class="dot"></div>
-        <span>TGMI-Tiny, under 220M parameters</span>
-        <div class="dot"></div>
-        <span>June 20th 2026</span>
-      </div>
-    </div>
+      <header class="hero">
+        <div class="hero-label">Architecture and build log</div>
 
-    <!-- FIG 1 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 1 ; Monarch architecture overview</div>
-      <svg viewBox="0 0 720 760" role="img" aria-label="Monarch architecture from sensory layer to output" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="mf1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6f6a60" /></marker></defs>
-        <rect x="38" y="34" width="644" height="88" rx="28" fill="#fff5f8" stroke="#e2687d" />
-        <text x="360" y="62" text-anchor="middle" class="svg-title" fill="#8e3141">Sensory layer</text>
-        <text x="360" y="91" text-anchor="middle" class="svg-label" fill="#8e3141">text, image, audio, code, math</text>
-        <text x="360" y="110" text-anchor="middle" class="svg-label" fill="#8e3141">projected into one 512-d space</text>
+        <h1>
+          Project Monarch 
+          
+        </h1>
 
-        <line x1="360" y1="122" x2="360" y2="156" stroke="#9a968c" marker-end="url(#mf1)" />
+        <p class="lede">
+          Monarch is a thought-grounded multimodal architecture. It separates
+          perception, thought formation, memory, specialist processing, reasoning,
+          and output instead of asking one token stream to perform every job at once.
+          This page explains the current design block by block, the data being prepared
+          for it, the compute limits shaping the build, and the parts that still require
+          real training signals before they can be trusted.
+        </p>
 
-        <rect x="70" y="156" width="580" height="82" rx="26" fill="#eafaf3" stroke="#18a078" />
-        <text x="360" y="186" text-anchor="middle" class="svg-title" fill="#006b5b">Thought formation</text>
-        <text x="360" y="214" text-anchor="middle" class="svg-label" fill="#006b5b">refinement loop, halting gate, anti-collapse</text>
+        <div class="hero-meta">
+          <span>Thought grounded multi-modal intelligence </span>
+          <div class="dot"></div>
+          <span>One billion total parameters count</span>
+          <div class="dot"></div>
+          <span>Trained on STEM and Maths. </span>
+        </div>
+      </header>
 
-        <line x1="360" y1="238" x2="360" y2="270" stroke="#9a968c" marker-end="url(#mf1)" />
+      <nav class="toc" aria-label="Article contents">
+        <div class="toc-title">On this page</div>
+        <ol>
+          <li><a href="#overview">The complete system</a></li>
+          <li><a href="#compute">Compute constraints</a></li>
+          <li><a href="#frontend">Inputs and thought</a></li>
+          <li><a href="#memory">Self and memory</a></li>
+          <li><a href="#workspace">Workspace and specialists</a></li>
+          <li><a href="#reasoning">Reasoning and output</a></li>
+          <li><a href="#learning">Learning after interaction</a></li>
+          <li><a href="#datasets">Datasets and boundaries</a></li>
+          <li><a href="#training">Training dependencies</a></li>
+        </ol>
+      </nav>
 
-        <rect x="76" y="270" width="276" height="126" rx="26" fill="#f4f3ff" stroke="#6d61d8" />
-        <text x="214" y="300" text-anchor="middle" class="svg-title" fill="#27215e">Self layer</text>
-        <text x="214" y="329" text-anchor="middle" class="svg-label" fill="#27215e">persistent self vector</text>
-        <text x="214" y="350" text-anchor="middle" class="svg-label" fill="#27215e">current input, active context</text>
-        <text x="214" y="371" text-anchor="middle" class="svg-label" fill="#27215e">recent episodes, stable knowledge</text>
+      <section id="overview">
+        <h2>The complete system in one view</h2>
 
-        <rect x="368" y="270" width="276" height="126" rx="26" fill="#fcf1dd" stroke="#c9851d" />
-        <text x="506" y="300" text-anchor="middle" class="svg-title" fill="#764400">Emotional analog</text>
-        <text x="506" y="329" text-anchor="middle" class="svg-label" fill="#764400">valence, arousal, novelty</text>
-        <text x="506" y="350" text-anchor="middle" class="svg-label" fill="#764400">social weight, threat</text>
-        <text x="506" y="371" text-anchor="middle" class="svg-label" fill="#764400">shapes how it reasons next</text>
+        <p>
+          Monarch begins with text, images, audio, video, or document chunks.
+          A frozen multimodal encoder converts those inputs into native semantic
+          vectors. Monarch then converts those vectors into its own internal space,
+          forms an active ThoughtVector, retrieves relevant memories, builds a workspace,
+          selects useful specialists, and runs one fixed-depth reasoning transformer
+          before generating an answer.
+        </p>
 
-        <path d="M214 396 C214 430 330 422 360 450" fill="none" stroke="#8c8378" marker-end="url(#mf1)" />
-        <path d="M506 396 C506 430 390 422 360 450" fill="none" stroke="#8c8378" marker-end="url(#mf1)" />
+        <div class="diagram-wrap">
+          <div class="diagram-label">Fig. 1 · End-to-end Monarch pipeline</div>
 
-        <rect x="70" y="450" width="580" height="82" rx="26" fill="#fff5f8" stroke="#e2687d" />
-        <text x="360" y="480" text-anchor="middle" class="svg-title" fill="#8e3141">Global workspace</text>
-        <text x="360" y="508" text-anchor="middle" class="svg-label" fill="#8e3141">specialists compete; winners become context</text>
+          <svg viewBox="0 0 760 1050" role="img"
+               aria-label="Complete Monarch pipeline from multimodal input to output and learning"
+               xmlns="http://www.w3.org/2000/svg">
 
-        <line x1="360" y1="532" x2="360" y2="566" stroke="#9a968c" marker-end="url(#mf1)" />
+            <defs>
+              <marker id="arrow-main" markerWidth="10" markerHeight="10"
+                      refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#777167"/>
+              </marker>
+            </defs>
 
-        <rect x="70" y="566" width="580" height="86" rx="26" fill="#eafaf3" stroke="#18a078" />
-        <text x="360" y="596" text-anchor="middle" class="svg-title" fill="#006b5b">Reasoning core</text>
-        <text x="360" y="624" text-anchor="middle" class="svg-label" fill="#006b5b">same stack runs multiple times</text>
-        <text x="360" y="644" text-anchor="middle" class="svg-label" fill="#006b5b">halt, retry, or think longer</text>
+            <rect x="65" y="30" width="630" height="78" rx="24"
+                  fill="#fff5f8" stroke="#c84e66"/>
+            <text x="380" y="58" text-anchor="middle"
+                  class="svg-title" fill="#8e3141">Raw multimodal input</text>
+            <text x="380" y="84" text-anchor="middle"
+                  class="svg-label" fill="#8e3141">
+              text · image · audio · video · document
+            </text>
 
-        <line x1="360" y1="652" x2="360" y2="686" stroke="#9a968c" marker-end="url(#mf1)" />
+            <line x1="380" y1="108" x2="380" y2="140"
+                  stroke="#777167" marker-end="url(#arrow-main)"/>
 
-        <rect x="70" y="686" width="580" height="54" rx="22" fill="#f4f3ff" stroke="#6d61d8" />
-        <text x="360" y="713" text-anchor="middle" class="svg-title" fill="#27215e">Output</text>
-        <text x="360" y="733" text-anchor="middle" class="svg-label" fill="#27215e">text, tool call, action, or self update</text>
-      </svg>
-    </div>
+            <rect x="65" y="140" width="630" height="88" rx="24"
+                  fill="#e7f1fa" stroke="#285d8f"/>
+            <text x="380" y="169" text-anchor="middle"
+                  class="svg-title" fill="#285d8f">
+              Frozen Omni-Embed multimodal encoder
+            </text>
+            <text x="380" y="197" text-anchor="middle"
+                  class="svg-label" fill="#285d8f">
+              raw input → native 2048-d semantic vector
+            </text>
 
-    <p>That's the whole loop. Whatever comes in, a sentence, a photo, an audio clip, a snippet of code, passes through every one of these stages before anything gets generated. Nothing reasons directly over raw input. The rest of this post goes through each stage, then spends time on the part I had to think hardest about: how a small model can actually be decent at math and code without needing the kind of scale that's out of reach for a side project.</p>
+            <line x1="380" y1="228" x2="380" y2="260"
+                  stroke="#777167" marker-end="url(#arrow-main)"/>
 
-    <h2>The scale I'm working with</h2>
-    <p>Everything here is built to run on a single RTX 4090 with 8GB of dedicated VRAM. That number shapes almost every decision below: how many specialists the workspace has, how big the memory buffer is, how long the context window can be. I'm running everything in mixed precision, checkpointing gradients through the heavier recurrent parts, and using an 8-bit optimizer to keep memory down, with a small per-step batch and gradient accumulation to make up the difference.</p>
+            <rect x="65" y="260" width="630" height="88" rx="24"
+                  fill="#e1f5ee" stroke="#0f6e56"/>
+            <text x="380" y="289" text-anchor="middle"
+                  class="svg-title" fill="#0f6e56">
+              Adapter & Thought Transformer
+            </text>
+            <text x="380" y="317" text-anchor="middle"
+                  class="svg-label" fill="#0f6e56">
+              2048 → 1536 → organized ThoughtVector
+            </text>
 
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Part</th><th>What it does</th><th>Parameters</th></tr></thead>
-        <tbody>
-          <tr><td>Text embedding</td><td>shared with the output layer</td><td>8.2M</td></tr>
-          <tr><td>Reasoning backbone</td><td>the stack that runs repeatedly during reasoning</td><td>63M</td></tr>
-          <tr><td>Image encoder</td><td>CLIP, used as-is, not trained</td><td>88M</td></tr>
-          <tr><td>Audio encoder</td><td>Whisper's encoder, used as-is, not trained</td><td>8M</td></tr>
-          <tr><td>Code / math encoder</td><td>parses structure, trained from scratch</td><td>~7M</td></tr>
-          <tr><td>Projectors</td><td>map each input type into the shared space</td><td>~2M</td></tr>
-          <tr><td>Thought refiner</td><td>forms the single thought vector</td><td>2.5M</td></tr>
-          <tr><td>Self and memory</td><td>self vector, episodic buffer, semantic bank</td><td>3.2M</td></tr>
-          <tr><td>Emotional signals</td><td>five small scoring heads</td><td>0.01M</td></tr>
-          <tr><td>Global workspace</td><td>eight specialists plus the competition mechanism</td><td>~30M</td></tr>
-          <tr><td><strong>Trained from scratch, total</strong></td><td></td><td><strong>~115M</strong></td></tr>
-          <tr><td><strong>Everything, including the parts I don't train</strong></td><td></td><td><strong>~211M</strong></td></tr>
-        </tbody>
-      </table>
-    </div>
+            <line x1="380" y1="348" x2="380" y2="380"
+                  stroke="#777167" marker-end="url(#arrow-main)"/>
 
-    <div class="callout">
-      <p><strong>Why this matters going forward:</strong> there's real headroom left under a 500M parameter ceiling. If this version trains cleanly, the natural next step is to widen the same architecture rather than redesign it.</p>
-    </div>
+            <rect x="65" y="380" width="300" height="108" rx="24"
+                  fill="#eeedfe" stroke="#3c3489"/>
+            <text x="215" y="410" text-anchor="middle"
+                  class="svg-title" fill="#3c3489">PersistentSelf</text>
+            <text x="215" y="438" text-anchor="middle"
+                  class="svg-label" fill="#3c3489">
+              learned blank state for new users
+            </text>
+            <text x="215" y="461" text-anchor="middle"
+                  class="svg-label" fill="#3c3489">
+              bounded runtime updates
+            </text>
 
-    <h2>Thought formation</h2>
-    <p>Before any reasoning happens, Monarch turns whatever it received into a single 512-dimensional vector, the thought. This isn't a one-shot projection. A small recurrent unit refines that vector against the input several times in a row, and a gate decides when the vector has settled. Easy, familiar inputs settle in a couple of steps. Unusual ones take longer, up to a cap of twelve refinement steps.</p>
-    <p>The hard part isn't forming a thought, it's stopping all thoughts from drifting toward the same point, which is the failure mode that quietly ruins a setup like this. The fix is a regularizer that runs underneath nearly every training signal in this architecture: it keeps the spread of thought vectors in a batch from shrinking, and keeps individual dimensions of the vector from becoming redundant with each other. It's a small piece of math, but it's the thing that keeps the whole idea from collapsing into a single useless point.</p>
+            <rect x="395" y="380" width="300" height="108" rx="24"
+                  fill="#faeeda" stroke="#854f0b"/>
+            <text x="545" y="410" text-anchor="middle"
+                  class="svg-title" fill="#854f0b">Explicit memory</text>
+            <text x="545" y="438" text-anchor="middle"
+                  class="svg-label" fill="#854f0b">
+              semantic concepts & past episodes
+            </text>
+            <text x="545" y="461" text-anchor="middle"
+                  class="svg-label" fill="#854f0b">
+              IVF-PQ & HNSW retrieval
+            </text>
 
-    <!-- FIG 2 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 2 ; How a thought settles</div>
-      <svg viewBox="0 0 720 392" role="img" aria-label="Thought vector refinement loop" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="mf2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#0f766e" /></marker></defs>
-        <rect x="76" y="58" width="172" height="68" rx="22" fill="#f8f5ec" stroke="#c6bfb2" />
-        <text x="162" y="92" text-anchor="middle" class="svg-title">Raw input</text>
-        <line x1="248" y1="92" x2="308" y2="92" stroke="#0f766e" marker-end="url(#mf2)" />
-        <rect x="308" y="58" width="172" height="68" rx="22" fill="#eafaf3" stroke="#17a579" />
-        <text x="394" y="84" text-anchor="middle" class="svg-title" fill="#006b5b">Bind slots</text>
-        <text x="394" y="108" text-anchor="middle" class="svg-label" fill="#006b5b">view, word, feeling</text>
-        <line x1="480" y1="92" x2="540" y2="92" stroke="#0f766e" marker-end="url(#mf2)" />
-        <rect x="540" y="58" width="104" height="68" rx="22" fill="#fff5f8" stroke="#e2687d" />
-        <text x="592" y="92" text-anchor="middle" class="svg-title" fill="#8e3141">Check</text>
-        <path d="M592 58 C592 24 406 24 394 58" fill="none" stroke="#e2687d" stroke-width="2" stroke-dasharray="6 8" marker-end="url(#mf2)" />
-        <text x="498" y="36" text-anchor="middle" class="svg-label" fill="#8e3141">not stable yet</text>
-        <rect x="170" y="246" width="380" height="72" rx="24" fill="#fcf1dd" stroke="#c9851d" />
-        <text x="360" y="274" text-anchor="middle" class="svg-title" fill="#764400">Thought vector</text>
-        <text x="360" y="298" text-anchor="middle" class="svg-label" fill="#764400">matched meanings stay close</text>
-        <line x1="592" y1="126" x2="398" y2="246" stroke="#0f766e" marker-end="url(#mf2)" />
-      </svg>
-    </div>
+            <path d="M215 488 C215 522 322 516 380 548"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-main)"/>
+            <path d="M545 488 C545 522 438 516 380 548"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-main)"/>
 
-    <h2>Four ways in, one shared space</h2>
-    <p>Four kinds of input land in that same 512-dimensional space. Text goes in directly through the embedding table. Images and audio go through CLIP and Whisper's encoder, both are pretrained, both stay frozen, and I run them once ahead of time and cache the results so they never have to sit in GPU memory during training. Code and math are different. There's no off-the-shelf encoder for what a piece of code or an equation actually <em>means</em> structurally, so I built a small one from scratch, it parses the expression into a tree and reads it bottom-up, which keeps things like nesting and operator order intact instead of letting them blur together the way a flat sequence of tokens would.</p>
-    <p>A separate training signal pulls matching ideas from different inputs toward each other in this space, a caption and the photo it describes, an English description of a derivative and the parsed expression for it.</p>
+            <rect x="65" y="548" width="630" height="88" rx="24"
+                  fill="#fff5f8" stroke="#c84e66"/>
+            <text x="380" y="577" text-anchor="middle"
+                  class="svg-title" fill="#8e3141">
+              Assessment & active workspace
+            </text>
+            <text x="380" y="605" text-anchor="middle"
+                  class="svg-label" fill="#8e3141">
+              thought, memory & risk · novelty · confidence
+            </text>
 
-    <!-- FIG 3 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 3 ; Four inputs, one space</div>
-      <svg viewBox="0 0 720 424" role="img" aria-label="Four input modalities projected into one shared space" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="mf3" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6f6a60" /></marker></defs>
-        <g class="svg-label">
-          <rect x="64" y="58" width="124" height="58" rx="18" fill="#fff5f8" stroke="#e2687d" /><text x="126" y="88" text-anchor="middle" fill="#8e3141">Text</text>
-          <rect x="224" y="58" width="124" height="58" rx="18" fill="#eafaf3" stroke="#18a078" /><text x="286" y="88" text-anchor="middle" fill="#006b5b">Image</text>
-          <rect x="384" y="58" width="124" height="58" rx="18" fill="#f4f3ff" stroke="#6d61d8" /><text x="446" y="88" text-anchor="middle" fill="#27215e">Audio</text>
-          <rect x="544" y="58" width="124" height="58" rx="18" fill="#fcf1dd" stroke="#c9851d" /><text x="606" y="88" text-anchor="middle" fill="#764400">Code/math</text>
-        </g>
-        <path d="M126 116 L294 194" stroke="#8c8378" fill="none" marker-end="url(#mf3)" />
-        <path d="M286 116 L326 192" stroke="#8c8378" fill="none" marker-end="url(#mf3)" />
-        <path d="M446 116 L394 192" stroke="#8c8378" fill="none" marker-end="url(#mf3)" />
-        <path d="M606 116 L426 194" stroke="#8c8378" fill="none" marker-end="url(#mf3)" />
-        <rect x="250" y="192" width="220" height="76" rx="24" fill="#fdfbf5" stroke="#c6bfb2" />
-        <text x="360" y="222" text-anchor="middle" class="svg-title">Projectors</text>
-        <text x="360" y="246" text-anchor="middle" class="svg-label">one geometry</text>
-        <line x1="360" y1="268" x2="360" y2="308" stroke="#0f766e" marker-end="url(#mf3)" />
-        <rect x="210" y="308" width="300" height="70" rx="24" fill="#eafaf3" stroke="#18a078" />
-        <text x="360" y="338" text-anchor="middle" class="svg-title" fill="#006b5b">Shared thought space</text>
-        <text x="360" y="362" text-anchor="middle" class="svg-label" fill="#006b5b">same meaning, many surfaces</text>
-      </svg>
-    </div>
+            <line x1="380" y1="636" x2="380" y2="668"
+                  stroke="#777167" marker-end="url(#arrow-main)"/>
 
-    <h2>Memory, on different timescales</h2>
-    <p>One vector, the self vector, carries forward across a conversation. It updates after every response, but only when something seems worth keeping, small talk doesn't overwrite it, a genuinely new piece of information does. That vector is also what the model uses to look things up: it's the query that goes out to memory whenever the model needs context beyond what's directly in front of it.</p>
-    <p>Memory itself isn't one flat pool. What just happened, what's been said in this conversation, what happened recently, and what the model has learned more durably are kept at different levels, because they shouldn't be searched or weighted the same way.</p>
+            <rect x="65" y="668" width="630" height="88" rx="24"
+                  fill="#faeeda" stroke="#854f0b"/>
+            <text x="380" y="697" text-anchor="middle"
+                  class="svg-title" fill="#854f0b">
+              Specialist routing and fusion
+            </text>
+            <text x="380" y="725" text-anchor="middle"
+                  class="svg-label" fill="#854f0b">
+              top-k learned experts · attention · gate-weighted merge
+            </text>
 
-    <!-- FIG 4 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 4 ; Memory timescales</div>
-      <svg viewBox="0 0 720 410" role="img" aria-label="Memory layers from current input to self state" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="mf4" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6f6a60" /></marker></defs>
-        <rect x="145" y="50" width="430" height="318" rx="34" fill="#fdfbf5" stroke="#ded8cc" />
-        <g class="svg-label">
-          <rect x="205" y="80" width="310" height="46" rx="15" fill="#fff5f8" stroke="#e2687d" /><text x="360" y="104" text-anchor="middle" fill="#8e3141">L0 ; current input</text>
-          <rect x="205" y="138" width="310" height="46" rx="15" fill="#eafaf3" stroke="#18a078" /><text x="360" y="162" text-anchor="middle" fill="#006b5b">L1 ; active context</text>
-          <rect x="205" y="196" width="310" height="46" rx="15" fill="#f4f3ff" stroke="#6d61d8" /><text x="360" y="220" text-anchor="middle" fill="#27215e">L2 ; recent episodes</text>
-          <rect x="205" y="254" width="310" height="46" rx="15" fill="#fcf1dd" stroke="#c9851d" /><text x="360" y="278" text-anchor="middle" fill="#764400">L3 ; stable knowledge</text>
-          <rect x="205" y="312" width="310" height="46" rx="15" fill="#f8f5ec" stroke="#b8b3aa" /><text x="360" y="336" text-anchor="middle">L4 ; self state</text>
-        </g>
-        <path d="M535 336 C612 286 612 150 535 104" fill="none" stroke="#8c8378" stroke-dasharray="7 8" marker-end="url(#mf4)" />
-        <text x="620" y="220" text-anchor="middle" class="svg-label">self queries</text>
-      </svg>
-    </div>
+            <line x1="380" y1="756" x2="380" y2="788"
+                  stroke="#777167" marker-end="url(#arrow-main)"/>
 
-    <h2>Five signals that shape how it reasons</h2>
-    <p>Alongside the thought itself, the model also scores how it relates to that thought, on five continuous scales: how positive or negative it seems, how much it warrants engagement, how unfamiliar it is, how socially relevant it is, and how much it looks like something that needs care. These aren't labels attached to the output afterward, they change what happens next. The clearest example is compute: how aroused the model is about a problem directly scales how many reasoning passes it's allowed to spend on it.</p>
+            <rect x="65" y="788" width="630" height="88" rx="24"
+                  fill="#e1f5ee" stroke="#0f6e56"/>
+            <text x="380" y="817" text-anchor="middle"
+                  class="svg-title" fill="#0f6e56">
+              Fixed-depth Reasoning Transformer
+            </text>
+            <text x="380" y="845" text-anchor="middle"
+                  class="svg-label" fill="#0f6e56">
+              one pass · six distinct layers · no recursive loop
+            </text>
 
-    <!-- FIG 5 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 5 ; What each signal actually changes</div>
-      <svg viewBox="0 0 780 480" role="img" aria-label="Five internal signals and what they affect" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="mf5" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6f6a60" /></marker></defs>
-        <rect x="266" y="48" width="248" height="52" rx="16" fill="#f8f5ec" stroke="#b8b3aa" />
-        <text x="390" y="74" text-anchor="middle" class="svg-label">thought + self vector, together</text>
-        <g class="svg-label">
-          <rect x="40" y="148" width="128" height="44" rx="14" fill="#fff5f8" stroke="#e2687d" /><text x="104" y="171" text-anchor="middle" fill="#8e3141">valence</text>
-          <rect x="186" y="148" width="128" height="44" rx="14" fill="#fff5f8" stroke="#e2687d" /><text x="250" y="171" text-anchor="middle" fill="#8e3141">arousal</text>
-          <rect x="332" y="148" width="128" height="44" rx="14" fill="#fff5f8" stroke="#e2687d" /><text x="396" y="171" text-anchor="middle" fill="#8e3141">novelty</text>
-          <rect x="478" y="148" width="138" height="44" rx="14" fill="#fff5f8" stroke="#e2687d" /><text x="547" y="171" text-anchor="middle" fill="#8e3141">social weight</text>
-          <rect x="634" y="148" width="106" height="44" rx="14" fill="#fff5f8" stroke="#e2687d" /><text x="687" y="171" text-anchor="middle" fill="#8e3141">threat</text>
-        </g>
-        <path d="M314 100 L104 148" fill="none" stroke="#b8b3aa" />
-        <path d="M354 100 L250 148" fill="none" stroke="#b8b3aa" />
-        <path d="M390 100 L396 148" fill="none" stroke="#b8b3aa" />
-        <path d="M426 100 L547 148" fill="none" stroke="#b8b3aa" />
-        <path d="M466 100 L687 148" fill="none" stroke="#b8b3aa" />
-        <g class="svg-label">
-          <rect x="34" y="244" width="140" height="72" rx="14" fill="#fdfcf9" stroke="#d8d2c6" />
-          <text x="104" y="272" text-anchor="middle">tone of</text>
-          <text x="104" y="294" text-anchor="middle">the response</text>
-          <rect x="188" y="244" width="140" height="72" rx="14" fill="#fdfcf9" stroke="#d8d2c6" />
-          <text x="258" y="272" text-anchor="middle">how long</text>
-          <text x="258" y="294" text-anchor="middle">it thinks</text>
-          <rect x="342" y="244" width="140" height="72" rx="14" fill="#fdfcf9" stroke="#d8d2c6" />
-          <text x="412" y="272" text-anchor="middle">how widely</text>
-          <text x="412" y="294" text-anchor="middle">memory opens</text>
-          <rect x="496" y="244" width="140" height="72" rx="14" fill="#fdfcf9" stroke="#d8d2c6" />
-          <text x="566" y="272" text-anchor="middle">human impact</text>
-          <text x="566" y="294" text-anchor="middle">gets weight</text>
-          <rect x="650" y="244" width="96" height="72" rx="14" fill="#fdfcf9" stroke="#d8d2c6" />
-          <text x="698" y="272" text-anchor="middle">strict</text>
-          <text x="698" y="294" text-anchor="middle">self-check</text>
-        </g>
-        <line x1="104" y1="192" x2="104" y2="244" stroke="#b8b3aa" marker-end="url(#mf5)" />
-        <line x1="250" y1="192" x2="258" y2="244" stroke="#b8b3aa" marker-end="url(#mf5)" />
-        <line x1="396" y1="192" x2="412" y2="244" stroke="#b8b3aa" marker-end="url(#mf5)" />
-        <line x1="547" y1="192" x2="566" y2="244" stroke="#b8b3aa" marker-end="url(#mf5)" />
-        <line x1="687" y1="192" x2="698" y2="244" stroke="#b8b3aa" marker-end="url(#mf5)" />
-        <rect x="160" y="374" width="460" height="58" rx="18" fill="#fcf1dd" stroke="#c9851d" />
-        <text x="390" y="396" text-anchor="middle" class="svg-label" fill="#764400">low arousal gets a quick answer</text>
-        <text x="390" y="418" text-anchor="middle" class="svg-label" fill="#764400">high novelty earns a longer pass</text>
-      </svg>
-    </div>
+            <line x1="380" y1="876" x2="380" y2="908"
+                  stroke="#777167" marker-end="url(#arrow-main)"/>
 
-    <h2>Specialists that compete for attention</h2>
-    <p>The model has eight specialist sub-networks, each leaning toward a different kind of reasoning, spatial, causal, language, social, abstract, planning, math, and code. For every thought, all eight score how relevant they are to it. The three most relevant win, and instead of working in isolation they attend to each other directly before handing off a combined result to the reasoning core. A visual puzzle pulls in a different trio than a social dilemma or a planning problem does. Math and code aren't built any differently from the other six, they're the same size, same structure. They become good at their domain the same way any of the others do, by being the ones that keep winning on that kind of problem during training.</p>
+            <rect x="65" y="908" width="630" height="80" rx="24"
+                  fill="#eeedfe" stroke="#3c3489"/>
+            <text x="380" y="936" text-anchor="middle"
+                  class="svg-title" fill="#3c3489">
+              Output & optional learning
+            </text>
+            <text x="380" y="963" text-anchor="middle"
+                  class="svg-label" fill="#3c3489">
+              generated tokens · episode write · bounded self update
+            </text>
+          </svg>
 
-    <!-- FIG 6 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 6 ; Specialists compete, then share</div>
-      <svg viewBox="0 0 720 456" role="img" aria-label="Eight specialists compete and selected specialists share results" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="mf6" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6f6a60" /></marker></defs>
-        <rect x="70" y="52" width="580" height="176" rx="30" fill="#fdfbf5" stroke="#d8d2c6" />
-        <g class="svg-label">
-          <rect x="104" y="82" width="112" height="42" rx="14" fill="#eafaf3" stroke="#18a078" /><text x="160" y="104" text-anchor="middle" fill="#006b5b">causal</text>
-          <rect x="232" y="82" width="112" height="42" rx="14" fill="#fff5f8" stroke="#e2687d" /><text x="288" y="104" text-anchor="middle" fill="#8e3141">planning</text>
-          <rect x="360" y="82" width="112" height="42" rx="14" fill="#fcf1dd" stroke="#c9851d" /><text x="416" y="104" text-anchor="middle" fill="#764400">math</text>
-          <rect x="488" y="82" width="112" height="42" rx="14" fill="#f4f3ff" stroke="#6d61d8" /><text x="544" y="104" text-anchor="middle" fill="#27215e">social</text>
-          <rect x="104" y="150" width="112" height="42" rx="14" fill="#f8f5ec" stroke="#b8b3aa" /><text x="160" y="172" text-anchor="middle">memory</text>
-          <rect x="232" y="150" width="112" height="42" rx="14" fill="#f8f5ec" stroke="#b8b3aa" /><text x="288" y="172" text-anchor="middle">analogy</text>
-          <rect x="360" y="150" width="112" height="42" rx="14" fill="#f8f5ec" stroke="#b8b3aa" /><text x="416" y="172" text-anchor="middle">code</text>
-          <rect x="488" y="150" width="112" height="42" rx="14" fill="#f8f5ec" stroke="#b8b3aa" /><text x="544" y="172" text-anchor="middle">reflect</text>
-        </g>
-        <path d="M160 124 C198 254 294 252 335 282" fill="none" stroke="#18a078" marker-end="url(#mf6)" />
-        <path d="M288 124 C304 224 332 246 348 282" fill="none" stroke="#e2687d" marker-end="url(#mf6)" />
-        <path d="M416 124 C404 224 386 246 372 282" fill="none" stroke="#c9851d" marker-end="url(#mf6)" />
-        <rect x="240" y="282" width="240" height="64" rx="22" fill="#eafaf3" stroke="#18a078" />
-        <text x="360" y="314" text-anchor="middle" class="svg-title" fill="#006b5b">Shared workspace</text>
-        <line x1="360" y1="346" x2="360" y2="384" stroke="#6f6a60" marker-end="url(#mf6)" />
-        <rect x="252" y="384" width="216" height="52" rx="18" fill="#fdfcf9" stroke="#aaa59a" />
-        <text x="360" y="410" text-anchor="middle" class="svg-title">Next step</text>
-      </svg>
-    </div>
+          <p class="diagram-caption">
+            Perception, thought formation, retrieval, reasoning, and output are
+            separate jobs. The reasoning transformer never operates directly on raw pixels,
+            audio samples, or unprepared text.
+          </p>
+        </div>
 
-    <h2>Reasoning: running the same stack more than once</h2>
-    <p>Once the workspace has produced a combined context, the reasoning core runs against it, and runs again, and again, using the exact same weights each time, for as many passes as the problem seems to warrant. A self-check after the final pass decides whether the result is good enough. If it isn't, the model resets to the original input and tries once more, this time nudged by its own sense of what it should adjust. That single retry is the closest thing this design has to noticing a mistake and correcting it.</p>
+        <div class="callout callout-teal">
+          <p>
+            <strong>The central architectural decision:</strong>
+            perception asks “what is present?”, thought formation asks “what is this
+            situation about?”, and reasoning asks “what follows from this prepared situation?”
+          </p>
+        </div>
+      </section>
 
-    <h2>Getting math and code right</h2>
-    <p>This is the part I spent the most time getting right, because the obvious approaches don't actually work well at this scale.</p>
-    <p>The first instinct is to treat math and code the way images and audio are treated, give them their own dedicated, pretrained encoder. That doesn't hold up, because images and audio need grounding in what something physically looks or sounds like, and there's no equivalent for code, what matters there is what an expression structurally <em>is</em> and what it <em>does</em> when evaluated, not a sensory pattern. That's why the code/math encoder described earlier is trained from scratch rather than borrowed: there's nothing pretrained that solves this particular problem.</p>
-    <p>A second instinct is to give the model an explicit, external map of mathematical and programming knowledge, a graph of theorems and techniques with their dependencies spelled out, retrieved and combined for every relevant problem. This is a real and well-studied approach, but it's heavy: it needs a large, carefully curated graph, and a fair amount of extra machinery to retrieve from it and combine the results at inference time. For a model this size, that's a lot of moving parts for the return.</p>
-    <p>What I actually use is simpler, and reuses machinery that's already in the architecture. A math or code thought is, most of the time, mostly a label for a technique, integration by parts, binary search, induction, and that label barely changes with the specific numbers in the problem. So I extract a flat list of a few hundred recurring techniques from worked solutions and tagged code problems, and apply the same collapse-prevention training signal from thought formation a second time, grouped by technique instead of by input type. Problems that use the same technique get pulled toward the same region of the thought space; the model ends up with something like a library of approaches, but it's geometry that emerges from training rather than a graph anyone had to build by hand.</p>
+      <section id="compute">
+        <h2>The compute envelope</h2>
 
-    <!-- FIG 7 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 7 ; Techniques cluster on their own</div>
-      <svg viewBox="0 0 720 480" role="img" aria-label="Technique clusters discovered in thought space" xmlns="http://www.w3.org/2000/svg">
-        <rect x="58" y="82" width="604" height="292" rx="24" fill="#fdfbf5" stroke="#d8d2c6" />
-        <text x="84" y="112" class="svg-label" fill="#7a7a72">thought space, simplified to two dimensions for illustration</text>
-        <g class="svg-label">
-          <circle cx="168" cy="174" r="7" fill="#18a078" /><circle cx="198" cy="188" r="7" fill="#18a078" /><circle cx="182" cy="214" r="7" fill="#18a078" /><circle cx="220" cy="210" r="7" fill="#18a078" /><circle cx="194" cy="236" r="7" fill="#18a078" />
-          <text x="190" y="274" text-anchor="middle" fill="#006b5b">induction proofs</text>
-          <circle cx="346" cy="250" r="7" fill="#5149bd" /><circle cx="378" cy="230" r="7" fill="#5149bd" /><circle cx="394" cy="260" r="7" fill="#5149bd" /><circle cx="364" cy="292" r="7" fill="#5149bd" /><circle cx="408" cy="292" r="7" fill="#5149bd" />
-          <text x="378" y="330" text-anchor="middle" fill="#27215e">two-pointer technique</text>
-          <circle cx="520" cy="156" r="7" fill="#ba7517" /><circle cx="548" cy="184" r="7" fill="#ba7517" /><circle cx="574" cy="168" r="7" fill="#ba7517" /><circle cx="562" cy="210" r="7" fill="#ba7517" />
-          <text x="552" y="246" text-anchor="middle" fill="#764400">chain rule</text>
-          <circle cx="120" cy="322" r="6" fill="#b8b3aa" /><circle cx="286" cy="342" r="6" fill="#b8b3aa" /><circle cx="474" cy="318" r="6" fill="#b8b3aa" /><circle cx="606" cy="322" r="6" fill="#b8b3aa" /><circle cx="450" cy="204" r="6" fill="#b8b3aa" />
-          <text x="360" y="358" text-anchor="middle" fill="#7a7a72">everything else stays spread out around them</text>
-        </g>
-        <rect x="78" y="410" width="564" height="42" rx="14" fill="#fcf1dd" stroke="#c9851d" />
-        <text x="360" y="431" text-anchor="middle" class="svg-label" fill="#764400">probe check: can technique be predicted from position alone?</text>
-      </svg>
-    </div>
+        <p>
+          This is a single-GPU research build. Data preparation has been running on
+          Google Colab instances with either an 80 GB A100 or a 95.6 GB Blackwell-class
+          GPU. The open multimodal encoder itself occupies roughly 9.5–10.5 GB during
+          tested inference.
+        </p>
 
-    <h3>Where exact answers actually come from</h3>
-    <p>None of this is meant to make the model good at long division. A model this small isn't going to reliably multiply six-digit numbers in its head, and I don't think it should try. Instead, when the model needs an exact number or needs to check whether a piece of code actually runs, it writes out a short expression, hands it to a real calculator or a sandboxed Python process, and reads the answer back into its own context before continuing. The model's job is recognizing <em>when</em> to reach for this and <em>what</em> to compute, the arithmetic itself happens outside the network entirely, where it's exact by construction.</p>
+        
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Constraint</th>
+                <th>Current decision</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Frontend encoder</td>
+                <td>Frozen Omni-Embed-Nemotron-style encoder</td>
+                <td>Avoid retraining multimodal perception from scratch.</td>
+              </tr>
+              <tr>
+                <td>Raw dataset storage</td>
+                <td>Disposable Colab local disk</td>
+                <td>Local reads are faster than repeatedly reading media from Drive.</td>
+              </tr>
+              <tr>
+                <td>Permanent storage</td>
+                <td>FP16 embeddings, metadata, manifests and checkpoints on Drive</td>
+                <td>Raw media can disappear with the session; reusable vectors cannot.</td>
+              </tr>
+              <tr>
+                <td>Reasoning compute</td>
+                <td>One six-layer transformer pass</td>
+                <td>Lower latency and fewer instability risks than recurrent reasoning.</td>
+              </tr>
+              <tr>
+                <td>Memory search</td>
+                <td>Approximate nearest-neighbour indexes</td>
+                <td>Avoid scanning every semantic or episodic record.</td>
+              </tr>
+              <tr>
+                <td>Knowledge strategy</td>
+                <td>semantic memory & episodic memory</td>
+                <td>Weights provide competence; explicit memory supplies searchable concepts and cases.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-    <!-- FIG 8 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 8 ; Calculator as a tool</div>
-      <svg viewBox="0 0 720 352" role="img" aria-label="Reasoning reaches for a calculator and returns exact value" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="mf8" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6f6a60" /></marker></defs>
-        <rect x="70" y="92" width="140" height="62" rx="20" fill="#eafaf3" stroke="#18a078" />
-        <text x="140" y="123" text-anchor="middle" class="svg-title" fill="#006b5b">Reasoning</text>
-        <line x1="210" y1="123" x2="276" y2="123" stroke="#6f6a60" marker-end="url(#mf8)" />
-        <rect x="276" y="92" width="150" height="62" rx="20" fill="#fcf1dd" stroke="#c9851d" />
-        <text x="351" y="118" text-anchor="middle" class="svg-title" fill="#764400">Expression</text>
-        <text x="351" y="140" text-anchor="middle" class="svg-label" fill="#764400">exact work</text>
-        <line x1="426" y1="123" x2="492" y2="123" stroke="#6f6a60" marker-end="url(#mf8)" />
-        <rect x="492" y="92" width="150" height="62" rx="20" fill="#f4f3ff" stroke="#6d61d8" />
-        <text x="567" y="123" text-anchor="middle" class="svg-title" fill="#27215e">Sandbox</text>
-        <path d="M566 154 C558 244 194 244 148 158" fill="none" stroke="#6d61d8" stroke-dasharray="7 8" marker-end="url(#mf8)" />
-        <rect x="250" y="238" width="220" height="58" rx="20" fill="#fff5f8" stroke="#e2687d" />
-        <text x="360" y="267" text-anchor="middle" class="svg-title" fill="#8e3141">Exact value returns</text>
-      </svg>
-    </div>
+        <p>
+          One normalized 2048-dimensional FP16 vector uses 4096 bytes, or about 4 KB.
+          A corpus of 250,000 vectors therefore requires roughly one gigabyte for
+          the dense arrays before metadata and indexes.
+        </p>
 
-    <h2>How I'm training it</h2>
-    <p>Standard backpropagation covers almost the entire model. The one place it doesn't reach cleanly is the self-improvement step, judging whether a change the model proposed to itself actually helped over time isn't something a gradient can point to directly, so that one piece is trained with a simple reward signal instead, kept deliberately small and isolated from the rest of the network. Everything related to learning a technique quickly from only a few examples, the math and code procedures, and the visual puzzle patterns, uses a lightweight meta-learning approach: adapt briefly to a handful of examples, then nudge the starting point slightly toward wherever that adaptation landed.</p>
-    <p>I'm splitting training into five stages, each one a gate before moving to the next.</p>
+        <div class="callout callout-amber">
+          <p>
+            <strong>What the hardware changes:</strong>
+            it encourages precomputation, short reproducible shards, conservative
+            batch sizes, fixed-depth reasoning, and staged training rather than one
+            enormous end-to-end run.
+          </p>
+        </div>
+      </section>
 
-    <!-- FIG 9 -->
-    <div class="diagram-wrap">
-      <div class="diagram-label">Fig. 9 ; Five training stages</div>
-      <svg viewBox="0 0 720 410" role="img" aria-label="Five training stages for Monarch" xmlns="http://www.w3.org/2000/svg">
-        <defs><marker id="mf9" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#6f6a60" /></marker></defs>
-        <g class="svg-label">
-          <rect x="52" y="76" width="112" height="58" rx="18" fill="#fff5f8" stroke="#e2687d" /><text x="108" y="105" text-anchor="middle" fill="#8e3141">Grounding</text>
-          <rect x="188" y="76" width="112" height="58" rx="18" fill="#eafaf3" stroke="#18a078" /><text x="244" y="105" text-anchor="middle" fill="#006b5b">Thought</text>
-          <rect x="324" y="76" width="112" height="58" rx="18" fill="#f4f3ff" stroke="#6d61d8" /><text x="380" y="105" text-anchor="middle" fill="#27215e">Reasoning</text>
-          <rect x="460" y="76" width="112" height="58" rx="18" fill="#fcf1dd" stroke="#c9851d" /><text x="516" y="105" text-anchor="middle" fill="#764400">Fast learn</text>
-          <rect x="596" y="76" width="72" height="58" rx="18" fill="#f8f5ec" stroke="#b8b3aa" /><text x="632" y="105" text-anchor="middle">Self</text>
-        </g>
-        <line x1="164" y1="105" x2="188" y2="105" stroke="#6f6a60" marker-end="url(#mf9)" />
-        <line x1="300" y1="105" x2="324" y2="105" stroke="#6f6a60" marker-end="url(#mf9)" />
-        <line x1="436" y1="105" x2="460" y2="105" stroke="#6f6a60" marker-end="url(#mf9)" />
-        <line x1="572" y1="105" x2="596" y2="105" stroke="#6f6a60" marker-end="url(#mf9)" />
-        <rect x="138" y="220" width="444" height="70" rx="24" fill="#fdfbf5" stroke="#d8d2c6" />
-        <text x="360" y="250" text-anchor="middle" class="svg-title">Gate checks each stage</text>
-        <text x="360" y="274" text-anchor="middle" class="svg-label">clusters, collapse, wins, coherence</text>
-        <path d="M360 134 L360 220" fill="none" stroke="#6f6a60" marker-end="url(#mf9)" />
-        <rect x="240" y="334" width="240" height="48" rx="16" fill="#eafaf3" stroke="#18a078" />
-        <text x="360" y="358" text-anchor="middle" class="svg-title" fill="#006b5b">Tiny build ; ~125 GPU-hours</text>
-      </svg>
-    </div>
+      <section id="frontend">
+        <h2>Inputs and thought formation</h2>
 
-    <h2>What I expect, and what I don't</h2>
-    <p>Nothing here has been trained yet, so everything below is a prediction, not a result. I expect tool use to matter a lot for grade-school and competition-style math, matter a fair amount for code, and matter not at all for visual abstraction puzzles, where the bottleneck isn't arithmetic at all.</p>
+        <div class="block block-blue">
+          <div class="section-index">Block 0</div>
+          <h3>Raw multimodal input</h3>
+          <p>
+            Monarch accepts supported combinations of text, images, audio, video,
+            documents, and extracted structured chunks. Raw data is not passed directly
+            into Monarch’s reasoning core.
+          </p>
+          <div class="flow-line">text · image · audio · video · document
+→ frozen multimodal encoder</div>
+        </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Benchmark</th><th>Without a calculator</th><th>With one</th><th>Why</th></tr></thead>
-        <tbody>
-          <tr><td>Grade-school math</td><td>25–35%</td><td>55–70%</td><td>reasoning picks the operation, the sandbox does the arithmetic</td></tr>
-          <tr><td>Short coding problems</td><td>5–10%</td><td>20–35%</td><td>write, run, see the error, fix it, repeat a few times</td></tr>
-          <tr><td>Visual abstraction puzzles</td><td>15–25%</td><td>15–25%</td><td>no amount of arithmetic help fixes a pattern it hasn't recognized</td></tr>
-        </tbody>
-      </table>
-    </div>
+        <div class="block block-blue">
+          <div class="section-index">Block 1</div>
+          <h3>Omni-Embed encoder layer</h3>
+          <p>
+            The current frontend uses NVIDIA’s Omni-Embed-Nemotron model. It maps
+            supported modalities into one 2048-dimensional semantic space. This replaces
+            the older design with separate CLIP, Whisper, text, and hand-built structural
+            encoders.
+          </p>
+          <p>
+            The encoder supplies perception and cross-modal alignment. It does not produce
+            Monarch’s final answer or its internal ThoughtVector.
+          </p>
+          <div class="flow-line">raw input → Omni-Embed → e ∈ R²⁰⁴⁸</div>
+        </div>
 
-    <div class="callout callout-amber">
-      <p><strong>Where I don't expect this to be strong:</strong> recalling obscure facts (there's just not enough capacity to memorize broadly at this size), holding long documents word-for-word, generating highly formulaic text where pattern-matching already wins, and raw speed, refining a thought, running a specialist competition, and reasoning over multiple passes all add latency a plain model the same size wouldn't pay.</p>
-    </div>
+        <div class="block block-blue">
+          <div class="section-index">Block 2</div>
+          <h3>Native vector storage</h3>
+          <p>
+            Encoder vectors are stored in their native width before any Monarch-specific
+            projection. Every shard is accompanied by metadata describing its source,
+            modality, domain and record identity.
+          </p>
+          <p>
+            Keeping the native vectors means the adapter or Monarch width can change later
+            without encoding the raw corpus again.
+          </p>
+          <div class="flow-line">embedding: float16 [2048]
+metadata: source · modality · domain · record ID
+manifest: encoder revision · dtype · normalization · counts</div>
+        </div>
 
-    <h2>Building it</h2>
-    <p>I'm building this in dependency order, the input encoders and the thought refiner first, tested in isolation before any real training data touches them, then memory and the emotional signals, then the workspace, then reasoning, then the full model wired together and checked for memory fit on the actual card before any real training run starts. The calculator sandbox gets its own isolated tests before anything in the model is allowed to depend on it. Every stage gets a short trial run first, checked against a monitoring script, before I scale it up, a collapsing thought space looks identical to normal training for a while before it's obviously broken, so I'm watching for it from the very first step, every stage, no exceptions.</p>
-    <p>I'm planning to lean on Claude Code and Codex heavily for the implementation itself, scaffolding the modules, writing the training loops, chasing down shape mismatches and memory errors. The judgment calls stay with me: whether something is collapsing, whether a stage actually converged, whether the technique clustering shows real signal. That part doesn't get automated.</p>
+        <div class="block block-teal">
+          <div class="section-index">Block 3</div>
+          <h3>Input Adapter</h3>
+          <p>
+            The adapter translates the encoder’s 2048-dimensional representation into
+            Monarch’s 1536-dimensional internal space. Encoder-space and Monarch-space
+            vectors must never be compared directly.
+          </p>
+          <div class="flow-line">LayerNorm(2048)
+→ Linear(2048, 1536)
+→ GELU
+→ Linear(1536, 1536)
+→ LayerNorm(1536)</div>
+        </div>
 
-    <hr class="section-rule">
+        <div class="block block-teal">
+          <div class="section-index">Block 4</div>
+          <h3>Thought Transformer</h3>
+          <p>
+            The Thought Transformer organizes perceived meaning into an active thought.
+            It uses learned latent thought tokens representing global, visual, relational,
+            causal and task-focused views of the input.
+          </p>
+          <p>
+            It does not generate text and it does not perform final reasoning. Its output
+            is a single 1536-dimensional ThoughtVector.
+          </p>
+          <div class="flow-line">adapted input x & learned thought tokens
+→ Thought Transformer
+→ pool updated thought tokens
+→ ThoughtVector t ∈ R¹⁵³⁶</div>
+        </div>
 
-    <h2>Closing thought</h2>
-    <p>Most of what holds this together is one mechanism reused in several places rather than a pile of separate ideas. The same collapse-prevention signal trains thought formation, multimodal grounding, and technique clustering. The same halting pattern shows up in thought formation and in reasoning. The same meta-learning loop handles visual puzzles and math techniques without needing to know which one it's looking at. None of it is exotic, the goal was never novelty for its own sake, just an architecture small enough to actually finish training on the hardware I have.</p>
+        <div class="diagram-wrap">
+          <div class="diagram-label">Fig. 2 · From experience to thought</div>
 
-    <div class="sources">
-      <h2>References</h2>
-      <ul class="source-list">
-        <li><span class="source-num">[1]</span><span><a href="https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2-preview">Gemini Embedding 2</a>, Google's natively multimodal embedding model (preview, March 2026), the early reference point for projecting text, image, audio, and documents into one shared space.</span></li>
-        <li><span class="source-num">[2]</span><span>Bardes, Ponce, LeCun, <a href="https://arxiv.org/abs/2105.04906"><em>VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning</em></a> (2021), the collapse-prevention mechanism reused throughout thought formation, multimodal grounding, and technique clustering.</span></li>
-        <li><span class="source-num">[3]</span><span>Finn, Abbeel, Levine, <a href="https://arxiv.org/abs/1703.03400"><em>Model-Agnostic Meta-Learning</em></a> (2017), the meta-learning approach behind fast technique adaptation, used here in its lighter first-order form.</span></li>
-        <li><span class="source-num">[4]</span><span>Cherti et al., <a href="https://arxiv.org/abs/2212.07143"><em>Reproducible Scaling Laws for Contrastive Language-Image Learning</em></a> (2022), and the <a href="https://github.com/mlfoundations/open_clip">OpenCLIP</a> codebase, the frozen image encoder used here.</span></li>
-        <li><span class="source-num">[5]</span><span>Radford et al., <a href="https://arxiv.org/abs/2212.04356"><em>Robust Speech Recognition via Large-Scale Weak Supervision</em></a> (2022), source of the frozen audio encoder.</span></li>
-        <li><span class="source-num">[6]</span><span>Tai, Socher, Manning, <a href="https://aclanthology.org/P15-1150/"><em>Improved Semantic Representations From Tree-Structured Long Short-Term Memory Networks</em></a> (2015), the structural approach behind the code and math encoder.</span></li>
-        <li><span class="source-num">[7]</span><span><a href="https://arxiv.org/abs/2110.14168">GSM8K</a>; <a href="https://arxiv.org/abs/2103.03874">the MATH dataset</a>; <a href="https://arxiv.org/abs/2107.03374">HumanEval</a>; <a href="https://arxiv.org/abs/1909.09436">CodeSearchNet</a>, the worked-solution and code datasets behind technique extraction and evaluation.</span></li>
-        <li><span class="source-num">[8]</span><span>Chollet, <em>On the Measure of Intelligence</em>, and the <a href="https://arcprize.org/">ARC Prize</a>, source of the visual abstraction benchmark referenced above.</span></li>
-      </ul>
-    </div>
+          <svg viewBox="0 0 760 390" role="img"
+               aria-label="Raw multimodal input becomes a stored embedding and ThoughtVector"
+               xmlns="http://www.w3.org/2000/svg">
 
-  </article>
+            <defs>
+              <marker id="arrow-thought" markerWidth="10" markerHeight="10"
+                      refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#777167"/>
+              </marker>
+            </defs>
+
+            <rect x="28" y="84" width="144" height="82" rx="20"
+                  fill="#fff5f8" stroke="#c84e66"/>
+            <text x="100" y="112" text-anchor="middle"
+                  class="svg-title" fill="#8e3141">Experience</text>
+            <text x="100" y="140" text-anchor="middle"
+                  class="svg-label" fill="#8e3141">text · image · audio</text>
+
+            <line x1="172" y1="125" x2="218" y2="125"
+                  stroke="#777167" marker-end="url(#arrow-thought)"/>
+
+            <rect x="218" y="84" width="144" height="82" rx="20"
+                  fill="#e7f1fa" stroke="#285d8f"/>
+            <text x="290" y="112" text-anchor="middle"
+                  class="svg-title" fill="#285d8f">Omni-Embed</text>
+            <text x="290" y="140" text-anchor="middle"
+                  class="svg-label" fill="#285d8f">2048-d native vector</text>
+
+            <line x1="362" y1="125" x2="408" y2="125"
+                  stroke="#777167" marker-end="url(#arrow-thought)"/>
+
+            <rect x="408" y="84" width="144" height="82" rx="20"
+                  fill="#faeeda" stroke="#854f0b"/>
+            <text x="480" y="112" text-anchor="middle"
+                  class="svg-title" fill="#854f0b">Adapter</text>
+            <text x="480" y="140" text-anchor="middle"
+                  class="svg-label" fill="#854f0b">2048 → 1536</text>
+
+            <line x1="552" y1="125" x2="598" y2="125"
+                  stroke="#777167" marker-end="url(#arrow-thought)"/>
+
+            <rect x="598" y="84" width="134" height="82" rx="20"
+                  fill="#e1f5ee" stroke="#0f6e56"/>
+            <text x="665" y="110" text-anchor="middle"
+                  class="svg-title" fill="#0f6e56">Thought</text>
+            <text x="665" y="138" text-anchor="middle"
+                  class="svg-label" fill="#0f6e56">t ∈ R¹⁵³⁶</text>
+
+            <rect x="165" y="250" width="430" height="72" rx="21"
+                  fill="#eeedfe" stroke="#3c3489"/>
+            <text x="380" y="277" text-anchor="middle"
+                  class="svg-title" fill="#3c3489">
+              Native vectors remain reusable
+            </text>
+            <text x="380" y="303" text-anchor="middle"
+                  class="svg-label" fill="#3c3489">
+              changing Monarch does not require re-running perception
+            </text>
+
+            <path d="M290 166 C290 214 332 219 350 250"
+                  fill="none" stroke="#3c3489"
+                  stroke-dasharray="6 7"
+                  marker-end="url(#arrow-thought)"/>
+          </svg>
+        </div>
+      </section>
+
+      <section id="memory">
+        <h2>Persistent state and explicit memory</h2>
+
+        <div class="block block-purple">
+          <div class="section-index">Block 5</div>
+          <h3>PersistentSelf</h3>
+          <p>
+            The ThoughtVector describes the current situation. PersistentSelf is a
+            separate 1536-dimensional runtime vector carrying capability estimates,
+            recent interaction context and session-sensitive information.
+          </p>
+          <p>
+            New users begin from a learned <code>blank_self</code> vector. Each runtime
+            session receives its own copy, preventing one user’s state from mutating the
+            shared default.
+          </p>
+          <div class="flow-line">t = what this situation means
+s = what Monarch currently carries about itself</div>
+        </div>
+
+        <div class="block block-purple">
+          <div class="section-index">Block 6</div>
+          <h3>Retrieval Query Head</h3>
+          <p>
+            Memory is not searched directly with the raw ThoughtVector. A Query Head
+            combines the current thought with PersistentSelf and produces a normalized
+            retrieval key.
+          </p>
+          <div class="flow-line">q = normalize(fq([t ; s]))
+q ∈ R¹⁵³⁶</div>
+          <p>
+            Semantic and episodic keys must be produced in this same learned key space.
+            This alignment requires contrastive retrieval training with relevant and
+            irrelevant examples.
+          </p>
+        </div>
+
+        <div class="block block-amber">
+          <div class="section-index">Block 7A</div>
+          <h3>Semantic memory</h3>
+          <p>
+            Semantic memory stores reusable concepts and procedures: load distribution,
+            proof strategies, stoichiometric relationships, repair procedures and other
+            abstractions that should be useful across many tasks.
+          </p>
+          <p>
+            Search uses a trained FAISS IVF-PQ index. IVF-PQ cannot accept useful searches
+            immediately after construction: its centroids and product-quantisation
+            codebooks must first be trained on representative normalized keys.
+          </p>
+          <div class="flow-line">representative keys → train IVF-PQ
+→ verify index.is_trained
+→ add semantic records
+→ retrieve m_sem ∈ R¹⁵³⁶</div>
+        </div>
+
+        <div class="block block-amber">
+          <div class="section-index">Block 7B</div>
+          <h3>Episodic memory</h3>
+          <p>
+            Episodic memory stores specific past cases rather than general concepts.
+            Examples include a previous solved problem, a failed attempt and correction,
+            or user-specific context from an earlier interaction.
+          </p>
+          <p>
+            Episodes use HNSW because new records can be inserted dynamically. The stored
+            key is <code>q.detach()</code>, not the raw ThoughtVector, ensuring writes and
+            later searches use the same key space.
+          </p>
+          <div class="flow-line">episode key: normalized q
+episode value: compressed 1536-d state
+index: dynamic HNSW
+output: m_epi ∈ R¹⁵³⁶</div>
+        </div>
+
+        <div class="block block-amber">
+          <div class="section-index">Block 8</div>
+          <h3>Memory Fusion</h3>
+          <p>
+            Semantic and episodic retrieval both return 1536-dimensional value summaries.
+            They are concatenated and compressed into one clean memory context.
+          </p>
+          <div class="flow-line">m_sem ∈ R¹⁵³⁶
+m_epi ∈ R¹⁵³⁶
+[m_sem ; m_epi] ∈ R³⁰⁷²
+→ Memory Fusion
+→ m ∈ R¹⁵³⁶</div>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">Fig. 3 · Shared retrieval-key space</div>
+
+          <svg viewBox="0 0 760 510" role="img"
+               aria-label="Thought and self form a normalized query used for semantic and episodic retrieval"
+               xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+              <marker id="arrow-memory" markerWidth="10" markerHeight="10"
+                      refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#777167"/>
+              </marker>
+            </defs>
+
+            <rect x="80" y="38" width="250" height="70" rx="20"
+                  fill="#e1f5ee" stroke="#0f6e56"/>
+            <text x="205" y="73" text-anchor="middle"
+                  class="svg-title" fill="#0f6e56">ThoughtVector t</text>
+
+            <rect x="430" y="38" width="250" height="70" rx="20"
+                  fill="#eeedfe" stroke="#3c3489"/>
+            <text x="555" y="73" text-anchor="middle"
+                  class="svg-title" fill="#3c3489">PersistentSelf s</text>
+
+            <path d="M205 108 C205 148 312 146 350 176"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-memory)"/>
+            <path d="M555 108 C555 148 448 146 410 176"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-memory)"/>
+
+            <rect x="250" y="176" width="260" height="76" rx="22"
+                  fill="#fff5f8" stroke="#c84e66"/>
+            <text x="380" y="205" text-anchor="middle"
+                  class="svg-title" fill="#8e3141">Query Head</text>
+            <text x="380" y="231" text-anchor="middle"
+                  class="svg-label" fill="#8e3141">normalized q ∈ R¹⁵³⁶</text>
+
+            <path d="M380 252 C380 291 235 289 205 320"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-memory)"/>
+            <path d="M380 252 C380 291 525 289 555 320"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-memory)"/>
+
+            <rect x="70" y="320" width="270" height="82" rx="22"
+                  fill="#faeeda" stroke="#854f0b"/>
+            <text x="205" y="349" text-anchor="middle"
+                  class="svg-title" fill="#854f0b">Semantic memory</text>
+            <text x="205" y="377" text-anchor="middle"
+                  class="svg-label" fill="#854f0b">trained FAISS IVF-PQ</text>
+
+            <rect x="420" y="320" width="270" height="82" rx="22"
+                  fill="#e7f1fa" stroke="#285d8f"/>
+            <text x="555" y="349" text-anchor="middle"
+                  class="svg-title" fill="#285d8f">Episodic memory</text>
+            <text x="555" y="377" text-anchor="middle"
+                  class="svg-label" fill="#285d8f">dynamic HNSW</text>
+
+            <path d="M205 402 C205 446 318 435 350 458"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-memory)"/>
+            <path d="M555 402 C555 446 442 435 410 458"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-memory)"/>
+
+            <rect x="250" y="448" width="260" height="50" rx="17"
+                  fill="#f1efe8" stroke="#9a968c"/>
+            <text x="380" y="473" text-anchor="middle"
+                  class="svg-title">Memory Fusion</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="workspace">
+        <h2>Assessment, workspace, and learned specialists</h2>
+
+        <div class="block block-rose">
+          <div class="section-index">Block 9</div>
+          <h3>Thought Assessment</h3>
+          <p>
+            The older “emotional analog” has been replaced with a more operational
+            assessment module. A shared trunk reads the current thought, self state and
+            retrieved memory. Five separate heads estimate novelty, risk, confidence,
+            importance and social context.
+          </p>
+          <div class="flow-line">[t ; s ; m] ∈ R⁴⁶⁰⁸
+→ shared assessment trunk
+→ five separate scalar heads</div>
+          <p>
+            These scores are not meaningful merely because the network outputs numbers.
+            They require auxiliary labels or defensible self-supervised training signals.
+          </p>
+        </div>
+
+        <div class="block block-rose">
+          <div class="section-index">Block 10</div>
+          <h3>Workspace Builder</h3>
+          <p>
+            The workspace is Monarch’s current reasoning table. It combines the active
+            thought, retrieved memory and projected assessment signals into one
+            1536-dimensional state.
+          </p>
+          <div class="flow-line">a_vec = Project(assessment)
+w0 = WorkspaceBuilder([t ; m ; a_vec])
+w0 ∈ R¹⁵³⁶</div>
+        </div>
+
+        <div class="block block-amber">
+          <div class="section-index">Block 11</div>
+          <h3>Specialist Gate</h3>
+          <p>
+            The gate routes using both the workspace and PersistentSelf:
+            <code>[w0 ; s]</code>. It does not route directly from raw input or the
+            ThoughtVector alone.
+          </p>
+          <p>
+            It produces a probability for every learned expert, selects the top-k, and
+            normalizes their selected weights. A load-balancing loss is required to
+            prevent every task from collapsing into one popular expert.
+          </p>
+        </div>
+
+        <div class="block block-amber">
+          <div class="section-index">Block 12</div>
+          <h3>Selected specialists</h3>
+          <p>
+            Each selected expert transforms the same workspace from a learned perspective.
+            Names such as causal, spatial, planning, mathematical or language may be
+            attached for monitoring, but the underlying behavior is learned rather than
+            manually programmed.
+          </p>
+        </div>
+
+        <div class="block block-amber">
+          <div class="section-index">Block 13</div>
+          <h3>Cross-specialist fusion</h3>
+          <p>
+            Selected specialist outputs attend to one another, then merge using the
+            gate probabilities. This allows one high-signal specialist to contribute more
+            than a weaker one.
+          </p>
+          <div class="flow-line">P = [p₁ ; p₂ ; p₃]
+P′ = MultiHeadAttention(P, P, P)
+w1 = MLP(Σ selected_weightᵢ × P′ᵢ)</div>
+        </div>
+
+        <div class="callout callout-amber">
+          <p>
+            <strong>Specialist names are not guarantees.</strong>
+            Useful specialization must emerge through task pressure, balanced routing,
+            and measurable expert behavior during training.
+          </p>
+        </div>
+      </section>
+
+      <section id="reasoning">
+        <h2>Reasoning: one transformer pass, not a loop</h2>
+
+        <p>
+          The current reasoning design intentionally rejects the older recursive system.
+          There is no repeated shared backbone, adaptive pass count, ACT halt controller,
+          or “think again” loop in v1.
+        </p>
+
+        <div class="block block-teal">
+          <div class="section-index">Block 14</div>
+          <h3>Fixed-depth Reasoning Transformer</h3>
+          <p>
+            The merged workspace passes once through a normal transformer module containing
+            six distinct layers. Each layer has its own parameters and executes once.
+          </p>
+          <div class="flow-line">w1
+→ layer 1
+→ layer 2
+→ layer 3
+→ layer 4
+→ layer 5
+→ layer 6
+→ ReasonedState h* ∈ R¹⁵³⁶</div>
+          <p>
+            “One transformer” means one fixed stack invoked once, not literally one layer.
+            This gives predictable compute, parallel training, simpler debugging and fewer
+            stability problems than recurrent reasoning.
+          </p>
+        </div>
+
+        <div class="diagram-wrap">
+          <div class="diagram-label">Fig. 4 · Locked v1 reasoning design</div>
+
+          <svg viewBox="0 0 760 350" role="img"
+               aria-label="One pass through six distinct transformer layers"
+               xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+              <marker id="arrow-reason" markerWidth="10" markerHeight="10"
+                      refX="8" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#777167"/>
+              </marker>
+            </defs>
+
+            <rect x="24" y="96" width="92" height="64" rx="18"
+                  fill="#faeeda" stroke="#854f0b"/>
+            <text x="70" y="128" text-anchor="middle"
+                  class="svg-title" fill="#854f0b">w1</text>
+
+            <line x1="116" y1="128" x2="145" y2="128"
+                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+
+            <g class="svg-label">
+              <rect x="145" y="96" width="72" height="64" rx="17"
+                    fill="#e1f5ee" stroke="#0f6e56"/>
+              <text x="181" y="128" text-anchor="middle" fill="#0f6e56">L1</text>
+
+              <rect x="237" y="96" width="72" height="64" rx="17"
+                    fill="#e1f5ee" stroke="#0f6e56"/>
+              <text x="273" y="128" text-anchor="middle" fill="#0f6e56">L2</text>
+
+              <rect x="329" y="96" width="72" height="64" rx="17"
+                    fill="#e1f5ee" stroke="#0f6e56"/>
+              <text x="365" y="128" text-anchor="middle" fill="#0f6e56">L3</text>
+
+              <rect x="421" y="96" width="72" height="64" rx="17"
+                    fill="#e1f5ee" stroke="#0f6e56"/>
+              <text x="457" y="128" text-anchor="middle" fill="#0f6e56">L4</text>
+
+              <rect x="513" y="96" width="72" height="64" rx="17"
+                    fill="#e1f5ee" stroke="#0f6e56"/>
+              <text x="549" y="128" text-anchor="middle" fill="#0f6e56">L5</text>
+
+              <rect x="605" y="96" width="72" height="64" rx="17"
+                    fill="#e1f5ee" stroke="#0f6e56"/>
+              <text x="641" y="128" text-anchor="middle" fill="#0f6e56">L6</text>
+            </g>
+
+            <line x1="217" y1="128" x2="237" y2="128"
+                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+            <line x1="309" y1="128" x2="329" y2="128"
+                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+            <line x1="401" y1="128" x2="421" y2="128"
+                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+            <line x1="493" y1="128" x2="513" y2="128"
+                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+            <line x1="585" y1="128" x2="605" y2="128"
+                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+
+            <rect x="268" y="246" width="224" height="60" rx="19"
+                  fill="#eeedfe" stroke="#3c3489"/>
+            <text x="380" y="276" text-anchor="middle"
+                  class="svg-title" fill="#3c3489">
+              h* · final reasoned state
+            </text>
+
+            <path d="M677 128 C718 128 708 276 492 276"
+                  fill="none" stroke="#777167"
+                  marker-end="url(#arrow-reason)"/>
+
+            <text x="380" y="44" text-anchor="middle"
+                  class="svg-label" fill="#74736c">
+              one forward pass · six different layers · fixed compute
+            </text>
+          </svg>
+        </div>
+
+        <div class="block block-purple">
+          <div class="section-index">Block 15</div>
+          <h3>Quality Head</h3>
+          <p>
+            A Quality Head estimates whether the final reasoned state appears reliable.
+            In v1 it is diagnostic only. It does not decide how many reasoning passes to run,
+            because there is only one pass.
+          </p>
+          <p>
+            It requires verified correctness, task success, reward labels, preference
+            data or another real target before its score can be trusted.
+          </p>
+        </div>
+
+        <div class="block block-purple">
+          <div class="section-index">Block 16</div>
+          <h3>Output and output embedding</h3>
+          <p>
+            The reasoned state conditions the output or decoder path. The LM Head maps
+            decoder hidden states to token logits, and decoding turns those logits into text.
+          </p>
+          <p>
+            The separate <code>output_embedding</code> is not a vocabulary-sized logit
+            vector. It is a pooled 1536-dimensional representation of decoder hidden states,
+            later used for episodic compression and self updating.
+          </p>
+          <div class="flow-line">h* → decoder hidden states → LM Head → token logits → text
+
+output_embedding =
+pool(non-padding or generated decoder hidden states)
+∈ R¹⁵³⁶</div>
+        </div>
+      </section>
+
+      <section id="learning">
+        <h2>What happens after an answer</h2>
+
+        <div class="block block-blue">
+          <div class="section-index">Block 17</div>
+          <h3>Optional episodic write</h3>
+          <p>
+            Monarch does not save every interaction. When an interaction is important
+            enough, an Episode Compressor combines the reasoned state, output embedding,
+            assessment and quality estimate into a 1536-dimensional episodic value.
+          </p>
+          <p>
+            The key is the normalized retrieval query from the interaction. HNSW top-k
+            neighbours are checked for duplicates before adding a new record.
+          </p>
+          <div class="flow-line">episode key = q.detach()
+
+episode value =
+compress([h* ; output_embedding ; assessment ; quality])
+∈ R¹⁵³⁶</div>
+        </div>
+
+        <div class="block block-purple">
+          <div class="section-index">Block 18</div>
+          <h3>Bounded self update</h3>
+          <p>
+            An Experience Builder combines the thought, final reasoned state,
+            output embedding, assessment and quality into one 1536-dimensional
+            experience vector.
+          </p>
+          <p>
+            A GRU proposes a new self state, but a learned mixing coefficient controls how
+            much of that proposal is accepted. Its output bias starts near −3, making the
+            initial update rate roughly 0.05.
+          </p>
+          <div class="flow-line">s_candidate = GRUCell(experience, s_old)
+alpha = sigmoid(f_alpha(assessment))
+s_new = (1 − alpha)s_old + alpha·s_candidate</div>
+        </div>
+
+        <div class="callout callout-purple">
+          <p>
+            <strong>Memory and self are different:</strong>
+            episodic memory can grow into a searchable collection of cases.
+            PersistentSelf stays one bounded vector representing runtime state.
+          </p>
+        </div>
+      </section>
+
+      <section id="datasets">
+        <h2>The data being prepared</h2>
+
+        <p>
+          The corpus is encoded once with the frozen multimodal frontend and stored as
+          normalized FP16 vectors. Raw data is temporary. Permanent output uses sharded
+          NumPy arrays, matching JSONL metadata, manifests and completion markers.
+        </p>
+
+        <h3>General foundation</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Allocation</th>
+                <th>Role</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>English Wikipedia</td>
+                <td>100,000</td>
+                <td>Factual and encyclopaedic grounding</td>
+                <td class="status-done">Validated</td>
+              </tr>
+              <tr>
+                <td>OpenWebText</td>
+                <td>60,000</td>
+                <td>General language and web knowledge</td>
+                <td class="status-done">Encoded</td>
+              </tr>
+              <tr>
+                <td>COCO 2017</td>
+                <td>40,000</td>
+                <td>Image-caption alignment</td>
+                <td class="status-done">Validated</td>
+              </tr>
+              <tr>
+                <td>CodeSearchNet Python</td>
+                <td>20,000</td>
+                <td>Code and documentation alignment</td>
+                <td class="status-done">Encoded</td>
+              </tr>
+              <tr>
+                <td>ConceptNet</td>
+                <td>15,000</td>
+                <td>Common-sense concept relationships</td>
+                <td class="status-done">Validated</td>
+              </tr>
+              <tr>
+                <td>AudioCaps</td>
+                <td>8,000</td>
+                <td>Short environmental audio-caption grounding</td>
+                <td class="status-done">Validated</td>
+              </tr>
+              <tr>
+                <td>Clotho</td>
+                <td>3,750</td>
+                <td>Longer, diverse sound descriptions</td>
+                <td class="status-done">Validated</td>
+              </tr>
+              <tr>
+                <td>OASST1 & bAbI</td>
+                <td>3,250</td>
+                <td>Dialogue format and compact logical reasoning</td>
+                <td class="status-plan">Final general allocation</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>250,000</strong></td>
+                <td>Balanced general multimodal foundation</td>
+                <td>Target</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>STEM specialization plan</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Domain</th>
+                <th>Primary sources</th>
+                <th>What they add</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mathematics</td>
+                <td>Big-Math-RL-Verified, OpenMathInstruct, Hendrycks MATH, MathVista training</td>
+                <td>Worked solutions, verified reasoning, competition problems and visual mathematics.</td>
+              </tr>
+              <tr>
+                <td>Physics</td>
+                <td>SciInstruct Physics, selected arXiv Physics, OpenAlex concepts</td>
+                <td>Scientific reasoning, research language and concept relationships.</td>
+              </tr>
+              <tr>
+                <td>Chemistry</td>
+                <td>SMolInstruct, PubChem descriptions, ChEBI, selected ChemRxiv</td>
+                <td>Chemical reasoning, entities, ontology and research context.</td>
+              </tr>
+              <tr>
+                <td>Biology</td>
+                <td>BioInstruct, BioAlchemy, Swiss-Prot, selected PMC, PDB descriptions</td>
+                <td>Biomedical instruction, proteins, structures and scientific literature.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-blue">
+          <p>
+            <strong>Domain-level packaging:</strong>
+            each STEM domain is prepared as one combined corpus and saved under one
+            domain folder. Metadata preserves the original source of every row without
+            requiring a separate training pipeline for every dataset.
+          </p>
+        </div>
+
+        <h3>Evaluation-only boundary</h3>
+
+        <p>
+          Evaluation sets remain separate from training data. Current protected examples
+          include ARC-AGI, HumanEval, OlymMATH, Omni-MATH, GPQA domain subsets,
+          UGPhysics, PhysReason, SUPERChem, ChemCoTBench-V2 and BioProBench.
+          Validation or test splits from multimodal datasets must also remain isolated.
+        </p>
+
+        <div class="callout">
+          <p>
+            <strong>Why this matters:</strong>
+            benchmark contamination can make a weak model look capable. A meaningful
+            evaluation requires keeping benchmark questions and answers outside the
+            training and semantic-memory build.
+          </p>
+        </div>
+      </section>
+
+      <section id="training">
+        <h2>What still has to be learned</h2>
+
+        <p>
+          The blocks are now dimensionally and operationally defined, but architecture
+          alone does not make their outputs meaningful. Several modules require explicit
+          objectives.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Required pressure</th>
+                <th>Failure without it</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Input Adapter</td>
+                <td>Preserve useful encoder geometry while adapting to Monarch space</td>
+                <td>Information loss or arbitrary projection.</td>
+              </tr>
+              <tr>
+                <td>Thought Transformer</td>
+                <td>Task losses, alignment objectives and anti-collapse regularisation</td>
+                <td>All ThoughtVectors become similar or remain encoder copies.</td>
+              </tr>
+              <tr>
+                <td>Query Head</td>
+                <td>Contrastive positive and negative retrieval pairs</td>
+                <td>Queries and stored keys occupy incompatible geometry.</td>
+              </tr>
+              <tr>
+                <td>Thought Assessment</td>
+                <td>Labels or defensible self-supervised proxies</td>
+                <td>Risk, novelty and confidence are meaningless numbers.</td>
+              </tr>
+              <tr>
+                <td>Specialist Gate</td>
+                <td>Task loss plus expert load balancing</td>
+                <td>One expert receives nearly every example.</td>
+              </tr>
+              <tr>
+                <td>Quality Head</td>
+                <td>Verified answers, preferences, rewards or task success</td>
+                <td>Quality scores cannot be trusted.</td>
+              </tr>
+              <tr>
+                <td>Bounded self update</td>
+                <td>Longer-horizon evidence that updates improve behaviour</td>
+                <td>Self drift or changes with no measurable benefit.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-teal">
+          <p>
+            <strong>Ground rule:</strong>
+            if a module requires a learning signal that does not yet exist, keep it
+            diagnostic or disabled. Do not mistake a returned scalar for learned intelligence.
+          </p>
+        </div>
+      </section>
+
+      <hr class="section-rule">
+
+      <section>
+        <h2>What Monarch is and what it is not</h2>
+
+        <p>
+          Monarch is an attempt to build a concept-oriented multimodal reasoning system
+          under realistic compute limits. It uses a capable frozen frontend for perception,
+          but the internal adapter, thought space, memory queries, workspace, specialists,
+          reasoning transformer and state updates remain trainable parts of the research system.
+        </p>
+
+        <p>
+          It is not yet evidence that a vector-based architecture will outperform a standard
+          language model. It is a concrete, testable architecture with explicit interfaces,
+          dimensions, indexes, failure modes and training dependencies. Its value will come
+          from measured retrieval quality, specialist behaviour, reasoning accuracy,
+          multimodal transfer and resistance to representation collapse, not from the names
+          assigned to its internal blocks.
+        </p>
+
+        <div class="callout callout-amber">
+          <p>
+            <strong>No benchmark results are claimed here.</strong>
+            Dataset preparation and architectural specification are progress, not proof.
+            Performance claims should appear only after clean held-out evaluation.
+          </p>
+        </div>
+      </section>
+
+      <section class="sources">
+        <h2>References and implementation sources</h2>
+
+        <ul class="source-list">
+          <li>
+            <span class="source-num">[1]</span>
+            <span>
+              <a href="https://huggingface.co/nvidia/omni-embed-nemotron-3b">
+                NVIDIA Omni-Embed-Nemotron-3B model card
+              </a>
+              : current multimodal frontend and 2048-dimensional output.
+            </span>
+          </li>
+
+          <li>
+            <span class="source-num">[2]</span>
+            <span>
+              Johnson, Douze and Jégou,
+              <a href="https://arxiv.org/abs/1702.08734">
+                Billion-scale similarity search with GPUs
+              </a>
+              : FAISS and indexed semantic retrieval.
+            </span>
+          </li>
+
+          <li>
+            <span class="source-num">[3]</span>
+            <span>
+              Malkov and Yashunin,
+              <a href="https://arxiv.org/abs/1603.09320">
+                Efficient and robust approximate nearest neighbor search using HNSW
+              </a>
+              : dynamic episodic-memory indexing.
+            </span>
+          </li>
+
+          <li>
+            <span class="source-num">[4]</span>
+            <span>
+              Bardes, Ponce and LeCun,
+              <a href="https://arxiv.org/abs/2105.04906">
+                VICReg
+              </a>
+              : variance, invariance and covariance regularisation against collapse.
+            </span>
+          </li>
+
+          <li>
+            <span class="source-num">[5]</span>
+            <span>
+              <a href="https://huggingface.co/datasets/wikimedia/wikipedia">Wikipedia</a>,
+              <a href="https://huggingface.co/datasets/Skylion007/openwebtext">OpenWebText</a>,
+              <a href="https://cocodataset.org/">COCO</a>,
+              <a href="https://huggingface.co/datasets/Nan-Do/code-search-net-python">CodeSearchNet Python</a>,
+              and <a href="https://conceptnet.io/">ConceptNet</a>
+              : general text, vision, code and conceptual grounding.
+            </span>
+          </li>
+
+          <li>
+            <span class="source-num">[6]</span>
+            <span>
+              <a href="https://huggingface.co/datasets/OpenSound/AudioCaps">AudioCaps</a>
+              and <a href="https://huggingface.co/datasets/gijs/clotho">Clotho</a>
+              : audio-caption alignment and environmental sound understanding.
+            </span>
+          </li>
+
+          <li>
+            <span class="source-num">[7]</span>
+            <span>
+              <a href="https://huggingface.co/datasets/OpenAssistant/oasst1">OASST1</a>
+              and <a href="https://huggingface.co/datasets/LM-Polygraph/babi_qa">bAbI QA</a>
+              : dialogue structure and compact logical reasoning.
+            </span>
+          </li>
+        </ul>
+      </section>
+
+    </article>
+  </main>
 
   <footer class="article-footer">
-    <span>Monarch ; TGMI-Tiny build log</span>
-    <span>Atom Technologies · 2026</span>
+    <span class="footer-text">Monarch · Thought-Grounded Multimodal Intelligence</span>
+    <span class="footer-text">Atom Technologies · 2026</span>
   </footer>
 
 </div>

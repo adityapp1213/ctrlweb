@@ -10,6 +10,9 @@ import { FooterSection } from "@/app/footer/page";
 export default function Home() {
   return (
     <>
+      <h1 className="sr-only">
+        Atom Ctrl, an AI research lab building Thinking Machines
+      </h1>
       <Hero />
       <DescriptionSection />
       <FeaturesSection />

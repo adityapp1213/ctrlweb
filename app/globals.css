@@ -14,6 +14,16 @@
   --foreground: oklch(0.145 0 0);
 }
 
+::selection {
+  background: #f2b8c2;
+  color: #111111;
+}
+
+::-moz-selection {
+  background: #f2b8c2;
+  color: #111111;
+}
+
 @layer base {
   html,
   body {

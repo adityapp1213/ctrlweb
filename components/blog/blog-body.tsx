@@ -31,6 +31,100 @@ type InlineToken = {
   sup?: boolean;
 };
 
+const diagramColors = ["#e2687d", "#6f91df", "#49a987", "#d99a4e", "#8a78cf"];
+
+function wrapDiagramText(value: string, limit = 34) {
+  const words = value.trim().split(/\s+/);
+  const lines: string[] = [];
+  let line = "";
+
+  words.forEach((word) => {
+    const candidate = line ? `${line} ${word}` : word;
+    if (candidate.length > limit && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = candidate;
+    }
+  });
+
+  if (line) lines.push(line);
+  return lines.slice(0, 3);
+}
+
+function ResearchFlowDiagram({ label, title, flow }: { label: string; title: string; flow: string }) {
+  const stages = flow
+    .replace(/\r/g, "")
+    .split(/\n|→/)
+    .map((stage) => stage.trim())
+    .filter(Boolean);
+  const vertical = stages.length > 4;
+  const height = vertical ? 92 + stages.length * 92 : 224;
+  const horizontalWidth = (680 - Math.max(stages.length - 1, 0) * 26) / Math.max(stages.length, 1);
+
+  return (
+    <div className={styles["research-diagram"]}>
+      <div className={styles["research-diagram-heading"]}>
+        <span>{label}</span>
+        <h3>{title}</h3>
+      </div>
+      <svg
+        viewBox={`0 0 760 ${height}`}
+        role="img"
+        aria-label={`${title}: ${stages.join(" then ")}`}
+      >
+        {stages.map((stage, index) => {
+          const color = diagramColors[index % diagramColors.length];
+          const lines = wrapDiagramText(stage, vertical ? 46 : 24);
+          const x = vertical ? 130 : 40 + index * (horizontalWidth + 26);
+          const y = vertical ? 38 + index * 92 : 78;
+          const width = vertical ? 500 : horizontalWidth;
+          const boxHeight = vertical ? 64 : 96;
+
+          return (
+            <g key={`${stage}-${index}`}>
+              {index > 0 && vertical ? (
+                <>
+                  <line x1="380" y1={y - 28} x2="380" y2={y - 10} className={styles["diagram-connector"]} />
+                  <path d={`M374 ${y - 15} L380 ${y - 9} L386 ${y - 15}`} className={styles["diagram-arrow"]} />
+                </>
+              ) : null}
+              {index > 0 && !vertical ? (
+                <>
+                  <line x1={x - 26} y1="126" x2={x - 8} y2="126" className={styles["diagram-connector"]} />
+                  <path d={`M${x - 13} 120 L${x - 7} 126 L${x - 13} 132`} className={styles["diagram-arrow"]} />
+                </>
+              ) : null}
+              <rect
+                x={x}
+                y={y}
+                width={width}
+                height={boxHeight}
+                rx="14"
+                fill={`${color}12`}
+                stroke={`${color}88`}
+              />
+              <text
+                x={x + width / 2}
+                y={y + boxHeight / 2 - (lines.length - 1) * 9}
+                textAnchor="middle"
+                fill="#171717"
+                className={styles["diagram-stage-text"]}
+              >
+                {lines.map((line, lineIndex) => (
+                  <tspan key={line} x={x + width / 2} dy={lineIndex === 0 ? 0 : 18}>
+                    {line}
+                  </tspan>
+                ))}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
 const classNamesToMap = [
   "section-rule",
   "diagram-wrap",
@@ -42,6 +136,14 @@ const classNamesToMap = [
   "path-grid",
   "path-card",
   "path-num",
+  "block",
+  "block-blue",
+  "block-teal",
+  "block-purple",
+  "block-amber",
+  "block-rose",
+  "section-index",
+  "flow-line",
 ];
 
 function mapModuleClasses(value: string | null | undefined) {
@@ -175,15 +277,15 @@ function GradientToken({
   const tokenSpan = range[1] - range[0];
   const revealStart = Math.max(range[0] - tokenSpan * 0.2, 0);
   const revealEnd = Math.min(range[1] + tokenSpan * 1.75, 1);
-  const opacity = useTransform(progress, [revealStart, revealEnd], [0, 1]);
+  const opacity = useTransform(progress, [revealStart, revealEnd], [0.2, 1]);
 
   return (
-    <span className="relative mr-[0.34em] inline-flex">
-      <span className="absolute left-0 top-0">{renderToken(token, true)}</span>
+    <>
       <motion.span style={{ opacity, transition: "all .45s" }}>
         {renderToken(token)}
       </motion.span>
-    </span>
+      {" "}
+    </>
   );
 }
 
@@ -293,6 +395,29 @@ function BlogBodyContent({
     const tagName = element.tagName.toLowerCase();
     const className = mapModuleClasses(element.getAttribute("class"));
     const childNodes = Array.from(element.childNodes);
+
+    if (element.classList.contains("block")) {
+      const flowElement = element.querySelector(":scope > .flow-line");
+
+      if (flowElement) {
+        const label = element.querySelector(":scope > .section-index")?.textContent?.trim() ?? "";
+        const title = element.querySelector(":scope > h3")?.textContent?.trim() ?? "Process";
+        const paragraphs = Array.from(element.children).filter(
+          (child) => child.tagName.toLowerCase() === "p",
+        );
+
+        return (
+          <section key={key} className={styles["diagram-section"]}>
+            <ResearchFlowDiagram label={label} title={title} flow={flowElement.textContent ?? ""} />
+            <div className={styles["diagram-explanation"]}>
+              {paragraphs.map((paragraph, index) =>
+                renderNode(paragraph, `${key}-explanation-${index}`),
+              )}
+            </div>
+          </section>
+        );
+      }
+    }
 
     if (tagName === "p") {
       const blockIndex = Number(element.getAttribute("data-block-index") ?? 0);

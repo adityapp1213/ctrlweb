@@ -1,76 +1,40 @@
 import type { Metadata } from "next";
 import { SitePreloader } from "@/components/site-preloader";
+import {
+  FOUNDER_NAME,
+  serializeJsonLd,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 import { palatino } from "./fonts";
 import "./globals.css";
 
-const siteDescription =
-  "Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.";
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://atomctrl.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "atom ctrl",
-    template: "%s | atom ctrl",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: siteDescription,
-  applicationName: "Ctrl",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
   keywords: [
     "Atom Ctrl",
-    "atom ctrl",
-    "ATOM CTRL",
-    "AtomCtrl",
-    "atomctrl",
-    "atom.ctrl",
-    "Atom CTRL",
-    "atom Ctrl",
-    "Atom ctrl",
-    "Ctrl",
-    "ctrl",
-    "CTRL",
-    "CTrl",
-    "cTRL",
-    "CtRL",
-    "ctrl",
-    "Atom",
-    "atom",
-    "ATOM",
     "AI research lab",
-    "artificial intelligence research",
     "thinking machines",
-    "machine intelligence",
-    "advanced AI",
-    "next generation AI",
-    "future of AI",
     "thought-grounded intelligence",
     "thought-grounded models",
     "multimodal intelligence",
-    "multimodal AI",
-    "world models",
-    "foundation models",
-    "efficient foundation models",
-    "memory architectures",
-    "synthetic data",
     "AI reasoning",
-    "AI cognition",
-    "machine learning",
-    "generative AI",
-    "what are thinking machines",
-    "how do AI models think",
-    "how does AI reason",
-    "how does AI learn",
-    "how does AI understand the world",
-    "what is multimodal AI",
-    "what is thought-grounded intelligence",
-    "what are world models in AI",
-    "what are foundation models",
-    "how does memory work in AI",
-    "how can AI learn from experience",
-    "how will AI evolve",
+    "AI memory",
+    "synthetic data research",
+    "human AI interaction",
+    "Monarch models",
   ],
-  authors: [{ name: "Aditya Prasad Panigrahi", url: "https://atomctrl.com" }],
-  creator: "Aditya Prasad Panigrahi",
-  publisher: "atom",
-  category: "tech",
+  authors: [{ name: FOUNDER_NAME, url: `${SITE_URL}/#about-us` }],
+  creator: FOUNDER_NAME,
+  publisher: SITE_NAME,
+  category: "AI research",
   alternates: {
     canonical: "/",
   },
@@ -88,17 +52,60 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "atom ctrl",
-    title: "atom ctrl",
-    description: siteDescription,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "atom ctrl",
-    description: siteDescription,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
     creator: "@adityapp1213",
   },
+};
+
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/apple-icon`,
+      description: SITE_DESCRIPTION,
+      founder: {
+        "@type": "Person",
+        name: FOUNDER_NAME,
+        url: `${SITE_URL}/#about-us`,
+      },
+      sameAs: [
+        "https://www.linkedin.com/in/aditya-prasad-panigrahi/",
+        "https://github.com/adityapp1213",
+        "https://www.instagram.com/why.adi_tya",
+      ],
+      knowsAbout: [
+        "Thought-grounded artificial intelligence",
+        "Multimodal intelligence",
+        "Machine reasoning",
+        "AI memory systems",
+        "Synthetic training data",
+        "Human-AI interaction",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: SITE_DESCRIPTION,
+      publisher: {
+        "@id": `${SITE_URL}/#organization`,
+      },
+      inLanguage: "en",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -111,6 +118,13 @@ export default function RootLayout({
       lang="en"
       className={`${palatino.variable} ${palatino.className} h-full bg-white antialiased`}
     >
+      <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="Atom Ctrl LLM index" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteJsonLd) }}
+        />
+      </head>
       <body className="min-h-full bg-white text-black">
         <SitePreloader>{children}</SitePreloader>
       </body>
