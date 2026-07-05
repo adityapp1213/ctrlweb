@@ -15,7 +15,7 @@ import Button7 from "@/components/ui/button-7";
 const menuItems = [
   { label: "Description", sectionId: "description" },
   { label: "Features", sectionId: "features" },
-  { label: "Why Ctrl", sectionId: "why-ctrl" },
+  { label: "Cloudy", sectionId: "why-ctrl" },
   { label: "Research", sectionId: "research" },
   { label: "About Us", sectionId: "about-us" },
   { label: "FAQ", sectionId: "faq" },
