@@ -9,7 +9,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronDown } from "lucide-react";
 
 type ProfileId = "aditya" | "anjali";
 
@@ -158,19 +158,34 @@ function MobilePortraitStory({
   });
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    const nextIndex = progress < 0.52 ? 0 : 1;
+    const nextIndex = progress < 0.48 ? 0 : 1;
     setActiveIndex((currentIndex) =>
       currentIndex === nextIndex ? currentIndex : nextIndex,
     );
   });
 
   const activeProfile = profiles[activeIndex];
+  const scrollToNextProfile = () => {
+    const story = storyRef.current;
+
+    if (!story) {
+      return;
+    }
+
+    const storyTop = window.scrollY + story.getBoundingClientRect().top;
+    const scrollRange = Math.max(0, story.offsetHeight - window.innerHeight);
+
+    window.scrollTo({
+      top: storyTop + scrollRange * 0.62,
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <div ref={storyRef} className="relative h-[240svh] md:hidden">
+    <div ref={storyRef} className="relative h-[170svh] md:hidden">
       <div className="sticky top-[7.5rem] flex h-[calc(100svh-7.5rem)] min-h-[32rem] flex-col overflow-hidden bg-white">
         <div className="relative z-20 shrink-0 px-6 pb-3 pt-5 text-center">
-          <p className="text-xs font-medium text-[#e2687d]">Our team</p>
+          
           <h2 className="mt-3 text-[2.75rem] font-medium leading-[0.88] tracking-[-0.06em] text-black">
             Meet the minds
             <br />
@@ -215,6 +230,23 @@ function MobilePortraitStory({
                 </span>
               </motion.div>
             </motion.button>
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {activeIndex < profiles.length - 1 ? (
+              <motion.button
+                type="button"
+                onClick={scrollToNextProfile}
+                aria-label="Show next team member"
+                className="absolute bottom-24 left-1/2 z-30 ml-[-1.25rem] grid size-10 place-items-center rounded-full border border-black/[0.08] bg-white text-black shadow-[0_10px_28px_rgba(0,0,0,0.16)] transition-transform active:scale-95"
+                initial={{ opacity: 0, y: -6, scale: 0.92 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.92 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <ChevronDown className="size-4" strokeWidth={1.8} />
+              </motion.button>
+            ) : null}
           </AnimatePresence>
         </div>
       </div>
