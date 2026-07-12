@@ -1,15 +1,10 @@
 "use client";
 
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
-import { ArrowLeft, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 type ProfileId = "aditya" | "anjali";
 
@@ -150,105 +145,45 @@ function MobilePortraitStory({
 }: {
   onSelect: (id: ProfileId) => void;
 }) {
-  const storyRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const { scrollYProgress } = useScroll({
-    target: storyRef,
-    offset: ["start start", "end end"],
-  });
-
-  useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    const nextIndex = progress < 0.48 ? 0 : 1;
-    setActiveIndex((currentIndex) =>
-      currentIndex === nextIndex ? currentIndex : nextIndex,
-    );
-  });
-
-  const activeProfile = profiles[activeIndex];
-  const scrollToNextProfile = () => {
-    const story = storyRef.current;
-
-    if (!story) {
-      return;
-    }
-
-    const storyTop = window.scrollY + story.getBoundingClientRect().top;
-    const scrollRange = Math.max(0, story.offsetHeight - window.innerHeight);
-
-    window.scrollTo({
-      top: storyTop + scrollRange * 0.62,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <div ref={storyRef} className="relative h-[170svh] md:hidden">
-      <div className="sticky top-[7.5rem] flex h-[calc(100svh-7.5rem)] min-h-[32rem] flex-col overflow-hidden bg-white">
-        <div className="relative z-20 shrink-0 px-6 pb-3 pt-5 text-center">
-          
-          <h2 className="mt-3 text-[2.75rem] font-medium leading-[0.88] tracking-[-0.06em] text-black">
-            Meet the minds
-            <br />
-            shaping an industry.
-          </h2>
-        </div>
+    <div className="bg-white md:hidden">
+      <div className="px-6 pb-6 pt-8 text-center">
+        <h2 className="text-[2.75rem] font-medium leading-[0.88] tracking-[-0.06em] text-black">
+          Meet the minds
+          <br />
+          shaping an industry.
+        </h2>
+      </div>
 
-        <div className="relative min-h-0 flex-1">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.button
-              key={activeProfile.id}
+      <div className="grid gap-4">
+        {profiles.map((profile) => (
+          <button
+              key={profile.id}
               type="button"
-              onClick={() => onSelect(activeProfile.id)}
-              aria-label={`Read about ${activeProfile.name}`}
-              className="absolute inset-0 overflow-hidden bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#e2687d]"
-              initial={{ opacity: 0, y: 18, filter: "blur(12px)", scale: 0.985 }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-              exit={{ opacity: 0, y: -12, filter: "blur(9px)", scale: 0.99 }}
-              transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              onClick={() => onSelect(profile.id)}
+              aria-label={`Read about ${profile.name}`}
+              className="relative h-[68svh] min-h-[32rem] overflow-hidden bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#e2687d]"
             >
               <Image
-                src={activeProfile.image}
-                alt={activeProfile.imageAlt}
+                src={profile.image}
+                alt={profile.imageAlt}
                 fill
                 sizes="100vw"
                 className="origin-bottom -translate-y-11 scale-[0.92] object-contain object-bottom"
               />
-              <motion.div
-                className="absolute inset-x-5 bottom-4 z-20 flex items-end justify-between border-t border-black/10 bg-white/88 px-1 pt-3 text-left backdrop-blur-md"
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.22, duration: 0.36 }}
-              >
+              <div className="absolute inset-x-5 bottom-4 z-20 flex items-end justify-between border-t border-black/10 bg-white px-1 pt-3 text-left">
                 <div>
                   <p className="text-xl font-medium leading-none tracking-[-0.035em] text-black">
-                    {activeProfile.name}
+                    {profile.name}
                   </p>
-                  <p className="mt-1.5 text-xs text-black/45">{activeProfile.role}</p>
+                  <p className="mt-1.5 text-xs text-black/45">{profile.role}</p>
                 </div>
                 <span className="text-xs tabular-nums text-black/35">
                   see details
                 </span>
-              </motion.div>
-            </motion.button>
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {activeIndex < profiles.length - 1 ? (
-              <motion.button
-                type="button"
-                onClick={scrollToNextProfile}
-                aria-label="Show next team member"
-                className="absolute bottom-24 left-1/2 z-30 ml-[-1.25rem] grid size-10 place-items-center rounded-full border border-black/[0.08] bg-white text-black shadow-[0_10px_28px_rgba(0,0,0,0.16)] transition-transform active:scale-95"
-                initial={{ opacity: 0, y: -6, scale: 0.92 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 8, scale: 0.92 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <ChevronDown className="size-4" strokeWidth={1.8} />
-              </motion.button>
-            ) : null}
-          </AnimatePresence>
-        </div>
+              </div>
+          </button>
+        ))}
       </div>
     </div>
   );

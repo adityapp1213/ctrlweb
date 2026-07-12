@@ -1,10 +1,5 @@
 "use client";
 
-import {
-  FlappingButterfly,
-  InvertedFlappingButterfly,
-} from "@/components/butterfly/flapping-butterfly";
-
 function Spin() {
   return (
     <div className="relative aspect-square w-[65px]">
@@ -17,7 +12,6 @@ function Spin() {
 export function SiteLoaderScreen({
   visible = true,
 }: {
-  progress?: number;
   visible?: boolean;
 }) {
   return (
@@ -29,23 +23,7 @@ export function SiteLoaderScreen({
       aria-live="polite"
       aria-busy={visible}
     >
-      <div className="relative flex items-center justify-center">
-        <Spin />
-
-        <span className="site-loader-butterfly-left absolute -left-16 -top-12">
-          <FlappingButterfly
-            className="size-20 rotate-[-14deg] opacity-80"
-            frameDelay={80}
-          />
-        </span>
-
-        <span className="site-loader-butterfly-right absolute -right-16 top-10">
-          <InvertedFlappingButterfly
-            className="size-20 rotate-[10deg] opacity-75"
-            frameDelay={180}
-          />
-        </span>
-      </div>
+      <Spin />
     </div>
   );
 }

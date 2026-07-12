@@ -1,34 +1,21 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { SiteLoaderScreen } from "@/components/site-loader-screen";
-import { siteAssetManifest } from "@/lib/site-assets";
 
-const MIN_LOADER_MS = 1600;
+const MIN_LOADER_MS = 450;
+const MAX_CRITICAL_WAIT_MS = 5000;
 
-function preloadImage(src: string) {
+function waitForImage(image: HTMLImageElement) {
+  if (image.complete) {
+    return image.decode().catch(() => undefined);
+  }
+
   return new Promise<void>((resolve) => {
-    const image = new window.Image();
-    let settled = false;
-
-    const finish = () => {
-      if (settled) {
-        return;
-      }
-
-      settled = true;
-      resolve();
-    };
-
-    image.onload = finish;
-    image.onerror = finish;
-    image.decoding = "async";
-    image.src = src;
-
-    if (image.complete) {
-      resolve();
-    }
-  });
+    const finish = () => resolve();
+    image.addEventListener("load", finish, { once: true });
+    image.addEventListener("error", finish, { once: true });
+  }).then(() => image.decode().catch(() => undefined));
 }
 
 export function SitePreloader({
@@ -36,37 +23,38 @@ export function SitePreloader({
 }: {
   children: React.ReactNode;
 }) {
-  const [loadedCount, setLoadedCount] = useState(0);
   const [isReady, setIsReady] = useState(false);
-
-  const totalAssets = Number(siteAssetManifest.length);
-  const progress = useMemo(() => {
-    if (totalAssets === 0) {
-      return 100;
-    }
-
-    return (loadedCount / totalAssets) * 100;
-  }, [loadedCount, totalAssets]);
 
   useEffect(() => {
     let cancelled = false;
     const start = window.performance.now();
 
-    document.body.style.overflow = "hidden";
+    const prepareCriticalContent = async () => {
+      // Both responsive hero images exist in the DOM. Wait only for the one
+      // selected by CSS, so the loader follows the asset the user will see and
+      // never downloads the site's below-the-fold media itself.
+      const heroImages = Array.from(
+        document.querySelectorAll<HTMLImageElement>("#hero img"),
+      );
+      const visibleHeroImage = heroImages.find(
+        (image) => window.getComputedStyle(image).display !== "none",
+      );
+      const criticalTasks: Promise<unknown>[] = [];
 
-    const preload = async () => {
-      const tasks = siteAssetManifest.map(async (src) => {
-        await preloadImage(src);
+      if (visibleHeroImage) {
+        criticalTasks.push(waitForImage(visibleHeroImage));
+      }
 
-        if (!cancelled) {
-          setLoadedCount((count) => count + 1);
-        }
-      });
+      if ("fonts" in document) {
+        criticalTasks.push(document.fonts.ready.catch(() => undefined));
+      }
 
-      const fontReady =
-        "fonts" in document ? document.fonts.ready.catch(() => undefined) : null;
-
-      await Promise.allSettled(fontReady ? [...tasks, fontReady] : tasks);
+      await Promise.race([
+        Promise.allSettled(criticalTasks),
+        new Promise<void>((resolve) =>
+          window.setTimeout(resolve, MAX_CRITICAL_WAIT_MS),
+        ),
+      ]);
 
       const elapsed = window.performance.now() - start;
       const remaining = Math.max(0, MIN_LOADER_MS - elapsed);
@@ -76,23 +64,20 @@ export function SitePreloader({
           return;
         }
 
-        setLoadedCount(totalAssets);
         setIsReady(true);
-        document.body.style.overflow = "";
       }, remaining);
     };
 
-    void preload();
+    void prepareCriticalContent();
 
     return () => {
       cancelled = true;
-      document.body.style.overflow = "";
     };
-  }, [totalAssets]);
+  }, []);
 
   return (
     <>
-      <SiteLoaderScreen progress={progress} visible={!isReady} />
+      <SiteLoaderScreen visible={!isReady} />
       <div
         className={[
           "opacity-100",
