@@ -5,7 +5,7 @@ import { WhyCtrlSection } from "@/app/why-ctrl/page";
 import { ResearchSection } from "@/app/research/page";
 import { AboutUsSection } from "@/app/about-us/page";
 import { FaqSection } from "@/app/faq/page";
-import { FooterSection } from "@/app/footer/page";
+import { FooterSection } from "@/components/footer-section";
 
 export default function Home() {
   return (

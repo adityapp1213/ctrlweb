@@ -7,7 +7,7 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/seo";
-import { palatino } from "./fonts";
+import { palatino, shadowsIntoLight } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -116,7 +116,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${palatino.variable} ${palatino.className} h-full bg-white antialiased`}
+      className={`${palatino.variable} ${shadowsIntoLight.variable} ${palatino.className} h-full bg-white antialiased`}
     >
       <head>
         <link rel="alternate" type="text/plain" href="/llms.txt" title="Atom Ctrl LLM index" />

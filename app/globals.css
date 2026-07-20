@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 @import "tailwindcss";
 
 @theme inline {
@@ -40,7 +39,7 @@
 }
 
 .shadows-into-light-regular {
-  font-family: "Shadows Into Light", cursive;
+  font-family: var(--font-shadows-into-light), cursive;
   font-weight: 400;
   font-style: normal;
 }

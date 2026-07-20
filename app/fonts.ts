@@ -5,3 +5,11 @@ export const palatino = localFont({
   display: "swap",
   variable: "--font-palatino",
 });
+
+export const shadowsIntoLight = localFont({
+  src: "../public/fonts/ShadowsIntoLight/shadows-into-light-v22.ttf",
+  display: "swap",
+  weight: "400",
+  style: "normal",
+  variable: "--font-shadows-into-light",
+});

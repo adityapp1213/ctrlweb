@@ -1,4 +1,4 @@
-import { FooterSection } from "@/app/footer/page";
+import { FooterSection } from "@/components/footer-section";
 import type { BlogArticle } from "@/lib/blog-article";
 import { createArticleJsonLd, serializeJsonLd, type ArticleSeo } from "@/lib/seo";
 import { BlogContent } from "./blog-content";
