@@ -15,7 +15,7 @@ export function SectionNavLink({
   children,
   onNavigate,
 }: SectionNavLinkProps) {
-  const href = `https://atomctrl.com/#${sectionId}`;
+  const href = `https://atomctrl.com/##${sectionId}`;
 
   return (
     <a href={href} onClick={onNavigate} className={className}>
