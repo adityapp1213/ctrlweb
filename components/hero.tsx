@@ -21,6 +21,8 @@ const menuItems = [
   { label: "FAQ", sectionId: "faq" },
 ] as const;
 
+const labHref = "https://lab.atomctrl.com";
+
 const navButterflies = [
   {
     className: "z-[70] -left-20 -top-16 size-24 -rotate-12 sm:size-32",
@@ -222,6 +224,14 @@ export function Hero() {
                       </SectionNavLink>
                     </li>
                   ))}
+                  <li>
+                    <a
+                      href={labHref}
+                      className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
+                    >
+                      Lab
+                    </a>
+                  </li>
                 </ul>
               </div>
 
@@ -255,6 +265,15 @@ export function Hero() {
                         </SectionNavLink>
                       </li>
                     ))}
+                    <li>
+                      <a
+                        href={labHref}
+                        onClick={() => setMenuOpen(false)}
+                        className="block font-normal text-black/60 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
+                      >
+                        Lab
+                      </a>
+                    </li>
                   </ul>
 
                   <ButterflyCta

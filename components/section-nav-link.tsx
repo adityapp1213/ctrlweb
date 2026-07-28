@@ -1,7 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import type { MouseEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type SectionNavLinkProps = {
   sectionId: string;
@@ -16,40 +15,10 @@ export function SectionNavLink({
   children,
   onNavigate,
 }: SectionNavLinkProps) {
-  const pathname = usePathname();
-  const hash = `#${sectionId}`;
-  const nestedHash = `##${sectionId}`;
-
-  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    onNavigate?.();
-
-    if (pathname !== "/") {
-      window.location.href = `/${nestedHash}`;
-      return;
-    }
-
-    const target = document.getElementById(sectionId);
-
-    if (!target) {
-      window.location.href = `/${hash}`;
-      return;
-    }
-
-    target.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-
-    window.history.replaceState(null, "", hash);
-  };
+  const href = `https://atomctrl.com/#${sectionId}`;
 
   return (
-    <a
-      href={pathname === "/" ? `/${hash}` : `/${nestedHash}`}
-      onClick={handleClick}
-      className={className}
-    >
+    <a href={href} onClick={onNavigate} className={className}>
       {children}
     </a>
   );
