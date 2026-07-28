@@ -4,9 +4,15 @@ const LAB_HOST = "lab.atomctrl.com";
 
 export function proxy(request: NextRequest) {
   const hostname = request.headers.get("host")?.split(":")[0].toLowerCase();
-  const { pathname } = request.nextUrl;
+  const url = request.nextUrl.clone();
+  const { pathname } = url;
 
-  if (pathname.startsWith("/lab") && hostname !== LAB_HOST) {
+  if (hostname === LAB_HOST && !pathname.startsWith("/lab")) {
+    url.pathname = pathname === "/" ? "/lab" : `/lab${pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  if (hostname !== LAB_HOST && pathname.startsWith("/lab")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
@@ -14,5 +20,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/lab/:path*"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|assets).*)"],
 };
