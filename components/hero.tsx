@@ -13,12 +13,9 @@ import { SectionNavLink } from "@/components/section-nav-link";
 import Button7 from "@/components/ui/button-7";
 
 const menuItems = [
-  { label: "Description", sectionId: "description" },
-  { label: "Features", sectionId: "features" },
-  { label: "Cloudy", sectionId: "why-ctrl" },
   { label: "Research", sectionId: "research" },
-  { label: "About Us", sectionId: "about-us" },
-  { label: "FAQ", sectionId: "faq" },
+  { label: "Firth", sectionId: "description" },
+  { label: "Company", sectionId: "about-us" },
 ] as const;
 
 // const labHref = "https://lab.atomctrl.com";
@@ -167,10 +164,7 @@ export function Hero() {
   }, []);
 
   const navShellClass = [
-    "mx-auto mt-3 w-full max-w-7xl overflow-visible rounded-[1.35rem] border border-transparent transition-[max-width,background-color,border-color,box-shadow,backdrop-filter] duration-300",
-    isScrolled
-      ? "max-w-5xl border-black/10 bg-white/85 shadow-lg shadow-black/5 backdrop-blur-md"
-      : "",
+    "mx-auto mt-4 w-full max-w-[50rem] overflow-visible rounded-xl border border-black/10 bg-white/85 shadow-sm shadow-black/5 backdrop-blur-md transition-[max-width,background-color,border-color,box-shadow,backdrop-filter] duration-300",
   ]
     .filter(Boolean)
     .join(" ");
@@ -183,19 +177,19 @@ export function Hero() {
           className="fixed z-[100] w-full overflow-visible px-2"
         >
           <div className={navShellClass}>
-            <div className="relative flex h-20 items-center justify-between px-3 sm:px-6">
+            <div className="relative flex h-14 items-center justify-between px-3 sm:px-5">
               <Link
                 href="/"
                 aria-label="home"
                 className="flex items-center gap-1"
               >
                 <AtomLogo
-                  size={48}
+                  size={38}
                   title="Ctrl logo"
                   className="shrink-0 text-black"
                 />
                 <span
-                  className="shadows-into-light-regular text-[1.9rem] tracking-[0.08em] text-black"
+                  className="shadows-into-light-regular text-[1.55rem] tracking-[0.08em] text-black"
                 >
                   Ctrl
 
@@ -213,7 +207,7 @@ export function Hero() {
               </button>
 
               <div className="absolute inset-0 m-auto hidden size-fit lg:block">
-                <ul className="flex gap-10 text-[0.98rem]">
+                <ul className="flex gap-8 text-[0.92rem]">
                   {menuItems.map((item) => (
                     <li key={item.label}>
                       <SectionNavLink
@@ -247,7 +241,7 @@ export function Hero() {
                       "noopener,noreferrer"
                     );
                   }}
-                  className="inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-medium text-white transition-colors hover:bg-black/85"
+                  className="inline-flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
                 >
                   <span>Join Waitlist</span>
                 </ButterflyCta>
@@ -291,7 +285,7 @@ export function Hero() {
                         "noopener,noreferrer"
                       );
                     }}
-                    className="inline-flex w-full items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-medium text-white transition-colors hover:bg-black/85"
+                    className="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
                   >
                     <span>Join Waitlist</span>
                   </ButterflyCta>
@@ -309,7 +303,7 @@ export function Hero() {
         >
           <div className="absolute inset-0">
             <Image
-              src="/assets/mainback3.png"
+              src="/assets/mainback6.png"
               alt="Hero background"
               fill
               sizes="(min-width: 640px) 100vw, 0vw"
