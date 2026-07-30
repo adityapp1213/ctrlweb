@@ -21,7 +21,7 @@ const menuItems = [
   { label: "FAQ", sectionId: "faq" },
 ] as const;
 
-const labHref = "https://lab.atomctrl.com";
+// const labHref = "https://lab.atomctrl.com";
 
 const navButterflies = [
   {
@@ -224,6 +224,7 @@ export function Hero() {
                       </SectionNavLink>
                     </li>
                   ))}
+                  {/* Temporarily hidden until the Lab is ready to launch.
                   <li>
                     <a
                       href={labHref}
@@ -232,6 +233,7 @@ export function Hero() {
                       Lab
                     </a>
                   </li>
+                  */}
                 </ul>
               </div>
 
@@ -265,6 +267,7 @@ export function Hero() {
                         </SectionNavLink>
                       </li>
                     ))}
+                    {/* Temporarily hidden until the Lab is ready to launch.
                     <li>
                       <a
                         href={labHref}
@@ -274,6 +277,7 @@ export function Hero() {
                         Lab
                       </a>
                     </li>
+                    */}
                   </ul>
 
                   <ButterflyCta
