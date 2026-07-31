@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   FlappingButterfly,
@@ -19,6 +19,85 @@ const menuItems = [
 ] as const;
 
 // const labHref = "https://lab.atomctrl.com";
+
+const labNavFrames = [
+  ...Array.from({ length: 25 }, (_, index) => `/assets/lab-new/${index + 1}.png`),
+];
+
+const researchMenuItems = [
+  {
+    title: "Monarch",
+    description: "Thought-grounded multimodal architecture.",
+    href: "/monarch",
+    image: "/assets/research/1o1.svg",
+    frames: Array.from(
+      { length: 6 },
+      (_, index) => `/assets/research/1o${index + 1}.svg`,
+    ),
+    frameOffsets: [
+      { x: -1.4, y: 0.3 },
+      { x: 0.7, y: 3.3 },
+      { x: -1.8, y: -0.1 },
+      { x: -2.4, y: -2.4 },
+      { x: 0, y: 0.1 },
+      { x: 3, y: -0.4 },
+    ],
+  },
+  {
+    title: "Interaction system",
+    description: "Interfaces for reasoning with thinking machines.",
+    href: "/interaction-systems",
+    image: "/assets/research/2o1.svg",
+    frames: Array.from(
+      { length: 6 },
+      (_, index) => `/assets/research/2o${index + 1}.svg`,
+    ),
+    frameOffsets: [
+      { x: 3.6, y: 0.5 },
+      { x: -0.2, y: 0.6 },
+      { x: 0.2, y: 0.3 },
+      { x: 4.4, y: -0.2 },
+      { x: -0.5, y: -0.4 },
+      { x: -0.7, y: -0.6 },
+    ],
+  },
+  {
+    title: "Godel model",
+    description: "Reflective model structure and recursive checks.",
+    href: "/godel-model",
+    image: "/assets/research/4o1.svg",
+    frames: Array.from(
+      { length: 6 },
+      (_, index) => `/assets/research/4o${index + 1}.svg`,
+    ),
+    frameOffsets: [
+      { x: -0.5, y: -0.3 },
+      { x: -1.2, y: 0.3 },
+      { x: 2.3, y: -0.5 },
+      { x: 3.1, y: -0.6 },
+      { x: 0.1, y: 0.4 },
+      { x: -0.1, y: 0.9 },
+    ],
+  },
+  {
+    title: "Scaling synthetic data",
+    description: "How generated data changes training behavior.",
+    href: "/scaling-synthetic-data",
+    image: "/assets/research/3o1.svg",
+    frames: Array.from(
+      { length: 6 },
+      (_, index) => `/assets/research/3o${index + 1}.svg`,
+    ),
+    frameOffsets: [
+      { x: 2.3, y: 0 },
+      { x: -1.5, y: 0.1 },
+      { x: -0.2, y: 2.8 },
+      { x: 4.5, y: -1.2 },
+      { x: -1.3, y: 0 },
+      { x: -0.1, y: -0.8 },
+    ],
+  },
+] as const;
 
 const navButterflies = [
   {
@@ -114,9 +193,195 @@ function ButterflyCta({
   );
 }
 
+function updateCardShader(event: React.MouseEvent<HTMLElement>) {
+  const rect = event.currentTarget.getBoundingClientRect();
+  event.currentTarget.style.setProperty(
+    "--spot-x",
+    `${event.clientX - rect.left}px`,
+  );
+  event.currentTarget.style.setProperty(
+    "--spot-y",
+    `${event.clientY - rect.top}px`,
+  );
+}
+
+function ResearchMegaMenu() {
+  const [hoveredResearchIndex, setHoveredResearchIndex] = useState<
+    number | null
+  >(null);
+  const [isLabHovered, setIsLabHovered] = useState(false);
+
+  return (
+    <div className="absolute left-1/2 top-full hidden w-[min(72rem,calc(100vw-2rem))] -translate-x-1/2 pt-3 lg:block">
+      <div className="grid min-h-[22rem] grid-cols-[1fr_20rem] gap-6 rounded-[1.75rem] border border-black/10 bg-white p-6 shadow-[0_24px_70px_rgba(0,0,0,0.14)]">
+        <div className="grid content-start gap-4">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <p className="text-xs tracking-[0.18em] text-black/35">
+                Research
+              </p>
+              <h2 className="mt-2 text-2xl font-normal leading-none text-black">
+                Current briefs and model notes
+              </h2>
+            </div>
+            <a
+              href="https://atomctrl.com/##research"
+              className="inline-flex items-center gap-1 text-sm text-black/45 transition-colors hover:text-black"
+            >
+              View all
+              <ArrowUpRight className="size-4" />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            {researchMenuItems.map((item, index) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onMouseMove={updateCardShader}
+                onMouseEnter={() => setHoveredResearchIndex(index)}
+                onMouseLeave={() => setHoveredResearchIndex(null)}
+                onFocus={() => setHoveredResearchIndex(index)}
+                onBlur={() => setHoveredResearchIndex(null)}
+                className={[
+                  "group relative grid min-h-[8.35rem] overflow-hidden rounded-2xl border border-black/[0.07] bg-white p-3 transition-[background-color,border-color,filter,opacity,transform] duration-300 hover:-translate-y-0.5 hover:border-black/15 hover:bg-[#f7f3ea] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20",
+                  hoveredResearchIndex !== null && hoveredResearchIndex !== index
+                    ? "opacity-60 blur-[1.5px]"
+                    : "opacity-100 blur-0",
+                ].join(" ")}
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(12rem circle at var(--spot-x,50%) var(--spot-y,50%), rgba(255,255,255,0.82), rgba(255,255,255,0.12) 34%, transparent 62%)",
+                  }}
+                />
+                <span className="relative grid grid-cols-[1fr_7rem] gap-3">
+                  <span className="flex min-w-0 flex-col justify-between">
+                    <span>
+                      <span className="block text-lg font-normal leading-tight text-black">
+                        {item.title}
+                      </span>
+                      <span className="mt-2 block text-sm leading-5 text-black/50">
+                        {item.description}
+                      </span>
+                    </span>
+                    <span className="mt-4 inline-flex items-center gap-1 text-xs text-black/42 transition-colors group-hover:text-black">
+                      Read brief
+                      <ArrowUpRight className="size-3.5" />
+                    </span>
+                  </span>
+                  <span
+                    className={[
+                      "relative min-h-[6.8rem] overflow-hidden rounded-xl bg-white",
+                      hoveredResearchIndex === index
+                        ? "research-sequence-desktop-active"
+                        : "",
+                    ].join(" ")}
+                  >
+                    {item.frames.map((frame, frameIndex) => (
+                      <Image
+                        key={frame}
+                        src={frame}
+                        alt=""
+                        fill
+                        sizes="112px"
+                        className="research-frame object-contain p-1.5 transition-transform duration-300 group-hover:scale-[1.03]"
+                        style={
+                          {
+                            "--research-frame-delay": `${
+                              -(((200 - frameIndex * 400) % 2400 + 2400) %
+                                2400)
+                            }ms`,
+                            "--research-frame-x": `${
+                              item.frameOffsets[frameIndex]?.x ?? 0
+                            }%`,
+                            "--research-frame-y": `${
+                              item.frameOffsets[frameIndex]?.y ?? 0
+                            }%`,
+                          } as React.CSSProperties
+                        }
+                      />
+                    ))}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <Link
+          href="/lab"
+          onMouseMove={updateCardShader}
+          onMouseEnter={() => setIsLabHovered(true)}
+          onMouseLeave={() => setIsLabHovered(false)}
+          onFocus={() => setIsLabHovered(true)}
+          onBlur={() => setIsLabHovered(false)}
+          className="group relative overflow-hidden rounded-2xl border border-black/[0.08] bg-white p-4 transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-black/15 hover:bg-[#f7f3ea] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+        >
+          <span
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{
+              background:
+                "radial-gradient(14rem circle at var(--spot-x,50%) var(--spot-y,50%), rgba(255,255,255,0.74), rgba(255,255,255,0.12) 38%, transparent 66%)",
+            }}
+          />
+          <span className="relative flex h-full flex-col justify-between">
+            <span>
+              <span className="relative block aspect-[1.35] overflow-hidden rounded-xl bg-white">
+                <span
+                  className={[
+                    "absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2",
+                    isLabHovered ? "lab-nav-sequence-active" : "",
+                  ].join(" ")}
+                >
+                  {labNavFrames.map((frame, frameIndex) => (
+                    <Image
+                      key={frame}
+                      src={frame}
+                      alt=""
+                      fill
+                      unoptimized
+                      sizes="320px"
+                      className="lab-nav-frame object-contain p-3"
+                      style={
+                        {
+                          "--lab-nav-frame-delay": `${
+                            -(((6500 - frameIndex * 260) % 6500 + 6500) %
+                              6500)
+                          }ms`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  ))}
+                </span>
+              </span>
+              <span className="mt-5 block text-2xl font-normal leading-none text-black">
+                Atom Ctrl Lab
+              </span>
+              <span className="mt-3 block text-sm leading-6 text-black/54">
+                Experiments, prototypes, and working notes connected to the
+                Monarch research track.
+              </span>
+            </span>
+            <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-colors group-hover:bg-black/85">
+              Open Lab
+              <ArrowUpRight className="size-4" />
+            </span>
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeNavMenu, setActiveNavMenu] = useState<
+    (typeof menuItems)[number]["label"] | null
+  >(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -164,7 +429,7 @@ export function Hero() {
   }, []);
 
   const navShellClass = [
-    "mx-auto mt-4 w-full max-w-[50rem] overflow-visible rounded-xl border border-black/10 bg-white/85 shadow-sm shadow-black/5 backdrop-blur-md transition-[max-width,background-color,border-color,box-shadow,backdrop-filter] duration-300",
+    "relative mx-auto mt-4 w-full max-w-[50rem] overflow-visible rounded-xl border border-black/10 bg-white/85 shadow-sm shadow-black/5 backdrop-blur-md transition-[max-width,background-color,border-radius,background-color,border-color,box-shadow,backdrop-filter] duration-300",
   ]
     .filter(Boolean)
     .join(" ");
@@ -176,8 +441,13 @@ export function Hero() {
           data-state={menuOpen ? "active" : "inactive"}
           className="fixed z-[100] w-full overflow-visible px-2"
         >
-          <div className={navShellClass}>
-            <div className="relative flex h-14 items-center justify-between px-3 sm:px-5">
+          <div
+            className={navShellClass}
+            onMouseLeave={() => setActiveNavMenu(null)}
+          >
+            <div
+              className="relative flex h-14 items-center justify-between px-3 sm:px-5"
+            >
               <Link
                 href="/"
                 aria-label="home"
@@ -210,12 +480,33 @@ export function Hero() {
                 <ul className="flex gap-8 text-[0.92rem]">
                   {menuItems.map((item) => (
                     <li key={item.label}>
-                      <SectionNavLink
-                        sectionId={item.sectionId}
-                        className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
-                      >
-                        <span>{item.label}</span>
-                      </SectionNavLink>
+                      {item.label === "Research" ? (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setActiveNavMenu((current) =>
+                              current === "Research" ? null : "Research",
+                            )
+                          }
+                          onMouseEnter={() => setActiveNavMenu("Research")}
+                          onFocus={() => setActiveNavMenu("Research")}
+                          className={[
+                            "block rounded-lg px-3 py-1.5 font-normal text-black/55 transition-[background-color,color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none",
+                            activeNavMenu === "Research"
+                              ? "bg-black/[0.055] text-black"
+                              : "",
+                          ].join(" ")}
+                        >
+                          <span>{item.label}</span>
+                        </button>
+                      ) : (
+                        <SectionNavLink
+                          sectionId={item.sectionId}
+                          className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
+                        >
+                          <span>{item.label}</span>
+                        </SectionNavLink>
+                      )}
                     </li>
                   ))}
                   {/* Temporarily hidden until the Lab is ready to launch.
@@ -292,11 +583,12 @@ export function Hero() {
                 </div>
               </div>
             </div>
+            {activeNavMenu === "Research" ? <ResearchMegaMenu /> : null}
           </div>
         </nav>
       </header>
 
-      <main className="relative z-0 min-h-screen bg-white text-black">
+      <main className="sticky top-0 z-0 min-h-screen bg-white text-black">
         <section
           id="hero"
           className="relative min-h-screen scroll-mt-28 overflow-hidden bg-white"
