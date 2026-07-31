@@ -302,7 +302,7 @@ export function Hero() {
         </nav>
       </header>
 
-      <main className="relative z-0 min-h-screen bg-white text-black">
+      <main className="sticky top-0 z-0 min-h-screen bg-white text-black">
         <section
           id="hero"
           className="relative min-h-screen scroll-mt-28 overflow-hidden bg-white"
