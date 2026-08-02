@@ -2,21 +2,17 @@
 
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { AtomLogo } from "@/components/logo";
-import { SectionNavLink } from "@/components/section-nav-link";
 import {
   FlappingButterfly,
   InvertedFlappingButterfly,
 } from "@/components/butterfly/flapping-butterfly";
+import { AtomLogo } from "@/components/logo";
 
-const menuItems = [
-  { label: "Research", sectionId: "research" },
-  { label: "Firth", sectionId: "description" },
-  { label: "Company", sectionId: "about-us" },
-];
-
-const labHref = "https://lab.atomctrl.com";
-const siteUrl = "https://atomctrl.com";
+const routeNavItems = [
+  { label: "Research", href: "/research" },
+  { label: "Firth", href: "/firth" },
+  { label: "Company", href: "/company" },
+] as const;
 
 const navButterflies = [
   {
@@ -33,14 +29,26 @@ const navButterflies = [
   },
 ];
 
-function WaitlistCta({
+function ButterflyWaitlistLink({
   className,
   wrapperClassName = "",
+  showButterflies,
 }: {
   className: string;
   wrapperClassName?: string;
+  showButterflies: boolean;
 }) {
   const [isInteracting, setIsInteracting] = useState(false);
+  const [butterfliesVisible, setButterfliesVisible] = useState(showButterflies);
+
+  useEffect(() => {
+    const shouldShowButterflies = showButterflies || isInteracting;
+    const timeout = window.setTimeout(() => {
+      setButterfliesVisible(shouldShowButterflies);
+    }, shouldShowButterflies ? 0 : 420);
+
+    return () => window.clearTimeout(timeout);
+  }, [showButterflies, isInteracting]);
 
   return (
     <span
@@ -58,7 +66,7 @@ function WaitlistCta({
           key={butterfly.className}
           className={[
             "pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out",
-            isInteracting ? "opacity-100" : "opacity-0",
+            butterfliesVisible ? "opacity-100" : "opacity-0",
           ].join(" ")}
         >
           {butterfly.inverted ? (
@@ -86,7 +94,7 @@ function WaitlistCta({
   );
 }
 
-export function BlogNav() {
+export function RouteTopNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -95,26 +103,25 @@ export function BlogNav() {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navShellClass = [
-    "mx-auto mt-4 w-full max-w-[50rem] overflow-visible rounded-xl border border-black/10 bg-white/85 shadow-sm shadow-black/5 backdrop-blur-md transition-[max-width,background-color,border-color,box-shadow,backdrop-filter] duration-300",
-  ]
-    .filter(Boolean)
-    .join(" ");
 
   return (
     <header>
       <nav
         data-state={menuOpen ? "active" : "inactive"}
-        className="fixed z-[100] w-full overflow-visible px-2"
+        className="fixed inset-x-0 top-0 z-[100] w-full overflow-visible px-2"
       >
-        <div className={navShellClass}>
+        <div className="relative mx-auto mt-4 w-full max-w-[50rem] overflow-visible rounded-xl border border-black/10 bg-white/85 shadow-sm shadow-black/5 backdrop-blur-md">
           <div className="relative flex h-14 items-center justify-between px-3 sm:px-5">
-            <a href={siteUrl} aria-label="home" className="flex items-center gap-1">
-              <AtomLogo size={38} title="Ctrl logo" className="shrink-0 text-black" />
+            <a href="/" aria-label="home" className="flex items-center gap-1">
+              <AtomLogo
+                size={38}
+                title="Ctrl logo"
+                className="shrink-0 text-black"
+              />
               <span className="shadows-into-light-regular text-[1.55rem] tracking-[0.08em] text-black">
                 Ctrl
               </span>
@@ -132,57 +139,44 @@ export function BlogNav() {
 
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
               <ul className="flex gap-8 text-[0.92rem]">
-                {menuItems.map((item) => (
-                  <li key={item.label}>
-                    <SectionNavLink
-                      sectionId={item.sectionId}
+                {routeNavItems.map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
                       className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                     >
                       {item.label}
-                    </SectionNavLink>
+                    </a>
                   </li>
                 ))}
-                <li>
-                  <a
-                    href={labHref}
-                    className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
-                  >
-                    Lab
-                  </a>
-                </li>
               </ul>
             </div>
 
             <div className="hidden w-fit items-center justify-end lg:flex">
-              <WaitlistCta className="inline-flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85" />
+              <ButterflyWaitlistLink
+                showButterflies={!isScrolled}
+                className="inline-flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
+              />
             </div>
 
             <div className="absolute inset-x-0 top-full mx-4 mt-4 hidden rounded-[1.75rem] border border-black/10 bg-white/92 p-6 shadow-2xl shadow-black/10 backdrop-blur-md in-data-[state=active]:block lg:hidden">
               <div className="space-y-6">
                 <ul className="space-y-5 text-base">
-                  {menuItems.map((item) => (
-                    <li key={item.label}>
-                      <SectionNavLink
-                        sectionId={item.sectionId}
-                        onNavigate={() => setMenuOpen(false)}
+                  {routeNavItems.map((item) => (
+                    <li key={item.href}>
+                      <a
+                        href={item.href}
+                        onClick={() => setMenuOpen(false)}
                         className="block font-normal text-black/60 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                       >
                         {item.label}
-                      </SectionNavLink>
+                      </a>
                     </li>
                   ))}
-                  <li>
-                    <a
-                      href={labHref}
-                      onClick={() => setMenuOpen(false)}
-                      className="block font-normal text-black/60 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
-                    >
-                      Lab
-                    </a>
-                  </li>
                 </ul>
 
-                <WaitlistCta
+                <ButterflyWaitlistLink
+                  showButterflies={!isScrolled}
                   wrapperClassName="w-full"
                   className="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
                 />

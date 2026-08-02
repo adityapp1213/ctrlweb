@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
@@ -9,16 +8,16 @@ import {
   InvertedFlappingButterfly,
 } from "@/components/butterfly/flapping-butterfly";
 import { AtomLogo } from "@/components/logo";
-import { SectionNavLink } from "@/components/section-nav-link";
 import Button7 from "@/components/ui/button-7";
 
 const menuItems = [
-  { label: "Research", sectionId: "research" },
-  { label: "Firth", sectionId: "description" },
-  { label: "Company", sectionId: "about-us" },
+  { label: "Research", href: "/research" },
+  { label: "Firth", href: "/firth" },
+  { label: "Company", href: "/company" },
 ] as const;
 
-// const labHref = "https://lab.atomctrl.com";
+const siteUrl = "https://atomctrl.com";
+const labHref = "https://lab.atomctrl.com";
 
 const labNavFrames = [
   ...Array.from({ length: 25 }, (_, index) => `/assets/lab-new/${index + 1}.png`),
@@ -28,7 +27,7 @@ const researchMenuItems = [
   {
     title: "Monarch",
     description: "Thought-grounded multimodal architecture.",
-    href: "/monarch",
+    href: `${siteUrl}/monarch`,
     image: "/assets/research/1o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -46,7 +45,7 @@ const researchMenuItems = [
   {
     title: "Interaction system",
     description: "Interfaces for reasoning with thinking machines.",
-    href: "/interaction-systems",
+    href: `${siteUrl}/interaction-systems`,
     image: "/assets/research/2o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -64,7 +63,7 @@ const researchMenuItems = [
   {
     title: "Godel model",
     description: "Reflective model structure and recursive checks.",
-    href: "/godel-model",
+    href: `${siteUrl}/godel-model`,
     image: "/assets/research/4o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -82,7 +81,7 @@ const researchMenuItems = [
   {
     title: "Scaling synthetic data",
     description: "How generated data changes training behavior.",
-    href: "/scaling-synthetic-data",
+    href: `${siteUrl}/scaling-synthetic-data`,
     image: "/assets/research/3o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -96,6 +95,19 @@ const researchMenuItems = [
       { x: -1.3, y: 0 },
       { x: -0.1, y: -0.8 },
     ],
+  },
+] as const;
+
+const firthMenuItems = [
+  {
+    title: "Firth overview",
+    description: "Monarch v3 and the JEPA-centered architecture.",
+    href: `${siteUrl}/##description`,
+  },
+  {
+    title: "Architecture notes",
+    description: "A future research brief for the next model track.",
+    href: `${siteUrl}/##research`,
   },
 ] as const;
 
@@ -235,7 +247,7 @@ function ResearchMegaMenu() {
 
           <div className="grid grid-cols-2 gap-3">
             {researchMenuItems.map((item, index) => (
-              <Link
+              <a
                 key={item.href}
                 href={item.href}
                 onMouseMove={updateCardShader}
@@ -306,13 +318,13 @@ function ResearchMegaMenu() {
                     ))}
                   </span>
                 </span>
-              </Link>
+              </a>
             ))}
           </div>
         </div>
 
-        <Link
-          href="/lab"
+        <a
+          href={labHref}
           onMouseMove={updateCardShader}
           onMouseEnter={() => setIsLabHovered(true)}
           onMouseLeave={() => setIsLabHovered(false)}
@@ -370,7 +382,81 @@ function ResearchMegaMenu() {
               <ArrowUpRight className="size-4" />
             </span>
           </span>
-        </Link>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function FirthMegaMenu() {
+  return (
+    <div className="absolute left-1/2 top-full hidden w-[min(58rem,calc(100vw-2rem))] -translate-x-1/2 pt-3 lg:block">
+      <div className="grid min-h-[18rem] grid-cols-[1fr_19rem] gap-5 rounded-[1.75rem] border border-black/10 bg-white p-5 shadow-[0_24px_70px_rgba(0,0,0,0.14)]">
+        <div className="grid content-start gap-5">
+          <div>
+            <p className="text-xs tracking-[0.18em] text-black/35">Firth</p>
+            <h2 className="mt-2 text-2xl font-normal leading-none text-black">
+              Monarch v3 model track
+            </h2>
+            <p className="mt-3 max-w-[32rem] text-sm leading-6 text-black/50">
+              The next version of Monarch, built around JEPA as the primary
+              model architecture.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            {firthMenuItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group inline-flex min-w-[15rem] items-center justify-between gap-5 rounded-xl border border-black/[0.08] bg-white px-5 py-3 text-left transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-black/15 hover:bg-[#f7f3ea] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+              >
+                <span>
+                  <span className="block text-base font-normal leading-tight text-black">
+                    {item.title}
+                  </span>
+                  <span className="mt-1 block text-xs leading-5 text-black/45">
+                    {item.description}
+                  </span>
+                </span>
+                <ArrowUpRight className="size-4 shrink-0 text-black/35 transition-colors group-hover:text-black" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <a
+          href={`${siteUrl}/##research`}
+          onMouseMove={updateCardShader}
+          className="group relative overflow-hidden rounded-2xl border border-black/[0.08] bg-white p-4 transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-black/15 hover:bg-[#f7f3ea] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+        >
+          <span
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{
+              background:
+                "radial-gradient(14rem circle at var(--spot-x,50%) var(--spot-y,50%), rgba(255,255,255,0.74), rgba(255,255,255,0.12) 38%, transparent 66%)",
+            }}
+          />
+          <span className="relative flex h-full flex-col justify-between">
+            <span>
+              <span className="flex aspect-[1.35] items-center justify-center rounded-xl bg-[#f7f3ea] px-6 text-center">
+                <span className="text-2xl font-normal leading-tight text-black">
+                  Firth research brief
+                </span>
+              </span>
+              <span className="mt-5 block text-2xl font-normal leading-none text-black">
+                Coming next
+              </span>
+              <span className="mt-3 block text-sm leading-6 text-black/54">
+                A focused note for the JEPA-based Monarch v3 direction.
+              </span>
+            </span>
+            <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-colors group-hover:bg-black/85">
+              View research
+              <ArrowUpRight className="size-4" />
+            </span>
+          </span>
+        </a>
       </div>
     </div>
   );
@@ -379,9 +465,6 @@ function ResearchMegaMenu() {
 export function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeNavMenu, setActiveNavMenu] = useState<
-    (typeof menuItems)[number]["label"] | null
-  >(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -443,13 +526,12 @@ export function Hero() {
         >
           <div
             className={navShellClass}
-            onMouseLeave={() => setActiveNavMenu(null)}
           >
             <div
               className="relative flex h-14 items-center justify-between px-3 sm:px-5"
             >
-              <Link
-                href="/"
+              <a
+                href={siteUrl}
                 aria-label="home"
                 className="flex items-center gap-1"
               >
@@ -464,7 +546,7 @@ export function Hero() {
                   Ctrl
 
                 </span>
-              </Link>
+              </a>
 
               <button
                 type="button"
@@ -480,33 +562,12 @@ export function Hero() {
                 <ul className="flex gap-8 text-[0.92rem]">
                   {menuItems.map((item) => (
                     <li key={item.label}>
-                      {item.label === "Research" ? (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setActiveNavMenu((current) =>
-                              current === "Research" ? null : "Research",
-                            )
-                          }
-                          onMouseEnter={() => setActiveNavMenu("Research")}
-                          onFocus={() => setActiveNavMenu("Research")}
-                          className={[
-                            "block rounded-lg px-3 py-1.5 font-normal text-black/55 transition-[background-color,color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none",
-                            activeNavMenu === "Research"
-                              ? "bg-black/[0.055] text-black"
-                              : "",
-                          ].join(" ")}
-                        >
-                          <span>{item.label}</span>
-                        </button>
-                      ) : (
-                        <SectionNavLink
-                          sectionId={item.sectionId}
-                          className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
-                        >
-                          <span>{item.label}</span>
-                        </SectionNavLink>
-                      )}
+                      <a
+                        href={item.href}
+                        className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
+                      >
+                        <span>{item.label}</span>
+                      </a>
                     </li>
                   ))}
                   {/* Temporarily hidden until the Lab is ready to launch.
@@ -543,13 +604,13 @@ export function Hero() {
                   <ul className="space-y-5 text-base">
                     {menuItems.map((item) => (
                       <li key={item.label}>
-                        <SectionNavLink
-                          sectionId={item.sectionId}
-                          onNavigate={() => setMenuOpen(false)}
+                        <a
+                          href={item.href}
+                          onClick={() => setMenuOpen(false)}
                           className="block font-normal text-black/60 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                         >
                           <span>{item.label}</span>
-                        </SectionNavLink>
+                        </a>
                       </li>
                     ))}
                     {/* Temporarily hidden until the Lab is ready to launch.
@@ -583,7 +644,6 @@ export function Hero() {
                 </div>
               </div>
             </div>
-            {activeNavMenu === "Research" ? <ResearchMegaMenu /> : null}
           </div>
         </nav>
       </header>

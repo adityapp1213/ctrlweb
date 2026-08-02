@@ -1,3 +1,4 @@
+import { BlankRouteShell } from "@/components/blank-route-shell";
 import { ScrollProgressStory } from "@/components/ui/main/scroll-progress-story";
 
 export function DescriptionSection() {
@@ -12,5 +13,5 @@ export function DescriptionSection() {
 }
 
 export default function DescriptionPage() {
-  return <DescriptionSection />;
+  return <BlankRouteShell />;
 }

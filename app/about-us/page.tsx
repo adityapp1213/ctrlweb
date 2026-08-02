@@ -1,4 +1,5 @@
 import { AboutUsGallery } from "@/app/about-us/about-us-gallery";
+import { BlankRouteShell } from "@/components/blank-route-shell";
 
 export function AboutUsSection() {
   return (
@@ -12,5 +13,5 @@ export function AboutUsSection() {
 }
 
 export default function AboutUsPage() {
-  return <AboutUsSection />;
+  return <BlankRouteShell />;
 }
