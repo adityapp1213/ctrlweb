@@ -1,27 +1,115 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   FlappingButterfly,
   InvertedFlappingButterfly,
 } from "@/components/butterfly/flapping-butterfly";
 import { AtomLogo } from "@/components/logo";
-import { SectionNavLink } from "@/components/section-nav-link";
 import Button7 from "@/components/ui/button-7";
 
 const menuItems = [
-  { label: "Description", sectionId: "description" },
-  { label: "Features", sectionId: "features" },
-  { label: "Cloudy", sectionId: "why-ctrl" },
-  { label: "Research", sectionId: "research" },
-  { label: "About Us", sectionId: "about-us" },
-  { label: "FAQ", sectionId: "faq" },
+  { label: "research", href: "/research" },
+  { label: "firth", href: "/first" },
+  { label: "company", href: "/company" },
 ] as const;
 
-// const labHref = "https://lab.atomctrl.com";
+const siteUrl = "https://atomctrl.com";
+const labHref = "https://lab.atomctrl.com";
+
+const labNavFrames = [
+  ...Array.from({ length: 25 }, (_, index) => `/assets/lab-new/${index + 1}.png`),
+];
+
+const researchMenuItems = [
+  {
+    title: "monarch",
+    description: "thought-grounded multimodal architecture.",
+    href: "/research",
+    image: "/assets/research/1o1.svg",
+    frames: Array.from(
+      { length: 6 },
+      (_, index) => `/assets/research/1o${index + 1}.svg`,
+    ),
+    frameOffsets: [
+      { x: -1.4, y: 0.3 },
+      { x: 0.7, y: 3.3 },
+      { x: -1.8, y: -0.1 },
+      { x: -2.4, y: -2.4 },
+      { x: 0, y: 0.1 },
+      { x: 3, y: -0.4 },
+    ],
+  },
+  {
+    title: "interaction system",
+    description: "interfaces for reasoning with thinking machines.",
+    href: "/research",
+    image: "/assets/research/2o1.svg",
+    frames: Array.from(
+      { length: 6 },
+      (_, index) => `/assets/research/2o${index + 1}.svg`,
+    ),
+    frameOffsets: [
+      { x: 3.6, y: 0.5 },
+      { x: -0.2, y: 0.6 },
+      { x: 0.2, y: 0.3 },
+      { x: 4.4, y: -0.2 },
+      { x: -0.5, y: -0.4 },
+      { x: -0.7, y: -0.6 },
+    ],
+  },
+  {
+    title: "godel model",
+    description: "reflective model structure and recursive checks.",
+    href: "/research",
+    image: "/assets/research/4o1.svg",
+    frames: Array.from(
+      { length: 6 },
+      (_, index) => `/assets/research/4o${index + 1}.svg`,
+    ),
+    frameOffsets: [
+      { x: -0.5, y: -0.3 },
+      { x: -1.2, y: 0.3 },
+      { x: 2.3, y: -0.5 },
+      { x: 3.1, y: -0.6 },
+      { x: 0.1, y: 0.4 },
+      { x: -0.1, y: 0.9 },
+    ],
+  },
+  {
+    title: "scaling synthetic data",
+    description: "how generated data changes training behavior.",
+    href: "/research",
+    image: "/assets/research/3o1.svg",
+    frames: Array.from(
+      { length: 6 },
+      (_, index) => `/assets/research/3o${index + 1}.svg`,
+    ),
+    frameOffsets: [
+      { x: 2.3, y: 0 },
+      { x: -1.5, y: 0.1 },
+      { x: -0.2, y: 2.8 },
+      { x: 4.5, y: -1.2 },
+      { x: -1.3, y: 0 },
+      { x: -0.1, y: -0.8 },
+    ],
+  },
+] as const;
+
+const firthMenuItems = [
+  {
+    title: "firth overview",
+    description: "monarch v3 and the jepa-centered architecture.",
+    href: `${siteUrl}/##description`,
+  },
+  {
+    title: "architecture notes",
+    description: "a future research brief for the next model track.",
+    href: `${siteUrl}/##research`,
+  },
+] as const;
 
 const navButterflies = [
   {
@@ -117,6 +205,263 @@ function ButterflyCta({
   );
 }
 
+function updateCardShader(event: React.MouseEvent<HTMLElement>) {
+  const rect = event.currentTarget.getBoundingClientRect();
+  event.currentTarget.style.setProperty(
+    "--spot-x",
+    `${event.clientX - rect.left}px`,
+  );
+  event.currentTarget.style.setProperty(
+    "--spot-y",
+    `${event.clientY - rect.top}px`,
+  );
+}
+
+function ResearchMegaMenu() {
+  const [hoveredResearchIndex, setHoveredResearchIndex] = useState<
+    number | null
+  >(null);
+  const [isLabHovered, setIsLabHovered] = useState(false);
+
+  return (
+    <div className="absolute left-1/2 top-full hidden w-[min(72rem,calc(100vw-2rem))] -translate-x-1/2 pt-3 lg:block">
+      <div className="grid min-h-[22rem] grid-cols-[1fr_20rem] gap-6 rounded-[1.75rem] border border-black/10 bg-white p-6 shadow-[0_24px_70px_rgba(0,0,0,0.14)]">
+        <div className="grid content-start gap-4">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <p className="text-xs tracking-[0.18em] text-black/35">
+                research
+              </p>
+              <h2 className="mt-2 text-2xl font-normal leading-none text-black">
+                current briefs and model notes
+              </h2>
+            </div>
+            <a
+              href="https://atomctrl.com/##research"
+              className="inline-flex items-center gap-1 text-sm text-black/45 transition-colors hover:text-black"
+            >
+              view all
+              <ArrowUpRight className="size-4" />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            {researchMenuItems.map((item, index) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onMouseMove={updateCardShader}
+                onMouseEnter={() => setHoveredResearchIndex(index)}
+                onMouseLeave={() => setHoveredResearchIndex(null)}
+                onFocus={() => setHoveredResearchIndex(index)}
+                onBlur={() => setHoveredResearchIndex(null)}
+                className={[
+                  "group relative grid min-h-[8.35rem] overflow-hidden rounded-2xl border border-black/[0.07] bg-white p-3 transition-[background-color,border-color,filter,opacity,transform] duration-300 hover:-translate-y-0.5 hover:border-black/15 hover:bg-[#f7f3ea] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20",
+                  hoveredResearchIndex !== null && hoveredResearchIndex !== index
+                    ? "opacity-60 blur-[1.5px]"
+                    : "opacity-100 blur-0",
+                ].join(" ")}
+              >
+                <span
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(12rem circle at var(--spot-x,50%) var(--spot-y,50%), rgba(255,255,255,0.82), rgba(255,255,255,0.12) 34%, transparent 62%)",
+                  }}
+                />
+                <span className="relative grid grid-cols-[1fr_7rem] gap-3">
+                  <span className="flex min-w-0 flex-col justify-between">
+                    <span>
+                      <span className="block text-lg font-normal leading-tight text-black">
+                        {item.title}
+                      </span>
+                      <span className="mt-2 block text-sm leading-5 text-black/50">
+                        {item.description}
+                      </span>
+                    </span>
+                    <span className="mt-4 inline-flex items-center gap-1 text-xs text-black/42 transition-colors group-hover:text-black">
+                      read brief
+                      <ArrowUpRight className="size-3.5" />
+                    </span>
+                  </span>
+                  <span
+                    className={[
+                      "relative min-h-[6.8rem] overflow-hidden rounded-xl bg-white",
+                      hoveredResearchIndex === index
+                        ? "research-sequence-desktop-active"
+                        : "",
+                    ].join(" ")}
+                  >
+                    {item.frames.map((frame, frameIndex) => (
+                      <Image
+                        key={frame}
+                        src={frame}
+                        alt=""
+                        fill
+                        sizes="112px"
+                        className="research-frame object-contain p-1.5 transition-transform duration-300 group-hover:scale-[1.03]"
+                        style={
+                          {
+                            "--research-frame-delay": `${
+                              -(((200 - frameIndex * 400) % 2400 + 2400) %
+                                2400)
+                            }ms`,
+                            "--research-frame-x": `${
+                              item.frameOffsets[frameIndex]?.x ?? 0
+                            }%`,
+                            "--research-frame-y": `${
+                              item.frameOffsets[frameIndex]?.y ?? 0
+                            }%`,
+                          } as React.CSSProperties
+                        }
+                      />
+                    ))}
+                  </span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <a
+          href={labHref}
+          onMouseMove={updateCardShader}
+          onMouseEnter={() => setIsLabHovered(true)}
+          onMouseLeave={() => setIsLabHovered(false)}
+          onFocus={() => setIsLabHovered(true)}
+          onBlur={() => setIsLabHovered(false)}
+          className="group relative overflow-hidden rounded-2xl border border-black/[0.08] bg-white p-4 transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-black/15 hover:bg-[#f7f3ea] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+        >
+          <span
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{
+              background:
+                "radial-gradient(14rem circle at var(--spot-x,50%) var(--spot-y,50%), rgba(255,255,255,0.74), rgba(255,255,255,0.12) 38%, transparent 66%)",
+            }}
+          />
+          <span className="relative flex h-full flex-col justify-between">
+            <span>
+              <span className="relative block aspect-[1.35] overflow-hidden rounded-xl bg-white">
+                <span
+                  className={[
+                    "absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2",
+                    isLabHovered ? "lab-nav-sequence-active" : "",
+                  ].join(" ")}
+                >
+                  {labNavFrames.map((frame, frameIndex) => (
+                    <Image
+                      key={frame}
+                      src={frame}
+                      alt=""
+                      fill
+                      unoptimized
+                      sizes="320px"
+                      className="lab-nav-frame object-contain p-3"
+                      style={
+                        {
+                          "--lab-nav-frame-delay": `${
+                            -(((6500 - frameIndex * 260) % 6500 + 6500) %
+                              6500)
+                          }ms`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  ))}
+                </span>
+              </span>
+              <span className="mt-5 block text-2xl font-normal leading-none text-black">
+                atom ctrl lab
+              </span>
+              <span className="mt-3 block text-sm leading-6 text-black/54">
+                experiments, prototypes, and working notes connected to the
+                monarch research track.
+              </span>
+            </span>
+            <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-colors group-hover:bg-black/85">
+              open lab
+              <ArrowUpRight className="size-4" />
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function FirthMegaMenu() {
+  return (
+    <div className="absolute left-1/2 top-full hidden w-[min(58rem,calc(100vw-2rem))] -translate-x-1/2 pt-3 lg:block">
+      <div className="grid min-h-[18rem] grid-cols-[1fr_19rem] gap-5 rounded-[1.75rem] border border-black/10 bg-white p-5 shadow-[0_24px_70px_rgba(0,0,0,0.14)]">
+        <div className="grid content-start gap-5">
+          <div>
+            <p className="text-xs tracking-[0.18em] text-black/35">firth</p>
+            <h2 className="mt-2 text-2xl font-normal leading-none text-black">
+              monarch v3 model track
+            </h2>
+            <p className="mt-3 max-w-[32rem] text-sm leading-6 text-black/50">
+              the next version of monarch, built around jepa as the primary
+              model architecture.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            {firthMenuItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group inline-flex min-w-[15rem] items-center justify-between gap-5 rounded-xl border border-black/[0.08] bg-white px-5 py-3 text-left transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-black/15 hover:bg-[#f7f3ea] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+              >
+                <span>
+                  <span className="block text-base font-normal leading-tight text-black">
+                    {item.title}
+                  </span>
+                  <span className="mt-1 block text-xs leading-5 text-black/45">
+                    {item.description}
+                  </span>
+                </span>
+                <ArrowUpRight className="size-4 shrink-0 text-black/35 transition-colors group-hover:text-black" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <a
+          href={`${siteUrl}/##research`}
+          onMouseMove={updateCardShader}
+          className="group relative overflow-hidden rounded-2xl border border-black/[0.08] bg-white p-4 transition-[background-color,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-black/15 hover:bg-[#f7f3ea] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20"
+        >
+          <span
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{
+              background:
+                "radial-gradient(14rem circle at var(--spot-x,50%) var(--spot-y,50%), rgba(255,255,255,0.74), rgba(255,255,255,0.12) 38%, transparent 66%)",
+            }}
+          />
+          <span className="relative flex h-full flex-col justify-between">
+            <span>
+              <span className="flex aspect-[1.35] items-center justify-center rounded-xl bg-[#f7f3ea] px-6 text-center">
+                <span className="text-2xl font-normal leading-tight text-black">
+                  firth research brief
+                </span>
+              </span>
+              <span className="mt-5 block text-2xl font-normal leading-none text-black">
+                coming next
+              </span>
+              <span className="mt-3 block text-sm leading-6 text-black/54">
+                a focused note for the jepa-based monarch v3 direction.
+              </span>
+            </span>
+            <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-colors group-hover:bg-black/85">
+              view research
+              <ArrowUpRight className="size-4" />
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -167,10 +512,7 @@ export function Hero() {
   }, []);
 
   const navShellClass = [
-    "mx-auto mt-3 w-full max-w-7xl overflow-visible rounded-[1.35rem] border border-transparent transition-[max-width,background-color,border-color,box-shadow,backdrop-filter] duration-300",
-    isScrolled
-      ? "max-w-5xl border-black/10 bg-white/85 shadow-lg shadow-black/5 backdrop-blur-md"
-      : "",
+    "relative mx-auto mt-4 w-full max-w-[50rem] overflow-visible rounded-xl border border-black/10 bg-white/85 shadow-sm shadow-black/5 backdrop-blur-md transition-[max-width,background-color,border-radius,background-color,border-color,box-shadow,backdrop-filter] duration-300",
   ]
     .filter(Boolean)
     .join(" ");
@@ -182,30 +524,34 @@ export function Hero() {
           data-state={menuOpen ? "active" : "inactive"}
           className="fixed z-[100] w-full overflow-visible px-2"
         >
-          <div className={navShellClass}>
-            <div className="relative flex h-20 items-center justify-between px-3 sm:px-6">
-              <Link
-                href="/"
+          <div
+            className={navShellClass}
+          >
+            <div
+              className="relative flex h-14 items-center justify-between px-3 sm:px-5"
+            >
+              <a
+                href={siteUrl}
                 aria-label="home"
                 className="flex items-center gap-1"
               >
                 <AtomLogo
-                  size={48}
-                  title="Ctrl logo"
+                  size={38}
+                  title="ctrl logo"
                   className="shrink-0 text-black"
                 />
                 <span
-                  className="shadows-into-light-regular text-[1.9rem] tracking-[0.08em] text-black"
+                  className="shadows-into-light-regular text-[1.55rem] tracking-[0.08em] text-black"
                 >
-                  Ctrl
+                  ctrl
 
                 </span>
-              </Link>
+              </a>
 
               <button
                 type="button"
                 onClick={() => setMenuOpen((open) => !open)}
-                aria-label={menuOpen ? "Close Menu" : "Open Menu"}
+                aria-label={menuOpen ? "close menu" : "open menu"}
                 className="relative z-20 block cursor-pointer p-3 lg:hidden"
               >
                 <Menu className="m-auto size-7 duration-200 in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0" />
@@ -213,15 +559,15 @@ export function Hero() {
               </button>
 
               <div className="absolute inset-0 m-auto hidden size-fit lg:block">
-                <ul className="flex gap-10 text-[0.98rem]">
+                <ul className="flex gap-8 text-[0.92rem]">
                   {menuItems.map((item) => (
                     <li key={item.label}>
-                      <SectionNavLink
-                        sectionId={item.sectionId}
+                      <a
+                        href={item.href}
                         className="block font-normal text-black/55 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                       >
                         <span>{item.label}</span>
-                      </SectionNavLink>
+                      </a>
                     </li>
                   ))}
                   {/* Temporarily hidden until the Lab is ready to launch.
@@ -247,9 +593,9 @@ export function Hero() {
                       "noopener,noreferrer"
                     );
                   }}
-                  className="inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-medium text-white transition-colors hover:bg-black/85"
+                  className="inline-flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
                 >
-                  <span>Join Waitlist</span>
+                  <span>join waitlist</span>
                 </ButterflyCta>
               </div>
 
@@ -258,13 +604,13 @@ export function Hero() {
                   <ul className="space-y-5 text-base">
                     {menuItems.map((item) => (
                       <li key={item.label}>
-                        <SectionNavLink
-                          sectionId={item.sectionId}
-                          onNavigate={() => setMenuOpen(false)}
+                        <a
+                          href={item.href}
+                          onClick={() => setMenuOpen(false)}
                           className="block font-normal text-black/60 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                         >
                           <span>{item.label}</span>
-                        </SectionNavLink>
+                        </a>
                       </li>
                     ))}
                     {/* Temporarily hidden until the Lab is ready to launch.
@@ -274,7 +620,7 @@ export function Hero() {
                         onClick={() => setMenuOpen(false)}
                         className="block font-normal text-black/60 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                       >
-                        Lab
+                    lab
                       </a>
                     </li>
                     */}
@@ -291,9 +637,9 @@ export function Hero() {
                         "noopener,noreferrer"
                       );
                     }}
-                    className="inline-flex w-full items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-medium text-white transition-colors hover:bg-black/85"
+                    className="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
                   >
-                    <span>Join Waitlist</span>
+                    <span>join waitlist</span>
                   </ButterflyCta>
                 </div>
               </div>
@@ -309,8 +655,8 @@ export function Hero() {
         >
           <div className="absolute inset-0">
             <Image
-              src="/assets/mainback3.png"
-              alt="Hero background"
+              src="/assets/mainback6.png"
+              alt="hero background"
               fill
               sizes="(min-width: 640px) 100vw, 0vw"
               priority
@@ -318,7 +664,7 @@ export function Hero() {
             />
             <Image
               src="/assets/mobileback.svg"
-              alt="Hero background"
+              alt="hero background"
               fill
               sizes="(max-width: 639px) 100vw, 0vw"
               priority
@@ -353,7 +699,7 @@ export function Hero() {
                   }}
                   className="relative z-10 h-[58px] w-[178px] rounded-xl bg-black px-0 text-[1.16rem] font-medium text-white shadow-none hover:bg-black/85 sm:h-[60px] sm:w-[150px] sm:px-0"
                 >
-                  See Research
+                  see research
                 </Button7>
               </span>
             </div>

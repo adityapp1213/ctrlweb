@@ -10,34 +10,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${SITE_URL}/monarch`,
+      url: `${SITE_URL}/research`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}/interaction-systems`,
+      url: `${SITE_URL}/first`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/godel-model`,
+      url: `${SITE_URL}/company`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/scaling-synthetic-data`,
-      lastModified: "2026-07-04",
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/faq`,
-      lastModified: "2026-07-04",
-      changeFrequency: "monthly",
-      priority: 0.6,
     },
   ];
 }

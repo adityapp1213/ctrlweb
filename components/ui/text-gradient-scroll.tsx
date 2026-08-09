@@ -22,6 +22,7 @@ type TextGradientScrollProps = {
   progress?: MotionValue<number>;
   range?: [number, number];
   dottedWords?: Record<string, string>;
+  dottedPhrases?: Record<string, string>;
 };
 
 type SegmentProps = {
@@ -57,6 +58,7 @@ function TextGradientScroll({
   progress,
   range: textRange = [0, 1],
   dottedWords,
+  dottedPhrases,
 }: TextGradientScrollProps) {
   const ref = useRef<HTMLParagraphElement>(null);
   const { scrollYProgress } = useScroll({
@@ -67,53 +69,99 @@ function TextGradientScroll({
   const words = text.split(" ");
   const activeProgress = progress ?? scrollYProgress;
   const textRangeSize = textRange[1] - textRange[0];
+  const normalizedWords = words.map(normalizeTextToken);
+  const normalizedDottedWords = Object.entries(dottedWords ?? {}).reduce<
+    Record<string, string>
+  >((acc, [word, href]) => {
+    acc[normalizeTextToken(word)] = href;
+    return acc;
+  }, {});
+  const phraseEntries = Object.entries(dottedPhrases ?? {}).map(
+    ([phrase, href]) => ({
+      href,
+      phrase,
+      tokens: phrase.split(" ").map(normalizeTextToken),
+    }),
+  );
+  const renderedSegments = [];
+
+  for (let index = 0; index < words.length; index += 1) {
+    const wordSize = textRangeSize / words.length;
+    const start = textRange[0] + index * wordSize;
+    const matchingPhrase = phraseEntries.find(({ tokens }) =>
+      tokens.every((token, tokenIndex) => normalizedWords[index + tokenIndex] === token),
+    );
+
+    if (matchingPhrase) {
+      const phraseWords = words.slice(index, index + matchingPhrase.tokens.length);
+      const end = start + wordSize * matchingPhrase.tokens.length;
+
+      renderedSegments.push(
+        <Fragment key={`${matchingPhrase.phrase}-${index}`}>
+          <SpecialWord
+            progress={activeProgress}
+            range={[start, end]}
+            href={matchingPhrase.href}
+          >
+            {phraseWords.join(" ")}
+          </SpecialWord>{" "}
+        </Fragment>,
+      );
+
+      index += matchingPhrase.tokens.length - 1;
+      continue;
+    }
+
+    const end = start + wordSize;
+    const range: [number, number] = [start, end];
+    const normalizedWord = normalizeTextToken(words[index]);
+    const dottedHref = normalizedDottedWords[normalizedWord];
+
+    if (dottedHref) {
+      renderedSegments.push(
+        <Fragment key={`${words[index]}-${index}`}>
+          <SpecialWord
+            progress={activeProgress}
+            range={range}
+            href={dottedHref}
+          >
+            {words[index]}
+          </SpecialWord>{" "}
+        </Fragment>,
+      );
+      continue;
+    }
+
+    const segment =
+      type === "word" ? (
+        <Word progress={activeProgress} range={range}>
+          {words[index]}
+        </Word>
+      ) : (
+        <Letter progress={activeProgress} range={range}>
+          {words[index]}
+        </Letter>
+      );
+
+    renderedSegments.push(
+      <Fragment key={`${words[index]}-${index}`}>
+        {segment}
+        {" "}
+      </Fragment>,
+    );
+  }
 
   return (
     <TextGradientScrollContext.Provider value={{ textOpacity }}>
       <p ref={ref} className={cn("relative m-0", className)}>
-        {words.map((word, index) => {
-          const wordSize = textRangeSize / words.length;
-          const start = textRange[0] + index * wordSize;
-          const end = start + wordSize;
-          const range: [number, number] = [start, end];
-          const normalizedWord = word.replace(/[^\w]/g, "");
-          const dottedHref = dottedWords?.[normalizedWord];
-
-          if (dottedHref) {
-            return (
-              <Fragment key={`${word}-${index}`}>
-                <SpecialWord
-                  progress={activeProgress}
-                  range={range}
-                  href={dottedHref}
-                >
-                  {word}
-                </SpecialWord>{" "}
-              </Fragment>
-            );
-          }
-
-          const segment =
-            type === "word" ? (
-              <Word progress={activeProgress} range={range}>
-                {word}
-              </Word>
-            ) : (
-              <Letter progress={activeProgress} range={range}>
-                {word}
-              </Letter>
-            );
-
-          return (
-            <Fragment key={`${word}-${index}`}>
-              {segment}
-              {" "}
-            </Fragment>
-          );
-        })}
+        {renderedSegments}
       </p>
     </TextGradientScrollContext.Provider>
   );
+}
+
+function normalizeTextToken(token: string) {
+  return token.replace(/[^\w]/g, "").toLowerCase();
 }
 
 const Word = ({ children, progress, range }: SegmentProps) => {

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AtomLogo } from "@/components/logo";
@@ -11,15 +10,13 @@ import {
 } from "@/components/butterfly/flapping-butterfly";
 
 const menuItems = [
-  { label: "Description", sectionId: "description" },
-  { label: "Features", sectionId: "features" },
-  { label: "Why Ctrl", sectionId: "why-ctrl" },
   { label: "Research", sectionId: "research" },
-  { label: "About Us", sectionId: "about-us" },
-  { label: "FAQ", sectionId: "faq" },
+  { label: "Firth", sectionId: "description" },
+  { label: "Company", sectionId: "about-us" },
 ];
 
 const labHref = "https://lab.atomctrl.com";
+const siteUrl = "https://atomctrl.com";
 
 const navButterflies = [
   {
@@ -103,10 +100,7 @@ export function BlogNav() {
   }, []);
 
   const navShellClass = [
-    "mx-auto mt-3 w-full max-w-7xl overflow-visible rounded-[1.35rem] border border-transparent transition-[max-width,background-color,border-color,box-shadow,backdrop-filter] duration-300",
-    isScrolled
-      ? "max-w-5xl border-black/10 bg-white/85 shadow-lg shadow-black/5 backdrop-blur-md"
-      : "",
+    "mx-auto mt-4 w-full max-w-[50rem] overflow-visible rounded-xl border border-black/10 bg-white/85 shadow-sm shadow-black/5 backdrop-blur-md transition-[max-width,background-color,border-color,box-shadow,backdrop-filter] duration-300",
   ]
     .filter(Boolean)
     .join(" ");
@@ -118,13 +112,13 @@ export function BlogNav() {
         className="fixed z-[100] w-full overflow-visible px-2"
       >
         <div className={navShellClass}>
-          <div className="relative flex h-20 items-center justify-between px-3 sm:px-6">
-            <Link href="/" aria-label="home" className="flex items-center gap-1">
-              <AtomLogo size={48} title="Ctrl logo" className="shrink-0 text-black" />
-              <span className="shadows-into-light-regular text-[1.9rem] tracking-[0.08em] text-black">
+          <div className="relative flex h-14 items-center justify-between px-3 sm:px-5">
+            <a href={siteUrl} aria-label="home" className="flex items-center gap-1">
+              <AtomLogo size={38} title="Ctrl logo" className="shrink-0 text-black" />
+              <span className="shadows-into-light-regular text-[1.55rem] tracking-[0.08em] text-black">
                 Ctrl
               </span>
-            </Link>
+            </a>
 
             <button
               type="button"
@@ -137,7 +131,7 @@ export function BlogNav() {
             </button>
 
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
-              <ul className="flex gap-10 text-[0.98rem]">
+              <ul className="flex gap-8 text-[0.92rem]">
                 {menuItems.map((item) => (
                   <li key={item.label}>
                     <SectionNavLink
@@ -160,7 +154,7 @@ export function BlogNav() {
             </div>
 
             <div className="hidden w-fit items-center justify-end lg:flex">
-              <WaitlistCta className="inline-flex items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-medium text-white transition-colors hover:bg-black/85" />
+              <WaitlistCta className="inline-flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85" />
             </div>
 
             <div className="absolute inset-x-0 top-full mx-4 mt-4 hidden rounded-[1.75rem] border border-black/10 bg-white/92 p-6 shadow-2xl shadow-black/10 backdrop-blur-md in-data-[state=active]:block lg:hidden">
@@ -190,7 +184,7 @@ export function BlogNav() {
 
                 <WaitlistCta
                   wrapperClassName="w-full"
-                  className="inline-flex w-full items-center justify-center rounded-xl bg-black px-6 py-3.5 text-base font-medium text-white transition-colors hover:bg-black/85"
+                  className="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
                 />
               </div>
             </div>

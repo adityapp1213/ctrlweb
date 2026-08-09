@@ -7,7 +7,7 @@ type Button7Props = {
 };
 
 const Button7 = ({
-  children = "Waitlist",
+  children = "waitlist",
   className = "",
   onClick,
 }: Button7Props) => {

@@ -2,6 +2,7 @@ import {
   FlappingButterfly,
   InvertedFlappingButterfly,
 } from "@/components/butterfly/flapping-butterfly";
+import { palatino } from "@/app/fonts";
 
 const footerButterflies = [
   {
@@ -24,7 +25,7 @@ const footerButterflies = [
 export function FooterSection() {
   return (
     <section className="relative z-10 bg-white px-4 pb-4 pt-4 sm:px-6 lg:pt-6">
-      <footer className="mx-auto flex min-h-[58vh] w-full max-w-[calc(100vw-2rem)] flex-col justify-end overflow-hidden rounded-xl bg-[#e2687d] px-5 pb-6 text-white sm:px-7 lg:min-h-[62vh] lg:max-w-[calc(100vw-3rem)] lg:px-8 lg:pb-8">
+      <footer className={`${palatino.className} mx-auto flex min-h-[58vh] w-full max-w-[calc(100vw-2rem)] flex-col justify-end overflow-hidden rounded-xl bg-[#e2687d] px-5 pb-6 text-white sm:px-7 lg:min-h-[62vh] lg:max-w-[calc(100vw-3rem)] lg:px-8 lg:pb-8`}>
         <div className="relative">
           {footerButterflies.map((butterfly, index) =>
             butterfly.inverted ? (
@@ -46,14 +47,14 @@ export function FooterSection() {
           </h2>
         </div>
 
-        <div className="mt-3 flex w-full flex-col items-start gap-5 text-sm font-medium uppercase leading-tight tracking-[-0.04em] text-white sm:mt-0 sm:flex-row sm:items-end sm:justify-between sm:text-base lg:text-lg">
+        <div className="mt-3 flex w-full flex-col items-start gap-5 text-sm font-medium leading-tight tracking-[-0.04em] text-white sm:mt-0 sm:flex-row sm:items-end sm:justify-between sm:text-base lg:text-lg">
           <div className="flex w-full items-start justify-between gap-8 sm:w-fit sm:justify-start sm:gap-16">
-            <p>Designer aditya & co-designer supriya</p>
+            <p>designer aditya & co-designer supriya</p>
           </div>
 
           <div className="flex w-full items-start justify-between gap-8 sm:w-fit sm:justify-start sm:gap-16">
             <p className="text-right sm:text-left">
-              ALL RIGHTS RESERVED © 2026
+              all rights reserved © 2026
             </p>
           </div>
         </div>
