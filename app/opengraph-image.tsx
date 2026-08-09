@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Atom Ctrl, AI research lab";
+export const alt = "atom ctrl, ai research lab";
 
 export const size = {
   width: 1200,
@@ -10,7 +10,7 @@ export const size = {
 export const contentType = "image/png";
 
 const siteDescription =
-  "Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.";
+  "atom ctrl is an ai research lab building thinking machines that can understand, reason, and learn from the world.";
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -100,7 +100,7 @@ export default function OpenGraphImage() {
                 letterSpacing: "-0.055em",
               }}
             >
-              Atom Ctrl
+              atom ctrl
             </div>
             <div
               style={{

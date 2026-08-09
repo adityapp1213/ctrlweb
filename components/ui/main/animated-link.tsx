@@ -364,7 +364,7 @@ const LinkDottedArrow = ({
             <span className="relative block overflow-hidden rounded-xl bg-[#f5f1ea] sm:rounded-[1.35rem]">
               <Image
                 src="/assets/monarch.png"
-                alt="Monarch preview"
+                alt="monarch preview"
                 width={512}
                 height={360}
                 className="aspect-[16/10.5] w-full object-cover"
@@ -373,10 +373,10 @@ const LinkDottedArrow = ({
             <span className="relative z-10 block px-4 pb-4 pt-5 sm:px-6 sm:pb-6 sm:pt-7">
               <span className="block">
                 <span className="block text-[1.18rem] font-medium leading-tight tracking-[-0.025em] text-black/90 sm:text-[1.42rem]">
-                  Explore Monarch
+                  explore monarch
                 </span>
                 <span className="mt-2 block max-w-[18rem] text-[0.92rem] leading-relaxed text-black/52 sm:mt-3 sm:max-w-[19rem] sm:text-[1.02rem]">
-                  Dive deeper into our family of thought-grounded multimodal
+                  dive deeper into our family of thought-grounded multimodal
                   models.
                 </span>
               </span>

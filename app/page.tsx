@@ -1,17 +1,17 @@
 import { Hero } from "@/components/hero";
-import { DescriptionSection } from "@/app/description/page";
-import { FeaturesSection } from "@/app/features/page";
-import { WhyCtrlSection } from "@/app/why-ctrl/page";
-import { ResearchSection } from "@/app/research/page";
-import { AboutUsSection } from "@/app/about-us/page";
-import { FaqSection } from "@/app/faq/page";
+import { DescriptionSection } from "@/app/_sections/description-section";
+import { FeaturesSection } from "@/app/_sections/features-section";
+import { WhyCtrlSection } from "@/app/_sections/why-ctrl-section";
+import { ResearchSection } from "@/app/_sections/research-section";
+import { AboutUsSection } from "@/app/_sections/about-us-section";
+import { FaqSection } from "@/app/_sections/faq-section";
 import { FooterSection } from "@/components/footer-section";
 
 export default function Home() {
   return (
     <>
       <h1 className="sr-only">
-        Atom Ctrl, an AI research lab building Thinking Machines
+        atom ctrl, an ai research lab building thinking machines
       </h1>
       <Hero />
       <DescriptionSection />

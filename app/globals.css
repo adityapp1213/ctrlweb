@@ -3,8 +3,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-palatino), "Palatino Linotype", Palatino, Georgia,
-    serif;
+  --font-sans: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
   --font-mono: "Courier New", Courier, monospace;
 }
 

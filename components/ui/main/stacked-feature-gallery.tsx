@@ -20,33 +20,33 @@ const StackedFeatureGalleryDemo = () => {
   const images = [
     {
       src: "/images/x.com/13.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/9.jpeg",
-      alt: "Illustrations by ©AarzooAly",
+      alt: "illustrations by ©aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/20.jpeg",
-      alt: "Illustrations by ©AarzooAly",
+      alt: "illustrations by ©aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/21.jpeg",
-      alt: "Illustrations by ©AarzooAly",
+      alt: "illustrations by ©aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/25.jpeg",
-      alt: "Illustrations by ©AarzooAly",
+      alt: "illustrations by ©aarzooaly",
       code: "# 23",
     },
 
     {
       src: "/images/x.com/32.jpeg",
-      alt: "Illustrations by ©AarzooAly",
+      alt: "illustrations by ©aarzooaly",
       code: "# 23",
     },
   ];
@@ -117,16 +117,6 @@ const StackedFeatureGallery = ({
                 <AnimatePresence>
                   {activeImage === index && (
                     <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute h-full w-full bg-gradient-to-t from-black/50 to-transparent"
-                    />
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {activeImage === index && (
-                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
@@ -155,7 +145,7 @@ const StackedFeatureGallery = ({
                     transition={{ duration: 0.22 }}
                     className="mb-3 mt-2 w-full max-w-[24rem] px-5 text-left sm:px-3 md:hidden"
                   >
-                    <p className="text-xs uppercase tracking-[0.24em] text-black/35">
+                    <p className="text-xs tracking-[0.24em] text-black/35">
                       {image.eyebrow}
                     </p>
                     <h3 className="mt-2 text-2xl font-medium leading-tight tracking-[-0.025em] text-black">

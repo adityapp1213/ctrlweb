@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   FlappingButterfly,
@@ -9,9 +10,9 @@ import {
 import { AtomLogo } from "@/components/logo";
 
 const routeNavItems = [
-  { label: "Research", href: "/research" },
-  { label: "Firth", href: "/firth" },
-  { label: "Company", href: "/company" },
+  { label: "research", href: "/research" },
+  { label: "firth", href: "/first" },
+  { label: "company", href: "/company" },
 ] as const;
 
 const navButterflies = [
@@ -88,7 +89,7 @@ function ButterflyWaitlistLink({
         rel="noopener noreferrer"
         className={className}
       >
-        Join Waitlist
+        join waitlist
       </a>
     </span>
   );
@@ -116,21 +117,21 @@ export function RouteTopNav() {
       >
         <div className="relative mx-auto mt-4 w-full max-w-[50rem] overflow-visible rounded-xl border border-black/10 bg-white/85 shadow-sm shadow-black/5 backdrop-blur-md">
           <div className="relative flex h-14 items-center justify-between px-3 sm:px-5">
-            <a href="/" aria-label="home" className="flex items-center gap-1">
+            <Link href="/" aria-label="home" className="flex items-center gap-1">
               <AtomLogo
                 size={38}
-                title="Ctrl logo"
+                title="ctrl logo"
                 className="shrink-0 text-black"
               />
               <span className="shadows-into-light-regular text-[1.55rem] tracking-[0.08em] text-black">
-                Ctrl
+                ctrl
               </span>
-            </a>
+            </Link>
 
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
-              aria-label={menuOpen ? "Close Menu" : "Open Menu"}
+              aria-label={menuOpen ? "close menu" : "open menu"}
               className="relative z-20 block cursor-pointer p-3 lg:hidden"
             >
               <Menu className="m-auto size-7 duration-200 in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0" />

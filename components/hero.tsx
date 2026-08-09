@@ -11,9 +11,9 @@ import { AtomLogo } from "@/components/logo";
 import Button7 from "@/components/ui/button-7";
 
 const menuItems = [
-  { label: "Research", href: "/research" },
-  { label: "Firth", href: "/firth" },
-  { label: "Company", href: "/company" },
+  { label: "research", href: "/research" },
+  { label: "firth", href: "/first" },
+  { label: "company", href: "/company" },
 ] as const;
 
 const siteUrl = "https://atomctrl.com";
@@ -25,9 +25,9 @@ const labNavFrames = [
 
 const researchMenuItems = [
   {
-    title: "Monarch",
-    description: "Thought-grounded multimodal architecture.",
-    href: `${siteUrl}/monarch`,
+    title: "monarch",
+    description: "thought-grounded multimodal architecture.",
+    href: "/research",
     image: "/assets/research/1o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -43,9 +43,9 @@ const researchMenuItems = [
     ],
   },
   {
-    title: "Interaction system",
-    description: "Interfaces for reasoning with thinking machines.",
-    href: `${siteUrl}/interaction-systems`,
+    title: "interaction system",
+    description: "interfaces for reasoning with thinking machines.",
+    href: "/research",
     image: "/assets/research/2o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -61,9 +61,9 @@ const researchMenuItems = [
     ],
   },
   {
-    title: "Godel model",
-    description: "Reflective model structure and recursive checks.",
-    href: `${siteUrl}/godel-model`,
+    title: "godel model",
+    description: "reflective model structure and recursive checks.",
+    href: "/research",
     image: "/assets/research/4o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -79,9 +79,9 @@ const researchMenuItems = [
     ],
   },
   {
-    title: "Scaling synthetic data",
-    description: "How generated data changes training behavior.",
-    href: `${siteUrl}/scaling-synthetic-data`,
+    title: "scaling synthetic data",
+    description: "how generated data changes training behavior.",
+    href: "/research",
     image: "/assets/research/3o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -100,13 +100,13 @@ const researchMenuItems = [
 
 const firthMenuItems = [
   {
-    title: "Firth overview",
-    description: "Monarch v3 and the JEPA-centered architecture.",
+    title: "firth overview",
+    description: "monarch v3 and the jepa-centered architecture.",
     href: `${siteUrl}/##description`,
   },
   {
-    title: "Architecture notes",
-    description: "A future research brief for the next model track.",
+    title: "architecture notes",
+    description: "a future research brief for the next model track.",
     href: `${siteUrl}/##research`,
   },
 ] as const;
@@ -230,17 +230,17 @@ function ResearchMegaMenu() {
           <div className="flex items-end justify-between gap-6">
             <div>
               <p className="text-xs tracking-[0.18em] text-black/35">
-                Research
+                research
               </p>
               <h2 className="mt-2 text-2xl font-normal leading-none text-black">
-                Current briefs and model notes
+                current briefs and model notes
               </h2>
             </div>
             <a
               href="https://atomctrl.com/##research"
               className="inline-flex items-center gap-1 text-sm text-black/45 transition-colors hover:text-black"
             >
-              View all
+              view all
               <ArrowUpRight className="size-4" />
             </a>
           </div>
@@ -280,7 +280,7 @@ function ResearchMegaMenu() {
                       </span>
                     </span>
                     <span className="mt-4 inline-flex items-center gap-1 text-xs text-black/42 transition-colors group-hover:text-black">
-                      Read brief
+                      read brief
                       <ArrowUpRight className="size-3.5" />
                     </span>
                   </span>
@@ -370,15 +370,15 @@ function ResearchMegaMenu() {
                 </span>
               </span>
               <span className="mt-5 block text-2xl font-normal leading-none text-black">
-                Atom Ctrl Lab
+                atom ctrl lab
               </span>
               <span className="mt-3 block text-sm leading-6 text-black/54">
-                Experiments, prototypes, and working notes connected to the
-                Monarch research track.
+                experiments, prototypes, and working notes connected to the
+                monarch research track.
               </span>
             </span>
             <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-colors group-hover:bg-black/85">
-              Open Lab
+              open lab
               <ArrowUpRight className="size-4" />
             </span>
           </span>
@@ -394,12 +394,12 @@ function FirthMegaMenu() {
       <div className="grid min-h-[18rem] grid-cols-[1fr_19rem] gap-5 rounded-[1.75rem] border border-black/10 bg-white p-5 shadow-[0_24px_70px_rgba(0,0,0,0.14)]">
         <div className="grid content-start gap-5">
           <div>
-            <p className="text-xs tracking-[0.18em] text-black/35">Firth</p>
+            <p className="text-xs tracking-[0.18em] text-black/35">firth</p>
             <h2 className="mt-2 text-2xl font-normal leading-none text-black">
-              Monarch v3 model track
+              monarch v3 model track
             </h2>
             <p className="mt-3 max-w-[32rem] text-sm leading-6 text-black/50">
-              The next version of Monarch, built around JEPA as the primary
+              the next version of monarch, built around jepa as the primary
               model architecture.
             </p>
           </div>
@@ -441,18 +441,18 @@ function FirthMegaMenu() {
             <span>
               <span className="flex aspect-[1.35] items-center justify-center rounded-xl bg-[#f7f3ea] px-6 text-center">
                 <span className="text-2xl font-normal leading-tight text-black">
-                  Firth research brief
+                  firth research brief
                 </span>
               </span>
               <span className="mt-5 block text-2xl font-normal leading-none text-black">
-                Coming next
+                coming next
               </span>
               <span className="mt-3 block text-sm leading-6 text-black/54">
-                A focused note for the JEPA-based Monarch v3 direction.
+                a focused note for the jepa-based monarch v3 direction.
               </span>
             </span>
             <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-colors group-hover:bg-black/85">
-              View research
+              view research
               <ArrowUpRight className="size-4" />
             </span>
           </span>
@@ -537,13 +537,13 @@ export function Hero() {
               >
                 <AtomLogo
                   size={38}
-                  title="Ctrl logo"
+                  title="ctrl logo"
                   className="shrink-0 text-black"
                 />
                 <span
                   className="shadows-into-light-regular text-[1.55rem] tracking-[0.08em] text-black"
                 >
-                  Ctrl
+                  ctrl
 
                 </span>
               </a>
@@ -551,7 +551,7 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => setMenuOpen((open) => !open)}
-                aria-label={menuOpen ? "Close Menu" : "Open Menu"}
+                aria-label={menuOpen ? "close menu" : "open menu"}
                 className="relative z-20 block cursor-pointer p-3 lg:hidden"
               >
                 <Menu className="m-auto size-7 duration-200 in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0" />
@@ -595,7 +595,7 @@ export function Hero() {
                   }}
                   className="inline-flex items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
                 >
-                  <span>Join Waitlist</span>
+                  <span>join waitlist</span>
                 </ButterflyCta>
               </div>
 
@@ -620,7 +620,7 @@ export function Hero() {
                         onClick={() => setMenuOpen(false)}
                         className="block font-normal text-black/60 transition-[color,font-weight] duration-150 hover:font-medium hover:text-black focus-visible:font-medium focus-visible:text-black focus-visible:outline-none"
                       >
-                        Lab
+                    lab
                       </a>
                     </li>
                     */}
@@ -639,7 +639,7 @@ export function Hero() {
                     }}
                     className="inline-flex w-full items-center justify-center rounded-lg bg-black px-5 py-2.5 text-[0.95rem] font-medium text-white transition-colors hover:bg-black/85"
                   >
-                    <span>Join Waitlist</span>
+                    <span>join waitlist</span>
                   </ButterflyCta>
                 </div>
               </div>
@@ -656,7 +656,7 @@ export function Hero() {
           <div className="absolute inset-0">
             <Image
               src="/assets/mainback6.png"
-              alt="Hero background"
+              alt="hero background"
               fill
               sizes="(min-width: 640px) 100vw, 0vw"
               priority
@@ -664,7 +664,7 @@ export function Hero() {
             />
             <Image
               src="/assets/mobileback.svg"
-              alt="Hero background"
+              alt="hero background"
               fill
               sizes="(max-width: 639px) 100vw, 0vw"
               priority
@@ -699,7 +699,7 @@ export function Hero() {
                   }}
                   className="relative z-10 h-[58px] w-[178px] rounded-xl bg-black px-0 text-[1.16rem] font-medium text-white shadow-none hover:bg-black/85 sm:h-[60px] sm:w-[150px] sm:px-0"
                 >
-                  See Research
+                  see research
                 </Button7>
               </span>
             </div>

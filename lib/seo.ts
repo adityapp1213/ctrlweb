@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 export const SITE_URL = "https://atomctrl.com";
-export const SITE_NAME = "Atom Ctrl";
+export const SITE_NAME = "atom ctrl";
 export const SITE_DESCRIPTION =
-  "Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.";
-export const FOUNDER_NAME = "Aditya Prasad Panigrahi";
+  "atom ctrl is an ai research lab building thinking machines that can understand, reason, and learn from the world.";
+export const FOUNDER_NAME = "aditya prasad panigrahi";
 
 export type ArticleSeo = {
   path: `/${string}`;

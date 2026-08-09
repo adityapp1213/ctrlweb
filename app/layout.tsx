@@ -7,7 +7,7 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/seo";
-import { palatino, shadowsIntoLight } from "./fonts";
+import { instrumentSerif, shadowsIntoLight } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,22 +19,22 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
-    "Atom Ctrl",
-    "AI research lab",
+    "atom ctrl",
+    "ai research lab",
     "thinking machines",
     "thought-grounded intelligence",
     "thought-grounded models",
     "multimodal intelligence",
-    "AI reasoning",
-    "AI memory",
+    "ai reasoning",
+    "ai memory",
     "synthetic data research",
-    "human AI interaction",
-    "Monarch models",
+    "human ai interaction",
+    "monarch models",
   ],
   authors: [{ name: FOUNDER_NAME, url: `${SITE_URL}/#about-us` }],
   creator: FOUNDER_NAME,
   publisher: SITE_NAME,
-  category: "AI research",
+  category: "ai research",
   alternates: {
     canonical: "/",
   },
@@ -86,12 +86,12 @@ const siteJsonLd = {
         "https://www.instagram.com/why.adi_tya",
       ],
       knowsAbout: [
-        "Thought-grounded artificial intelligence",
-        "Multimodal intelligence",
-        "Machine reasoning",
-        "AI memory systems",
-        "Synthetic training data",
-        "Human-AI interaction",
+        "thought-grounded artificial intelligence",
+        "multimodal intelligence",
+        "machine reasoning",
+        "ai memory systems",
+        "synthetic training data",
+        "human-ai interaction",
       ],
     },
     {
@@ -116,10 +116,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${palatino.variable} ${shadowsIntoLight.variable} ${palatino.className} h-full bg-white antialiased`}
+      className={`${instrumentSerif.variable} ${shadowsIntoLight.variable} ${instrumentSerif.className} h-full bg-white antialiased`}
     >
       <head>
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="Atom Ctrl LLM index" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="atom ctrl llm index" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteJsonLd) }}

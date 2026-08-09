@@ -12,47 +12,47 @@ const ExpandableResearchGalleryDemo = () => {
   const images = [
     {
       src: "/images/x.com/13.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/32.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/20.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/21.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/19.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/1.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/2.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/3.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
     {
       src: "/images/x.com/4.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      alt: "illustrations by my fav aarzooaly",
       code: "# 23",
     },
   ];
@@ -168,7 +168,7 @@ const ExpandableResearchGallery = ({
           <div className="flex w-max snap-x snap-mandatory items-center gap-3.5 sm:gap-4 lg:gap-[1.125rem]">
           {images.map((image, index) => (
             <motion.div
-              key={image.href ?? `${image.src}-${index}`}
+              key={`${image.src}-${index}`}
               className={cn(
                 "relative h-[22rem] w-[15.25rem] shrink-0 snap-start overflow-hidden rounded-3xl bg-[#fbf8f2] transition-[filter,opacity] duration-500 ease-out sm:h-[23.5rem] sm:w-[16.25rem]",
                 hoveredIndex !== null && hoveredIndex !== index
@@ -229,7 +229,7 @@ const ExpandableResearchGallery = ({
                   href={image.href ?? "#"}
                   className="inline-flex shrink-0 items-center gap-1 rounded-xl bg-black px-2.5 py-2.5 text-xs font-medium text-white shadow-[0_14px_30px_rgba(0,0,0,0.18)] transition-colors hover:bg-black/85 sm:px-3 sm:py-2.5 sm:text-xs"
                 >
-                  See blog
+                  see blog
                   <ArrowUpRight className="size-4" aria-hidden="true" />
                 </Link>
               </div>
