@@ -31,7 +31,7 @@ type InlineToken = {
   sup?: boolean;
 };
 
-const diagramColors = ["#e2687d", "#6f91df", "#49a987", "#d99a4e", "#8a78cf"];
+const diagramColors = ["#2f2f2f", "#4b4b4b", "#666666", "#858585", "#a3a3a3"];
 
 function wrapDiagramText(value: string, limit = 34) {
   const words = value.trim().split(/\s+/);

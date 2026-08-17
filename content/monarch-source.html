@@ -12,30 +12,30 @@
 
 <style>
   :root {
-    --ink: #0e0e0d;
-    --ink-2: #3a3a36;
-    --ink-3: #74736c;
-    --surface: #f8f7f3;
-    --surface-2: #ffffff;
-    --surface-3: #e4e1d8;
-    --rule: #d3d1c7;
+    --ink: #1c1c1c;
+    --ink-2: #424242;
+    --ink-3: #747474;
+    --surface: #e9e9e9;
+    --surface-2: #eeeeee;
+    --surface-3: #d5d5d5;
+    --rule: #c7c7c7;
 
-    --teal: #0f6e56;
-    --teal-light: #e1f5ee;
+    --teal: #5d5d5d;
+    --teal-light: #e3e3e3;
 
-    --purple: #3c3489;
-    --purple-light: #eeedfe;
+    --purple: #444444;
+    --purple-light: #e1e1e1;
 
-    --amber: #854f0b;
-    --amber-light: #faeeda;
+    --amber: #5b5b5b;
+    --amber-light: #e2e2e2;
 
-    --rose: #c84e66;
-    --rose-light: #fbe6eb;
+    --rose: #6c6c6c;
+    --rose-light: #dedede;
 
-    --blue: #285d8f;
-    --blue-light: #e7f1fa;
+    --blue: #5a5a5a;
+    --blue-light: #e2e2e2;
 
-    --gray-light: #f1efe8;
+    --gray-light: #e2e2e2;
 
     --mono: "DM Mono", monospace;
     --serif: "Instrument Serif", serif;
@@ -237,8 +237,8 @@
     overflow: hidden;
     border: 1px solid var(--rule);
     border-radius: 18px;
-    background: linear-gradient(180deg, #fff 0%, #fcfbf8 100%);
-    box-shadow: 0 14px 34px rgba(14, 14, 13, .05);
+    background: linear-gradient(180deg, #eeeeee 0%, #ececec 100%);
+    box-shadow: 0 14px 34px rgba(28, 28, 28, 0.05);
   }
 
   .diagram-label {
@@ -249,7 +249,7 @@
     padding: 6px 10px;
     border: 1px solid var(--surface-3);
     border-radius: 999px;
-    background: rgba(248, 247, 243, .92);
+    background: rgba(233, 233, 233, 0.92);
     color: var(--ink-3);
     font-size: 11px;
     font-weight: 500;
@@ -355,7 +355,7 @@
     padding: 22px;
     border: 1px solid var(--rule);
     border-radius: 14px;
-    background: rgba(255,255,255,.55);
+    background: rgba(238, 238, 238, 0.55);
   }
 
   .toc-title {
@@ -390,7 +390,7 @@
     padding: 26px 24px 24px;
     border: 1px solid var(--rule);
     border-radius: 14px;
-    background: rgba(255,255,255,.58);
+    background: rgba(238, 238, 238, 0.58);
   }
 
   .block::before {
@@ -454,7 +454,7 @@
   .metric {
     padding: 18px;
     border-top: 2px solid var(--metric-accent, var(--teal));
-    background: rgba(255,255,255,.58);
+    background: rgba(238, 238, 238, 0.58);
   }
 
   .metric-value {
@@ -693,133 +693,133 @@
             <defs>
               <marker id="arrow-main" markerWidth="10" markerHeight="10"
                       refX="8" refY="5" orient="auto">
-                <path d="M0,0 L10,5 L0,10 Z" fill="#777167"/>
+                <path d="M0,0 L10,5 L0,10 Z" fill="#737373"/>
               </marker>
             </defs>
 
             <rect x="65" y="30" width="630" height="78" rx="24"
-                  fill="#fff5f8" stroke="#c84e66"/>
+                  fill="#e9e9e9" stroke="#6c6c6c"/>
             <text x="380" y="58" text-anchor="middle"
-                  class="svg-title" fill="#8e3141">Raw multimodal input</text>
+                  class="svg-title" fill="#4d4d4d">Raw multimodal input</text>
             <text x="380" y="84" text-anchor="middle"
-                  class="svg-label" fill="#8e3141">
+                  class="svg-label" fill="#4d4d4d">
               text · image · audio · video · document
             </text>
 
             <line x1="380" y1="108" x2="380" y2="140"
-                  stroke="#777167" marker-end="url(#arrow-main)"/>
+                  stroke="#737373" marker-end="url(#arrow-main)"/>
 
             <rect x="65" y="140" width="630" height="88" rx="24"
-                  fill="#e7f1fa" stroke="#285d8f"/>
+                  fill="#e2e2e2" stroke="#5a5a5a"/>
             <text x="380" y="169" text-anchor="middle"
-                  class="svg-title" fill="#285d8f">
+                  class="svg-title" fill="#5a5a5a">
               Frozen Omni-Embed multimodal encoder
             </text>
             <text x="380" y="197" text-anchor="middle"
-                  class="svg-label" fill="#285d8f">
+                  class="svg-label" fill="#5a5a5a">
               raw input → native 2048-d semantic vector
             </text>
 
             <line x1="380" y1="228" x2="380" y2="260"
-                  stroke="#777167" marker-end="url(#arrow-main)"/>
+                  stroke="#737373" marker-end="url(#arrow-main)"/>
 
             <rect x="65" y="260" width="630" height="88" rx="24"
-                  fill="#e1f5ee" stroke="#0f6e56"/>
+                  fill="#e3e3e3" stroke="#5d5d5d"/>
             <text x="380" y="289" text-anchor="middle"
-                  class="svg-title" fill="#0f6e56">
+                  class="svg-title" fill="#5d5d5d">
               Adapter & Thought Transformer
             </text>
             <text x="380" y="317" text-anchor="middle"
-                  class="svg-label" fill="#0f6e56">
+                  class="svg-label" fill="#5d5d5d">
               2048 → 1536 → organized ThoughtVector
             </text>
 
             <line x1="380" y1="348" x2="380" y2="380"
-                  stroke="#777167" marker-end="url(#arrow-main)"/>
+                  stroke="#737373" marker-end="url(#arrow-main)"/>
 
             <rect x="65" y="380" width="300" height="108" rx="24"
-                  fill="#eeedfe" stroke="#3c3489"/>
+                  fill="#e1e1e1" stroke="#444444"/>
             <text x="215" y="410" text-anchor="middle"
-                  class="svg-title" fill="#3c3489">PersistentSelf</text>
+                  class="svg-title" fill="#444444">PersistentSelf</text>
             <text x="215" y="438" text-anchor="middle"
-                  class="svg-label" fill="#3c3489">
+                  class="svg-label" fill="#444444">
               learned blank state for new users
             </text>
             <text x="215" y="461" text-anchor="middle"
-                  class="svg-label" fill="#3c3489">
+                  class="svg-label" fill="#444444">
               bounded runtime updates
             </text>
 
             <rect x="395" y="380" width="300" height="108" rx="24"
-                  fill="#faeeda" stroke="#854f0b"/>
+                  fill="#e2e2e2" stroke="#5b5b5b"/>
             <text x="545" y="410" text-anchor="middle"
-                  class="svg-title" fill="#854f0b">Explicit memory</text>
+                  class="svg-title" fill="#5b5b5b">Explicit memory</text>
             <text x="545" y="438" text-anchor="middle"
-                  class="svg-label" fill="#854f0b">
+                  class="svg-label" fill="#5b5b5b">
               semantic concepts & past episodes
             </text>
             <text x="545" y="461" text-anchor="middle"
-                  class="svg-label" fill="#854f0b">
+                  class="svg-label" fill="#5b5b5b">
               IVF-PQ & HNSW retrieval
             </text>
 
             <path d="M215 488 C215 522 322 516 380 548"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-main)"/>
             <path d="M545 488 C545 522 438 516 380 548"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-main)"/>
 
             <rect x="65" y="548" width="630" height="88" rx="24"
-                  fill="#fff5f8" stroke="#c84e66"/>
+                  fill="#e9e9e9" stroke="#6c6c6c"/>
             <text x="380" y="577" text-anchor="middle"
-                  class="svg-title" fill="#8e3141">
+                  class="svg-title" fill="#4d4d4d">
               Assessment & active workspace
             </text>
             <text x="380" y="605" text-anchor="middle"
-                  class="svg-label" fill="#8e3141">
+                  class="svg-label" fill="#4d4d4d">
               thought, memory & risk · novelty · confidence
             </text>
 
             <line x1="380" y1="636" x2="380" y2="668"
-                  stroke="#777167" marker-end="url(#arrow-main)"/>
+                  stroke="#737373" marker-end="url(#arrow-main)"/>
 
             <rect x="65" y="668" width="630" height="88" rx="24"
-                  fill="#faeeda" stroke="#854f0b"/>
+                  fill="#e2e2e2" stroke="#5b5b5b"/>
             <text x="380" y="697" text-anchor="middle"
-                  class="svg-title" fill="#854f0b">
+                  class="svg-title" fill="#5b5b5b">
               Specialist routing and fusion
             </text>
             <text x="380" y="725" text-anchor="middle"
-                  class="svg-label" fill="#854f0b">
+                  class="svg-label" fill="#5b5b5b">
               top-k learned experts · attention · gate-weighted merge
             </text>
 
             <line x1="380" y1="756" x2="380" y2="788"
-                  stroke="#777167" marker-end="url(#arrow-main)"/>
+                  stroke="#737373" marker-end="url(#arrow-main)"/>
 
             <rect x="65" y="788" width="630" height="88" rx="24"
-                  fill="#e1f5ee" stroke="#0f6e56"/>
+                  fill="#e3e3e3" stroke="#5d5d5d"/>
             <text x="380" y="817" text-anchor="middle"
-                  class="svg-title" fill="#0f6e56">
+                  class="svg-title" fill="#5d5d5d">
               Fixed-depth Reasoning Transformer
             </text>
             <text x="380" y="845" text-anchor="middle"
-                  class="svg-label" fill="#0f6e56">
+                  class="svg-label" fill="#5d5d5d">
               one pass · six distinct layers · no recursive loop
             </text>
 
             <line x1="380" y1="876" x2="380" y2="908"
-                  stroke="#777167" marker-end="url(#arrow-main)"/>
+                  stroke="#737373" marker-end="url(#arrow-main)"/>
 
             <rect x="65" y="908" width="630" height="80" rx="24"
-                  fill="#eeedfe" stroke="#3c3489"/>
+                  fill="#e1e1e1" stroke="#444444"/>
             <text x="380" y="936" text-anchor="middle"
-                  class="svg-title" fill="#3c3489">
+                  class="svg-title" fill="#444444">
               Output & optional learning
             </text>
             <text x="380" y="963" text-anchor="middle"
-                  class="svg-label" fill="#3c3489">
+                  class="svg-label" fill="#444444">
               generated tokens · episode write · bounded self update
             </text>
           </svg>
@@ -1002,60 +1002,60 @@ manifest: encoder revision · dtype · normalization · counts</div>
             <defs>
               <marker id="arrow-thought" markerWidth="10" markerHeight="10"
                       refX="8" refY="5" orient="auto">
-                <path d="M0,0 L10,5 L0,10 Z" fill="#777167"/>
+                <path d="M0,0 L10,5 L0,10 Z" fill="#737373"/>
               </marker>
             </defs>
 
             <rect x="28" y="84" width="144" height="82" rx="20"
-                  fill="#fff5f8" stroke="#c84e66"/>
+                  fill="#e9e9e9" stroke="#6c6c6c"/>
             <text x="100" y="112" text-anchor="middle"
-                  class="svg-title" fill="#8e3141">Experience</text>
+                  class="svg-title" fill="#4d4d4d">Experience</text>
             <text x="100" y="140" text-anchor="middle"
-                  class="svg-label" fill="#8e3141">text · image · audio</text>
+                  class="svg-label" fill="#4d4d4d">text · image · audio</text>
 
             <line x1="172" y1="125" x2="218" y2="125"
-                  stroke="#777167" marker-end="url(#arrow-thought)"/>
+                  stroke="#737373" marker-end="url(#arrow-thought)"/>
 
             <rect x="218" y="84" width="144" height="82" rx="20"
-                  fill="#e7f1fa" stroke="#285d8f"/>
+                  fill="#e2e2e2" stroke="#5a5a5a"/>
             <text x="290" y="112" text-anchor="middle"
-                  class="svg-title" fill="#285d8f">Omni-Embed</text>
+                  class="svg-title" fill="#5a5a5a">Omni-Embed</text>
             <text x="290" y="140" text-anchor="middle"
-                  class="svg-label" fill="#285d8f">2048-d native vector</text>
+                  class="svg-label" fill="#5a5a5a">2048-d native vector</text>
 
             <line x1="362" y1="125" x2="408" y2="125"
-                  stroke="#777167" marker-end="url(#arrow-thought)"/>
+                  stroke="#737373" marker-end="url(#arrow-thought)"/>
 
             <rect x="408" y="84" width="144" height="82" rx="20"
-                  fill="#faeeda" stroke="#854f0b"/>
+                  fill="#e2e2e2" stroke="#5b5b5b"/>
             <text x="480" y="112" text-anchor="middle"
-                  class="svg-title" fill="#854f0b">Adapter</text>
+                  class="svg-title" fill="#5b5b5b">Adapter</text>
             <text x="480" y="140" text-anchor="middle"
-                  class="svg-label" fill="#854f0b">2048 → 1536</text>
+                  class="svg-label" fill="#5b5b5b">2048 → 1536</text>
 
             <line x1="552" y1="125" x2="598" y2="125"
-                  stroke="#777167" marker-end="url(#arrow-thought)"/>
+                  stroke="#737373" marker-end="url(#arrow-thought)"/>
 
             <rect x="598" y="84" width="134" height="82" rx="20"
-                  fill="#e1f5ee" stroke="#0f6e56"/>
+                  fill="#e3e3e3" stroke="#5d5d5d"/>
             <text x="665" y="110" text-anchor="middle"
-                  class="svg-title" fill="#0f6e56">Thought</text>
+                  class="svg-title" fill="#5d5d5d">Thought</text>
             <text x="665" y="138" text-anchor="middle"
-                  class="svg-label" fill="#0f6e56">t ∈ R¹⁵³⁶</text>
+                  class="svg-label" fill="#5d5d5d">t ∈ R¹⁵³⁶</text>
 
             <rect x="165" y="250" width="430" height="72" rx="21"
-                  fill="#eeedfe" stroke="#3c3489"/>
+                  fill="#e1e1e1" stroke="#444444"/>
             <text x="380" y="277" text-anchor="middle"
-                  class="svg-title" fill="#3c3489">
+                  class="svg-title" fill="#444444">
               Native vectors remain reusable
             </text>
             <text x="380" y="303" text-anchor="middle"
-                  class="svg-label" fill="#3c3489">
+                  class="svg-label" fill="#444444">
               changing Monarch does not require re-running perception
             </text>
 
             <path d="M290 166 C290 214 332 219 350 250"
-                  fill="none" stroke="#3c3489"
+                  fill="none" stroke="#444444"
                   stroke-dasharray="6 7"
                   marker-end="url(#arrow-thought)"/>
           </svg>
@@ -1161,64 +1161,64 @@ m_epi ∈ R¹⁵³⁶
             <defs>
               <marker id="arrow-memory" markerWidth="10" markerHeight="10"
                       refX="8" refY="5" orient="auto">
-                <path d="M0,0 L10,5 L0,10 Z" fill="#777167"/>
+                <path d="M0,0 L10,5 L0,10 Z" fill="#737373"/>
               </marker>
             </defs>
 
             <rect x="80" y="38" width="250" height="70" rx="20"
-                  fill="#e1f5ee" stroke="#0f6e56"/>
+                  fill="#e3e3e3" stroke="#5d5d5d"/>
             <text x="205" y="73" text-anchor="middle"
-                  class="svg-title" fill="#0f6e56">ThoughtVector t</text>
+                  class="svg-title" fill="#5d5d5d">ThoughtVector t</text>
 
             <rect x="430" y="38" width="250" height="70" rx="20"
-                  fill="#eeedfe" stroke="#3c3489"/>
+                  fill="#e1e1e1" stroke="#444444"/>
             <text x="555" y="73" text-anchor="middle"
-                  class="svg-title" fill="#3c3489">PersistentSelf s</text>
+                  class="svg-title" fill="#444444">PersistentSelf s</text>
 
             <path d="M205 108 C205 148 312 146 350 176"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-memory)"/>
             <path d="M555 108 C555 148 448 146 410 176"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-memory)"/>
 
             <rect x="250" y="176" width="260" height="76" rx="22"
-                  fill="#fff5f8" stroke="#c84e66"/>
+                  fill="#e9e9e9" stroke="#6c6c6c"/>
             <text x="380" y="205" text-anchor="middle"
-                  class="svg-title" fill="#8e3141">Query Head</text>
+                  class="svg-title" fill="#4d4d4d">Query Head</text>
             <text x="380" y="231" text-anchor="middle"
-                  class="svg-label" fill="#8e3141">normalized q ∈ R¹⁵³⁶</text>
+                  class="svg-label" fill="#4d4d4d">normalized q ∈ R¹⁵³⁶</text>
 
             <path d="M380 252 C380 291 235 289 205 320"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-memory)"/>
             <path d="M380 252 C380 291 525 289 555 320"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-memory)"/>
 
             <rect x="70" y="320" width="270" height="82" rx="22"
-                  fill="#faeeda" stroke="#854f0b"/>
+                  fill="#e2e2e2" stroke="#5b5b5b"/>
             <text x="205" y="349" text-anchor="middle"
-                  class="svg-title" fill="#854f0b">Semantic memory</text>
+                  class="svg-title" fill="#5b5b5b">Semantic memory</text>
             <text x="205" y="377" text-anchor="middle"
-                  class="svg-label" fill="#854f0b">trained FAISS IVF-PQ</text>
+                  class="svg-label" fill="#5b5b5b">trained FAISS IVF-PQ</text>
 
             <rect x="420" y="320" width="270" height="82" rx="22"
-                  fill="#e7f1fa" stroke="#285d8f"/>
+                  fill="#e2e2e2" stroke="#5a5a5a"/>
             <text x="555" y="349" text-anchor="middle"
-                  class="svg-title" fill="#285d8f">Episodic memory</text>
+                  class="svg-title" fill="#5a5a5a">Episodic memory</text>
             <text x="555" y="377" text-anchor="middle"
-                  class="svg-label" fill="#285d8f">dynamic HNSW</text>
+                  class="svg-label" fill="#5a5a5a">dynamic HNSW</text>
 
             <path d="M205 402 C205 446 318 435 350 458"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-memory)"/>
             <path d="M555 402 C555 446 442 435 410 458"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-memory)"/>
 
             <rect x="250" y="448" width="260" height="50" rx="17"
-                  fill="#f1efe8" stroke="#9a968c"/>
+                  fill="#e2e2e2" stroke="#939393"/>
             <text x="380" y="473" text-anchor="middle"
                   class="svg-title">Memory Fusion</text>
           </svg>
@@ -1348,68 +1348,68 @@ w1 = MLP(Σ selected_weightᵢ × P′ᵢ)</div>
             <defs>
               <marker id="arrow-reason" markerWidth="10" markerHeight="10"
                       refX="8" refY="5" orient="auto">
-                <path d="M0,0 L10,5 L0,10 Z" fill="#777167"/>
+                <path d="M0,0 L10,5 L0,10 Z" fill="#737373"/>
               </marker>
             </defs>
 
             <rect x="24" y="96" width="92" height="64" rx="18"
-                  fill="#faeeda" stroke="#854f0b"/>
+                  fill="#e2e2e2" stroke="#5b5b5b"/>
             <text x="70" y="128" text-anchor="middle"
-                  class="svg-title" fill="#854f0b">w1</text>
+                  class="svg-title" fill="#5b5b5b">w1</text>
 
             <line x1="116" y1="128" x2="145" y2="128"
-                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+                  stroke="#737373" marker-end="url(#arrow-reason)"/>
 
             <g class="svg-label">
               <rect x="145" y="96" width="72" height="64" rx="17"
-                    fill="#e1f5ee" stroke="#0f6e56"/>
-              <text x="181" y="128" text-anchor="middle" fill="#0f6e56">L1</text>
+                    fill="#e3e3e3" stroke="#5d5d5d"/>
+              <text x="181" y="128" text-anchor="middle" fill="#5d5d5d">L1</text>
 
               <rect x="237" y="96" width="72" height="64" rx="17"
-                    fill="#e1f5ee" stroke="#0f6e56"/>
-              <text x="273" y="128" text-anchor="middle" fill="#0f6e56">L2</text>
+                    fill="#e3e3e3" stroke="#5d5d5d"/>
+              <text x="273" y="128" text-anchor="middle" fill="#5d5d5d">L2</text>
 
               <rect x="329" y="96" width="72" height="64" rx="17"
-                    fill="#e1f5ee" stroke="#0f6e56"/>
-              <text x="365" y="128" text-anchor="middle" fill="#0f6e56">L3</text>
+                    fill="#e3e3e3" stroke="#5d5d5d"/>
+              <text x="365" y="128" text-anchor="middle" fill="#5d5d5d">L3</text>
 
               <rect x="421" y="96" width="72" height="64" rx="17"
-                    fill="#e1f5ee" stroke="#0f6e56"/>
-              <text x="457" y="128" text-anchor="middle" fill="#0f6e56">L4</text>
+                    fill="#e3e3e3" stroke="#5d5d5d"/>
+              <text x="457" y="128" text-anchor="middle" fill="#5d5d5d">L4</text>
 
               <rect x="513" y="96" width="72" height="64" rx="17"
-                    fill="#e1f5ee" stroke="#0f6e56"/>
-              <text x="549" y="128" text-anchor="middle" fill="#0f6e56">L5</text>
+                    fill="#e3e3e3" stroke="#5d5d5d"/>
+              <text x="549" y="128" text-anchor="middle" fill="#5d5d5d">L5</text>
 
               <rect x="605" y="96" width="72" height="64" rx="17"
-                    fill="#e1f5ee" stroke="#0f6e56"/>
-              <text x="641" y="128" text-anchor="middle" fill="#0f6e56">L6</text>
+                    fill="#e3e3e3" stroke="#5d5d5d"/>
+              <text x="641" y="128" text-anchor="middle" fill="#5d5d5d">L6</text>
             </g>
 
             <line x1="217" y1="128" x2="237" y2="128"
-                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+                  stroke="#737373" marker-end="url(#arrow-reason)"/>
             <line x1="309" y1="128" x2="329" y2="128"
-                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+                  stroke="#737373" marker-end="url(#arrow-reason)"/>
             <line x1="401" y1="128" x2="421" y2="128"
-                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+                  stroke="#737373" marker-end="url(#arrow-reason)"/>
             <line x1="493" y1="128" x2="513" y2="128"
-                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+                  stroke="#737373" marker-end="url(#arrow-reason)"/>
             <line x1="585" y1="128" x2="605" y2="128"
-                  stroke="#777167" marker-end="url(#arrow-reason)"/>
+                  stroke="#737373" marker-end="url(#arrow-reason)"/>
 
             <rect x="268" y="246" width="224" height="60" rx="19"
-                  fill="#eeedfe" stroke="#3c3489"/>
+                  fill="#e1e1e1" stroke="#444444"/>
             <text x="380" y="276" text-anchor="middle"
-                  class="svg-title" fill="#3c3489">
+                  class="svg-title" fill="#444444">
               h* · final reasoned state
             </text>
 
             <path d="M677 128 C718 128 708 276 492 276"
-                  fill="none" stroke="#777167"
+                  fill="none" stroke="#737373"
                   marker-end="url(#arrow-reason)"/>
 
             <text x="380" y="44" text-anchor="middle"
-                  class="svg-label" fill="#74736c">
+                  class="svg-label" fill="#747474">
               one forward pass · six different layers · fixed compute
             </text>
           </svg>

@@ -27,5 +27,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${SITE_URL}/blog/monarch`,
+      lastModified: "2026-07-04",
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${SITE_URL}/blog/interaction-systems`,
+      lastModified: "2026-07-04",
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/blog/godel-model`,
+      lastModified: "2026-07-04",
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/blog/scaling-synthetic-data`,
+      lastModified: "2026-07-04",
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
   ];
 }

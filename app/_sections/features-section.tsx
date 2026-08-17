@@ -71,22 +71,30 @@ export function FeaturesSection() {
       id="features"
       className="relative z-10 scroll-mt-28 overflow-hidden bg-white px-0 pb-10 pt-0 sm:px-6 sm:pb-12 sm:pt-2 lg:pb-14"
     >
-      <Image
-        src="/assets/cloud3.1.png"
-        alt=""
-        fill
-        sizes="100vw"
-        className="pointer-events-none object-cover sm:hidden"
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[64rem] sm:hidden"
         aria-hidden="true"
-      />
-      <Image
-        src="/assets/cloud4.1.png"
-        alt=""
-        fill
-        sizes="100vw"
-        className="pointer-events-none hidden object-cover sm:block"
+      >
+        <Image
+          src="/assets/cloud3.1.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 hidden h-[54rem] sm:block lg:h-[38rem]"
         aria-hidden="true"
-      />
+      >
+        <Image
+          src="/assets/cloud4.1.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center justify-items-center gap-8 lg:grid-cols-[1fr_minmax(24rem,32rem)_1fr] lg:justify-items-stretch">
         <div className="hidden min-h-[24rem] items-center lg:flex">
           <div className="max-w-xs">

@@ -21,7 +21,7 @@ const researchSectionImages = [
     alt: "ctrl horizontal gallery study one",
     code: "# 01",
     title: "monarch",
-    href: "/research",
+    href: "/blog/monarch",
   },
   {
     src: "/assets/research/2o1.svg",
@@ -40,7 +40,7 @@ const researchSectionImages = [
     alt: "ctrl horizontal gallery study two",
     code: "# 02",
     title: "interaction system",
-    href: "/research",
+    href: "/blog/interaction-systems",
   },
   {
     src: "/assets/research/4o1.svg",
@@ -59,7 +59,7 @@ const researchSectionImages = [
     alt: "ctrl horizontal gallery study three",
     code: "# 03",
     title: "godel model",
-    href: "/research",
+    href: "/blog/godel-model",
   },
   {
     src: "/assets/research/3o1.svg",
@@ -78,7 +78,7 @@ const researchSectionImages = [
     alt: "ctrl horizontal gallery study four",
     code: "# 04",
     title: "scaling synthetic data",
-    href: "/research",
+    href: "/blog/scaling-synthetic-data",
   },
 ];
 

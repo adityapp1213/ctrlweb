@@ -7,19 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0e0e0d;
-    --ink-2: #3a3a36;
-    --ink-3: #7a7a72;
-    --surface: #f8f7f3;
-    --surface-3: #e4e1d8;
-    --teal: #0f6e56;
-    --teal-light: #e1f5ee;
-    --purple: #3c3489;
-    --purple-light: #eeedfe;
-    --amber: #854f0b;
-    --amber-light: #faeeda;
-    --gray-light: #f1efe8;
-    --rule: #d3d1c7;
+    --ink: #1c1c1c;
+    --ink-2: #424242;
+    --ink-3: #7a7a7a;
+    --surface: #e9e9e9;
+    --surface-3: #d5d5d5;
+    --teal: #5d5d5d;
+    --teal-light: #e3e3e3;
+    --purple: #444444;
+    --purple-light: #e1e1e1;
+    --amber: #5b5b5b;
+    --amber-light: #e2e2e2;
+    --gray-light: #e2e2e2;
+    --rule: #c7c7c7;
     --mono: 'DM Mono', monospace;
     --serif: 'Instrument Serif', serif;
     --sans: 'Geist', sans-serif;
@@ -75,7 +75,7 @@
 
   .section-rule { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
 
-  .diagram-wrap { margin: 36px 0 44px; border: 1px solid var(--rule); border-radius: 12px; background: #fff; padding: 24px 18px 18px; overflow: hidden; }
+  .diagram-wrap { margin: 36px 0 44px; border: 1px solid var(--rule); border-radius: 12px; background: #eeeeee; padding: 24px 18px 18px; overflow: hidden; }
   .diagram-label { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
   .diagram-wrap svg { display: block; width: 100%; height: auto; }
 
@@ -95,7 +95,7 @@
   tr:last-child td { border-bottom: none; }
 
   .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
-  .path-card { border: 1px solid var(--rule); border-radius: 10px; padding: 20px; background: #fff; }
+  .path-card { border: 1px solid var(--rule); border-radius: 10px; padding: 20px; background: #eeeeee; }
   .path-card .path-num { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-3); margin-bottom: 8px; text-transform: uppercase; }
   .path-card h4 { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
   .path-card p { font-size: 13px; margin: 0; color: var(--ink-3); line-height: 1.55; }
@@ -152,38 +152,38 @@
           </marker>
         </defs>
 
-        <rect x="24" y="126" width="112" height="66" rx="10" fill="#f1efe8" stroke="#b4b2a9" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#2c2c2a" x="80" y="152" text-anchor="middle">User voice</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#888780" x="80" y="173" text-anchor="middle">continuous stream</text>
+        <rect x="24" y="126" width="112" height="66" rx="10" fill="#e2e2e2" stroke="#acacac" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#363636" x="80" y="152" text-anchor="middle">User voice</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#868686" x="80" y="173" text-anchor="middle">continuous stream</text>
 
-        <rect x="180" y="36" width="202" height="86" rx="12" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#085041" x="281" y="64" text-anchor="middle">Public backend</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="281" y="87" text-anchor="middle">auth · stream intake · context load</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="281" y="105" text-anchor="middle">routing · model call · response stream</text>
+        <rect x="180" y="36" width="202" height="86" rx="12" fill="#e3e3e3" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#474747" x="281" y="64" text-anchor="middle">Public backend</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="281" y="87" text-anchor="middle">auth · stream intake · context load</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="281" y="105" text-anchor="middle">routing · model call · response stream</text>
 
-        <rect x="424" y="126" width="112" height="66" rx="10" fill="#eeedfe" stroke="#534ab7" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#26215c" x="480" y="152" text-anchor="middle">Reply out</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="480" y="173" text-anchor="middle">text and voice</text>
+        <rect x="424" y="126" width="112" height="66" rx="10" fill="#e1e1e1" stroke="#595959" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#313131" x="480" y="152" text-anchor="middle">Reply out</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#444444" x="480" y="173" text-anchor="middle">text and voice</text>
 
-        <rect x="180" y="228" width="110" height="54" rx="10" fill="#faeeda" stroke="#ba7517" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#633806" x="235" y="250" text-anchor="middle">STT state</text>
-        <text font-family="'DM Mono',monospace" font-size="10" fill="#854f0b" x="235" y="269" text-anchor="middle">partial meaning</text>
+        <rect x="180" y="228" width="110" height="54" rx="10" fill="#e2e2e2" stroke="#7d7d7d" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#464646" x="235" y="250" text-anchor="middle">STT state</text>
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#5b5b5b" x="235" y="269" text-anchor="middle">partial meaning</text>
 
-        <rect x="308" y="228" width="110" height="54" rx="10" fill="#eeedfe" stroke="#534ab7" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#26215c" x="363" y="250" text-anchor="middle">LLM state</text>
-        <text font-family="'DM Mono',monospace" font-size="10" fill="#3c3489" x="363" y="269" text-anchor="middle">answer forming</text>
+        <rect x="308" y="228" width="110" height="54" rx="10" fill="#e1e1e1" stroke="#595959" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#313131" x="363" y="250" text-anchor="middle">LLM state</text>
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#444444" x="363" y="269" text-anchor="middle">answer forming</text>
 
-        <path d="M136 159 H180" fill="none" stroke="#b4b2a9" stroke-width="1.3" marker-end="url(#v1)"/>
-        <path d="M382 159 H424" fill="none" stroke="#534ab7" stroke-width="1.3" marker-end="url(#v1)"/>
-        <path d="M235 122 V228" fill="none" stroke="#ba7517" stroke-width="1.3" marker-end="url(#v1)"/>
-        <path d="M363 122 V228" fill="none" stroke="#534ab7" stroke-width="1.3" marker-end="url(#v1)"/>
+        <path d="M136 159 H180" fill="none" stroke="#acacac" stroke-width="1.3" marker-end="url(#v1)"/>
+        <path d="M382 159 H424" fill="none" stroke="#595959" stroke-width="1.3" marker-end="url(#v1)"/>
+        <path d="M235 122 V228" fill="none" stroke="#7d7d7d" stroke-width="1.3" marker-end="url(#v1)"/>
+        <path d="M363 122 V228" fill="none" stroke="#595959" stroke-width="1.3" marker-end="url(#v1)"/>
 
-        <text font-family="'DM Mono',monospace" font-size="9.5" fill="#888780" x="158" y="145" text-anchor="middle">ingest</text>
-        <text font-family="'DM Mono',monospace" font-size="9" fill="#3c3489" x="403" y="140" text-anchor="middle">
+        <text font-family="'DM Mono',monospace" font-size="9.5" fill="#868686" x="158" y="145" text-anchor="middle">ingest</text>
+        <text font-family="'DM Mono',monospace" font-size="9" fill="#444444" x="403" y="140" text-anchor="middle">
           <tspan x="403" dy="0">stream</tspan>
           <tspan x="403" dy="11">back</tspan>
         </text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="312" text-anchor="middle">A good interaction system keeps all four states moving in one continuous loop.</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="280" y="312" text-anchor="middle">A good interaction system keeps all four states moving in one continuous loop.</text>
       </svg>
     </div>
 
@@ -216,26 +216,26 @@
           </marker>
         </defs>
 
-        <rect x="28" y="98" width="120" height="60" rx="10" fill="#f1efe8" stroke="#b4b2a9" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#2c2c2a" x="88" y="122" text-anchor="middle">Mic chunks</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#888780" x="88" y="143" text-anchor="middle">20–32 ms sends</text>
+        <rect x="28" y="98" width="120" height="60" rx="10" fill="#e2e2e2" stroke="#acacac" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#363636" x="88" y="122" text-anchor="middle">Mic chunks</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#868686" x="88" y="143" text-anchor="middle">20–32 ms sends</text>
 
-        <rect x="190" y="52" width="182" height="76" rx="12" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="281" y="78" text-anchor="middle">Stream buffer</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="281" y="99" text-anchor="middle">incoming audio stays hot</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="281" y="117" text-anchor="middle">latest 0.5–1.0 s available</text>
+        <rect x="190" y="52" width="182" height="76" rx="12" fill="#e3e3e3" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#474747" x="281" y="78" text-anchor="middle">Stream buffer</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="281" y="99" text-anchor="middle">incoming audio stays hot</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="281" y="117" text-anchor="middle">latest 0.5–1.0 s available</text>
 
-        <rect x="190" y="160" width="182" height="66" rx="12" fill="#faeeda" stroke="#ba7517" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#633806" x="281" y="186" text-anchor="middle">Partial transcript</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#854f0b" x="281" y="207" text-anchor="middle">early words, not final words</text>
+        <rect x="190" y="160" width="182" height="66" rx="12" fill="#e2e2e2" stroke="#7d7d7d" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#464646" x="281" y="186" text-anchor="middle">Partial transcript</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5b5b5b" x="281" y="207" text-anchor="middle">early words, not final words</text>
 
-        <rect x="414" y="98" width="118" height="60" rx="10" fill="#eeedfe" stroke="#534ab7" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#26215c" x="473" y="122" text-anchor="middle">System state</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="473" y="143" text-anchor="middle">turn is active</text>
+        <rect x="414" y="98" width="118" height="60" rx="10" fill="#e1e1e1" stroke="#595959" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#313131" x="473" y="122" text-anchor="middle">System state</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#444444" x="473" y="143" text-anchor="middle">turn is active</text>
 
-        <path d="M148 128 H190" fill="none" stroke="#b4b2a9" stroke-width="1.3" marker-end="url(#v2)"/>
-        <path d="M281 128 V160" fill="none" stroke="#ba7517" stroke-width="1.3" marker-end="url(#v2)"/>
-        <path d="M372 128 H414" fill="none" stroke="#534ab7" stroke-width="1.3" marker-end="url(#v2)"/>
+        <path d="M148 128 H190" fill="none" stroke="#acacac" stroke-width="1.3" marker-end="url(#v2)"/>
+        <path d="M281 128 V160" fill="none" stroke="#7d7d7d" stroke-width="1.3" marker-end="url(#v2)"/>
+        <path d="M372 128 H414" fill="none" stroke="#595959" stroke-width="1.3" marker-end="url(#v2)"/>
       </svg>
     </div>
 
@@ -274,39 +274,39 @@
           </marker>
         </defs>
 
-        <rect x="174" y="14" width="212" height="54" rx="10" fill="#faeeda" stroke="#ba7517" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#633806" x="280" y="36" text-anchor="middle">Partial transcript + turn state</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#854f0b" x="280" y="55" text-anchor="middle">enough meaning to begin deeper work</text>
+        <rect x="174" y="14" width="212" height="54" rx="10" fill="#e2e2e2" stroke="#7d7d7d" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#464646" x="280" y="36" text-anchor="middle">Partial transcript + turn state</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5b5b5b" x="280" y="55" text-anchor="middle">enough meaning to begin deeper work</text>
 
-        <line x1="280" y1="68" x2="280" y2="92" stroke="#b4b2a9" stroke-width="1.2" marker-end="url(#v3)"/>
+        <line x1="280" y1="68" x2="280" y2="92" stroke="#acacac" stroke-width="1.2" marker-end="url(#v3)"/>
 
-        <rect x="174" y="92" width="212" height="54" rx="10" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041" x="280" y="114" text-anchor="middle">Context assembly</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="133" text-anchor="middle">chat state, rules, tools, retrieval</text>
+        <rect x="174" y="92" width="212" height="54" rx="10" fill="#e3e3e3" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#474747" x="280" y="114" text-anchor="middle">Context assembly</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="280" y="133" text-anchor="middle">chat state, rules, tools, retrieval</text>
 
-        <path d="M174 119 H132" fill="none" stroke="#1d9e75" stroke-width="1.2" marker-end="url(#v3)"/>
-        <text font-family="'DM Mono',monospace" font-size="9.5" fill="#0f6e56" x="151" y="106" text-anchor="middle">simple</text>
-        <rect x="18" y="92" width="110" height="54" rx="10" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#085041" x="73" y="114" text-anchor="middle">Direct answer</text>
-        <text font-family="'DM Mono',monospace" font-size="10" fill="#0f6e56" x="73" y="133" text-anchor="middle">no extra tools</text>
+        <path d="M174 119 H132" fill="none" stroke="#808080" stroke-width="1.2" marker-end="url(#v3)"/>
+        <text font-family="'DM Mono',monospace" font-size="9.5" fill="#5d5d5d" x="151" y="106" text-anchor="middle">simple</text>
+        <rect x="18" y="92" width="110" height="54" rx="10" fill="#e3e3e3" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#474747" x="73" y="114" text-anchor="middle">Direct answer</text>
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#5d5d5d" x="73" y="133" text-anchor="middle">no extra tools</text>
 
-        <path d="M386 119 H428" fill="none" stroke="#534ab7" stroke-width="1.2" marker-end="url(#v3)"/>
-        <text font-family="'DM Mono',monospace" font-size="9.5" fill="#3c3489" x="409" y="106" text-anchor="middle">complex</text>
-        <rect x="432" y="92" width="110" height="54" rx="10" fill="#eeedfe" stroke="#534ab7" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#26215c" x="487" y="114" text-anchor="middle">Tools / search</text>
-        <text font-family="'DM Mono',monospace" font-size="10" fill="#3c3489" x="487" y="133" text-anchor="middle">external context</text>
+        <path d="M386 119 H428" fill="none" stroke="#595959" stroke-width="1.2" marker-end="url(#v3)"/>
+        <text font-family="'DM Mono',monospace" font-size="9.5" fill="#444444" x="409" y="106" text-anchor="middle">complex</text>
+        <rect x="432" y="92" width="110" height="54" rx="10" fill="#e1e1e1" stroke="#595959" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#313131" x="487" y="114" text-anchor="middle">Tools / search</text>
+        <text font-family="'DM Mono',monospace" font-size="10" fill="#444444" x="487" y="133" text-anchor="middle">external context</text>
 
-        <line x1="280" y1="146" x2="280" y2="174" stroke="#534ab7" stroke-width="1.2" marker-end="url(#v3)"/>
+        <line x1="280" y1="146" x2="280" y2="174" stroke="#595959" stroke-width="1.2" marker-end="url(#v3)"/>
 
-        <rect x="174" y="174" width="212" height="54" rx="10" fill="#eeedfe" stroke="#534ab7" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#26215c" x="280" y="196" text-anchor="middle">LLM response formation</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#3c3489" x="280" y="215" text-anchor="middle">answer begins before the turn cools</text>
+        <rect x="174" y="174" width="212" height="54" rx="10" fill="#e1e1e1" stroke="#595959" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#313131" x="280" y="196" text-anchor="middle">LLM response formation</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#444444" x="280" y="215" text-anchor="middle">answer begins before the turn cools</text>
 
-        <line x1="280" y1="228" x2="280" y2="254" stroke="#534ab7" stroke-width="1.2" marker-end="url(#v3)"/>
+        <line x1="280" y1="228" x2="280" y2="254" stroke="#595959" stroke-width="1.2" marker-end="url(#v3)"/>
 
-        <rect x="174" y="254" width="212" height="52" rx="10" fill="#f1efe8" stroke="#b4b2a9" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#2c2c2a" x="280" y="275" text-anchor="middle">Final output</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#888780" x="280" y="294" text-anchor="middle">streamed text, spoken reply, or both</text>
+        <rect x="174" y="254" width="212" height="52" rx="10" fill="#e2e2e2" stroke="#acacac" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#363636" x="280" y="275" text-anchor="middle">Final output</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#868686" x="280" y="294" text-anchor="middle">streamed text, spoken reply, or both</text>
       </svg>
     </div>
 
@@ -327,30 +327,30 @@
           </marker>
         </defs>
 
-        <rect x="20" y="120" width="120" height="64" rx="10" fill="#f1efe8" stroke="#b4b2a9" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#2c2c2a" x="80" y="146" text-anchor="middle">Frontend</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#888780" x="80" y="167" text-anchor="middle">voice in · stream out</text>
+        <rect x="20" y="120" width="120" height="64" rx="10" fill="#e2e2e2" stroke="#acacac" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#363636" x="80" y="146" text-anchor="middle">Frontend</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#868686" x="80" y="167" text-anchor="middle">voice in · stream out</text>
 
-        <rect x="182" y="86" width="196" height="132" rx="12" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#085041" x="280" y="116" text-anchor="middle">api.yourdomain.com</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="139" text-anchor="middle">Clerk validation · Convex context</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="157" text-anchor="middle">STT handoff · routing · model stream</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="175" text-anchor="middle">TTS output · persistence hooks</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56" x="280" y="193" text-anchor="middle">one public face for the whole loop</text>
+        <rect x="182" y="86" width="196" height="132" rx="12" fill="#e3e3e3" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="15" font-weight="500" fill="#474747" x="280" y="116" text-anchor="middle">api.yourdomain.com</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="280" y="139" text-anchor="middle">Clerk validation · Convex context</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="280" y="157" text-anchor="middle">STT handoff · routing · model stream</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="280" y="175" text-anchor="middle">TTS output · persistence hooks</text>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d" x="280" y="193" text-anchor="middle">one public face for the whole loop</text>
 
-        <rect x="420" y="24" width="114" height="52" rx="10" fill="#eeedfe" stroke="#534ab7" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#26215c" x="477" y="55" text-anchor="middle">Private STT</text>
+        <rect x="420" y="24" width="114" height="52" rx="10" fill="#e1e1e1" stroke="#595959" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#313131" x="477" y="55" text-anchor="middle">Private STT</text>
 
-        <rect x="420" y="124" width="114" height="52" rx="10" fill="#eeedfe" stroke="#534ab7" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#26215c" x="477" y="155" text-anchor="middle">LLM / tools</text>
+        <rect x="420" y="124" width="114" height="52" rx="10" fill="#e1e1e1" stroke="#595959" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#313131" x="477" y="155" text-anchor="middle">LLM / tools</text>
 
-        <rect x="420" y="224" width="114" height="52" rx="10" fill="#eeedfe" stroke="#534ab7" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#26215c" x="477" y="255" text-anchor="middle">TTS + data</text>
+        <rect x="420" y="224" width="114" height="52" rx="10" fill="#e1e1e1" stroke="#595959" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#313131" x="477" y="255" text-anchor="middle">TTS + data</text>
 
-        <path d="M140 152 H182" fill="none" stroke="#b4b2a9" stroke-width="1.3" marker-end="url(#v4)"/>
-        <path d="M378 116 H420" fill="none" stroke="#534ab7" stroke-width="1.2" marker-end="url(#v4)"/>
-        <path d="M378 152 H420" fill="none" stroke="#534ab7" stroke-width="1.2" marker-end="url(#v4)"/>
-        <path d="M378 188 H420" fill="none" stroke="#534ab7" stroke-width="1.2" marker-end="url(#v4)"/>
+        <path d="M140 152 H182" fill="none" stroke="#acacac" stroke-width="1.3" marker-end="url(#v4)"/>
+        <path d="M378 116 H420" fill="none" stroke="#595959" stroke-width="1.2" marker-end="url(#v4)"/>
+        <path d="M378 152 H420" fill="none" stroke="#595959" stroke-width="1.2" marker-end="url(#v4)"/>
+        <path d="M378 188 H420" fill="none" stroke="#595959" stroke-width="1.2" marker-end="url(#v4)"/>
       </svg>
     </div>
 

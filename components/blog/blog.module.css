@@ -80,6 +80,7 @@
   height: auto;
   overflow: visible;
   font-family: inherit;
+  filter: grayscale(1) saturate(0) contrast(1.08);
 }
 
 .article svg rect {

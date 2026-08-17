@@ -59,7 +59,7 @@ export function FaqSection() {
         alt=""
         fill
         sizes="100vw"
-        className="pointer-events-none object-cover"
+        className="pointer-events-none object-cover object-top"
         aria-hidden="true"
       />
       <script

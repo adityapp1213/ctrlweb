@@ -77,6 +77,10 @@ const StackedFeatureGallery = ({
   const activeImage = activeIndex ?? internalActiveImage;
 
   const handleActiveChange = (index: number) => {
+    if (activeImage === index) {
+      return;
+    }
+
     setInternalActiveImage(index);
     onActiveChange?.(index);
   };

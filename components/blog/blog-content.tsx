@@ -76,6 +76,7 @@ export function BlogContent({
 
   const svgRadius = 18;
   const circumference = 2 * Math.PI * svgRadius;
+  const isSvgHero = heroImageSrc.toLowerCase().endsWith(".svg");
 
   return (
     <section
@@ -100,7 +101,9 @@ export function BlogContent({
           width={1600}
           height={900}
           priority
-          className="aspect-[16/8.8] w-full object-cover"
+          className={`aspect-[16/8.8] w-full object-cover ${
+            isSvgHero ? "grayscale saturate-0 contrast-110" : ""
+          }`}
         />
       </div>
 
@@ -115,12 +118,12 @@ export function BlogContent({
                 aria-hidden="true"
                 className={`mb-6 block size-2 rounded-full ${
                   highlight.tone === "rose"
-                    ? "bg-[#e2687d]"
+                    ? "bg-black/65"
                     : highlight.tone === "blue"
-                      ? "bg-[#6f91df]"
+                      ? "bg-black/50"
                       : highlight.tone === "teal"
-                        ? "bg-[#49a987]"
-                        : "bg-[#d99a4e]"
+                        ? "bg-black/40"
+                        : "bg-black/55"
                 }`}
               />
               <h2 className="text-[1.05rem] font-medium leading-tight tracking-[-0.02em] text-black">

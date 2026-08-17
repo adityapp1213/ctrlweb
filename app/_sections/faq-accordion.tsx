@@ -15,14 +15,17 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="w-full overflow-hidden bg-black/[0.035]">
       {items.map((item, index) => {
         const isActive = activeIndex === index;
 
         return (
           <div
             key={item.id}
-            className="rounded-none bg-black/[0.035] px-5 transition-colors duration-300 data-[open=true]:bg-black/[0.055] sm:px-6"
+            className={[
+              "px-5 sm:px-6",
+              index === 0 ? "" : "border-t border-black/[0.055]",
+            ].join(" ")}
             data-open={isActive}
           >
             <button

@@ -27,7 +27,7 @@ const researchMenuItems = [
   {
     title: "monarch",
     description: "thought-grounded multimodal architecture.",
-    href: "/research",
+    href: "/blog/monarch",
     image: "/assets/research/1o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -45,7 +45,7 @@ const researchMenuItems = [
   {
     title: "interaction system",
     description: "interfaces for reasoning with thinking machines.",
-    href: "/research",
+    href: "/blog/interaction-systems",
     image: "/assets/research/2o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -63,7 +63,7 @@ const researchMenuItems = [
   {
     title: "godel model",
     description: "reflective model structure and recursive checks.",
-    href: "/research",
+    href: "/blog/godel-model",
     image: "/assets/research/4o1.svg",
     frames: Array.from(
       { length: 6 },
@@ -81,7 +81,7 @@ const researchMenuItems = [
   {
     title: "scaling synthetic data",
     description: "how generated data changes training behavior.",
-    href: "/research",
+    href: "/blog/scaling-synthetic-data",
     image: "/assets/research/3o1.svg",
     frames: Array.from(
       { length: 6 },

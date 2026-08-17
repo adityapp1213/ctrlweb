@@ -7,19 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0e0e0d;
-    --ink-2: #3a3a36;
-    --ink-3: #7a7a72;
-    --surface: #f8f7f3;
-    --surface-3: #e4e1d8;
-    --teal: #0f6e56;
-    --teal-light: #e1f5ee;
-    --purple: #3c3489;
-    --purple-light: #eeedfe;
-    --amber: #854f0b;
-    --amber-light: #faeeda;
-    --gray-light: #f1efe8;
-    --rule: #d3d1c7;
+    --ink: #1c1c1c;
+    --ink-2: #424242;
+    --ink-3: #7a7a7a;
+    --surface: #e9e9e9;
+    --surface-3: #d5d5d5;
+    --teal: #5d5d5d;
+    --teal-light: #e3e3e3;
+    --purple: #444444;
+    --purple-light: #e1e1e1;
+    --amber: #5b5b5b;
+    --amber-light: #e2e2e2;
+    --gray-light: #e2e2e2;
+    --rule: #c7c7c7;
     --mono: 'DM Mono', monospace;
     --serif: 'Instrument Serif', serif;
     --sans: 'Geist', sans-serif;
@@ -75,8 +75,8 @@
 
   .section-rule { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
 
-  .diagram-wrap { margin: 36px 0 44px; border: 1px solid var(--rule); border-radius: 18px; background: linear-gradient(180deg, #fff 0%, #fcfbf8 100%); padding: 24px 18px 18px; overflow: hidden; box-shadow: 0 14px 34px rgba(14,14,13,.05); }
-  .diagram-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; padding: 6px 10px; border: 1px solid var(--surface-3); border-radius: 999px; background: rgba(248,247,243,.9); }
+  .diagram-wrap { margin: 36px 0 44px; border: 1px solid var(--rule); border-radius: 18px; background: linear-gradient(180deg, #eeeeee 0%, #ececec 100%); padding: 24px 18px 18px; overflow: hidden; box-shadow: 0 14px 34px rgba(28, 28, 28, 0.05); }
+  .diagram-label { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; padding: 6px 10px; border: 1px solid var(--surface-3); border-radius: 999px; background: rgba(233, 233, 233, 0.9); }
   .diagram-label::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--ink-3); opacity: .65; }
   .diagram-wrap svg { display: block; width: 100%; height: auto; }
 
@@ -96,7 +96,7 @@
   tr:last-child td { border-bottom: none; }
 
   .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
-  .path-card { border: 1px solid var(--rule); border-radius: 10px; padding: 20px; background: #fff; }
+  .path-card { border: 1px solid var(--rule); border-radius: 10px; padding: 20px; background: #eeeeee; }
   .path-card .path-num { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-3); margin-bottom: 8px; text-transform: uppercase; }
   .path-card h4 { font-family: var(--sans); font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
   .path-card p { font-size: 13px; margin: 0; color: var(--ink-3); line-height: 1.55; }
@@ -165,42 +165,42 @@
           </marker>
         </defs>
 
-        <rect x="134" y="8" width="292" height="304" rx="18" fill="#fbfaf6" stroke="#e4e1d8" stroke-width="0.8"/>
+        <rect x="134" y="8" width="292" height="304" rx="18" fill="#ebebeb" stroke="#d5d5d5" stroke-width="0.8"/>
         <!-- Box 1: OpenWebText -->
-        <rect x="150" y="16" width="260" height="72" rx="14" fill="#f6f3ea" stroke="#b4b2a9" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#2c2c2a"
+        <rect x="150" y="16" width="260" height="72" rx="14" fill="#e5e5e5" stroke="#acacac" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#363636"
               x="280" y="44" text-anchor="middle" dominant-baseline="central">OpenWebText Corpus</text>
-        <text font-family="'DM Mono',monospace" font-size="11" fill="#888780"
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#868686"
               x="280" y="68" text-anchor="middle" dominant-baseline="central">Raw web text · streamed as .jsonl.gz</text>
 
         <!-- Arrow 1→2 -->
-        <line x1="280" y1="88" x2="280" y2="120" stroke="#b4b2a9" stroke-width="1.3" marker-end="url(#p1)"/>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#74736c"
+        <line x1="280" y1="88" x2="280" y2="120" stroke="#acacac" stroke-width="1.3" marker-end="url(#p1)"/>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#747474"
               x="300" y="103" dominant-baseline="central">50–500 line chunks</text>
 
         <!-- Box 2: LLaMA-3 Rephraser -->
-        <rect x="150" y="128" width="260" height="72" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041"
+        <rect x="150" y="128" width="260" height="72" rx="14" fill="#e8e8e8" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#474747"
               x="280" y="156" text-anchor="middle" dominant-baseline="central">LLaMA-3 Rephraser</text>
-        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56"
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#5d5d5d"
               x="280" y="180" text-anchor="middle" dominant-baseline="central">Rewrites each batch into Q/A pairs</text>
 
         <!-- Arrow 2→3 -->
-        <line x1="280" y1="200" x2="280" y2="232" stroke="#1d9e75" stroke-width="1.3" marker-end="url(#p1)"/>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+        <line x1="280" y1="200" x2="280" y2="232" stroke="#808080" stroke-width="1.3" marker-end="url(#p1)"/>
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d"
               x="300" y="215" dominant-baseline="central">rephrased Q/A output</text>
 
         <!-- Box 3: Synthetic Dataset -->
-        <rect x="150" y="240" width="260" height="72" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#085041"
+        <rect x="150" y="240" width="260" height="72" rx="14" fill="#e8e8e8" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="14" font-weight="500" fill="#474747"
               x="280" y="268" text-anchor="middle" dominant-baseline="central">Synthetic Dataset</text>
-        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56"
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#5d5d5d"
               x="280" y="292" text-anchor="middle" dominant-baseline="central">batch_data00001.jsonl · 00002 · …</text>
 
         <!-- Side label -->
-        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56"
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#5d5d5d"
               x="142" y="196" text-anchor="end" dominant-baseline="central">synthesis</text>
-        <text font-family="'DM Mono',monospace" font-size="11" fill="#0f6e56"
+        <text font-family="'DM Mono',monospace" font-size="11" fill="#5d5d5d"
               x="142" y="210" text-anchor="end" dominant-baseline="central">stage</text>
 
         <!-- Footer caption -->
@@ -245,40 +245,40 @@
         </defs>
 
         <!-- Box 1: Raw batch -->
-        <rect x="8" y="30" width="154" height="76" rx="14" fill="#f6f3ea" stroke="#b4b2a9" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#2c2c2a"
+        <rect x="8" y="30" width="154" height="76" rx="14" fill="#e5e5e5" stroke="#acacac" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#363636"
               x="85" y="58" text-anchor="middle" dominant-baseline="central">Raw batch</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#888780"
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#868686"
               x="85" y="79" text-anchor="middle" dominant-baseline="central">50–500 lines</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#888780"
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#868686"
               x="85" y="96" text-anchor="middle" dominant-baseline="central">from OpenWebText</text>
 
         <!-- Arrow 1→2 -->
-        <line x1="162" y1="68" x2="192" y2="68" stroke="#b4b2a9" stroke-width="1.3" marker-end="url(#p2)"/>
+        <line x1="162" y1="68" x2="192" y2="68" stroke="#acacac" stroke-width="1.3" marker-end="url(#p2)"/>
 
         <!-- Box 2: LLaMA-3 -->
-        <rect x="196" y="30" width="168" height="76" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#085041"
+        <rect x="196" y="30" width="168" height="76" rx="14" fill="#e8e8e8" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#474747"
               x="280" y="56" text-anchor="middle" dominant-baseline="central">LLaMA-3 Rephrase</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d"
               x="280" y="76" text-anchor="middle" dominant-baseline="central">Local GPU inference</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d"
               x="280" y="95" text-anchor="middle" dominant-baseline="central">15 GB+ VRAM required</text>
 
         <!-- Arrow 2→3 -->
-        <line x1="364" y1="68" x2="394" y2="68" stroke="#1d9e75" stroke-width="1.3" marker-end="url(#p2)"/>
+        <line x1="364" y1="68" x2="394" y2="68" stroke="#808080" stroke-width="1.3" marker-end="url(#p2)"/>
 
         <!-- Box 3: Refined output -->
-        <rect x="398" y="30" width="154" height="76" rx="14" fill="#ebfaf3" stroke="#1d9e75" stroke-width="0.9"/>
-        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#085041"
+        <rect x="398" y="30" width="154" height="76" rx="14" fill="#e8e8e8" stroke="#808080" stroke-width="0.9"/>
+        <text font-family="'Geist',sans-serif" font-size="13" font-weight="500" fill="#474747"
               x="475" y="56" text-anchor="middle" dominant-baseline="central">Refined batch</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d"
               x="475" y="76" text-anchor="middle" dominant-baseline="central">{"q": "…", "a": "…"}</text>
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#0f6e56"
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#5d5d5d"
               x="475" y="95" text-anchor="middle" dominant-baseline="central">saved as .jsonl</text>
 
         <!-- Caption -->
-        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#b4b2a9"
+        <text font-family="'DM Mono',monospace" font-size="10.5" fill="#acacac"
               x="280" y="158" text-anchor="middle">Batches are processed sequentially · pipeline is resumable at any point</text>
       </svg>
     </div>
