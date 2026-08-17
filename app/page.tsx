@@ -1,6 +1,5 @@
 import { Hero } from "@/components/hero";
 import { DescriptionSection } from "@/app/_sections/description-section";
-import { FeaturesSection } from "@/app/_sections/features-section";
 import { WhyCtrlSection } from "@/app/_sections/why-ctrl-section";
 import { ResearchSection } from "@/app/_sections/research-section";
 import { AboutUsSection } from "@/app/_sections/about-us-section";
@@ -15,7 +14,6 @@ export default function Home() {
       </h1>
       <Hero />
       <DescriptionSection />
-      <FeaturesSection />
       <WhyCtrlSection />
       <ResearchSection />
       <AboutUsSection />

@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import Lenis from "lenis";
 import { useEffect, useRef, useState } from "react";
+import { FeaturesSection } from "@/app/_sections/features-section";
 import { RouteTopNav } from "@/components/route-top-nav";
 import { ScrollProgressStory } from "@/components/ui/main/scroll-progress-story";
 
@@ -214,6 +215,7 @@ export default function ResearchRoutePage() {
             </div>
           </section>
 
+          <FeaturesSection />
         </section>
       </main>
     </>
