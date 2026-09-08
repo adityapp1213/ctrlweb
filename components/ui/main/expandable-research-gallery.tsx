@@ -69,17 +69,20 @@ export { ExpandableResearchGalleryDemo };
 const ExpandableResearchGallery = ({
   images,
   className,
+  layout = "rail",
 }: {
   images: {
     src: string;
     alt: string;
     code: string;
     title?: string;
+    description?: string;
     href?: string;
     frames?: string[];
     frameOffsets?: { x: number; y: number }[];
   }[];
   className?: string;
+  layout?: "rail" | "grid";
 }) => {
   const [periodicIndex, setPeriodicIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -163,14 +166,23 @@ const ExpandableResearchGallery = ({
       >
         <div
           ref={railRef}
-          className="overflow-x-auto px-1 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-2"
+          className={cn(
+            "overflow-x-auto px-1 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-2",
+            layout === "grid" && "research-gallery-grid-viewport",
+          )}
         >
-          <div className="flex w-max snap-x snap-mandatory items-center gap-3.5 sm:gap-4 lg:gap-[1.125rem]">
+          <div
+            className={cn(
+              "flex w-max snap-x snap-mandatory items-center gap-3.5 sm:gap-4 lg:gap-[1.125rem]",
+              layout === "grid" && "research-gallery-grid-track",
+            )}
+          >
           {images.map((image, index) => (
             <motion.div
               key={`${image.src}-${index}`}
               className={cn(
-                "relative h-[22rem] w-[15.25rem] shrink-0 snap-start overflow-hidden rounded-3xl bg-[#fbf8f2] transition-[filter,opacity] duration-500 ease-out sm:h-[23.5rem] sm:w-[16.25rem]",
+                "relative h-[22rem] shrink-0 snap-start overflow-hidden rounded-3xl bg-[#fbf8f2] transition-[filter,opacity] duration-500 ease-out sm:h-[23.5rem] sm:w-[16.25rem]",
+                layout === "grid" && "w-full min-w-0 sm:w-full",
                 hoveredIndex !== null && hoveredIndex !== index
                   ? "opacity-60 blur-[1.5px]"
                   : "opacity-100 blur-0",
@@ -193,7 +205,8 @@ const ExpandableResearchGallery = ({
             >
               <div
                 className={cn(
-                  "research-sequence-mobile absolute inset-x-0 bottom-[5.75rem] top-0",
+                "research-sequence-mobile absolute inset-x-0 bottom-[5.75rem] top-0",
+                layout === "grid" && "research-grid-image",
                   activeIndex === index && "research-sequence-desktop-active",
                   mobileCenteredIndex === index &&
                     "research-sequence-mobile-active",
@@ -221,15 +234,23 @@ const ExpandableResearchGallery = ({
                 ))}
               </div>
 
-              <div className="absolute inset-x-4 bottom-4 z-10 flex items-center justify-between gap-2 sm:bottom-5">
+              <div
+                className={cn(
+                  "absolute inset-x-4 bottom-4 z-10 flex items-center justify-between gap-2 sm:bottom-5",
+                  layout === "grid" && "research-grid-card-content",
+                )}
+              >
                 <p className="min-w-0 max-w-[calc(100%-5.75rem)] break-words text-left text-xl font-medium leading-[0.95] tracking-[-0.04em] text-black sm:text-[1.55rem]">
                   {image.title}
                 </p>
+                {layout === "grid" && image.description ? (
+                  <p className="research-grid-description">{image.description}</p>
+                ) : null}
                 <Link
                   href={image.href ?? "#"}
                   className="inline-flex shrink-0 items-center gap-1 rounded-xl bg-black px-2.5 py-2.5 text-xs font-medium text-white shadow-[0_14px_30px_rgba(0,0,0,0.18)] transition-colors hover:bg-black/85 sm:px-3 sm:py-2.5 sm:text-xs"
                 >
-                  see blog
+                  {layout === "grid" ? "Explore" : "See blog"}
                   <ArrowUpRight className="size-4" aria-hidden="true" />
                 </Link>
               </div>

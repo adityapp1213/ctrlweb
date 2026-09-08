@@ -1,26 +1,40 @@
-import { Hero } from "@/components/hero";
-import { DescriptionSection } from "@/app/_sections/description-section";
-import { WorldThinkingModelsSection } from "@/app/_sections/world-thinking-models-section";
-import { WhyCtrlSection } from "@/app/_sections/why-ctrl-section";
-import { ResearchSection } from "@/app/_sections/research-section";
-import { AboutUsSection } from "@/app/_sections/about-us-section";
-import { FaqSection } from "@/app/_sections/faq-section";
-import { FooterSection } from "@/components/footer-section";
+import Link from "next/link";
+import { SimpleSiteNav } from "@/components/simple-site-nav";
 
 export default function Home() {
   return (
-    <>
-      <h1 className="sr-only">
-        atom ctrl, an ai research lab building thinking machines
-      </h1>
-      <Hero />
-      <DescriptionSection />
-      <WorldThinkingModelsSection />
-      <WhyCtrlSection />
-      <ResearchSection />
-      <AboutUsSection />
-      <FaqSection />
-      <FooterSection />
-    </>
+    <main className="simple-site min-h-screen bg-[#f7f7f5] text-[#171717]">
+      <div className="simple-site-shell">
+        <SimpleSiteNav active="Ctrl" />
+
+        <section className="simple-site-content" aria-labelledby="home-title">
+          <h1 id="home-title">
+            Intelligence embedded in the <span>world.</span>
+          </h1>
+
+          <div className="simple-site-intro">
+            <p>
+              We are building thinking machines that can understand, reason,
+              and learn from the world around them.
+            </p>
+            <p>Our work starts with a simple question: what should intelligence feel like?</p>
+          </div>
+
+          <div className="simple-site-divider" />
+
+          <section className="simple-site-first-section" aria-labelledby="first-section-title">
+            <p className="simple-site-number">01</p>
+            <h2 id="first-section-title">thinking machines</h2>
+            <p>
+              We research models with memory, context, and a grounded sense of
+              the world—not systems that only imitate an answer.
+            </p>
+            <Link className="simple-site-text-link" href="/research">
+              explore our research <span aria-hidden="true">↗</span>
+            </Link>
+          </section>
+        </section>
+      </div>
+    </main>
   );
 }

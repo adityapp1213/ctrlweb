@@ -7,7 +7,7 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/seo";
-import { instrumentSerif, shadowsIntoLight } from "./fonts";
+import { instrumentSerif, monaSans, shadowsIntoLight } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -116,7 +116,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${shadowsIntoLight.variable} ${instrumentSerif.className} h-full bg-white antialiased`}
+      className={`${monaSans.variable} ${instrumentSerif.variable} ${shadowsIntoLight.variable} ${monaSans.className} h-full bg-white antialiased`}
     >
       <head>
         <link rel="alternate" type="text/plain" href="/llms.txt" title="atom ctrl llm index" />
