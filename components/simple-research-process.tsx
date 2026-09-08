@@ -16,7 +16,7 @@ const processSteps = [
     title: "Interaction system",
     description:
       "A real-time voice architecture for conversations that understand while they unfold.",
-    image: "/assets/blog-cards/2.png",
+    image: "/assets/blog-cards/2.2.png",
     alt: "A blurred landscape in motion",
     href: "/blog/interaction-systems",
   },

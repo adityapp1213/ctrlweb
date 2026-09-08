@@ -27,6 +27,9 @@ export function SimpleSiteNav({ active }: { active: string }) {
           ))}
         </ul>
         <div className="simple-site-nav-rule" />
+        <p className="simple-site-talk">
+          Let&apos;s talk <span aria-hidden="true">↗</span>
+        </p>
       </nav>
     </aside>
   );
