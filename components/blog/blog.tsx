@@ -25,18 +25,20 @@ export function Blog({ article, heroImageAlt, heroImageSrc, highlights, seo }: B
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(createArticleJsonLd(seo)) }}
       />
-      <div className="simple-site-stack simple-blog-page">
-        <div className="simple-blog-shell">
-          <SimpleSiteNav active="Research" />
-          <main className="simple-blog-main">
-            <BlogContent
-              article={article}
-              plainTitle={plainTitle}
-              heroImageSrc={heroImageSrc}
-              heroImageAlt={heroImageAlt}
-              highlights={highlights}
-            />
-          </main>
+      <div className="simple-site-stack">
+        <div className="simple-site simple-blog-page">
+          <div className="simple-blog-shell">
+            <SimpleSiteNav active="Research" />
+            <main className="simple-blog-main">
+              <BlogContent
+                article={article}
+                plainTitle={plainTitle}
+                heroImageSrc={heroImageSrc}
+                heroImageAlt={heroImageAlt}
+                highlights={highlights}
+              />
+            </main>
+          </div>
         </div>
         <SimpleSiteFooter />
       </div>

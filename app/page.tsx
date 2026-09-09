@@ -132,7 +132,7 @@ export default function Home() {
             <section className="simple-site-first-section" aria-labelledby="monarch-section-title">
               <p className="simple-site-number">07</p>
               <h2 id="monarch-section-title">Project Monarch</h2>
-              <h3>An H-JEPA model for simulated robot control.</h3>
+              <h3>Our earlier model.</h3>
               <p className="simple-section-description">
                 Project Monarch is the internal name for our first model. We were
                 building it to Before adapting towards world action models ( WAM-1 ), 

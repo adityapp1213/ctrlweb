@@ -194,35 +194,45 @@
 
 .simple-site-stack {
   position: relative;
+  isolation: isolate;
   overflow: visible;
   background: #0b0b0b;
 }
 
 .simple-blog-page {
+  position: relative;
+  z-index: 1;
   background: #f7f7f5;
+  border-radius: 0 0 1.75rem 1.75rem;
 }
 
 .simple-blog-shell {
   display: grid;
   grid-template-columns: 155px minmax(0, 1fr);
   gap: 77px;
-  width: min(100% - 3rem, 1010px);
+  width: min(100% - 3rem, 1280px);
   margin: 0 auto;
   padding: clamp(8rem, 16vh, 10.5rem) 0 8rem;
   transform: translateX(clamp(0rem, 2vw, 1.5rem));
+  position: relative;
+  z-index: 1;
+  background: #f7f7f5;
+  border-radius: 0 0 1.75rem 1.75rem;
 }
 
 .simple-blog-main {
   min-width: 0;
+  padding-right: 1.5rem;
   color: #171717;
+  transform: translateX(-0.75rem);
 }
 
 .simple-blog-content {
-  max-width: 778px;
+  max-width: none;
 }
 
 .simple-blog-content > div:first-child {
-  max-width: 778px;
+  max-width: none;
   margin-left: 0;
   margin-right: auto;
   text-align: center;
@@ -257,15 +267,15 @@
 }
 
 .simple-blog-content > div:nth-child(2) {
-  max-width: 778px;
+  max-width: none;
   margin-left: 0;
   margin-right: auto;
   border-radius: 1.25rem;
 }
 
 .simple-blog-content > div:last-child {
-  grid-template-columns: minmax(0, 1fr) 190px;
-  gap: 3rem;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 4rem;
 }
 
 .simple-blog-content > div:last-child > article {
@@ -315,7 +325,8 @@
 }
 
 .simple-site-footer {
-  position: relative;
+  position: sticky;
+  bottom: 0;
   z-index: 0;
   min-height: 0;
   margin-top: -1.75rem;
@@ -503,6 +514,15 @@
   font-family: var(--font-mona-sans), Arial, sans-serif;
   font-size: 0.98rem;
   line-height: 1.65;
+}
+
+.simple-blog-shell > .simple-site-nav {
+  margin-left: max(
+    0px,
+    calc(
+      (min(100% - 3rem, 1280px) - min(100% - 3rem, 1010px)) / 2
+    )
+  );
 }
 
 .simple-site-nav-brand {
@@ -1304,6 +1324,8 @@
 
   .simple-blog-main {
     margin-top: 6rem;
+    padding-right: 0;
+    transform: none;
   }
 
   .simple-blog-content {
@@ -1339,6 +1361,10 @@
     justify-content: space-between;
     margin-bottom: 6rem;
     transform: none;
+  }
+
+  .simple-blog-shell > .simple-site-nav {
+    margin-left: 0;
   }
 
   .simple-site-brand {
