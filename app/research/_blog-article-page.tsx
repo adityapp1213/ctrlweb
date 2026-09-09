@@ -18,10 +18,10 @@ type BlogConfig = {
 export const blogArticles = {
   monarch: {
     sourceFile: "monarch-source.html",
-    heroImageSrc: "/assets/monarch.png",
-    heroImageAlt: "monarch model overview",
+    heroImageSrc: "/assets/blog-cards/1.png",
+    heroImageAlt: "Monarch research card",
     seo: {
-      path: "/blog/monarch",
+      path: "/research/monarch",
       title: "monarch: thought-grounded multimodal intelligence",
       description:
         "monarch is atom ctrl's architecture for turning multimodal experience into structured thought, memory, specialist processing, reasoning, and output.",
@@ -65,10 +65,10 @@ export const blogArticles = {
   },
   "interaction-systems": {
     sourceFile: "interaction-systems-source.html",
-    heroImageSrc: "/assets/is1.svg",
-    heroImageAlt: "interaction systems timing overview",
+    heroImageSrc: "/assets/blog-cards/2.2.png",
+    heroImageAlt: "Interaction system research card",
     seo: {
-      path: "/blog/interaction-systems",
+      path: "/research/interaction-systems",
       title: "interaction systems: how voice becomes a real conversation",
       description:
         "atom ctrl's interaction architecture preserves turn state, forms partial understanding early, and begins shaping a response while a conversation is still active.",
@@ -86,10 +86,10 @@ export const blogArticles = {
   },
   "godel-model": {
     sourceFile: "godel-source.html",
-    heroImageSrc: "/assets/gm1.svg",
-    heroImageAlt: "godel 1.6 local-cloud architecture overview",
+    heroImageSrc: "/assets/blog-cards/3.png",
+    heroImageAlt: "Godel model research card",
     seo: {
-      path: "/blog/godel-model",
+      path: "/research/godel-model",
       title: "godel 1.6: a hybrid local-cloud llm architecture",
       description:
         "godel 1.6 is an atom ctrl architecture that handles routine work locally and routes complex tasks to cloud specialists only when required.",
@@ -107,10 +107,10 @@ export const blogArticles = {
   },
   "scaling-synthetic-data": {
     sourceFile: "scaling-source.html",
-    heroImageSrc: "/assets/scl.svg",
-    heroImageAlt: "scaling synthetic data overview",
+    heroImageSrc: "/assets/blog-cards/4.png",
+    heroImageAlt: "Scaling synthetic data research card",
     seo: {
-      path: "/blog/scaling-synthetic-data",
+      path: "/research/scaling-synthetic-data",
       title: "scaling synthetic data",
       description:
         "atom ctrl explores using llama-3 to turn raw web text into cleaner, structured synthetic training data for compact language models.",

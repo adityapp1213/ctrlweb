@@ -81,15 +81,15 @@ export function BlogContent({
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto w-full max-w-[1600px] px-4 pb-16 sm:px-6 lg:px-8 lg:pb-24 lg:pr-24"
+      className="simple-blog-content relative mx-auto w-full px-4 pb-16 sm:px-6 lg:px-0 lg:pb-24"
     >
       <div className="mx-auto max-w-4xl text-center">
         <h1 className="mx-auto max-w-4xl text-4xl font-medium leading-[1.14] tracking-[-0.04em] text-black sm:text-5xl lg:text-6xl">
           {plainTitle}
         </h1>
-        <div className="mt-7 flex flex-col items-center gap-2 text-[1.02rem] leading-7 text-black/64">
+        <div className="simple-blog-hero-meta">
           {article.heroMeta.map((item) => (
-            <p key={item}>{item}</p>
+            <span key={item}>{item}</span>
           ))}
         </div>
       </div>
@@ -139,7 +139,7 @@ export function BlogContent({
 
       <div
         ref={articleTrackRef}
-        className="relative mt-12 lg:grid lg:grid-cols-[220px_minmax(0,760px)_220px] lg:gap-16"
+        className="relative mt-12 lg:grid lg:gap-16"
       >
         <motion.div
           style={{ opacity: smoothLoaderOpacity }}
@@ -180,10 +180,6 @@ export function BlogContent({
           </div>
         </motion.div>
 
-        <aside className="hidden lg:block">
-          <BlogToc items={article.toc} />
-        </aside>
-
         <article className="min-w-0">
           <BlogBody
             bodyHtml={`<p>${article.ledeHtml}</p>${article.bodyHtml}`}
@@ -193,7 +189,9 @@ export function BlogContent({
           />
         </article>
 
-        <div className="hidden lg:block" aria-hidden="true" />
+        <aside className="hidden lg:block">
+          <BlogToc items={article.toc} />
+        </aside>
       </div>
     </section>
   );

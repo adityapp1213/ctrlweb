@@ -1,8 +1,8 @@
-import { FooterSection } from "@/components/footer-section";
 import type { BlogArticle } from "@/lib/blog-article";
 import { createArticleJsonLd, serializeJsonLd, type ArticleSeo } from "@/lib/seo";
+import { SimpleSiteFooter } from "@/components/simple-site-footer";
+import { SimpleSiteNav } from "@/components/simple-site-nav";
 import { BlogContent } from "./blog-content";
-import { BlogNav } from "./blog-nav";
 
 type BlogProps = {
   article: BlogArticle;
@@ -25,18 +25,21 @@ export function Blog({ article, heroImageAlt, heroImageSrc, highlights, seo }: B
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(createArticleJsonLd(seo)) }}
       />
-      <BlogNav />
-      <main className="min-h-screen bg-white pt-28 text-black">
-        <BlogContent
-          article={article}
-          plainTitle={plainTitle}
-          heroImageSrc={heroImageSrc}
-          heroImageAlt={heroImageAlt}
-          highlights={highlights}
-        />
-
-        <FooterSection />
-      </main>
+      <div className="simple-site-stack simple-blog-page">
+        <div className="simple-blog-shell">
+          <SimpleSiteNav active="Research" />
+          <main className="simple-blog-main">
+            <BlogContent
+              article={article}
+              plainTitle={plainTitle}
+              heroImageSrc={heroImageSrc}
+              heroImageAlt={heroImageAlt}
+              highlights={highlights}
+            />
+          </main>
+        </div>
+        <SimpleSiteFooter />
+      </div>
     </>
   );
 }

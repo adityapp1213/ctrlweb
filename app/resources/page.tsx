@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SimpleSiteNav } from "@/components/simple-site-nav";
 import { SimpleSiteFooter } from "@/components/simple-site-footer";
-import { blogArticles } from "@/app/blog/_blog-article-page";
+import { blogArticles } from "@/app/research/_blog-article-page";
 
 const blogCards = Object.values(blogArticles);
 

@@ -22,7 +22,7 @@ export const researchSectionImages = [
     code: "# 01",
     title: "Monarch",
     description: "A thought-grounded multimodal architecture for memory, reasoning, and persistent state.",
-    href: "/blog/monarch",
+    href: "/research/monarch",
   },
   {
     src: "/assets/research/2o1.svg",
@@ -42,7 +42,7 @@ export const researchSectionImages = [
     code: "# 02",
     title: "Interaction system",
     description: "A real-time voice architecture for conversations that understand while they unfold.",
-    href: "/blog/interaction-systems",
+    href: "/research/interaction-systems",
   },
   {
     src: "/assets/research/4o1.svg",
@@ -62,7 +62,7 @@ export const researchSectionImages = [
     code: "# 03",
     title: "Godel model",
     description: "A hybrid local-cloud language model architecture that routes work where it fits.",
-    href: "/blog/godel-model",
+    href: "/research/godel-model",
   },
   {
     src: "/assets/research/3o1.svg",
@@ -82,7 +82,7 @@ export const researchSectionImages = [
     code: "# 04",
     title: "Scaling synthetic data",
     description: "A practical study of turning raw web text into cleaner training data.",
-    href: "/blog/scaling-synthetic-data",
+    href: "/research/scaling-synthetic-data",
   },
 ];
 

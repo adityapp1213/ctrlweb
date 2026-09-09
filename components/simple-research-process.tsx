@@ -9,7 +9,7 @@ const processSteps = [
       "A thought-grounded multimodal architecture for memory, reasoning, and persistent state.",
     image: "/assets/blog-cards/1.png",
     alt: "A landscape moving past a train window",
-    href: "/blog/monarch",
+    href: "/research/monarch",
   },
   {
     number: "02",
@@ -18,7 +18,7 @@ const processSteps = [
       "A real-time voice architecture for conversations that understand while they unfold.",
     image: "/assets/blog-cards/2.2.png",
     alt: "A blurred landscape in motion",
-    href: "/blog/interaction-systems",
+    href: "/research/interaction-systems",
   },
   {
     number: "03",
@@ -27,7 +27,7 @@ const processSteps = [
       "A hybrid local-cloud language model architecture that routes work where it fits.",
     image: "/assets/blog-cards/3.png",
     alt: "A landscape with red birds moving through the sky",
-    href: "/blog/godel-model",
+    href: "/research/godel-model",
   },
   {
     number: "04",
@@ -35,7 +35,7 @@ const processSteps = [
     description: "A practical study of turning raw web text into cleaner training data.",
     image: "/assets/blog-cards/4.png",
     alt: "Trees moving past a train window",
-    href: "/blog/scaling-synthetic-data",
+    href: "/research/scaling-synthetic-data",
   },
 ];
 
