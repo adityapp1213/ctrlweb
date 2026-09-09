@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { CONTACT_URL } from "@/lib/seo";
 
 const members = [
   {
@@ -43,6 +44,7 @@ export function SimpleTeamCards() {
       <h1 id="team-title">
         Meet the minds shaping an <span>industry.</span>
       </h1>
+      <div className="simple-site-divider simple-team-divider" aria-hidden="true" />
       {expandedId ? (
         <button className="simple-team-back" type="button" onClick={() => setExpandedId(null)}>
           <span aria-hidden="true">←</span> Back to Team
@@ -96,7 +98,7 @@ export function SimpleTeamCards() {
         })}
       </div>
       <div className="simple-team-connect-section">
-        <a className="simple-team-connect" href="mailto:aditya@atomctrl.com">
+        <a className="simple-team-connect" href={CONTACT_URL} target="_blank" rel="noreferrer">
           Want to join the team? Let&apos;s connect <span aria-hidden="true">↗</span>
         </a>
       </div>

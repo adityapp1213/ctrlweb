@@ -17,7 +17,7 @@ export function SiteLoaderScreen({
   return (
     <div
       className={[
-        "fixed inset-0 z-[200] flex items-center justify-center bg-[#f7f2ea] px-6 transition-opacity duration-500 ease-out",
+        "fixed inset-0 z-[200] flex items-center justify-center bg-white px-6 transition-opacity duration-500 ease-out",
         visible ? "opacity-100" : "pointer-events-none opacity-0",
       ].join(" ")}
       aria-live="polite"

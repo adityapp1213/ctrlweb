@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { GeistPixelCircle } from "geist/font/pixel";
+import { CONTACT_URL } from "@/lib/seo";
 
 const footerLinks = [
   { label: "Ctrl", href: "/" },
@@ -20,7 +21,9 @@ export function SimpleSiteFooter() {
               {link.label}
             </Link>
           ))}
-          <span>Let&apos;s talk</span>
+          <a href={CONTACT_URL} target="_blank" rel="noreferrer">
+            Let&apos;s talk
+          </a>
         </nav>
         <div className="simple-site-footer-bottom">
           <p>designer aditya &amp; co designer supriya</p>

@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_DESCRIPTION } from "@/lib/seo";
 
 export const alt = "atom ctrl, ai research lab";
 
@@ -8,9 +9,6 @@ export const size = {
 };
 
 export const contentType = "image/png";
-
-const siteDescription =
-  "atom ctrl is an ai research lab building thinking machines that can understand, reason, and learn from the world.";
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -22,7 +20,7 @@ export default function OpenGraphImage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#f8f4ed",
+          background: "#ffffff",
           color: "#111111",
           position: "relative",
           overflow: "hidden",
@@ -100,7 +98,7 @@ export default function OpenGraphImage() {
                 letterSpacing: "-0.055em",
               }}
             >
-              atom ctrl
+              atom ctrl: world thinking machines
             </div>
             <div
               style={{
@@ -110,7 +108,7 @@ export default function OpenGraphImage() {
                 color: "rgba(17,17,17,0.64)",
               }}
             >
-              {siteDescription}
+              {SITE_DESCRIPTION}
             </div>
           </div>
         </div>
