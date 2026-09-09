@@ -336,7 +336,7 @@
   order: 2;
   align-self: flex-start;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-left: -2rem;
   overflow: visible;
   white-space: nowrap;
@@ -578,6 +578,231 @@
   max-width: 720px;
 }
 
+.simple-team-cards {
+  max-width: 575px;
+}
+
+.simple-team-cards h1 {
+  max-width: 330px;
+  margin: 0;
+  font-size: clamp(2.45rem, 3.2vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.simple-team-cards h1 span {
+  color: #171717;
+}
+
+.simple-site:has(.simple-team-cards.is-expanded) {
+  background: #ececea !important;
+}
+
+.simple-team-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 2rem;
+  row-gap: 1rem;
+  margin-top: 4.25rem;
+}
+
+.simple-team-back {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #686868;
+  font: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+
+.simple-team-back:hover,
+.simple-team-back:focus-visible {
+  color: #171717;
+}
+
+.simple-team-card-grid.is-expanded {
+  grid-template-columns: minmax(0, 27rem);
+  justify-content: center;
+}
+
+.simple-team-card {
+  min-width: 0;
+}
+
+.simple-team-card-toggle {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.simple-team-card-image {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1.2;
+  overflow: hidden;
+  background: #ececea;
+}
+
+.simple-team-card-image img {
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 450ms ease;
+}
+
+.simple-team-card-toggle:hover .simple-team-card-image img,
+.simple-team-card-toggle:focus-visible .simple-team-card-image img {
+  transform: scale(1.12);
+}
+
+.simple-team-card-image-aditya img {
+  object-position: 70% center;
+  transform: scale(1.02);
+}
+
+.simple-team-card-image-anjali img {
+  object-position: 58% center;
+}
+
+.simple-team-card-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.9rem;
+}
+
+.simple-team-card-meta > span:first-child {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.simple-team-card-meta strong {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.simple-team-card-meta small {
+  color: #8a8a86;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+.simple-team-card-plus {
+  color: #686868;
+  font-size: 1.35rem;
+  font-weight: 300;
+  line-height: 0.8;
+  transition: color 150ms ease;
+}
+
+.simple-team-card-toggle:hover .simple-team-card-plus,
+.simple-team-card-toggle:focus-visible .simple-team-card-plus {
+  color: #171717;
+}
+
+.simple-team-card-details {
+  padding: 1.15rem 0 0.25rem;
+  color: #686868;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.simple-team-card-grid.is-expanded .simple-team-card-image {
+  aspect-ratio: 1 / 0.92;
+  background: #ececea;
+}
+
+.simple-team-card-grid.is-expanded .simple-team-card {
+  padding: 0;
+}
+
+.simple-team-card-grid.is-expanded .simple-team-card-image img {
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+.simple-team-card-grid.is-expanded .simple-team-card-meta {
+  padding-top: 1rem;
+}
+
+.simple-team-card-grid.is-expanded .simple-team-card-meta strong {
+  font-size: 1.25rem;
+}
+
+.simple-team-card-grid.is-expanded .simple-team-card-details {
+  padding-bottom: 0.5rem;
+  font-size: 0.98rem;
+}
+
+.simple-team-card-details p {
+  margin: 0;
+}
+
+.simple-team-connect {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #d6d6d2;
+  border-radius: 0.35rem;
+  background: #ffffff;
+  color: #686868;
+  font-size: 0.82rem;
+  text-decoration: none;
+  box-shadow: 0 0.4rem 1.2rem rgba(23, 23, 23, 0.04);
+  transition: color 150ms ease;
+}
+
+.simple-team-connect:hover,
+.simple-team-connect:focus-visible {
+  color: #686868;
+}
+
+.simple-team-card-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.15rem;
+  padding: 0.75rem 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.simple-team-card-links img {
+  width: 32px;
+  height: 32px;
+  transform: scale(2.65);
+}
+
+.simple-team-card-links a {
+  display: inline-flex;
+  color: #686868;
+  transition: color 150ms ease, transform 150ms ease;
+}
+
+.simple-team-card-links a:hover,
+.simple-team-card-links a:focus-visible {
+  color: #171717;
+  transform: translateY(-1px);
+}
+
 .simple-site-content h1 {
   max-width: 330px;
   margin: 0;
@@ -613,8 +838,12 @@
 
 .simple-site-first-section {
   max-width: 575px;
-  padding: 0;
+  padding: 4.25rem 0 0;
   font-family: var(--font-mona-sans), Arial, sans-serif;
+}
+
+.simple-site-content > .simple-site-first-section {
+  padding-top: 0;
 }
 
 .simple-site-first-section + .simple-site-first-section {
@@ -633,6 +862,83 @@
   font-size: clamp(1.35rem, 2vw, 1.55rem);
   font-weight: 400;
   letter-spacing: -0.04em;
+}
+
+.simple-site-world-action-section {
+  padding-bottom: 0;
+  animation: simple-site-world-action-fade 700ms ease-out both;
+}
+
+.simple-site-world-action-section h3 {
+  margin-top: 1rem;
+}
+
+.simple-site-world-action-section .simple-section-description {
+  margin-top: 1.15rem;
+}
+
+.simple-site-world-action-section h2 span {
+  color: #686868;
+}
+
+.simple-site-supporting-note {
+  margin: 1.15rem 0 0;
+  color: #8a8a86;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.simple-site-supporting-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.team-profile-card {
+  min-width: 0;
+}
+
+.team-profile-card > button {
+  min-height: 46rem;
+}
+
+.team-profile-card-copy {
+  padding: 1.35rem 1.25rem 3rem;
+  font-family: var(--font-mona-sans), Arial, sans-serif;
+}
+
+.team-profile-card-role {
+  margin: 0 0 0.8rem;
+  color: #8a8a86;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.team-profile-card-copy h3 {
+  margin: 0;
+  color: #171717;
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+@keyframes simple-site-world-action-fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .simple-site-world-action-section {
+    animation: none;
+  }
 }
 
 .simple-site-first-section h3 {
@@ -664,15 +970,35 @@
   height: auto;
   margin-top: 2.25rem;
   border-radius: 0.35rem;
+  background: #ececea;
+  border: 1px solid #dededb;
 }
 
 .simple-site-text-link {
   display: inline-flex;
   gap: 0.3rem;
   margin-top: 1.8rem;
-  color: #171717;
+  color: #686868;
   font-size: 1rem;
   text-underline-offset: 0.2em;
+  transition: color 150ms ease;
+}
+
+.simple-site-text-link:hover,
+.simple-site-text-link:focus-visible {
+  color: #171717;
+}
+
+.simple-site a span[aria-hidden="true"],
+.simple-site-talk span[aria-hidden="true"] {
+  color: #686868;
+  transition: color 150ms ease;
+}
+
+.simple-site a:hover span[aria-hidden="true"],
+.simple-site a:focus-visible span[aria-hidden="true"],
+.simple-site-talk:hover span[aria-hidden="true"] {
+  color: #171717;
 }
 
 .simple-research-content {
@@ -845,7 +1171,14 @@
 
 .simple-blog-index-item > span {
   flex: 0 0 auto;
+  color: #686868;
   font-size: 1rem;
+  transition: color 150ms ease;
+}
+
+.simple-blog-index-item:hover > span,
+.simple-blog-index-item:focus-visible > span {
+  color: #171717;
 }
 
 .simple-research-process-step:hover .simple-research-process-image,
@@ -1026,6 +1359,31 @@
     font-size: clamp(2.5rem, 14vw, 3.5rem);
   }
 
+  .simple-team h1 {
+    max-width: 300px;
+    font-size: clamp(2.5rem, 14vw, 3.5rem);
+  }
+
+  .simple-team-intro {
+  margin-top: 0;
+  }
+
+  .simple-team-list {
+    margin-top: 3.5rem;
+  }
+
+  .simple-team-member {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 1.75rem;
+    padding: 1.75rem 0 2rem;
+  }
+
+  .simple-team-member-image {
+    aspect-ratio: 1.2 / 1;
+  }
+
   .simple-site-intro {
     margin-top: 3rem;
     font-size: 1rem;
@@ -1091,4 +1449,10 @@
   .simple-site-divider {
     margin: 3.5rem 0 3.25rem;
   }
+}
+
+.simple-team-connect-section {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #dededb;
 }

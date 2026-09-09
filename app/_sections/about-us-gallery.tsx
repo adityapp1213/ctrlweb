@@ -417,28 +417,30 @@ export function AboutUsGallery() {
           <MobilePortraitStory onSelect={selectProfile} />
 
           <motion.div
-            className="hidden md:block"
+            className="team-desktop-gallery hidden md:block"
             initial={{ opacity: 0, y: 22, filter: "blur(10px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: 8, filter: "blur(6px)" }}
             viewport={{ once: true, amount: 0.18 }}
             transition={{ duration: 0.68, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative z-10 mx-auto max-w-3xl px-6 pb-4 pt-8 text-center lg:pt-10">
-              <h2 className="mt-5 text-[2.65rem] font-medium leading-[0.95] tracking-[-0.055em] text-black sm:text-5xl lg:text-6xl">
+            <div className="team-page-heading">
+              <h1>
                 meet the minds
                 <br />
-                shaping an industry.
-              </h2>
+                shaping an <span>industry.</span>
+              </h1>
             </div>
 
-            <div className="grid grid-cols-2 items-end bg-transparent px-8 lg:px-20">
+            <div className="grid grid-cols-2 items-end bg-transparent px-0">
               {profiles.map((profile) => (
-                <PortraitButton
-                  key={profile.id}
-                  profile={profile}
-                  onSelect={selectProfile}
-                />
+                <div className="team-profile-card" key={profile.id}>
+                  <PortraitButton profile={profile} onSelect={selectProfile} />
+                  <div className="team-profile-card-copy">
+                    <p className="team-profile-card-role">{profile.role}</p>
+                    <h3>{profile.name}</h3>
+                  </div>
+                </div>
               ))}
             </div>
           </motion.div>

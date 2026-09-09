@@ -2,6 +2,7 @@ import Image from "next/image";
 import { SimpleSiteNav } from "@/components/simple-site-nav";
 import { SimpleSiteFooter } from "@/components/simple-site-footer";
 import { SimpleSiteCta } from "@/components/simple-site-cta";
+import { MoversCanvas } from "@/components/movers-canvas";
 
 export default function Home() {
   return (
@@ -36,6 +37,89 @@ export default function Home() {
                 compare possible actions, and choose a next step with more
                 context.
               </p>
+              <MoversCanvas />
+            </section>
+
+            <section className="simple-site-first-section" aria-labelledby="jepa-section-title">
+              <p className="simple-site-number">02</p>
+              <h2 id="jepa-section-title">Understanding the world</h2>
+              <h3>Predicting the outcome of an action </h3>
+              <p className="simple-section-description">
+                A robot needs more than an Internal representation of what the actions cause in the real world and space around it, how things change, adapt, and interact with an action 
+              </p>
+            </section>
+
+            <section
+              className="simple-site-first-section simple-site-world-action-section"
+              aria-labelledby="world-action-model-title"
+            >
+              <p className="simple-site-number">03</p>
+              <h2 id="world-action-model-title">
+                World Action <span>Model</span>
+              </h2>
+              <h3>A class of JEPA models for action and control.</h3>
+              <p className="simple-section-description">
+                The World Action Model ( WAM-1 ) will be our class of H-JEPA models that learns
+                how actions change the world. Our first production model is
+                planned at nearly one billion total parameters, giving it the
+                capacity to predict outcomes and support longer-horizon robot
+                tasks.
+              </p>
+              <p className="simple-site-supporting-note">
+                The model is still under development. Read our research on other
+                topics <a href="/research">here <span aria-hidden="true">↗</span></a>.
+              </p>
+            </section>
+
+            <section className="simple-site-first-section" aria-labelledby="jepa-method-title">
+              <p className="simple-site-number">04</p>
+              <h2 id="jepa-method-title">JEPA</h2>
+              <h3>Predicting meaning instead of every pixel.</h3>
+              <p className="simple-section-description">
+                Joint Embedding Predictive Architectures let a model focus on
+                the parts of an observation that matter for understanding and
+                action. This was created by one of the forefathers of AI, Mr. Yann le Cun, and we adapted towards this idea and paradigm of models. 
+              </p>
+              <a
+                className="simple-site-text-link"
+                href="https://arxiv.org/abs/2301.08243"
+                target="_blank"
+                rel="noreferrer"
+              >
+                read the JEPA paper <span aria-hidden="true">↗</span>
+              </a>
+            </section>
+
+            <section className="simple-site-first-section" aria-labelledby="h-jepa-title">
+              <p className="simple-site-number">05</p>
+              <h2 id="h-jepa-title">H-JEPA</h2>
+              <h3>Planning across longer horizons.</h3>
+              <p className="simple-section-description">
+                H-JEPA extends predictive learning across time. It gives a model
+                a way to think about several possible futures, so a robot can
+                organize a sequence of actions instead of reacting to one frame
+                at a time.
+              </p>
+              <a
+                className="simple-site-text-link"
+                href="https://arxiv.org/abs/2306.02572"
+                target="_blank"
+                rel="noreferrer"
+              >
+                read the H-JEPA paper <span aria-hidden="true">↗</span>
+              </a>
+            </section>
+
+            <section className="simple-site-first-section" aria-labelledby="goals-title">
+              <p className="simple-site-number">06</p>
+              <h2 id="goals-title">Our goals</h2>
+              <h3>Prediction, control, and recovery.</h3>
+              <p className="simple-section-description">
+                We want our systems to predict the result of an action before it
+                happens, notice when a plan is failing, and recover without
+                starting over. The larger goal is reliable behavior across tasks
+                that take time and require several decisions.
+              </p>
               <Image
                 className="simple-home-section-image"
                 src="/assets/monarch-simulation-grid.png"
@@ -45,68 +129,14 @@ export default function Home() {
               />
             </section>
 
-            <section className="simple-site-first-section" aria-labelledby="jepa-section-title">
-              <p className="simple-site-number">02</p>
-              <h2 id="jepa-section-title">Understanding the world</h2>
-              <h3>Prediction starts with a good model.</h3>
-              <p className="simple-section-description">
-                A robot needs more than an instruction. It needs to understand
-                the space around it, the objects in that space, and the changes
-                that an action may cause. That is the foundation of our work.
-              </p>
-            </section>
-
-            <section className="simple-site-first-section" aria-labelledby="jepa-method-title">
-              <p className="simple-site-number">03</p>
-              <h2 id="jepa-method-title">JEPA</h2>
-              <h3>Predicting meaning instead of every pixel.</h3>
-              <p className="simple-section-description">
-                Joint Embedding Predictive Architectures let a model focus on
-                the parts of an observation that matter for understanding and
-                action. We are studying how this approach can make world models
-                more useful, efficient, and easier to plan with.
-              </p>
-              <a className="simple-site-text-link" href="/research">
-                read the research <span aria-hidden="true">↗</span>
-              </a>
-            </section>
-
-            <section className="simple-site-first-section" aria-labelledby="h-jepa-title">
-              <p className="simple-site-number">04</p>
-              <h2 id="h-jepa-title">H-JEPA</h2>
-              <h3>Planning across longer horizons.</h3>
-              <p className="simple-section-description">
-                H-JEPA extends predictive learning across time. It gives a model
-                a way to think about several possible futures, so a robot can
-                organize a sequence of actions instead of reacting to one frame
-                at a time.
-              </p>
-              <a className="simple-site-text-link" href="/research">
-                read about H-JEPA <span aria-hidden="true">↗</span>
-              </a>
-            </section>
-
-            <section className="simple-site-first-section" aria-labelledby="goals-title">
-              <p className="simple-site-number">05</p>
-              <h2 id="goals-title">Our goals</h2>
-              <h3>Prediction, control, and recovery.</h3>
-              <p className="simple-section-description">
-                We want our systems to predict the result of an action before it
-                happens, notice when a plan is failing, and recover without
-                starting over. The larger goal is reliable behavior across tasks
-                that take time and require several decisions.
-              </p>
-            </section>
-
             <section className="simple-site-first-section" aria-labelledby="monarch-section-title">
-              <p className="simple-site-number">06</p>
+              <p className="simple-site-number">07</p>
               <h2 id="monarch-section-title">Project Monarch</h2>
               <h3>An H-JEPA model for simulated robot control.</h3>
               <p className="simple-section-description">
-                Project Monarch is the internal name for our first model. We are
-                building it to predict action outcomes in simulation and use that
-                understanding to complete longer robot tasks. The current target
-                is around one billion total parameters.
+                Project Monarch is the internal name for our first model. We were
+                building it to Before adapting towards world action models ( WAM-1 ), 
+                Which, after internal assessment and testing, was found to be a best fit for use cases like robotics and automations where there is a defined action rather than Concepts which have meaning and are hard to divide in an abstract sense 
               </p>
               <a className="simple-site-text-link" href="/research/monarch">
                 read about Project Monarch <span aria-hidden="true">↗</span>
@@ -114,7 +144,7 @@ export default function Home() {
             </section>
 
             <section className="simple-site-first-section" aria-labelledby="timeline-title">
-              <p className="simple-site-number">07</p>
+              <p className="simple-site-number">08</p>
               <h2 id="timeline-title">The timeline</h2>
               <h3>From simulation to capable machines.</h3>
               <p className="simple-section-description">
