@@ -1804,3 +1804,43 @@
   padding-top: 1.5rem;
   border-top: 1px solid #dededb;
 }
+
+.logo-bg-ss-page {
+  min-height: 100svh;
+  padding: 3rem 1.5rem 1.5rem;
+  overflow: hidden;
+  background: #0b0b0b;
+  color: #f7f7f5;
+}
+
+.logo-bg-ss-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100svh - 4.5rem);
+  width: min(100%, 1010px);
+  margin: 0 auto;
+}
+
+.logo-bg-ss-wordmark {
+  color: #f7f7f5;
+  font-size: clamp(8rem, 20vw, 18rem);
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  line-height: 0.9;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .logo-bg-ss-page {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .logo-bg-ss-inner {
+    min-height: calc(100svh - 3rem);
+  }
+
+  .logo-bg-ss-wordmark {
+    font-size: clamp(4.25rem, 17vw, 7rem);
+  }
+}
