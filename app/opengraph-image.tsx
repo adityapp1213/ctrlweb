@@ -35,25 +35,16 @@ export default function OpenGraphImage() {
       >
         <div
           style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(circle at 18% 20%, rgba(226,104,125,0.2), transparent 28%), radial-gradient(circle at 86% 80%, rgba(226,104,125,0.14), transparent 30%)",
-          }}
-        />
-
-        <div
-          style={{
             width: "100%",
             height: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: "54px",
+            gap: "48px",
             borderRadius: "34px",
             border: "1px solid rgba(17,17,17,0.09)",
             background: "rgba(255,255,255,0.72)",
-            padding: "58px 66px",
+            padding: "54px 60px",
             position: "relative",
           }}
         >
@@ -83,7 +74,7 @@ export default function OpenGraphImage() {
           >
             <div
               style={{
-                fontSize: 94,
+                fontSize: 76,
                 lineHeight: 0.95,
                 letterSpacing: "-0.055em",
               }}
@@ -93,7 +84,7 @@ export default function OpenGraphImage() {
             <div
               style={{
                 maxWidth: "760px",
-                fontSize: 34,
+                fontSize: 30,
                 lineHeight: 1.32,
                 color: "rgba(17,17,17,0.64)",
               }}

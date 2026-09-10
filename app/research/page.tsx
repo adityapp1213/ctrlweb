@@ -9,7 +9,12 @@ export const metadata = createPageMetadata({
   title: "Research",
   description:
     "Research notes from atom ctrl on world models, interaction systems, and the path toward capable machines.",
-  image: "/assets/blog-cards/1.png",
+  image: [
+    "/assets/blog-cards/1.png",
+    "/assets/blog-cards/2.2.png",
+    "/assets/blog-cards/3.png",
+    "/assets/blog-cards/4.png",
+  ],
 });
 
 export default function ResearchPage() {
