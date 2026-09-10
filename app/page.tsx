@@ -67,7 +67,7 @@ export default function Home() {
               </p>
               <p className="simple-site-supporting-note">
                 The model is still under development. Read our research on other
-                topics <a href="/research">here <span aria-hidden="true">↗</span></a>.
+                topics <a href="/research">here <span aria-hidden="true" /></a>.
               </p>
             </section>
 
@@ -86,7 +86,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                read the JEPA paper <span aria-hidden="true">↗</span>
+                read the JEPA paper <span aria-hidden="true" />
               </a>
             </section>
 
@@ -106,7 +106,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                read the H-JEPA paper <span aria-hidden="true">↗</span>
+                read the H-JEPA paper <span aria-hidden="true" />
               </a>
             </section>
 
@@ -139,7 +139,7 @@ export default function Home() {
                 Which, after internal assessment and testing, was found to be a best fit for use cases like robotics and automations where there is a defined action rather than Concepts which have meaning and are hard to divide in an abstract sense 
               </p>
               <a className="simple-site-text-link" href="/research/monarch">
-                read about Project Monarch <span aria-hidden="true">↗</span>
+                read about Project Monarch <span aria-hidden="true" />
               </a>
             </section>
 

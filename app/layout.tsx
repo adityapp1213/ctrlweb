@@ -63,9 +63,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
+        url: "/assets/atom-ctrl-og.png",
+        width: 1563,
+        height: 927,
         alt: "atom ctrl - world thinking machines",
       },
     ],
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     title: "atom ctrl - world thinking machines",
     description: SITE_DESCRIPTION,
     creator: "@adityapp1213",
-    images: ["/twitter-image"],
+    images: ["/assets/atom-ctrl-og.png"],
   },
 };
 

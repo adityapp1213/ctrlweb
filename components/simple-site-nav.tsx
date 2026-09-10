@@ -64,7 +64,7 @@ export function SimpleSiteNav({ active }: { active: string }) {
         </ul>
         <div className="simple-site-nav-rule" />
         <a className="simple-site-talk" href={CONTACT_URL} target="_blank" rel="noreferrer">
-          Let&apos;s talk <span aria-hidden="true">↗</span>
+          Let&apos;s talk <span aria-hidden="true" />
         </a>
       </nav>
       <button

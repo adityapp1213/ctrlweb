@@ -21,7 +21,7 @@ export function createPageMetadata({
   path,
   title,
   description,
-  image = "/opengraph-image",
+  image = "/assets/atom-ctrl-og.png",
 }: {
   path: `/${string}`;
   title: string;
