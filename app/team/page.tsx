@@ -2,6 +2,14 @@ import { SimpleSiteNav } from "@/components/simple-site-nav";
 import { SimpleSiteFooter } from "@/components/simple-site-footer";
 import { SimpleSiteCta } from "@/components/simple-site-cta";
 import { SimpleTeamCards } from "@/components/simple-team-cards";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  path: "/team",
+  title: "Team",
+  description:
+    "Meet the people building atom ctrl and its research into world thinking machines.",
+});
 
 export default function TeamPage() {
   return (

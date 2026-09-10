@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { SITE_DESCRIPTION } from "@/lib/seo";
 
 export const alt = "atom ctrl, ai research lab";
@@ -9,6 +11,10 @@ export const size = {
 };
 
 export const contentType = "image/png";
+
+const logoMarkUrl = `data:image/png;base64,${readFileSync(
+  join(process.cwd(), "public", "logo-mark.png"),
+).toString("base64")}`;
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -51,35 +57,19 @@ export default function OpenGraphImage() {
             position: "relative",
           }}
         >
-          <svg
-            width="150"
-            height="150"
-            viewBox="0 0 64 64"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ flexShrink: 0 }}
-          >
-            <ellipse
-              cx="32"
-              cy="32"
-              rx="22"
-              ry="10"
-              stroke="rgba(17,17,17,0.62)"
-              strokeWidth="3"
-              strokeLinecap="round"
-              transform="rotate(45 32 32)"
-            />
-            <ellipse
-              cx="32"
-              cy="32"
-              rx="22"
-              ry="10"
-              stroke="#111111"
-              strokeWidth="3"
-              strokeLinecap="round"
-              transform="rotate(-45 32 32)"
-            />
-          </svg>
+          <img
+            src={logoMarkUrl}
+            alt="atom ctrl logo mark"
+            width={150}
+            height={150}
+            style={{
+              width: 150,
+              height: 150,
+              flexShrink: 0,
+              borderRadius: 34,
+              objectFit: "contain",
+            }}
+          />
 
           <div
             style={{

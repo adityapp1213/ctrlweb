@@ -16,22 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}/resources`,
+      url: `${SITE_URL}/team`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
       priority: 0.85,
-    },
-    {
-      url: `${SITE_URL}/first`,
-      lastModified: "2026-07-04",
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/company`,
-      lastModified: "2026-07-04",
-      changeFrequency: "monthly",
-      priority: 0.8,
     },
     {
       url: `${SITE_URL}/research/monarch`,

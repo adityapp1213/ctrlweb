@@ -25,7 +25,7 @@ export const blogArticles = {
       title: "monarch: thought-grounded multimodal intelligence",
       description:
         "monarch is atom ctrl's architecture for turning multimodal experience into structured thought, memory, specialist processing, reasoning, and output.",
-      image: "/opengraph-image",
+      image: "/assets/blog-cards/1.png",
       datePublished: "2026-07-03",
       dateModified: "2026-07-04",
       keywords: [
@@ -72,7 +72,7 @@ export const blogArticles = {
       title: "interaction systems: how voice becomes a real conversation",
       description:
         "atom ctrl's interaction architecture preserves turn state, forms partial understanding early, and begins shaping a response while a conversation is still active.",
-      image: "/opengraph-image",
+      image: "/assets/blog-cards/2.2.png",
       datePublished: "2026-05-30",
       dateModified: "2026-07-04",
       keywords: [
@@ -93,7 +93,7 @@ export const blogArticles = {
       title: "godel 1.6: a hybrid local-cloud llm architecture",
       description:
         "godel 1.6 is an atom ctrl architecture that handles routine work locally and routes complex tasks to cloud specialists only when required.",
-      image: "/opengraph-image",
+      image: "/assets/blog-cards/3.png",
       datePublished: "2025-08-20",
       dateModified: "2026-07-04",
       keywords: [
@@ -114,7 +114,7 @@ export const blogArticles = {
       title: "scaling synthetic data",
       description:
         "atom ctrl explores using llama-3 to turn raw web text into cleaner, structured synthetic training data for compact language models.",
-      image: "/opengraph-image",
+      image: "/assets/blog-cards/4.png",
       datePublished: "2025-07-28",
       dateModified: "2026-07-04",
       keywords: [
