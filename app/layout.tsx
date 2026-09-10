@@ -13,7 +13,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "atom ctrl: world thinking machines",
+    default: "atom ctrl - world thinking machines",
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: SITE_NAME,
-    title: "atom ctrl: world thinking machines",
+    title: "atom ctrl - world thinking machines",
     description: SITE_DESCRIPTION,
     locale: "en_US",
     images: [
@@ -66,13 +66,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "atom ctrl: world thinking machines",
+        alt: "atom ctrl - world thinking machines",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "atom ctrl: world thinking machines",
+    title: "atom ctrl - world thinking machines",
     description: SITE_DESCRIPTION,
     creator: "@adityapp1213",
     images: ["/twitter-image"],

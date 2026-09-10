@@ -1668,8 +1668,8 @@
     max-width: none;
     height: auto;
     margin-top: 1.75rem;
-    aspect-ratio: 16 / 7;
-    object-fit: contain;
+    aspect-ratio: auto;
+    object-fit: initial;
   }
 
   .simple-research-process-step {
