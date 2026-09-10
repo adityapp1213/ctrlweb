@@ -1032,8 +1032,30 @@
 
 .simple-site a span[aria-hidden="true"],
 .simple-site-talk span[aria-hidden="true"] {
+  display: inline;
+  width: auto;
+  height: auto;
+  margin-left: 0.1rem;
+  border: 0;
   color: #686868;
+  font-size: 0;
+  transform: none;
   transition: color 150ms ease;
+}
+
+.simple-site a span[aria-hidden="true"]::before,
+.simple-site-talk span[aria-hidden="true"]::before {
+  content: none;
+}
+
+.simple-site a span[aria-hidden="true"]::after,
+.simple-site-talk span[aria-hidden="true"]::after {
+  position: static;
+  display: inline-block;
+  content: "\2197";
+  font-size: 0.9rem;
+  line-height: 1;
+  vertical-align: 0.14em;
 }
 
 .simple-site a:hover span[aria-hidden="true"],
@@ -1774,6 +1796,7 @@
   .simple-blog-content > div:last-child {
     margin-top: 3rem;
   }
+
 }
 
 .simple-team-connect-section {
