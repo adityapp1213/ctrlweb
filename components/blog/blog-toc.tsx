@@ -63,7 +63,7 @@ export function BlogToc({ items }: { items: TocItem[] }) {
   }, [items]);
 
   return (
-    <nav className="sticky top-28">
+    <nav className="simple-blog-toc sticky">
       <ul className="space-y-4 text-[0.98rem] leading-7 text-black/55">
         {items.map((item) => (
           <li key={item.id}>

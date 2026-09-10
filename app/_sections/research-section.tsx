@@ -3,7 +3,7 @@
 import { ExpandableResearchGallery } from "@/components/ui/main/expandable-research-gallery";
 import { TextGradientScroll } from "@/components/ui/text-gradient-scroll";
 
-const researchSectionImages = [
+export const researchSectionImages = [
   {
     src: "/assets/research/1o1.svg",
     frames: Array.from(
@@ -20,8 +20,9 @@ const researchSectionImages = [
     ],
     alt: "ctrl horizontal gallery study one",
     code: "# 01",
-    title: "monarch",
-    href: "/blog/monarch",
+    title: "Monarch",
+    description: "A thought-grounded multimodal architecture for memory, reasoning, and persistent state.",
+    href: "/research/monarch",
   },
   {
     src: "/assets/research/2o1.svg",
@@ -39,8 +40,9 @@ const researchSectionImages = [
     ],
     alt: "ctrl horizontal gallery study two",
     code: "# 02",
-    title: "interaction system",
-    href: "/blog/interaction-systems",
+    title: "Interaction system",
+    description: "A real-time voice architecture for conversations that understand while they unfold.",
+    href: "/research/interaction-systems",
   },
   {
     src: "/assets/research/4o1.svg",
@@ -58,8 +60,9 @@ const researchSectionImages = [
     ],
     alt: "ctrl horizontal gallery study three",
     code: "# 03",
-    title: "godel model",
-    href: "/blog/godel-model",
+    title: "Godel model",
+    description: "A hybrid local-cloud language model architecture that routes work where it fits.",
+    href: "/research/godel-model",
   },
   {
     src: "/assets/research/3o1.svg",
@@ -77,8 +80,9 @@ const researchSectionImages = [
     ],
     alt: "ctrl horizontal gallery study four",
     code: "# 04",
-    title: "scaling synthetic data",
-    href: "/blog/scaling-synthetic-data",
+    title: "Scaling synthetic data",
+    description: "A practical study of turning raw web text into cleaner training data.",
+    href: "/research/scaling-synthetic-data",
   },
 ];
 

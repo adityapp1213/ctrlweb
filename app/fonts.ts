@@ -1,5 +1,11 @@
 import localFont from "next/font/local";
 
+export const monaSans = localFont({
+  src: "../public/fonts/Mona_Sans/Mona_Sans/MonaSans-VariableFont_wdth,wght.ttf",
+  display: "swap",
+  variable: "--font-mona-sans",
+});
+
 export const instrumentSerif = localFont({
   src: [
     {

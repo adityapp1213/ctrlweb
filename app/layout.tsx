@@ -7,34 +7,39 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/seo";
-import { instrumentSerif, shadowsIntoLight } from "./fonts";
+import { instrumentSerif, monaSans, shadowsIntoLight } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: SITE_NAME,
+    default: "atom ctrl: world thinking machines",
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
     "atom ctrl",
-    "ai research lab",
-    "thinking machines",
-    "thought-grounded intelligence",
-    "thought-grounded models",
+    "AI robotics lab",
+    "world thinking machines",
+    "world action models",
+    "JEPA",
+    "H-JEPA",
+    "robot learning",
+    "simulated robot control",
+    "long-horizon tasks",
     "multimodal intelligence",
-    "ai reasoning",
-    "ai memory",
-    "synthetic data research",
-    "human ai interaction",
-    "monarch models",
+    "predictive world models",
+    "Project Monarch",
   ],
   authors: [{ name: FOUNDER_NAME, url: `${SITE_URL}/#about-us` }],
   creator: FOUNDER_NAME,
   publisher: SITE_NAME,
   category: "ai research",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
   alternates: {
     canonical: "/",
   },
@@ -53,15 +58,24 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: SITE_NAME,
-    title: SITE_NAME,
+    title: "atom ctrl: world thinking machines",
     description: SITE_DESCRIPTION,
     locale: "en_US",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "atom ctrl: world thinking machines",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_NAME,
+    title: "atom ctrl: world thinking machines",
     description: SITE_DESCRIPTION,
     creator: "@adityapp1213",
+    images: ["/twitter-image"],
   },
 };
 
@@ -73,7 +87,7 @@ const siteJsonLd = {
       "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
       url: SITE_URL,
-      logo: `${SITE_URL}/apple-icon`,
+      logo: `${SITE_URL}/favicon.ico`,
       description: SITE_DESCRIPTION,
       founder: {
         "@type": "Person",
@@ -86,12 +100,14 @@ const siteJsonLd = {
         "https://www.instagram.com/why.adi_tya",
       ],
       knowsAbout: [
-        "thought-grounded artificial intelligence",
+        "AI robotics",
+        "world action models",
+        "JEPA",
+        "H-JEPA",
+        "robot control",
+        "long-horizon task planning",
         "multimodal intelligence",
-        "machine reasoning",
-        "ai memory systems",
-        "synthetic training data",
-        "human-ai interaction",
+        "predictive world models",
       ],
     },
     {
@@ -116,7 +132,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${shadowsIntoLight.variable} ${instrumentSerif.className} h-full bg-white antialiased`}
+      className={`${monaSans.variable} ${instrumentSerif.variable} ${shadowsIntoLight.variable} ${monaSans.className} h-full bg-white antialiased`}
     >
       <head>
         <link rel="alternate" type="text/plain" href="/llms.txt" title="atom ctrl llm index" />

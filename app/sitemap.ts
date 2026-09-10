@@ -16,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${SITE_URL}/resources`,
+      lastModified: "2026-07-04",
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
+    {
       url: `${SITE_URL}/first`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
@@ -28,25 +34,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/blog/monarch`,
+      url: `${SITE_URL}/research/monarch`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
       priority: 0.75,
     },
     {
-      url: `${SITE_URL}/blog/interaction-systems`,
+      url: `${SITE_URL}/research/interaction-systems`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/blog/godel-model`,
+      url: `${SITE_URL}/research/godel-model`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/blog/scaling-synthetic-data`,
+      url: `${SITE_URL}/research/scaling-synthetic-data`,
       lastModified: "2026-07-04",
       changeFrequency: "monthly",
       priority: 0.7,
