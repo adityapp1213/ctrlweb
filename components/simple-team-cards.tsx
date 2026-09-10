@@ -99,7 +99,7 @@ export function SimpleTeamCards() {
       </div>
       <div className="simple-team-connect-section">
         <a className="simple-team-connect" href={CONTACT_URL} target="_blank" rel="noreferrer">
-          Want to join the team? Let&apos;s connect <span aria-hidden="true">↗</span>
+          Want to join the team? Let&apos;s connect <span aria-hidden="true" />
         </a>
       </div>
     </section>
