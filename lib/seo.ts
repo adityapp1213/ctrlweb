@@ -26,8 +26,10 @@ export function createPageMetadata({
   path: `/${string}`;
   title: string;
   description: string;
-  image?: string;
+  image?: string | string[];
 }): Metadata {
+  const images = Array.isArray(image) ? image : [image];
+
   return {
     title,
     description,
@@ -40,13 +42,13 @@ export function createPageMetadata({
       siteName: SITE_NAME,
       title,
       description,
-      images: [{ url: image, alt: title }],
+      images: images.map((url) => ({ url, alt: title })),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
+      images,
     },
   };
 }
