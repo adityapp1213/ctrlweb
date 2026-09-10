@@ -36,6 +36,8 @@ export function MoversCanvas() {
     }
 
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     canvas.width = CANVAS_WIDTH * pixelRatio;
     canvas.height = CANVAS_HEIGHT * pixelRatio;
     context.scale(pixelRatio, pixelRatio);
@@ -69,11 +71,18 @@ export function MoversCanvas() {
     let animationFrame = 0;
 
     const draw = () => {
+      const time = performance.now() / 1000;
       context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
       context.fillStyle = "#000000";
 
       for (const mover of movers) {
-        if (pointer.active) {
+        if (isMobile && !prefersReducedMotion) {
+          // Mobile gets a quiet preset flow so the component is alive without touch.
+          mover.accelerationX = Math.sin(time * 0.65 + mover.y * 0.012) * 0.045;
+          mover.accelerationY = Math.cos(time * 0.55 + mover.x * 0.008) * 0.045;
+          mover.velocityX *= 0.995;
+          mover.velocityY *= 0.995;
+        } else if (pointer.active) {
           const directionX = pointer.x - mover.x;
           const directionY = pointer.y - mover.y;
           const distance = Math.hypot(directionX, directionY);

@@ -98,7 +98,7 @@ export default function OpenGraphImage() {
                 letterSpacing: "-0.055em",
               }}
             >
-              atom ctrl: world thinking machines
+              atom ctrl - world thinking machines
             </div>
             <div
               style={{
