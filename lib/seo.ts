@@ -17,6 +17,40 @@ export type ArticleSeo = {
   keywords: string[];
 };
 
+export function createPageMetadata({
+  path,
+  title,
+  description,
+  image = "/opengraph-image",
+}: {
+  path: `/${string}`;
+  title: string;
+  description: string;
+  image?: string;
+}): Metadata {
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      type: "website",
+      url: path,
+      siteName: SITE_NAME,
+      title,
+      description,
+      images: [{ url: image, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
 export function absoluteUrl(path: string) {
   return new URL(path, SITE_URL).toString();
 }
