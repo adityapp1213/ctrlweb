@@ -1,48 +1,37 @@
 
-# Atom ctrl :)
+# Atom ctrl ( redesign ) :)
 
 this is the source code for my startup site, https://www.atomctrl.com/
 
 i use this site to put everything in one place:
-my research, my ideas around machine learning and thinking machines, the stuff i am building, and my blog-style research pages too. it is basically the home for what i am doing with atom ctrl (my tiny startup)
+my research, my ideas around machine learning and thinking machines for robots, the stuff i am building, and my blog-style research pages too. it is basically the home for what i am doing with atom ctrl (my tiny startup)
 
-it is built as a Next.js app-router site, and right now the homepage is basically one long landing page with sections for the story, features, research, founder stuff, faq, and a very pink footer :))
-
-Special thanks to the butterfly component. In the entire site I love that the most you can see them /butterfly/flapping-butterfly
+it is built as a Next.js app-router site, and right now the homepage is basically three page `/`, `/research`, and `/team`. 
 
 ## routes
 
 `/`
 main landing page
 
-`/description`
-the intro / what my project Monarch is about
-
-`/features`
-the core ideas and features section which shows everything about Monarch's features 
-
-`/why-ctrl`
-gives intro to the friendly character (cloudy) which will be in the app 
+`/ctrl`
+resolves in main
 
 `/research`
 research section with the main blogs and they links 
 
-`/about-us`
+`/team`
 founder and adviser section
 
-`/faq`
-faq page
-
-`/monarch`
+`research/monarch`
 research/blog page for monarch
 
-`/interaction-systems`
+`research/interaction-systems`
 research/blog page for interaction-systems
 
-`/godel-model`
+`research/godel-model`
 research/blog page
 
-`/scaling-synthetic-data`
+`research/scaling-synthetic-data`
 research/blog page for godel-model
 
 ## stack
@@ -60,27 +49,29 @@ research/blog page for godel-model
 
 ```text
 app/
-  about-us/
-  description/
-  faq/
-  features/
-  footer/
-  godel-model/
-  hero/
-  interaction-systems/
-  monarch/
+  ctrl/
+    page.tsx
   research/
-  scaling-synthetic-data/
-  why-ctrl/
+    monarch/
+    interaction-systems/
+    godel-model/
+    scaling-synthetic-data/
+    _blog-article-page.tsx
+    page.tsx
+  team/
+    page.tsx
+  _sections/
   apple-icon.tsx
-  favicon.ico
   fonts.ts
   globals.css
   icon.tsx
   layout.tsx
   loading.tsx
+  manifest.ts
   opengraph-image.tsx
   page.tsx
+  robots.ts
+  sitemap.ts
   twitter-image.tsx
 
 components/
@@ -88,9 +79,15 @@ components/
   butterfly/
   ui/
     main/
+    skiper-ui/
   hero.tsx
-  logo.tsx
-  section-nav-link.tsx
+  movers-canvas.tsx
+  route-top-nav.tsx
+  simple-research-process.tsx
+  simple-site-cta.tsx
+  simple-site-footer.tsx
+  simple-site-nav.tsx
+  simple-team-cards.tsx
   site-loader-screen.tsx
   site-preloader.tsx
 
@@ -102,12 +99,14 @@ content/
 
 lib/
   blog-article.ts
-  site-assets.ts
+  seo.ts
   utils.ts
 
 public/
   assets/
   fonts/
+  favicon.ico
+  logo-mark.png
 
 root files/
   package.json
@@ -117,6 +116,7 @@ root files/
   eslint.config.mjs
   postcss.config.mjs
   components.json
+  AGENTS.md
   README.md
 ```
 
@@ -161,20 +161,9 @@ good news, this thing is healthy rn :)
 pretty simple:
 
 1. you land on `/`
-2. you scroll through the main story, features, research, about section, and faq
-3. if you want the actual ml / research stuff, you jump into the article pages
-4. if you want updates or access, you hit the waitlist CTA its powered by type form
-
-## content setup
-
-the research/blog pages are powered by source HTML files inside `content/`
-
-- `monarch-source.html`
-- `interaction-systems-source.html`
-- `godel-source.html`
-- `scaling-source.html`
-
-`lib/blog-article.ts` reads those files, fixes weird encoding mess, builds a table of contents, and turns them into the final article pages. very cool. slightly held together by sleep deprivation probably.
+2. you scroll through the points and our goal
+3. if you want the actual ml / research stuff, you jump into the research
+4. if you want updates or access, you hit the lets talk
 
 ## branding notes
 
@@ -182,12 +171,7 @@ the research/blog pages are powered by source HTML files inside `content/`
 - favicon lives in `app/favicon.ico`
 - the visible logo is the custom `AtomLogo` svg component
 - the font is loaded locally from `public/fonts/`
-- butterflies are part of the design now and at this point they are basically employees and they are amazing looking 
 
-## future cleanup ideas
 
-- add route-specific metadata for the research pages
-- tighten some copy and casing across sections
-- clean up the section/page structure a little more
-- add analytics later if i want to track clicks and signups
+
 
