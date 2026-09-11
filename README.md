@@ -52,37 +52,38 @@ app/
   ctrl/
     page.tsx
   research/
-    monarch/
-    interaction-systems/
     godel-model/
+      page.tsx
+    interaction-systems/
+      page.tsx
+    monarch/
+      page.tsx
     scaling-synthetic-data/
+      page.tsx
     _blog-article-page.tsx
     page.tsx
   team/
     page.tsx
-  _sections/
   apple-icon.tsx
+  favicon.ico
   fonts.ts
   globals.css
   icon.tsx
   layout.tsx
   loading.tsx
   manifest.ts
-  opengraph-image.tsx
   page.tsx
   robots.ts
   sitemap.ts
-  twitter-image.tsx
 
 components/
   blog/
-  butterfly/
-  ui/
-    main/
-    skiper-ui/
-  hero.tsx
+    blog-body.tsx
+    blog-content.tsx
+    blog-toc.tsx
+    blog.module.css
+    blog.tsx
   movers-canvas.tsx
-  route-top-nav.tsx
   simple-research-process.tsx
   simple-site-cta.tsx
   simple-site-footer.tsx
@@ -104,9 +105,27 @@ lib/
 
 public/
   assets/
+    atom-ctrl-og.png
+    blog-cards/
+      1.png
+      2.2.png
+      3.png
+      4.png
+    chiku2.svg
+    chintu1.svg
+    footer-cta-forest.png
+    github.svg
+    gmail.svg
+    instagram.svg
+    linkedin.svg
+    monarch-simulation-grid.png
   fonts/
+    Instrument_Serif/
+    Mona_Sans/
+    Shadows_Into_Light/
   favicon.ico
-  logo-mark.png
+  llms-full.txt
+  llms.txt
 
 root files/
   package.json
@@ -116,8 +135,11 @@ root files/
   eslint.config.mjs
   postcss.config.mjs
   components.json
-  AGENTS.md
+  proxy.ts
   README.md
+  AGENTS.md
+  CLAUDE.md
+  .gitignore
 ```
 
 ## how to run it
