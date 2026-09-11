@@ -23,12 +23,6 @@ export const instrumentSerif = localFont({
   variable: "--font-instrument-serif",
 });
 
-export const palatino = localFont({
-  src: "../public/fonts/Palatino/palr45w.ttf",
-  display: "swap",
-  variable: "--font-palatino",
-});
-
 export const shadowsIntoLight = localFont({
   src: "../public/fonts/ShadowsIntoLight/shadows-into-light-v22.ttf",
   display: "swap",
