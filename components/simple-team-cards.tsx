@@ -17,8 +17,11 @@ const members = [
       { label: "instagram", href: "https://www.instagram.com/why.adi_tya", icon: "/assets/instagram.svg" },
       { label: "gmail", href: "mailto:aditya@atomctrl.com", icon: "/assets/gmail.svg" },
     ],
-    description:
-      "aditya is building atom ctrl around thinking machines that can understand the world, predict what may happen next, and act with purpose.",
+    heading: "built close to the problem.",
+    paragraphs: [
+      "i'm aditya panigrahi (chief everything officer), 18 have been working on atom ctrl since last year have built, ideated and shipped multiple things.",
+      "now have shifted my focus on WAM, because i feel ai is not just about predicting the next word rather to be a truely thinking machine....",
+    ],
   },
   {
     id: "anjali",
@@ -31,8 +34,11 @@ const members = [
       { label: "instagram", href: "https://www.instagram.com/_anjali_panigrahi_", icon: "/assets/instagram.svg" },
       { label: "gmail", href: "mailto:anjali.panigrahi.99@gmail.com", icon: "/assets/gmail.svg" },
     ],
-    description:
-      "anjali advises atom ctrl and provides the steady support and perspective behind the lab as its ideas and models take shape.",
+    heading: "the person who kept believing.",
+    paragraphs: [
+      "anjali panigrahi (adviser ), also my sister :) is the one who has been my constant support and adviser throughout this journey.",
+      "from day one she was the one pushing me to work towards something innovative. she is the one who kept believing in me when i was doubting myself.",
+    ],
   },
 ];
 
@@ -77,7 +83,10 @@ export function SimpleTeamCards() {
               </button>
               {expanded ? (
                 <div className="simple-team-card-details">
-                  <p>{member.description}</p>
+                  <h2>{member.heading}</h2>
+                  {member.paragraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
                   <div className="simple-team-card-links" aria-label={`${member.name} social links`}>
                     {member.links.map((link) => (
                       <a

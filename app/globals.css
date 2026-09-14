@@ -642,6 +642,10 @@
   background: #ececea !important;
 }
 
+.simple-site:has(.simple-team-cards.is-expanded) .simple-site-cta {
+  background: #ececea;
+}
+
 .simple-team-card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -795,6 +799,19 @@
 
 .simple-team-card-details p {
   margin: 0;
+}
+
+.simple-team-card-details p + p {
+  margin-top: 0.9rem;
+}
+
+.simple-team-card-details h2 {
+  margin: 0 0 1rem;
+  color: #171717;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .simple-team-connect {
@@ -1004,6 +1021,108 @@
 .simple-site-first-section .simple-section-description {
   max-width: 620px;
   margin-top: 0.65rem;
+}
+
+.simple-site-faq {
+  max-width: 575px;
+  padding-bottom: 1rem;
+  font-family: var(--font-mona-sans), Arial, sans-serif;
+}
+
+.simple-site-faq .simple-site-divider {
+  margin-bottom: 2.2rem;
+}
+
+.simple-site-faq h2 {
+  margin: 0 0 1.8rem;
+  font-family: var(--font-mona-sans), Arial, sans-serif;
+  font-size: clamp(1.35rem, 2vw, 1.55rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.faq-accordion {
+  width: 100%;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+.faq-accordion-item {
+  padding: 0 1.25rem;
+}
+
+.faq-accordion-item-border {
+  border-top: 1px solid rgb(0 0 0 / 0.055);
+}
+
+.faq-accordion-trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.35rem 0;
+  color: #171717;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  transition: color 150ms ease;
+}
+
+.faq-accordion-trigger:hover,
+.faq-accordion-trigger-active {
+  color: #686868 !important;
+}
+
+.faq-accordion-trigger:focus-visible {
+  outline: 2px solid rgb(23 23 23 / 0.2);
+  outline-offset: -2px;
+}
+
+.faq-accordion-icon {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  color: rgb(23 23 23 / 0.45);
+}
+
+.faq-accordion-trigger:hover .faq-accordion-icon,
+.faq-accordion-trigger-active .faq-accordion-icon {
+  color: #686868 !important;
+}
+
+.faq-accordion-answer {
+  margin: 0;
+  padding: 0 0 1.35rem;
+  color: rgb(23 23 23 / 0.62);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.faq-page-content {
+  max-width: 575px;
+}
+
+.faq-page-content h1 {
+  max-width: 575px;
+}
+
+.faq-page-answer {
+  max-width: 575px;
+  margin-top: 3rem;
+  color: #686868;
+  font-family: var(--font-mona-sans), Arial, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.faq-accordion-date {
+  margin: -0.65rem 0 1.35rem;
+  color: rgb(23 23 23 / 0.35);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .simple-home-section-image {

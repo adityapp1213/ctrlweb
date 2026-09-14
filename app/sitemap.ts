@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { faqItems } from "@/lib/faq";
 import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -45,5 +46,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    ...faqItems.map((item) => ({
+      url: `${SITE_URL}/faq/${item.slug}`,
+      lastModified: "2026-07-04",
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
   ];
 }

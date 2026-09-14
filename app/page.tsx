@@ -3,6 +3,8 @@ import { SimpleSiteNav } from "@/components/simple-site-nav";
 import { SimpleSiteFooter } from "@/components/simple-site-footer";
 import { SimpleSiteCta } from "@/components/simple-site-cta";
 import { MoversCanvas } from "@/components/movers-canvas";
+import { FaqAccordion } from "@/components/faq-accordion";
+import { faqItems } from "@/lib/faq";
 
 export default function Home() {
   return (
@@ -153,6 +155,13 @@ export default function Home() {
                 longer tasks, broader environments, and the steps needed to move
                 these systems toward real robots.
               </p>
+            </section>
+
+            <section className="simple-site-faq" aria-labelledby="faq-title">
+              <div className="simple-site-divider" />
+              <p className="simple-site-number">FAQ</p>
+              <h2 id="faq-title">Questions, answered.</h2>
+              <FaqAccordion items={faqItems} />
             </section>
           </section>
         </div>
