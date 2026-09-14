@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { SitePreloader } from "@/components/site-preloader";
 import {
   FOUNDER_NAME,
@@ -143,6 +144,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full bg-white text-black">
         <SitePreloader>{children}</SitePreloader>
+        <Analytics />
       </body>
     </html>
   );
