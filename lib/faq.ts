@@ -19,10 +19,10 @@ export const faqItems: FaqItem[] = [
   {
     id: "2",
     slug: "what-is-a-world-action-model",
-    question: "What is a World Action Model( WAM )?",
+    question: "What is a WAM?",
     title: "What is a World Action Model?",
-    description: "A clear introduction to World Action Models, a class of JEPA models focused on action, control, and predicting how actions change the world.",
-    answer: "A World Action Model is a class of JEPA models focused on action and control. It learns how actions change the world so systems can plan, predict outcomes, and complete longer tasks.",
+    description: "A clear introduction to World Action Models ( WAM ), a class of JEPA models focused on action, control, and predicting how actions change the world.",
+    answer: "A World Action Model ( WAM ) is a class of JEPA models focused on action and control. It learns how actions change the world so systems can plan, predict outcomes, and complete longer tasks.",
   },
   {
     id: "3",
