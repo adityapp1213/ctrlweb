@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CONTACT_URL } from "@/lib/seo";
 
 const members = [
   {
     id: "aditya",
+    route: "/team/#aditya",
+    backRoute: "/team",
     name: "aditya panigrahi",
     role: "founder · chief everything officer",
     image: "/assets/chintu1.svg",
@@ -25,6 +27,8 @@ const members = [
   },
   {
     id: "anjali",
+    route: "/team/#anjali",
+    backRoute: "/team",
     name: "anjali panigrahi",
     role: "adviser",
     image: "/assets/chiku2.svg",
@@ -45,6 +49,26 @@ const members = [
 export function SimpleTeamCards() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
+  useEffect(() => {
+    const syncExpandedMember = () => {
+      const member = members.find((item) => window.location.hash === `#${item.id}`);
+      setExpandedId(member?.id ?? null);
+    };
+
+    syncExpandedMember();
+    window.addEventListener("popstate", syncExpandedMember);
+
+    return () => window.removeEventListener("popstate", syncExpandedMember);
+  }, []);
+
+  const toggleMember = (memberId: string) => {
+    const member = members.find((item) => item.id === memberId);
+    const isExpanded = expandedId === memberId;
+
+    setExpandedId(isExpanded ? null : memberId);
+    window.history.pushState(null, "", isExpanded ? member?.backRoute : member?.route);
+  };
+
   return (
     <section className={`simple-team-cards${expandedId ? " is-expanded" : ""}`} aria-labelledby="team-title">
       <h1 id="team-title">
@@ -52,7 +76,7 @@ export function SimpleTeamCards() {
       </h1>
       <div className="simple-site-divider simple-team-divider" aria-hidden="true" />
       {expandedId ? (
-        <button className="simple-team-back" type="button" onClick={() => setExpandedId(null)}>
+        <button className="simple-team-back" type="button" onClick={() => toggleMember(expandedId)}>
           <span aria-hidden="true">←</span> Back to Team
         </button>
       ) : null}
@@ -66,7 +90,7 @@ export function SimpleTeamCards() {
                 className="simple-team-card-toggle"
                 type="button"
                 aria-expanded={expanded}
-                onClick={() => setExpandedId(expanded ? null : member.id)}
+                onClick={() => toggleMember(member.id)}
               >
                 <span className={`simple-team-card-image simple-team-card-image-${member.id}`}>
                   <Image src={member.image} alt={member.alt} fill sizes="(max-width: 700px) 100vw, 18rem" />

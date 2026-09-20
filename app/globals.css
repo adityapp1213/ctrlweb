@@ -705,6 +705,7 @@
 
 .simple-team-card-image img {
   object-fit: cover;
+  filter: grayscale(1);
   transform: scale(1.08);
   transition: transform 450ms ease;
 }
