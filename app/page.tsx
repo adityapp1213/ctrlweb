@@ -29,9 +29,9 @@ export default function Home() {
 
             <div className="simple-site-divider" />
 
-            <section className="simple-site-first-section" aria-labelledby="first-section-title">
+            <section id="world-thinking-machines" className="simple-site-first-section" aria-labelledby="first-section-title">
               <p className="simple-site-number">01</p>
-              <h2 id="first-section-title">world thinking machines</h2>
+              <h2 id="first-section-title">world thinking machines <a className="simple-site-section-hash" href="#world-thinking-machines" aria-label="Link to world thinking machines">#</a></h2>
               <h3>Learning what can happen next.</h3>
               <p className="simple-section-description">
                 Our models learn a useful representation of the world before
@@ -42,9 +42,9 @@ export default function Home() {
               <MoversCanvas />
             </section>
 
-            <section className="simple-site-first-section" aria-labelledby="jepa-section-title">
+            <section id="understanding-the-world" className="simple-site-first-section" aria-labelledby="jepa-section-title">
               <p className="simple-site-number">02</p>
-              <h2 id="jepa-section-title">Understanding the world</h2>
+              <h2 id="jepa-section-title">Understanding the world <a className="simple-site-section-hash" href="#understanding-the-world" aria-label="Link to understanding the world">#</a></h2>
               <h3>Predicting the outcome of an action </h3>
               <p className="simple-section-description">
                 A robot needs more than an Internal representation of what the actions cause in the real world and space around it, how things change, adapt, and interact with an action 
@@ -52,13 +52,12 @@ export default function Home() {
             </section>
 
             <section
+              id="world-action-model"
               className="simple-site-first-section simple-site-world-action-section"
               aria-labelledby="world-action-model-title"
             >
               <p className="simple-site-number">03</p>
-              <h2 id="world-action-model-title">
-                World Action <span>Model</span>
-              </h2>
+              <h2 id="world-action-model-title">World Action <span>Model</span> <a className="simple-site-section-hash" href="#world-action-model" aria-label="Link to World Action Model">#</a></h2>
               <h3>A class of JEPA models for action and control.</h3>
               <p className="simple-section-description">
                 The World Action Model ( WAM-1 ) will be our class of H-JEPA models that learns
@@ -73,9 +72,9 @@ export default function Home() {
               </p>
             </section>
 
-            <section className="simple-site-first-section" aria-labelledby="jepa-method-title">
+            <section id="jepa" className="simple-site-first-section" aria-labelledby="jepa-method-title">
               <p className="simple-site-number">04</p>
-              <h2 id="jepa-method-title">JEPA</h2>
+              <h2 id="jepa-method-title">JEPA <a className="simple-site-section-hash" href="#jepa" aria-label="Link to JEPA">#</a></h2>
               <h3>Predicting meaning instead of every pixel.</h3>
               <p className="simple-section-description">
                 Joint Embedding Predictive Architectures let a model focus on
@@ -92,9 +91,9 @@ export default function Home() {
               </a>
             </section>
 
-            <section className="simple-site-first-section" aria-labelledby="h-jepa-title">
+            <section id="h-jepa" className="simple-site-first-section" aria-labelledby="h-jepa-title">
               <p className="simple-site-number">05</p>
-              <h2 id="h-jepa-title">H-JEPA</h2>
+              <h2 id="h-jepa-title">H-JEPA <a className="simple-site-section-hash" href="#h-jepa" aria-label="Link to H-JEPA">#</a></h2>
               <h3>Planning across longer horizons.</h3>
               <p className="simple-section-description">
                 H-JEPA extends predictive learning across time. It gives a model
@@ -112,9 +111,9 @@ export default function Home() {
               </a>
             </section>
 
-            <section className="simple-site-first-section" aria-labelledby="goals-title">
+            <section id="our-goals" className="simple-site-first-section" aria-labelledby="goals-title">
               <p className="simple-site-number">06</p>
-              <h2 id="goals-title">Our goals</h2>
+              <h2 id="goals-title">Our goals <a className="simple-site-section-hash" href="#our-goals" aria-label="Link to our goals">#</a></h2>
               <h3>Prediction, control, and recovery.</h3>
               <p className="simple-section-description">
                 We want our systems to predict the result of an action before it
@@ -131,9 +130,9 @@ export default function Home() {
               />
             </section>
 
-            <section className="simple-site-first-section" aria-labelledby="monarch-section-title">
+            <section id="project-monarch" className="simple-site-first-section" aria-labelledby="monarch-section-title">
               <p className="simple-site-number">07</p>
-              <h2 id="monarch-section-title">Project Monarch</h2>
+              <h2 id="monarch-section-title">Project Monarch <a className="simple-site-section-hash" href="#project-monarch" aria-label="Link to Project Monarch">#</a></h2>
               <h3>Our earlier model.</h3>
               <p className="simple-section-description">
                 Project Monarch is the internal name for our first model. We were
@@ -145,9 +144,9 @@ export default function Home() {
               </a>
             </section>
 
-            <section className="simple-site-first-section" aria-labelledby="timeline-title">
+            <section id="the-timeline" className="simple-site-first-section" aria-labelledby="timeline-title">
               <p className="simple-site-number">08</p>
-              <h2 id="timeline-title">The timeline</h2>
+              <h2 id="timeline-title">The timeline <a className="simple-site-section-hash" href="#the-timeline" aria-label="Link to the timeline">#</a></h2>
               <h3>From simulation to capable machines.</h3>
               <p className="simple-section-description">
                 We are starting with simulated environments where we can test

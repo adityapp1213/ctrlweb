@@ -38,8 +38,9 @@ export const metadata: Metadata = {
   publisher: SITE_NAME,
   category: "ai research",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: "/assets/atom-mark-favicon.png",
+    shortcut: "/assets/atom-mark-favicon.png",
+    apple: "/assets/atom-mark-favicon.png",
   },
   alternates: {
     canonical: "/",
@@ -88,7 +89,7 @@ const siteJsonLd = {
       "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
       url: SITE_URL,
-      logo: `${SITE_URL}/favicon.ico`,
+      logo: `${SITE_URL}/assets/atom-mark-favicon.png`,
       description: SITE_DESCRIPTION,
       founder: {
         "@type": "Person",

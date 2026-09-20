@@ -925,6 +925,23 @@
   letter-spacing: -0.04em;
 }
 
+.simple-site-section-hash {
+  display: inline-block;
+  margin-left: 0.28em;
+  color: #686868;
+  font-size: 0.78em;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  vertical-align: 0.08em;
+  transition: color 150ms ease;
+}
+
+.simple-site-section-hash:hover,
+.simple-site-section-hash:focus-visible {
+  color: #171717;
+}
+
 .simple-site-world-action-section {
   padding-bottom: 0;
   animation: simple-site-world-action-fade 700ms ease-out both;

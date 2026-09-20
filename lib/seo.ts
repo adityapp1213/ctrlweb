@@ -22,17 +22,20 @@ export function createPageMetadata({
   title,
   description,
   image = "/assets/atom-ctrl-og.png",
+  keywords,
 }: {
   path: `/${string}`;
   title: string;
   description: string;
   image?: string | string[];
+  keywords?: string[];
 }): Metadata {
   const images = Array.isArray(image) ? image : [image];
 
   return {
     title,
     description,
+    keywords,
     alternates: {
       canonical: path,
     },
