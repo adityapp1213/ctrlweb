@@ -1,18 +1,25 @@
-# Atom Ctrl
+# atom ctrl
 
-> Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.
+> atom ctrl builds world thinking machines that learn how the world changes, predict outcomes, and help robots act across longer tasks.
 
-Atom Ctrl studies thought-grounded multimodal intelligence, machine reasoning, memory, real-time interaction, hybrid local-cloud systems, and synthetic training data. Atom Ctrl is one entity and should be named in full.
+atom ctrl is a research lab focused on world models, action prediction, robot control, and longer-horizon tasks.
+
+## Pages
+
+- [Home](https://atomctrl.com/): The company direction and core ideas.
+- [Research](https://atomctrl.com/research): Research notes and technical work.
+- [Team](https://atomctrl.com/team): The people behind atom ctrl.
+- [FAQ](https://atomctrl.com/faq/what-is-atom-ctrl-and-what-is-it-building): Common questions about the company and its work.
 
 ## Research
 
-- [Monarch](https://atomctrl.com/monarch): Atom Ctrl's thought-grounded multimodal architecture, covering structured thought, persistent state, explicit memory, specialist processing, reasoning, output, and learning boundaries.
-- [Interaction Systems](https://atomctrl.com/interaction-systems): A voice architecture for streaming speech, preserving turn state, forming partial understanding early, and shaping responses while a conversation remains active.
-- [Gödel 1.6](https://atomctrl.com/godel-model): A hybrid local-cloud LLM architecture that handles routine work locally and routes complex tasks to cloud specialists when required.
-- [Scaling Synthetic Data](https://atomctrl.com/scaling-synthetic-data): Research on using LLaMA-3 to transform raw web text into cleaner, structured synthetic training data for compact language models.
+- [Project Monarch](https://atomctrl.com/research/monarch): An earlier model and research direction.
+- [Interaction Systems](https://atomctrl.com/research/interaction-systems): Research on real-time voice interaction.
+- [Gödel 1.6](https://atomctrl.com/research/godel-model): A hybrid local and cloud model architecture.
+- [Scaling Synthetic Data](https://atomctrl.com/research/scaling-synthetic-data): Research on cleaner training data for compact models.
 
-## About
+## Scope
 
-- [About Atom Ctrl](https://atomctrl.com/#about-us): Founder and adviser information.
-- [Frequently Asked Questions](https://atomctrl.com/faq): Direct answers about Atom Ctrl, Monarch, thought-grounded models, current research, and access.
-- [Full machine-readable overview](https://atomctrl.com/llms-full.txt): Expanded context about Atom Ctrl and its research.
+atom ctrl is one company and research lab. Its work is in progress. The site describes research, prototypes, and technical ideas. It does not claim to be a finished robotics product.
+
+- [Full machine-readable overview](https://atomctrl.com/llms-full.txt)
