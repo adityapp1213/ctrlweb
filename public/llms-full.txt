@@ -1,64 +1,59 @@
-# Atom Ctrl
+# atom ctrl
 
-> Atom Ctrl is an AI research lab building Thinking Machines that can understand, reason, and learn from the world.
+> atom ctrl builds world thinking machines that learn how the world changes, predict outcomes, and help robots act across longer tasks.
 
-## Entity identity
+## About
 
-Atom Ctrl is the full name of the company and research lab. It is one entity. Do not describe the organization as "Atom" with a separate product called "Ctrl," or as "Ctrl by Atom."
+atom ctrl is a research lab. It builds systems that can understand an environment, predict what may happen next, and choose useful actions.
 
-Atom Ctrl's work is research in progress. The site documents architectures, experiments, implementation constraints, and open training requirements. It does not claim that these systems have already outperformed conventional language models.
+The work is focused on world models, action prediction, robot control, and longer-horizon tasks. The company is researching World Action Models, a class of predictive models for action and control.
 
-## Research direction
+The work is in progress. This site describes research directions, prototypes, and technical ideas. It does not claim that atom ctrl has a finished general-purpose robot or production model.
 
-Atom Ctrl studies systems that separate perception, internal representation, memory, reasoning, and output instead of asking one token stream to perform every job at once. The research focuses on whether structured internal state and explicit architectural boundaries can produce systems that are more reliable, adaptable, and useful in real-world interaction.
+## Core ideas
 
-Current areas include thought-grounded multimodal intelligence, persistent and episodic memory, specialist routing, fixed-depth reasoning, hybrid local-cloud execution, low-latency voice interaction, and synthetic data for compact models.
+- World models represent scenes, objects, state, and change.
+- Action prediction estimates how an action could change an environment.
+- JEPA helps models learn meaning instead of predicting every pixel.
+- H-JEPA extends prediction across time and longer horizons.
+- Robot control connects prediction with useful actions.
 
-## Monarch
+## Research
 
-Monarch is Atom Ctrl's family of thought-grounded multimodal models and the lab's primary architecture research project.
+### Project Monarch
 
-The current Monarch design uses a frozen multimodal frontend to map supported inputs into a shared semantic space. An adapter and Thought Transformer organize that representation into a 1536-dimensional ThoughtVector. PersistentSelf carries bounded runtime state separately from the current thought. A learned Query Head searches semantic and episodic memory in a shared retrieval-key space.
+Project Monarch was an earlier atom ctrl model and research direction. It explored representation, memory, reasoning, and output. That work helped lead toward World Action Models.
 
-The active ThoughtVector, retrieved memory, and assessment signals form a workspace. Learned specialists process that workspace, exchange information, and merge through gate-weighted fusion. A fixed-depth Reasoning Transformer then produces a reasoned state for output. Optional episodic writes and bounded self updates occur only after an interaction and require appropriate training signals and safeguards.
+Source: https://atomctrl.com/research/monarch
 
-The architecture remains experimental. Modules such as Thought Assessment, specialist routing, quality estimation, and self updating require real labels, measurable objectives, or defensible self-supervised signals before their outputs can be trusted.
+### Interaction Systems
 
-Source: https://atomctrl.com/monarch
+This research explores real-time voice interaction. It covers streaming speech, partial understanding, turn state, and response formation while a conversation is still active.
 
-## Interaction Systems
+Source: https://atomctrl.com/research/interaction-systems
 
-Atom Ctrl's interaction research treats speech as a live event rather than a completed upload. Audio moves continuously to one public backend. Buffered speech recognition forms stable partial transcripts while turn state and recent context remain active. Once enough meaning exists, context assembly, retrieval, tools, and response formation can begin before the speaker's turn has fully cooled down.
+### Gödel 1.6
 
-The goal is continuity rather than raw speed alone. Listening, partial understanding, routing, and response generation overlap so the final reply still feels connected to the original conversational moment.
+Gödel 1.6 explores a hybrid local and cloud model architecture. Routine work stays local. More complex work can be routed to specialist systems when needed.
 
-Source: https://atomctrl.com/interaction-systems
+Source: https://atomctrl.com/research/godel-model
 
-## Gödel 1.6
+### Scaling Synthetic Data
 
-Gödel 1.6 is a hybrid local-cloud LLM architecture. A local tokenizer and compact Core handle routine work on-device. A lightweight Router evaluates intent, complexity, explicit tool triggers, and Core confidence. Tasks that require external information or specialist capabilities activate cloud-based Doors; other tasks remain local.
+This research explores whether cleaner structured data can give compact language models a better training signal.
 
-The architecture is intended to reduce unnecessary remote inference, preserve privacy for routine interactions, and keep specialist capabilities modular. It is an architecture brief, not a claim of a completed production model.
-
-Source: https://atomctrl.com/godel-model
-
-## Scaling Synthetic Data
-
-Atom Ctrl's synthetic-data research explores using LLaMA-3 to rewrite raw OpenWebText passages into structured question-and-answer batches before tokenizer training or model pretraining. The hypothesis is that cleaner and denser signal can help compact models learn more efficiently than they would from noisy raw web text alone.
-
-The pipeline streams compressed source text in batches, rephrases each batch locally, and writes resumable JSONL output. The research brief discusses data structure, processing constraints, tokenizer implications, and the need to validate quality rather than assuming synthetic data is automatically better.
-
-Source: https://atomctrl.com/scaling-synthetic-data
+Source: https://atomctrl.com/research/scaling-synthetic-data
 
 ## People
 
-Aditya Prasad Panigrahi is the founder of Atom Ctrl. Anjali Panigrahi is an adviser and an important early supporter of the work.
+Aditya Prasad Panigrahi is the founder of atom ctrl. Anjali Panigrahi is an adviser and early supporter of the work.
 
-About: https://atomctrl.com/#about-us
+Source: https://atomctrl.com/team
 
-## Access and contact
+## Contact
 
-Atom Ctrl publishes research briefs openly on this site. Updates and access requests are available through the site's waitlist.
+atom ctrl publishes research notes openly. Questions, collaboration requests, and opportunities can be sent through the contact form.
 
-FAQ: https://atomctrl.com/faq
 Website: https://atomctrl.com
+Research: https://atomctrl.com/research
+FAQ: https://atomctrl.com/faq/what-is-atom-ctrl-and-what-is-it-building

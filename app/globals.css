@@ -317,6 +317,34 @@
   color: #171717;
 }
 
+.pixel-hover-highlight {
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
+  display: block;
+  width: max-content;
+  height: max-content;
+  overflow: visible;
+  white-space: nowrap;
+  color: #ffffff;
+  opacity: 0;
+  -webkit-mask-image: radial-gradient(
+    circle 4.5rem at var(--pixel-x, 0px) var(--pixel-y, 0px),
+    #000 0%,
+    #000 70%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 4.5rem at var(--pixel-x, 0px) var(--pixel-y, 0px),
+    #000 0%,
+    #000 70%,
+    transparent 100%
+  );
+  transition: opacity 120ms ease;
+}
+
 .simple-site-stack > .simple-site {
   position: relative;
   z-index: 1;
@@ -351,6 +379,7 @@
   margin-left: -2rem;
   overflow: visible;
   white-space: nowrap;
+  color: #c4c4bf;
   font-size: clamp(8rem, 20vw, 18rem);
   font-weight: 700;
   letter-spacing: -0.08em;
@@ -399,6 +428,26 @@
 .simple-site-footer-bottom p:last-child {
   margin-left: auto;
   margin-right: 7rem;
+}
+
+.not-found-message {
+  margin: 0;
+  color: #a6a6a6;
+  font-family: var(--font-mona-sans), Arial, sans-serif;
+  font-size: 0.9rem;
+}
+
+.not-found-mark {
+  color: #c4c4bf;
+}
+
+.not-found-home-link {
+  color: #a6a6a6;
+}
+
+.not-found-home-link:hover,
+.not-found-home-link:focus-visible {
+  color: #f7f7f5;
 }
 
 @media (max-width: 700px) {

@@ -4,7 +4,7 @@ export const SITE_URL = "https://atomctrl.com";
 export const CONTACT_URL = "https://form.typeform.com/to/lmRUeiyH";
 export const SITE_NAME = "atom ctrl";
 export const SITE_DESCRIPTION =
-  "atom ctrl is an AI robotics lab building world thinking machines that learn to predict, act, and complete long-horizon tasks.";
+  "atom ctrl builds world thinking machines that learn how the world changes, predict outcomes, and help robots act across longer tasks.";
 export const FOUNDER_NAME = "aditya prasad panigrahi";
 
 export type ArticleSeo = {
