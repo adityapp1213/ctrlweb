@@ -157,7 +157,6 @@ export default function Home() {
             </section>
 
             <section className="simple-site-faq" aria-labelledby="faq-title">
-              <div className="simple-site-divider" />
               <p className="simple-site-number">FAQ</p>
               <h2 id="faq-title">Questions, answered.</h2>
               <FaqAccordion items={faqItems} />

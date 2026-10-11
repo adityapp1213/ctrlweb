@@ -62,10 +62,32 @@ export function SimpleSiteNav({ active }: { active: string }) {
             </li>
           ))}
         </ul>
-        <div className="simple-site-nav-rule" />
-        <a className="simple-site-talk" href={CONTACT_URL} target="_blank" rel="noreferrer">
-          Let&apos;s talk <span aria-hidden="true" />
-        </a>
+        <div className="simple-site-talk">
+          <a
+            className="simple-site-talk-mobile-link"
+            href={CONTACT_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Let&apos;s talk
+          </a>
+          <span className="simple-site-talk-desktop-copy">
+            <span className="simple-site-talk-message">
+              Ask a demo <br></br>or learn more
+            </span>
+            <span className="simple-site-talk-action">
+              <a
+                className="simple-site-talk-connect"
+                href={CONTACT_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                here
+              </a>
+              <span className="simple-site-talk-arrow" aria-hidden="true" />
+            </span>
+          </span>
+        </div>
       </nav>
       <button
         ref={menuButtonRef}

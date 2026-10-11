@@ -467,6 +467,189 @@
   }
 }
 
+/* Desktop editorial frame. Mobile keeps the original layout above untouched. */
+@media (min-width: 701px) {
+  .simple-site-shell:not(.simple-site-shell-research) {
+    position: relative;
+    grid-template-columns: 155px minmax(0, 775px);
+    gap: 0;
+    width: min(100% - 3rem, 930px);
+    transform: none;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research)::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 155px;
+    content: "";
+    border-right: 1px solid #dededb;
+    border-left: 1px solid #dededb;
+    pointer-events: none;
+  }
+
+  .simple-site-shell-research {
+    position: relative;
+  }
+
+  .simple-site-shell-research::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 155px;
+    content: "";
+    border-right: 1px solid #dededb;
+    border-left: 1px solid #dededb;
+    pointer-events: none;
+  }
+
+  .simple-site-shell-research > .simple-research-process {
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 4.25rem 0 0;
+    border-top: 1px solid #dededb;
+  }
+
+  .simple-site-shell-research .simple-research-process-heading {
+    margin-left: 0;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-site-content {
+    box-sizing: border-box;
+    max-width: none;
+    min-width: 0;
+    padding: 4.25rem 2rem 0;
+    border-top: 1px solid #dededb;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-team-cards {
+    box-sizing: border-box;
+    max-width: none;
+    min-width: 0;
+    padding: 4.25rem 2rem;
+    border-top: 1px solid #dededb;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-site-content h1 {
+    padding-top: 0;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-site-content > .simple-site-divider,
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-team-cards > .simple-team-divider {
+    margin-right: -2rem;
+    margin-left: -2rem;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-site-content > .simple-site-first-section {
+    box-sizing: border-box;
+    max-width: none;
+    margin-right: -2rem;
+    margin-left: -2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-top: 0;
+    padding-bottom: 4.25rem;
+    border-bottom: 1px solid #dededb;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-site-content > .simple-site-first-section + .simple-site-first-section {
+    padding-top: 4.25rem;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-site-content > .simple-site-first-section:last-of-type {
+    border-bottom: 0;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) .simple-home-section-image {
+    width: 100%;
+    max-width: none;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) > .simple-team-cards {
+    padding-bottom: 4.25rem;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) .simple-team-card-grid {
+    column-gap: 2rem;
+  }
+
+  .simple-site-shell:not(.simple-site-shell-research) .simple-site-talk {
+    width: 8rem;
+    max-width: 8rem;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .simple-site-talk-mobile-copy,
+  .simple-site-talk-mobile-arrow {
+    display: none;
+  }
+
+  .simple-site-talk-desktop-copy {
+    display: block;
+    width: 100%;
+  }
+
+  .simple-site-talk-connect {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .simple-site-talk-arrow {
+    position: relative;
+    display: inline-block;
+    width: 0.82rem;
+    height: 0.82rem;
+    margin-left: 0.2rem;
+    vertical-align: -0.08em;
+  }
+
+  .simple-site-talk .simple-site-talk-arrow::before {
+    position: absolute;
+    top: 0.14rem;
+    right: 0.06rem;
+    width: 0.76rem;
+    height: 2px;
+    content: "";
+    background: currentColor;
+    transform: rotate(-45deg);
+    transform-origin: right center;
+  }
+
+  .simple-site-talk .simple-site-talk-arrow::after {
+    position: absolute;
+    top: 0.08rem;
+    right: 0.04rem;
+    width: 0.34rem;
+    height: 0.34rem;
+    content: "";
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+  }
+
+  .simple-site-links a {
+    position: relative;
+  }
+
+  .simple-site-links a[aria-current="page"]::before {
+    position: absolute;
+    top: 50%;
+    left: -1rem;
+    width: 0;
+    height: 0;
+    content: "";
+    border-top: 0.26rem solid transparent;
+    border-bottom: 0.26rem solid transparent;
+    border-left: 0.38rem solid #171717;
+    transform: translateY(-50%);
+  }
+}
+
 .simple-site-cta {
   position: relative;
   z-index: 1;
@@ -630,18 +813,41 @@
 
 .simple-site-talk {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   width: max-content;
   gap: 0.18rem;
   margin: 0.85rem 0 0;
   color: inherit;
   font-size: 0.9rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.simple-site-talk-mobile-link {
+  display: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+.simple-site-talk-desktop-copy {
+  display: block;
+}
+
+.simple-site-talk-message,
+.simple-site-talk-action {
+  display: block;
+}
+
+.simple-site-talk-connect {
+  color: #6c6c6c;
   text-decoration: underline;
   text-underline-offset: 0.2em;
   transition: color 150ms ease;
 }
 
-.simple-site-talk:hover {
+.simple-site-talk-connect:hover,
+.simple-site-talk-connect:focus-visible {
   color: #171717;
 }
 
@@ -916,6 +1122,7 @@
 .simple-site-content h1 {
   max-width: 330px;
   margin: 0;
+  padding-top: 4.25rem;
   font-size: clamp(2.45rem, 3.2vw, 3rem);
   font-weight: 400;
   letter-spacing: -0.045em;
@@ -1092,12 +1299,19 @@
 
 .simple-site-faq {
   max-width: 575px;
-  padding-bottom: 1rem;
+  margin-top: 0;
+  padding-top: 4.25rem;
+  padding-bottom: 4.25rem;
   font-family: var(--font-mona-sans), Arial, sans-serif;
 }
 
-.simple-site-faq .simple-site-divider {
+.simple-site-faq > .simple-site-number {
+  margin-top: 0;
   margin-bottom: 2.2rem;
+}
+
+.simple-site-faq .faq-accordion {
+  max-width: 575px;
 }
 
 .simple-site-faq h2 {
@@ -1260,8 +1474,12 @@
 }
 
 .simple-site a:hover span[aria-hidden="true"],
-.simple-site a:focus-visible span[aria-hidden="true"],
-.simple-site-talk:hover span[aria-hidden="true"] {
+.simple-site a:focus-visible span[aria-hidden="true"] {
+  color: #171717;
+}
+
+.simple-site-talk-connect:hover + .simple-site-talk-arrow,
+.simple-site-talk-connect:focus-visible + .simple-site-talk-arrow {
   color: #171717;
 }
 
@@ -1278,7 +1496,13 @@
 }
 
 .simple-site-shell-research {
-  grid-template-columns: 155px 778px;
+  display: grid;
+  grid-template-columns: 155px minmax(0, 775px);
+  gap: 0;
+  width: min(100% - 3rem, 930px);
+  margin: 0 auto;
+  padding: clamp(8rem, 21vh, 10.5rem) 0 8rem;
+  transform: none;
 }
 
 .simple-research-process {
@@ -1706,6 +1930,16 @@
   }
 
   .simple-site-nav-rule {
+    display: none;
+  }
+
+  .simple-site-talk-mobile-link {
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+  }
+
+  .simple-site-talk-desktop-copy {
     display: none;
   }
 
