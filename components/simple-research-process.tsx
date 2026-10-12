@@ -4,6 +4,15 @@ import Link from "next/link";
 const processSteps = [
   {
     number: "01",
+    title: "WAM-0.1 dataset",
+    description:
+      "A custom 350 GB robosuite-based dataset built for training H-JEPA to predict action and change.",
+    image: "/assets/blog-cards/5.2.png",
+    alt: "A simulated robotics environment for the WAM-0.1 dataset",
+    href: "/research/wam-0-1-dataset",
+  },
+  {
+    number: "02",
     title: "Monarch",
     description:
       "A thought-grounded multimodal architecture for memory, reasoning, and persistent state.",
@@ -12,7 +21,7 @@ const processSteps = [
     href: "/research/monarch",
   },
   {
-    number: "02",
+    number: "03",
     title: "Interaction system",
     description:
       "A real-time voice architecture for conversations that understand while they unfold.",
@@ -21,7 +30,7 @@ const processSteps = [
     href: "/research/interaction-systems",
   },
   {
-    number: "03",
+    number: "04",
     title: "Godel model",
     description:
       "A hybrid local-cloud language model architecture that routes work where it fits.",
@@ -30,9 +39,9 @@ const processSteps = [
     href: "/research/godel-model",
   },
   {
-    number: "04",
+    number: "05",
     title: "Scaling synthetic data",
-      description: "A practical study of turning raw web text into cleaner training data.",
+    description: "A practical study of turning raw web text into cleaner training data.",
     image: "/assets/blog-cards/4.png",
     alt: "Trees moving past a train window",
     href: "/research/scaling-synthetic-data",

@@ -19,12 +19,14 @@ export function BlogContent({
   heroImageAlt,
   heroImageSrc,
   plainTitle,
+  heroMetaClassName,
   highlights,
 }: {
   article: BlogArticle;
   heroImageAlt: string;
   heroImageSrc: string;
   plainTitle: string;
+  heroMetaClassName?: string;
   highlights?: Array<{
     title: string;
     description: string;
@@ -87,7 +89,7 @@ export function BlogContent({
         <h1 className="mx-auto max-w-4xl text-4xl font-medium leading-[1.14] tracking-[-0.04em] text-black sm:text-5xl lg:text-6xl">
           {plainTitle}
         </h1>
-        <div className="simple-blog-hero-meta">
+        <div className={`simple-blog-hero-meta${heroMetaClassName ? ` ${heroMetaClassName}` : ""}`}>
           {article.heroMeta.map((item) => (
             <span key={item}>{item}</span>
           ))}

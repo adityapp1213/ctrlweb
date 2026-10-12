@@ -266,6 +266,28 @@
   background: #e2e2df;
 }
 
+.simple-blog-hero-meta-wam {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  justify-content: center;
+  max-width: 44rem;
+}
+
+.simple-blog-hero-meta-wam span:nth-child(3) {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+@media (max-width: 640px) {
+  .simple-blog-hero-meta-wam {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .simple-blog-hero-meta-wam span:nth-child(3) {
+    grid-column: auto;
+  }
+}
+
 .simple-blog-content > div:nth-child(2) {
   max-width: none;
   margin-left: 0;

@@ -9,6 +9,7 @@ type BlogProps = {
   heroImageAlt: string;
   heroImageSrc: string;
   seo: ArticleSeo;
+  heroMetaClassName?: string;
   highlights?: Array<{
     title: string;
     description: string;
@@ -16,7 +17,7 @@ type BlogProps = {
   }>;
 };
 
-export function Blog({ article, heroImageAlt, heroImageSrc, highlights, seo }: BlogProps) {
+export function Blog({ article, heroImageAlt, heroImageSrc, heroMetaClassName, highlights, seo }: BlogProps) {
   const plainTitle = article.titleHtml.replace(/<[^>]+>/g, "");
 
   return (
@@ -35,6 +36,7 @@ export function Blog({ article, heroImageAlt, heroImageSrc, highlights, seo }: B
                 plainTitle={plainTitle}
                 heroImageSrc={heroImageSrc}
                 heroImageAlt={heroImageAlt}
+                heroMetaClassName={heroMetaClassName}
                 highlights={highlights}
               />
             </main>

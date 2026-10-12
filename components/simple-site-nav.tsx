@@ -73,7 +73,7 @@ export function SimpleSiteNav({ active }: { active: string }) {
           </a>
           <span className="simple-site-talk-desktop-copy">
             <span className="simple-site-talk-message">
-              Ask a demo <br></br>or learn more
+              Request a demo <br></br>or learn more
             </span>
             <span className="simple-site-talk-action">
               <a

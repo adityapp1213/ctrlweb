@@ -7,6 +7,7 @@ type BlogConfig = {
   sourceFile: string;
   heroImageAlt: string;
   heroImageSrc: string;
+  heroMetaClassName?: string;
   seo: ArticleSeo;
   highlights?: Array<{
     title: string;
@@ -126,6 +127,28 @@ export const blogArticles = {
       ],
     },
   },
+  "wam-0-1-dataset": {
+    sourceFile: "wam-0-1-dataset-source.html",
+    heroImageSrc: "/assets/blog-cards/5.2.png",
+    heroImageAlt: "WAM-0.1 dataset research card",
+    heroMetaClassName: "simple-blog-hero-meta-wam",
+    seo: {
+      path: "/research/wam-0-1-dataset",
+      title: "WAM-0.1 dataset: a robosuite dataset for H-JEPA",
+      description:
+        "WAM-0.1 is a custom robosuite-based dataset, approximately 350 GB in size, purpose-built to support H-JEPA research on action and change.",
+      image: "/assets/blog-cards/5.2.png",
+      datePublished: "2026-10-12",
+      dateModified: "2026-10-12",
+      keywords: [
+        "WAM-0.1 dataset",
+        "robosuite dataset",
+        "H-JEPA",
+        "robot learning",
+        "world action models",
+      ],
+    },
+  },
 } satisfies Record<string, BlogConfig>;
 
 export type BlogSlug = keyof typeof blogArticles;
@@ -151,6 +174,7 @@ export async function BlogArticle({ slug }: { slug: BlogSlug }) {
       article={article}
       heroImageSrc={config.heroImageSrc}
       heroImageAlt={config.heroImageAlt}
+      heroMetaClassName={config.heroMetaClassName}
       seo={config.seo}
       highlights={config.highlights}
     />
