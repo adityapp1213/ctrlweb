@@ -2,10 +2,17 @@
 
 import {
   motion,
-  type MotionValue,
-  useTransform,
+  useInView,
 } from "framer-motion";
-import { useMemo, useSyncExternalStore, type ReactNode } from "react";
+import Image from "next/image";
+import {
+  useMemo,
+  useRef,
+  useSyncExternalStore,
+  type ElementType,
+  type ReactNode,
+  type Ref,
+} from "react";
 import { cn } from "@/lib/utils";
 import styles from "./blog.module.css";
 
@@ -18,8 +25,6 @@ type ReferenceItem = {
 type BlogBodyProps = {
   bodyHtml: string;
   references: ReferenceItem[];
-  progress: MotionValue<number>;
-  progressRange?: [number, number];
 };
 
 type InlineToken = {
@@ -144,6 +149,10 @@ const classNamesToMap = [
   "block-rose",
   "section-index",
   "flow-line",
+  "image-figure",
+  "image-caption",
+  "image-pair",
+  "article-image",
 ];
 
 function mapModuleClasses(value: string | null | undefined) {
@@ -166,13 +175,33 @@ function mapModuleClasses(value: string | null | undefined) {
 
 function extractInlineTokens(node: ChildNode, marks: Omit<InlineToken, "text"> = {}): InlineToken[] {
   if (node.nodeType === Node.TEXT_NODE) {
-    const text = node.textContent ?? "";
+    const text = (node.textContent ?? "").replace(/\s+/g, " ");
+    const parts = text.match(/\s+|\S+/g) ?? [];
+    const tokens: InlineToken[] = [];
+    let pendingWhitespace = "";
 
-    return text
-      .split(/\s+/)
-      .map((part) => part.trim())
-      .filter(Boolean)
-      .map((part) => ({ text: part, ...marks }));
+    parts.forEach((part) => {
+      if (/^\s+$/.test(part)) {
+        pendingWhitespace += part;
+        return;
+      }
+
+      tokens.push({
+        text: `${pendingWhitespace}${part}`,
+        ...marks,
+      });
+      pendingWhitespace = "";
+    });
+
+    if (pendingWhitespace) {
+      if (tokens.length > 0) {
+        tokens[tokens.length - 1].text += pendingWhitespace;
+      } else {
+        tokens.push({ text: pendingWhitespace, ...marks });
+      }
+    }
+
+    return tokens;
   }
 
   if (node.nodeType !== Node.ELEMENT_NODE) {
@@ -197,29 +226,32 @@ function extractInlineTokens(node: ChildNode, marks: Omit<InlineToken, "text"> =
 
 function RichTextGradient({
   tokens,
-  progress,
-  range,
   className,
+  id,
   as = "p",
 }: {
   tokens: InlineToken[];
-  progress: MotionValue<number>;
-  range: [number, number];
   className?: string;
-  as?: "p" | "li";
+  id?: string;
+  as?: "p" | "li" | "h2" | "h3" | "h4";
 }) {
-  const Tag = as;
-  const tokenSpan = (token: InlineToken, muted?: boolean) => {
+  const targetRef = useRef<HTMLElement>(null);
+  const isInView = useInView(targetRef, {
+    amount: 0.25,
+    margin: "0px 0px -10% 0px",
+  });
+  const Tag = as as ElementType;
+  const tokenSpan = (token: InlineToken) => {
     const content = (
       <span
         className={cn(
           "inline-block",
+          "whitespace-pre",
           token.strong && "font-medium text-black",
           token.code &&
             "rounded-[0.32rem] bg-black/[0.045] px-[0.34rem] py-[0.08rem] font-mono text-[0.9em]",
           token.em && "italic",
           token.sup && "align-super text-[0.7em] leading-none",
-          muted ? "opacity-20" : "",
         )}
       >
         {token.text}
@@ -243,62 +275,32 @@ function RichTextGradient({
   };
 
   return (
-    <Tag className={className}>
+    <Tag ref={targetRef as Ref<HTMLElement>} id={id} className={className}>
       {tokens.map((token, index) => {
-        const tokenSize = (range[1] - range[0]) / Math.max(tokens.length, 1);
-        const start = range[0] + index * tokenSize;
-        const end = start + tokenSize;
-
-        return (
-          <GradientToken
+        return <motion.span
             key={`${token.text}-${index}`}
-            token={token}
-            progress={progress}
-            range={[start, end]}
-            renderToken={tokenSpan}
-          />
-        );
+            initial={false}
+            animate={{ opacity: isInView ? 1 : 0.2 }}
+            transition={{
+              duration: 0.4,
+              ease: "easeOut",
+              delay: isInView ? Math.min(index * 0.012, 0.24) : 0,
+            }}
+            className="inline-block"
+          >
+            {tokenSpan(token)}
+          </motion.span>;
       })}
     </Tag>
-  );
-}
-
-function GradientToken({
-  token,
-  progress,
-  range,
-  renderToken,
-}: {
-  token: InlineToken;
-  progress: MotionValue<number>;
-  range: [number, number];
-  renderToken: (token: InlineToken, muted?: boolean) => ReactNode;
-}) {
-  const tokenSpan = range[1] - range[0];
-  const revealStart = Math.max(range[0] - tokenSpan * 0.2, 0);
-  const revealEnd = Math.min(range[1] + tokenSpan * 1.75, 1);
-  const opacity = useTransform(progress, [revealStart, revealEnd], [0.2, 1]);
-
-  return (
-    <>
-      <motion.span style={{ opacity, transition: "all .45s" }}>
-        {renderToken(token)}
-      </motion.span>
-      {" "}
-    </>
   );
 }
 
 function BlogBodyContent({
   bodyHtml,
   references,
-  progress,
-  progressRange = [0, 1],
 }: {
   bodyHtml: string;
   references: ReferenceItem[];
-  progress: MotionValue<number>;
-  progressRange?: [number, number];
 }) {
   const canEnhance = useSyncExternalStore(
     (onStoreChange) => {
@@ -332,32 +334,10 @@ function BlogBodyContent({
       "text/html",
     );
 
-    let textBlockIndex = 0;
-    const annotateBlocks = (node: ChildNode) => {
-      if (node.nodeType !== Node.ELEMENT_NODE) {
-        return;
-      }
-
-      const element = node as HTMLElement;
-      const tagName = element.tagName.toLowerCase();
-
-      if (tagName === "p" || tagName === "li") {
-        element.setAttribute("data-block-index", String(textBlockIndex));
-        textBlockIndex += 1;
-      }
-
-      Array.from(element.childNodes).forEach(annotateBlocks);
-    };
-
     const bodyNodes = Array.from(bodyDoc.body.childNodes);
     const referenceNodes = Array.from(refsDoc.querySelectorAll("li"));
 
-    bodyNodes.forEach(annotateBlocks);
-    referenceNodes.forEach(annotateBlocks);
-
-    const totalTextBlocks = textBlockIndex;
-
-    return { bodyNodes, referenceNodes, totalTextBlocks };
+    return { bodyNodes, referenceNodes };
   }, [bodyHtml, references, canEnhance]);
 
   if (!canEnhance || !parsed) {
@@ -420,45 +400,72 @@ function BlogBodyContent({
     }
 
     if (tagName === "p") {
-      const blockIndex = Number(element.getAttribute("data-block-index") ?? 0);
-      const segment = progressRange[1] - progressRange[0];
-      const range: [number, number] = [
-        progressRange[0] +
-          (blockIndex / Math.max(parsed.totalTextBlocks, 1)) * segment,
-        progressRange[0] +
-          ((blockIndex + 1) / Math.max(parsed.totalTextBlocks, 1)) * segment,
-      ];
-
       return (
         <RichTextGradient
           key={key}
           as="p"
           tokens={childNodes.flatMap((child) => extractInlineTokens(child))}
-          progress={progress}
-          range={range}
           className={cn("m-0", className)}
         />
       );
     }
 
-    if (tagName === "h2") {
+    if (tagName === "ul" || tagName === "ol") {
+      const ListTag = tagName as "ul" | "ol";
+
       return (
-        <h2 key={key} id={element.id}>
-          {element.textContent}
-        </h2>
+        <ListTag key={key} className={className}>
+          {childNodes.map((child, index) => renderNode(child, `${key}-${index}`))}
+        </ListTag>
       );
     }
 
-    if (tagName === "h3") {
-      return <h3 key={key}>{element.textContent}</h3>;
+    if (tagName === "li") {
+      return (
+        <RichTextGradient
+          key={key}
+          as="li"
+          tokens={childNodes.flatMap((child) => extractInlineTokens(child))}
+          className={className}
+        />
+      );
     }
 
-    if (tagName === "h4") {
-      return <h4 key={key}>{element.textContent}</h4>;
+    if (tagName === "h2" || tagName === "h3" || tagName === "h4") {
+      return (
+        <RichTextGradient
+          key={key}
+          as={tagName}
+          id={element.id || undefined}
+          tokens={childNodes.flatMap((child) => extractInlineTokens(child))}
+          className={className}
+        />
+      );
     }
 
     if (tagName === "hr") {
       return <hr key={key} className={className} />;
+    }
+
+    if (tagName === "pre") {
+      return (
+        <pre key={key} className={className}>
+          {element.textContent}
+        </pre>
+      );
+    }
+
+    if (tagName === "img") {
+      return (
+        <Image
+          key={key}
+          src={element.getAttribute("src") ?? ""}
+          alt={element.getAttribute("alt") ?? ""}
+          width={Number(element.getAttribute("width") ?? 1600)}
+          height={Number(element.getAttribute("height") ?? 900)}
+          className={className}
+        />
+      );
     }
 
     if (tagName === "svg") {
@@ -554,17 +561,6 @@ function BlogBodyContent({
         </h2>
         <ol className="mt-8 space-y-4 text-[0.98rem] leading-8 text-black/64">
           {parsed.referenceNodes.map((referenceNode, index) => {
-            const blockIndex = Number(
-              referenceNode.getAttribute("data-block-index") ?? 0,
-            );
-            const segment = progressRange[1] - progressRange[0];
-            const range: [number, number] = [
-              progressRange[0] +
-                (blockIndex / Math.max(parsed.totalTextBlocks, 1)) * segment,
-              progressRange[0] +
-                ((blockIndex + 1) / Math.max(parsed.totalTextBlocks, 1)) * segment,
-            ];
-
             return (
               <li key={references[index].id} className="flex gap-3">
                 <span className="shrink-0 text-black/34">{references[index].number}</span>
@@ -574,8 +570,6 @@ function BlogBodyContent({
                     tokens={Array.from(referenceNode.childNodes).flatMap((child) =>
                       extractInlineTokens(child),
                     )}
-                    progress={progress}
-                    range={range}
                     className="m-0 text-[0.98rem] leading-8 text-black/64"
                   />
                 </div>
@@ -591,15 +585,11 @@ function BlogBodyContent({
 export function BlogBody({
   bodyHtml,
   references,
-  progress,
-  progressRange,
 }: BlogBodyProps) {
   return (
     <BlogBodyContent
       bodyHtml={bodyHtml}
       references={references}
-      progress={progress}
-      progressRange={progressRange}
     />
   );
 }

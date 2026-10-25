@@ -1,0 +1,17 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\adity\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.19.0
+2 info using node@v22.20.0
+3 silly config load:file:C:\Users\adity\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\adity\OneDrive\Desktop\ctrl-web\.npmrc
+5 silly config load:file:C:\Users\adity\.npmrc
+6 silly config load:file:C:\Users\adity\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm
+8 verbose argv "-cache" "clear"
+9 verbose logfile logs-max:10 dir:C:\Users\adity\OneDrive\Desktop\ctrl-web\clear\_logs\2026-10-12T09_23_18_654Z-
+10 verbose logfile C:\Users\adity\OneDrive\Desktop\ctrl-web\clear\_logs\2026-10-12T09_23_18_654Z-debug-0.log
+11 verbose cwd C:\Users\adity\OneDrive\Desktop\ctrl-web
+12 verbose os Windows_NT 10.0.26200
+13 verbose node v22.20.0
+14 verbose npm  v11.19.0
+15 verbose exit 1
+16 verbose code 1

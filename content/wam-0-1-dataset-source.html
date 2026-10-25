@@ -1,0 +1,328 @@
+<article>
+  <header class="hero">
+    <div class="hero-label">Dataset and training systems</div>
+    <h1>WAM-0.1 Dataset</h1>
+    <p class="lede">
+      WAM-0.1 is an image-and-action robotics dataset built to learn how Panda
+      robot actions change the world. It is designed for H-JEPA and
+      action-conditioned world models, with aligned visual observations, actions,
+      robot state, and future subgoals.
+    </p>
+    <div class="hero-meta">
+      <span>300,029 physical transitions</span>
+      <span>Approximately 150 GB</span>
+      <span>RoboSuite and RoboCasa</span>
+    </div>
+  </header>
+
+  <div class="article-body">
+    <section>
+      <h2>What WAM-0.1 is built to teach</h2>
+      <p>
+        Most visual datasets show what the world looks like. WAM-0.1 also records
+        what the robot did and what changed after the action. That makes it useful
+        for models that need to connect perception, action, and physical consequence.
+      </p>
+      <p>
+        The dataset uses a simulated Panda arm and contains successful demonstrations
+        from official RoboSuite and RoboCasa tasks. Both sources use the same storage
+        contract, allowing them to become one action-conditioned training system.
+      </p>
+      <p>
+        <strong>The central learning contract:</strong> observe a state, apply a
+        known action, and preserve the resulting state as a grounded prediction target.
+      </p>
+    </section>
+
+    <section>
+      <h2>Two aligned learning levels</h2>
+      <p>
+        WAM-0.1 is organized at two temporal scales. Level 0 captures immediate
+        one-step dynamics; Level 1 groups those transitions into short-horizon
+        action chunks and future subgoals.
+      </p>
+      <span class="section-index">01 · Level 0</span>
+      <h3>One-step dynamics</h3>
+      <p>Level 0 represents the immediate effect of one action on the scene.</p>
+      <p class="flow-line">input image + one 7D Panda action → next observation image</p>
+      <p>
+        Each physical transition contains an input observation, one Panda action,
+        the resulting observation, robot state, and task metadata.
+      </p>
+      <p class="flow-line">[dx, dy, dz, dRx, dRy, dRz, gripper]</p>
+
+      <span class="section-index">02 · Level 1</span>
+      <h3>Action chunks and subgoals</h3>
+      <p>
+        Level 1 groups consecutive Level 0 transitions into a short-horizon
+        prediction target. The start and end frames come from the same trajectory;
+        they are never randomly paired.
+      </p>
+      <p class="flow-line">starting image + action chunk → future subgoal image</p>
+      <pre><code>Level 0: image[t] + action[t] → image[t + 1]
+Level 1: image[start] + actions[start:start+8] → image[start + 8]</code></pre>
+
+      <figure class="image-figure">
+        <img class="article-image" src="/assets/research/wam-0-1/panda-action-sequence.png" alt="A Panda robot moving an object across a simulated tabletop" width="2048" height="512" />
+        <figcaption class="image-caption">A short action sequence: the same scene, robot, and object state evolving across consecutive frames.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Data sources and task coverage</h2>
+      <span class="section-index">01 · RoboSuite</span>
+      <h3>Core manipulation tasks</h3>
+      <p>
+        Official Panda manipulation tasks covering lifting, stacking, wiping,
+        doors, placement, and assembly.
+      </p>
+      <figure class="image-figure">
+        <img class="article-image" src="/assets/research/wam-0-1/robosuite-task-montage.png" alt="RoboSuite Panda manipulation task montage" width="1316" height="530" />
+        <figcaption class="image-caption">RoboSuite manipulation tasks across different object and scene configurations.</figcaption>
+      </figure>
+
+      <span class="section-index">02 · RoboCasa</span>
+      <h3>Household and kitchen tasks</h3>
+      <p>
+        Official household and kitchen tasks that extend the range of behaviors
+        beyond the core RoboSuite set.
+      </p>
+      <figure class="image-figure">
+        <img class="article-image" src="/assets/research/wam-0-1/robocasa-task-montage.png" alt="RoboCasa household and kitchen task montage" width="1316" height="530" />
+        <figcaption class="image-caption">RoboCasa kitchen and household scenes extending the manipulation envelope.</figcaption>
+      </figure>
+      <p>
+        The dataset includes successful demonstrations from normal trajectories and
+        controlled randomized trajectories that vary scene and object conditions while
+        preserving task logic.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Source</th><th>Included tasks</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RoboSuite</td>
+              <td>Lift, Stack, Door, Wipe, PickPlaceBread, PickPlaceMilk, PickPlaceCereal, PickPlaceCan, PickPlaceSingle, NutAssemblySquare</td>
+            </tr>
+            <tr>
+              <td>RoboCasa</td>
+              <td>Official household and kitchen manipulation tasks from the RoboCasa task suite</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="image-figure">
+        <img class="article-image" src="/assets/research/wam-0-1/robosuite-variation-montage.png" alt="RoboSuite task variations with different objects and scene arrangements" width="1316" height="530" />
+        <figcaption class="image-caption">Controlled task variation changes the scene while preserving the underlying action logic.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Visual observations</h2>
+      <p>
+        Each physical transition can contain synchronized observations from three
+        camera views. A Level 0 input and output must use the same camera stream and
+        remain inside the same trajectory.
+      </p>
+      <span class="section-index">Observation contract</span>
+      <h3>Three views, one aligned transition</h3>
+      <p>
+        The standard image resolution is 128 × 128 pixels. The available camera
+        streams are <code>agentview</code>, <code>frontview</code>, and
+        <code>sideview</code>.
+      </p>
+      <p class="flow-line">camera[t] + action[t] + state[t] → camera[t + 1] + state[t + 1]</p>
+
+      <figure class="image-figure">
+        <img class="article-image" src="/assets/research/wam-0-1/trajectory-multiview.png" alt="Multi-view RGB and depth observations from WAM-0.1 trajectories" width="1920" height="2532" />
+        <figcaption class="image-caption">A trajectory is stored across synchronized camera views, including RGB-difference inspection for alignment checks.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Storage and distribution</h2>
+      <p>
+        The local project keeps code, schemas, documentation, validation tools, and
+        visual examples together. The dataset is distributed separately as downloadable
+        Hugging Face shards.
+      </p>
+      <span class="section-index">Local training layout</span>
+      <h3>Final dataset structure</h3>
+      <pre><code>data/
+└── final/
+    ├── level_0/
+    │   ├── normal/
+    │   ├── random/
+    │   └── robocasa/
+    └── level_1/
+        ├── normal/
+        ├── random/
+        └── robocasa/</code></pre>
+      <span class="section-index">Hugging Face</span>
+      <h3>Shard-based distribution</h3>
+      <p>
+        The repository is organized around downloadable tar shards. Each shard
+        contains one task and split combination, with the learning levels preserved
+        inside the archive where applicable.
+      </p>
+      <pre><code>atomctrl/wam-0.1/
+├── README.md
+└── shards/
+    ├── lift-normal.tar
+    ├── random-Lift.tar
+    ├── normal-Door.tar
+    ├── random-Door.tar
+    ├── normal-Stack.tar
+    ├── random-Stack.tar
+    ├── normal-PickPlaceBread.tar
+    ├── random-PickPlaceBread.tar
+    ├── normal-PickPlaceCan.tar
+    ├── random-PickPlaceCan.tar
+    ├── normal-PickPlaceCereal.tar
+    ├── random-PickPlaceCereal.tar
+    ├── normal-PickPlaceMilk.tar
+    ├── random-PickPlaceMilk.tar
+    ├── normal-PickPlaceSingle.tar
+    ├── random-PickPlaceSingle.tar
+    ├── normal-NutAssemblySquare.tar
+    ├── random-NutAssemblySquare.tar
+    └── normal-robocasa.tar</code></pre>
+
+      <figure class="image-figure">
+        <img class="article-image" src="/assets/research/wam-0-1/dataset-index.png" alt="Annotated index of WAM-0.1 task examples and observation views" width="1080" height="2568" />
+        <figcaption class="image-caption">The dataset index makes task, camera, and endpoint conventions visible before a trajectory is loaded.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>File contracts</h2>
+      <span class="section-index">Level 0</span>
+      <h3>Physical transition</h3>
+      <pre><code>level_0/normal/Lift/trajectory_000000/
+├── observation/
+│   ├── agentview/000000/
+│   │   ├── rgb.png
+│   │   └── depth.npy
+│   ├── frontview/
+│   └── sideview/
+├── action.npy
+├── robot_state.npy
+├── observation_state.npy
+└── metadata.json</code></pre>
+
+      <span class="section-index">Level 1</span>
+      <h3>Action-chunk segment</h3>
+      <pre><code>level_1/normal/Lift/trajectory_000000/
+├── segment_000/
+│   ├── action_block.npy
+│   ├── start_state.npy
+│   ├── subgoal_state.npy
+│   └── metadata.json
+└── segment_001/</code></pre>
+      <p>
+        Every Level 1 segment references a contiguous block of Level 0 actions. The
+        segment start is the first observation, and the subgoal is the future
+        observation reached after the action chunk.
+      </p>
+    </section>
+
+    <section>
+      <h2>From collection to shard</h2>
+      <p>
+        The collection pipeline keeps task success, frame alignment, camera
+        consistency, array shapes, and metadata paths inside the validation boundary.
+      </p>
+      <span class="section-index">Pipeline</span>
+      <h3>One trajectory, validated end to end</h3>
+      <pre><code>task selection
+    → environment reset
+    → action execution or official replay
+    → Level 0 capture
+    → Level 1 chunk construction
+    → validation
+    → task shard creation
+    → Hugging Face upload</code></pre>
+      <ol>
+        <li>The collector selects a RoboSuite or RoboCasa task and a successful demonstration source.</li>
+        <li>The environment is reset and the Panda scene is initialized.</li>
+        <li>The controller replays or executes the task action sequence.</li>
+        <li>RGB, depth, robot state, action, and metadata are captured at every step.</li>
+        <li>The captured step is written as a Level 0 transition.</li>
+        <li>Consecutive Level 0 transitions are grouped into fixed-length Level 1 action chunks.</li>
+        <li>Validation checks alignment, task success, camera consistency, shapes, and paths.</li>
+        <li>Validated task directories are packed into Hugging Face shard archives.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Using a single shard in Colab</h2>
+      <p>
+        A single shard can be downloaded for inspection without pulling the full
+        dataset. This keeps early experiments small while preserving the production
+        storage contract.
+      </p>
+      <span class="section-index">Quick start</span>
+      <h3>Download one task shard</h3>
+      <pre><code>!pip -q install huggingface_hub
+
+from huggingface_hub import hf_hub_download
+
+shard = hf_hub_download(
+    repo_id="atomctrl/wam-0.1",
+    repo_type="dataset",
+    filename="shards/lift-normal.tar",
+    local_dir="/content/wam-test"
+)
+
+print(shard)</code></pre>
+    </section>
+
+    <section>
+      <h2>Intended use</h2>
+      <p>
+        WAM-0.1 is intended as a research substrate for action-aware prediction,
+        planning, and control. Its paired observations and actions make the dataset
+        useful wherever a model needs to explain not only what changed, but why it changed.
+      </p>
+      <span class="section-index">01 · Representation learning</span>
+      <h3>Grounded visual prediction</h3>
+      <p>
+        H-JEPA can use the aligned images, robot state, and action traces to learn
+        representations grounded in physical transitions rather than appearance alone.
+      </p>
+
+      <span class="section-index">02 · World models</span>
+      <h3>Actions connected to outcomes</h3>
+      <p>
+        The Level 0 and Level 1 contracts support one-step dynamics prediction as well
+        as short-horizon subgoal prediction for action-conditioned world models.
+      </p>
+
+      <span class="section-index">03 · Planning and control</span>
+      <h3>From prediction to behavior</h3>
+      <p>
+        The same structure can support visual planning, Panda manipulation research,
+        and simulation-to-real experiments where a controller must anticipate the
+        consequences of its next action.
+      </p>
+    </section>
+
+    <section class="sources">
+      <h2>References and project links</h2>
+      <ol>
+        <li><span class="source-num">01</span><span><a href="https://huggingface.co/datasets/atomctrl/wam-0.1">WAM-0.1 dataset on Hugging Face</a></span></li>
+        <li><span class="source-num">02</span><span><a href="https://github.com/adityapp1213/Wam-0.1">WAM-0.1 GitHub repository</a></span></li>
+        <li><span class="source-num">03</span><span><a href="https://github.com/robocasa/robocasa">RoboCasa official repository</a></span></li>
+        <li><span class="source-num">04</span><span><a href="https://atomctrl.com">atom ctrl</a></span></li>
+      </ol>
+    </section>
+  </div>
+
+  <footer class="article-footer">
+    <span>WAM-0.1 Dataset · Dataset Brief</span>
+    <span>atom ctrl · 2026</span>
+  </footer>
+</article>

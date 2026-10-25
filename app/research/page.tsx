@@ -14,6 +14,7 @@ export const metadata = createPageMetadata({
     "/assets/blog-cards/2.2.png",
     "/assets/blog-cards/3.png",
     "/assets/blog-cards/4.png",
+    "/assets/blog-cards/5.2.png",
   ],
 });
 
