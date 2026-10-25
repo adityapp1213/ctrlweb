@@ -12,6 +12,8 @@ export type ArticleSeo = {
   title: string;
   description: string;
   image: string;
+  imageWidth?: number;
+  imageHeight?: number;
   datePublished: string;
   dateModified?: string;
   keywords: string[];
@@ -65,34 +67,40 @@ export function serializeJsonLd(value: unknown) {
 }
 
 export function createArticleMetadata(article: ArticleSeo): Metadata {
+  const shareImageUrl = absoluteUrl(article.image);
+
+  const image = {
+    url: shareImageUrl,
+    ...(article.imageWidth ? { width: article.imageWidth } : {}),
+    ...(article.imageHeight ? { height: article.imageHeight } : {}),
+    alt: article.title,
+  };
+
   return {
     title: article.title,
     description: article.description,
     keywords: article.keywords,
     alternates: {
-      canonical: article.path,
+      canonical: absoluteUrl(article.path),
     },
     openGraph: {
       type: "article",
-      url: article.path,
+      url: absoluteUrl(article.path),
       siteName: SITE_NAME,
       title: article.title,
       description: article.description,
       publishedTime: article.datePublished,
       modifiedTime: article.dateModified ?? article.datePublished,
       authors: [FOUNDER_NAME],
-      images: [
-        {
-          url: article.image,
-          alt: article.title,
-        },
-      ],
+      locale: "en_US",
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.description,
-      images: [article.image],
+      creator: "@adityapp1213",
+      images: [shareImageUrl],
     },
   };
 }

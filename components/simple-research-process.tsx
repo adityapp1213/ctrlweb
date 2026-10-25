@@ -6,7 +6,7 @@ const processSteps = [
     number: "01",
     title: "WAM-0.1 dataset",
     description:
-      "A custom 350 GB robosuite-based dataset built for training H-JEPA to predict action and change.",
+      "A custom 150 GB robosuite-based dataset built for training H-JEPA to predict action and change.",
     image: "/assets/blog-cards/5.2.png",
     alt: "A simulated robotics environment for the WAM-0.1 dataset",
     href: "/research/wam-0-1-dataset",

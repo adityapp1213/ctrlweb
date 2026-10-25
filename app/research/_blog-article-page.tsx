@@ -134,15 +134,18 @@ export const blogArticles = {
     heroMetaClassName: "simple-blog-hero-meta-wam",
     seo: {
       path: "/research/wam-0-1-dataset",
-      title: "WAM-0.1 dataset: a robosuite dataset for H-JEPA",
+      title: "WAM-0.1 Dataset: Action-Conditioned Robotics Data for H-JEPA",
       description:
-        "WAM-0.1 is a custom robosuite-based dataset, approximately 350 GB in size, purpose-built to support H-JEPA research on action and change.",
+        "WAM-0.1 is a 150 GB RoboSuite and RoboCasa dataset for H-JEPA research on action-conditioned prediction, robot learning, and world models.",
       image: "/assets/blog-cards/5.2.png",
+      imageWidth: 1200,
+      imageHeight: 675,
       datePublished: "2026-10-12",
-      dateModified: "2026-10-12",
+      dateModified: "2026-10-25",
       keywords: [
         "WAM-0.1 dataset",
-        "robosuite dataset",
+        "RoboSuite dataset",
+        "RoboCasa dataset",
         "H-JEPA",
         "robot learning",
         "world action models",

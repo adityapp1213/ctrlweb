@@ -34,7 +34,6 @@ export function BlogContent({
   }>;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const articleTrackRef = useRef<HTMLDivElement>(null);
   const [progressPercent, setProgressPercent] = useState(0);
 
   const { scrollYProgress: loaderProgress } = useScroll({
@@ -42,15 +41,7 @@ export function BlogContent({
     offset: ["start 92%", "end 12%"],
   });
 
-  const { scrollYProgress: articleProgress } = useScroll({
-    target: articleTrackRef,
-    offset: ["start 98%", "end 20%"],
-  });
-
   const clampedLoaderProgress = useTransform(loaderProgress, (value) =>
-    Math.min(Math.max(value, 0), 1),
-  );
-  const clampedArticleProgress = useTransform(articleProgress, (value) =>
     Math.min(Math.max(value, 0), 1),
   );
   const progressAsPercent = useTransform(clampedLoaderProgress, (value) =>
@@ -139,10 +130,7 @@ export function BlogContent({
         </div>
       ) : null}
 
-      <div
-        ref={articleTrackRef}
-        className="relative mt-12 lg:grid lg:gap-16"
-      >
+      <div className="relative mt-12 lg:grid lg:gap-16">
         <motion.div
           style={{ opacity: smoothLoaderOpacity }}
           className="group fixed bottom-6 right-6 z-30 hidden items-center gap-1 lg:flex"
@@ -186,8 +174,6 @@ export function BlogContent({
           <BlogBody
             bodyHtml={`<p>${article.ledeHtml}</p>${article.bodyHtml}`}
             references={article.references}
-            progress={clampedArticleProgress}
-            progressRange={[0, 1]}
           />
         </article>
 

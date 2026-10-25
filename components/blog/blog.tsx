@@ -26,7 +26,7 @@ export function Blog({ article, heroImageAlt, heroImageSrc, heroMetaClassName, h
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(createArticleJsonLd(seo)) }}
       />
-      <div className="simple-site-stack">
+      <div className="simple-site-stack simple-site-stack-footer-reveal">
         <div className="simple-site simple-blog-page">
           <div className="simple-blog-shell">
             <SimpleSiteNav active="Research" />
@@ -42,7 +42,7 @@ export function Blog({ article, heroImageAlt, heroImageSrc, heroMetaClassName, h
             </main>
           </div>
         </div>
-        <SimpleSiteFooter />
+        <SimpleSiteFooter reveal />
       </div>
     </>
   );

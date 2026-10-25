@@ -46,6 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${SITE_URL}/research/wam-0-1-dataset`,
+      lastModified: "2026-10-25",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     ...faqItems.map((item) => ({
       url: `${SITE_URL}/faq/${item.slug}`,
       lastModified: "2026-07-04",
