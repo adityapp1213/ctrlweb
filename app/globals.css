@@ -277,6 +277,11 @@
   max-width: 44rem;
 }
 
+.simple-blog-hero-meta-wam span {
+  width: fit-content;
+  max-width: 100%;
+}
+
 .simple-blog-hero-meta-wam span:nth-child(3) {
   grid-column: 1 / -1;
   justify-self: center;
@@ -284,11 +289,25 @@
 
 @media (max-width: 640px) {
   .simple-blog-hero-meta-wam {
-    grid-template-columns: minmax(0, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    gap: 0.45rem;
+  }
+
+  .simple-blog-hero-meta-wam span {
+    width: max-content;
+    max-width: 100%;
+    flex: 0 0 auto;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
   }
 
   .simple-blog-hero-meta-wam span:nth-child(3) {
     grid-column: auto;
+    justify-self: auto;
   }
 }
 
