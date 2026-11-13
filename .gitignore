@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Local Neon project link and credentials.
+.neon
+
 # vercel
 .vercel
 

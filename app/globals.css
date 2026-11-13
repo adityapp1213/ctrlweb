@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@clerk/ui/themes/shadcn.css";
 
 @theme inline {
   --color-background: var(--background);
@@ -2044,4 +2045,44 @@
   .logo-bg-ss-wordmark {
     font-size: clamp(4.25rem, 17vw, 7rem);
   }
+}
+
+/* Account entry point and Clerk cards, scoped to the authentication screens. */
+.simple-site-access { margin-top: 0.85rem; color: inherit; font-size: 0.9rem; line-height: 1.35; }
+.simple-site-access p { margin: 0; }
+.simple-site-access .simple-site-talk { margin-top: 0.15rem; }
+
+.auth-loading { font-size: 15px; color: #99999f; }
+.atom-auth-root { width: 100%; font-family: var(--font-mona-sans), Arial, sans-serif; color-scheme: dark; }
+.atom-auth-root :is(button, input, select, textarea) { font-family: var(--font-mona-sans), Arial, sans-serif; }
+.atom-auth-card-box { width: 100%; max-width: none; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
+.atom-auth-card { width: 100%; padding: 0; gap: 44px; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.atom-auth-header { align-items: center; text-align: center; gap: 14px; }
+.atom-auth-title { font-family: var(--font-mona-sans), Arial, sans-serif; font-size: 36px; font-weight: 550; letter-spacing: -0.04em; line-height: 1.2; color: #f5f5f5; }
+.atom-auth-subtitle { font-size: 16px; line-height: 1.6; color: #99999f; }
+.atom-auth-main { gap: 28px; }
+.atom-auth-form { gap: 22px; }
+.atom-auth-label { font-size: 14px; font-weight: 500; color: #c2c2c7; }
+.atom-auth-socials { gap: 16px; }
+.atom-auth-social-button { min-height: 44px; padding: 10px 16px; border: 1px solid #414141; border-radius: 4px; box-shadow: none; background: transparent; color: #f5f5f5; }
+.atom-auth-social-button:hover { background: #151515; border-color: #777; }
+.atom-auth-social-label { font-size: 15px; font-weight: 500; letter-spacing: -0.015em; }
+.atom-auth-divider { margin-block: 8px; }
+.atom-auth-divider-line { flex: 1; height: 1px; background: #555; opacity: 1; }
+.atom-auth-divider-text { padding-inline: 16px; color: #aaa; font-size: 14px; }
+.atom-auth-input { min-height: 46px; padding: 11px 14px; border: 1px solid #353535; border-radius: 4px; background: #050505; color: #f5f5f5; font-size: 15px; box-shadow: none; }
+.atom-auth-input::placeholder { color: #7f7f86; }
+.atom-auth-input:focus { border-color: #bdbdbd; box-shadow: 0 0 0 3px #ffffff15; outline: none; }
+.atom-auth-submit { min-height: 46px; border: 1px solid #555; border-radius: 4px; background: #101010; color: #f5f5f5; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; box-shadow: none; }
+.atom-auth-submit:hover { background: #202020; border-color: #888; }
+.atom-auth-submit:focus-visible, .atom-auth-social-button:focus-visible { outline: 2px solid #f5f5f5; outline-offset: 4px; }
+.atom-auth-root { filter: grayscale(1); }
+.atom-auth-footer { margin: 0; padding: 24px 0 0; gap: 18px; background: transparent; border: 0; border-radius: 0; }
+.atom-auth-footer-action { justify-content: flex-start; font-size: 15px; gap: 7px; color: #aaaab0; }
+.atom-auth-footer-link { color: #f5f5f5; font-size: 15px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .atom-auth-title { font-size: 30px; }
+  .atom-auth-card { gap: 32px; }
+  .atom-auth-input { font-size: 16px; }
+  .atom-auth-subtitle { font-size: 15px; }
 }

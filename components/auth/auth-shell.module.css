@@ -1,0 +1,100 @@
+.page {
+  min-height: 100svh;
+  background: #050505;
+  color: #f5f5f5;
+  color-scheme: dark;
+  font-family: var(--font-mona-sans), Arial, sans-serif;
+}
+.shell {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 5fr);
+  min-height: 100svh;
+}
+.artwork {
+  position: sticky;
+  top: 0;
+  display: grid;
+  height: 100svh;
+  min-width: 0;
+  place-items: center;
+  overflow: hidden;
+  border-right: 1px solid #242424;
+  background: #050505;
+  isolation: isolate;
+}
+.artwork::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  background: rgb(0 0 0 / 58%);
+}
+.image {
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(1);
+}
+.brandStory {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 36px;
+  text-align: center;
+}
+.brand {
+  color: #f5f5f5;
+  font-size: clamp(36px, 4.5vw, 64px);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.statement {
+  margin: 0;
+  font-size: clamp(28px, 2.45vw, 44px);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 1.18;
+}
+.panel {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 100svh;
+  place-items: center;
+  padding: 116px 48px 76px;
+}
+.home {
+  position: absolute;
+  top: 44px;
+  left: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #f5f5f5;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.home:hover { color: #bdbdbd; }
+.brand:focus-visible,
+.home:focus-visible { outline: 2px solid #f5f5f5; outline-offset: 6px; }
+.form { width: 100%; max-width: 440px; min-width: 0; }
+@media (max-width: 1000px) {
+  .panel { padding-inline: 32px; }
+  .home { left: 32px; }
+  .brandStory { padding: 24px; }
+}
+@media (max-width: 760px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .artwork { position: relative; height: auto; border-right: 0; border-bottom: 1px solid #242424; }
+  .brandStory { gap: 16px; padding: 40px 24px 32px; }
+  .brand { font-size: 44px; }
+  .statement { font-size: 28px; }
+  .panel { min-height: 0; padding: 92px 24px 48px; }
+  .home { top: 28px; left: 24px; font-size: 14px; }
+}

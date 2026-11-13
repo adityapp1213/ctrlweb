@@ -1,0 +1,88 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  background: #f7f7f5;
+}
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 100svh; }
+.layout[data-mode="playground"] { grid-template-columns: 264px minmax(0, 1fr); background: #111; color: #f5f5f5; color-scheme: dark; }
+.stage { display: flex; flex-direction: column; min-width: 0; min-height: 100svh; }
+.menuButton { display: none; }
+.layout[data-mode="playground"] .modeToggle { background: #202020; }
+.layout[data-mode="playground"] .selection { background: #333; border-color: #444; box-shadow: 0 1px 5px #0003; }
+.layout[data-mode="playground"] .option { color: #999; }
+.layout[data-mode="playground"] .option:has(input:checked) { color: #f5f5f5; }
+
+.header {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  padding: 24px clamp(24px, 5vw, 72px);
+}
+
+.account { grid-column: 3; justify-self: end; }
+.workspace { flex: 1; }
+
+.modeToggle {
+  position: relative;
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(306px, calc(100vw - 120px));
+  min-width: 0;
+  height: 50px;
+  margin: 0;
+  padding: 3px;
+  border: 0;
+  border-radius: 999px;
+  background: #eeeeec;
+  font-family: var(--font-mona-sans), Arial, sans-serif;
+}
+
+.selection {
+  position: absolute;
+  inset: 3px auto 3px 3px;
+  width: calc(50% - 3px);
+  border: 1px solid #e2e2df;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 5px #00000008;
+  transition: transform 180ms ease;
+}
+.selection[data-mode="research"] { transform: translateX(100%); }
+
+.option {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  border-radius: 999px;
+  color: #686866;
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+  transition: color 180ms ease;
+}
+.option:has(input:checked) { color: #171717; }
+.option:has(input:focus-visible) { outline: 2px solid #777; outline-offset: 3px; }
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 380px) { .option { font-size: 13px; } }
+@media (max-width: 760px) {
+  .layout[data-mode="playground"] { grid-template-columns: minmax(0, 1fr); }
+  .header { padding: 18px 20px; }
+  .menuButton { position: absolute; left: 18px; display: grid; place-items: center; width: 32px; height: 36px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: #ccc; cursor: pointer; }
+  .menuButton:focus-visible { outline: 2px solid #aaa; outline-offset: 2px; }
+}
+@media (prefers-reduced-motion: reduce) { .selection, .option { transition: none; } }

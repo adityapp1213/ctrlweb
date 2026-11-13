@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
+import { shadcn } from "@clerk/ui/themes";
 import { Analytics } from "@vercel/analytics/next";
 import { SitePreloader } from "@/components/site-preloader";
 import {
@@ -144,8 +146,52 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full bg-white text-black">
-        <SitePreloader>{children}</SitePreloader>
-        <Analytics />
+        <ClerkProvider
+          signInUrl="/sign/login"
+          signUpUrl="/sign/register"
+          signInForceRedirectUrl="/platform"
+          signUpForceRedirectUrl="/platform"
+          afterSignOutUrl="/"
+          appearance={{
+            cssLayerName: "clerk",
+            theme: shadcn,
+            variables: {
+              colorPrimary: "#171717",
+              colorPrimaryForeground: "#ffffff",
+              colorBackground: "#ffffff",
+              colorForeground: "#171717",
+              colorMutedForeground: "#83837e",
+              colorBorder: "#e7e7e4",
+              colorInput: "#ffffff",
+              colorInputForeground: "#171717",
+              colorRing: "#777773",
+              fontFamily: "var(--font-mona-sans), Arial, sans-serif",
+              fontFamilyButtons: "var(--font-mona-sans), Arial, sans-serif",
+              borderRadius: "0.5rem",
+            },
+          }}
+          localization={{
+            socialButtonsBlockButton: "{{provider|titleize}}",
+            socialButtonsBlockButtonManyInView: "{{provider|titleize}}",
+            signIn: {
+              start: {
+                title: "Sign into the platform",
+                titleCombined: "Sign into the platform",
+                subtitle: "Your next experiment starts here.",
+                subtitleCombined: "Your next experiment starts here.",
+              },
+            },
+            signUp: {
+              start: {
+                title: "Start building with atom ctrl",
+                subtitle: "A world of possibilities. A place to begin.",
+              },
+            },
+          }}
+        >
+          <SitePreloader>{children}</SitePreloader>
+          <Analytics />
+        </ClerkProvider>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { GeistPixelCircle } from "geist/font/pixel";
 import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -13,6 +14,7 @@ const navItems = [
 ];
 
 export function SimpleSiteNav({ active }: { active: string }) {
+  const isHome = usePathname() === "/";
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -63,9 +65,18 @@ export function SimpleSiteNav({ active }: { active: string }) {
           ))}
         </ul>
         <div className="simple-site-nav-rule" />
-        <a className="simple-site-talk" href={CONTACT_URL} target="_blank" rel="noreferrer">
-          Let&apos;s talk <span aria-hidden="true" />
-        </a>
+        {isHome ? (
+          <div className="simple-site-access">
+            <p>Request a demo<br />or learn more</p>
+            <Link className="simple-site-talk" href="/sign/login" prefetch={false}>
+              here <span aria-hidden="true" />
+            </Link>
+          </div>
+        ) : (
+          <a className="simple-site-talk" href={CONTACT_URL} target="_blank" rel="noreferrer">
+            Let&apos;s talk <span aria-hidden="true" />
+          </a>
+        )}
       </nav>
       <button
         ref={menuButtonRef}
@@ -97,6 +108,11 @@ export function SimpleSiteNav({ active }: { active: string }) {
                 {item.label}
               </Link>
             ))}
+            {isHome ? (
+              <Link href="/sign/login" prefetch={false} onClick={() => setMenuOpen(false)}>
+                Sign in to the platform
+              </Link>
+            ) : null}
           </div>
         </div>
       ) : null}
