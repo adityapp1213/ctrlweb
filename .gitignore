@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+/public/vendor/mujoco/
+/public/vendor/python/
+/.simulation-cache/
 /.pnp
 .pnp.*
 .yarn/*

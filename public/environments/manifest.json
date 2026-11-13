@@ -1,0 +1,115 @@
+{
+  "sources": [
+    {
+      "id": "menagerie",
+      "repo": "google-deepmind/mujoco_menagerie",
+      "revision": "370c43965323c0944b433b202aac5058b5f907a9",
+      "files": [
+        "aloha/LICENSE",
+        "aloha/scene.xml",
+        "aloha/assets/tabletop.obj",
+        "aloha/assets/tablelegs.obj",
+        "aloha/assets/small_meta_table_diffuse.png",
+        "franka_emika_panda/LICENSE",
+        "franka_emika_panda/mjx_single_cube.xml"
+      ]
+    },
+    {
+      "id": "robosuite",
+      "repo": "ARISE-Initiative/robosuite",
+      "revision": "5ce6643f3092639d08f7b0f90ed1c6a84f50552c",
+      "files": [
+        "LICENSE",
+        "robosuite/models/assets/arenas/bins_arena.xml",
+        "robosuite/models/assets/objects/can.xml",
+        "robosuite/models/assets/objects/lemon.xml",
+        "robosuite/models/assets/objects/meshes/can.msh",
+        "robosuite/models/assets/objects/meshes/lemon.msh",
+        "robosuite/models/assets/textures/soda.png",
+        "robosuite/models/assets/textures/lemon.png",
+        "robosuite/models/assets/textures/light-wood.png",
+        "robosuite/models/objects/primitive/ball.py",
+        "robosuite/controllers/parts/generic/joint_pos.py",
+        "robosuite/controllers/config/default/parts/joint_position.json"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "menagerie/aloha/assets/small_meta_table_diffuse.png",
+      "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/aloha/assets/small_meta_table_diffuse.png"
+    },
+    {
+      "name": "menagerie/aloha/assets/tablelegs.obj",
+      "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/aloha/assets/tablelegs.obj"
+    },
+    {
+      "name": "menagerie/aloha/assets/tabletop.obj",
+      "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/aloha/assets/tabletop.obj"
+    },
+    {
+      "name": "menagerie/aloha/LICENSE",
+      "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/aloha/LICENSE"
+    },
+    {
+      "name": "menagerie/aloha/scene.xml",
+      "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/aloha/scene.xml"
+    },
+    {
+      "name": "menagerie/franka_emika_panda/LICENSE",
+      "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/franka_emika_panda/LICENSE"
+    },
+    {
+      "name": "menagerie/franka_emika_panda/mjx_single_cube.xml",
+      "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/franka_emika_panda/mjx_single_cube.xml"
+    },
+    {
+      "name": "robosuite/LICENSE",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/LICENSE"
+    },
+    {
+      "name": "robosuite/robosuite/controllers/config/default/parts/joint_position.json",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/controllers/config/default/parts/joint_position.json"
+    },
+    {
+      "name": "robosuite/robosuite/controllers/parts/generic/joint_pos.py",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/controllers/parts/generic/joint_pos.py"
+    },
+    {
+      "name": "robosuite/robosuite/models/assets/arenas/bins_arena.xml",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/assets/arenas/bins_arena.xml"
+    },
+    {
+      "name": "robosuite/robosuite/models/assets/objects/can.xml",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/assets/objects/can.xml"
+    },
+    {
+      "name": "robosuite/robosuite/models/assets/objects/lemon.xml",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/assets/objects/lemon.xml"
+    },
+    {
+      "name": "robosuite/robosuite/models/assets/objects/meshes/can.msh",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/assets/objects/meshes/can.msh"
+    },
+    {
+      "name": "robosuite/robosuite/models/assets/objects/meshes/lemon.msh",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/assets/objects/meshes/lemon.msh"
+    },
+    {
+      "name": "robosuite/robosuite/models/assets/textures/lemon.png",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/assets/textures/lemon.png"
+    },
+    {
+      "name": "robosuite/robosuite/models/assets/textures/light-wood.png",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/assets/textures/light-wood.png"
+    },
+    {
+      "name": "robosuite/robosuite/models/assets/textures/soda.png",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/assets/textures/soda.png"
+    },
+    {
+      "name": "robosuite/robosuite/models/objects/primitive/ball.py",
+      "source": "https://github.com/ARISE-Initiative/robosuite/blob/5ce6643f3092639d08f7b0f90ed1c6a84f50552c/robosuite/models/objects/primitive/ball.py"
+    }
+  ]
+}

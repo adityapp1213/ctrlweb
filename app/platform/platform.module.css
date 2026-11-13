@@ -24,6 +24,11 @@
 
 .account { grid-column: 3; justify-self: end; }
 .workspace { flex: 1; }
+.simulationLoading { padding: 24px 32px; color: #888; font-size: 13px; }
+.library { padding: 32px; color: #999; font-size: 13px; }
+.library h1 { margin: 0 0 12px; color: #eee; font-size: 24px; font-weight: 500; }
+.library p { max-width: 520px; line-height: 1.7; }
+.library a { display: inline-block; margin-top: 20px; color: #ddd; }
 
 .modeToggle {
   position: relative;

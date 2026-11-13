@@ -149,8 +149,8 @@ export default function RootLayout({
         <ClerkProvider
           signInUrl="/sign/login"
           signUpUrl="/sign/register"
-          signInForceRedirectUrl="/platform"
-          signUpForceRedirectUrl="/platform"
+          signInFallbackRedirectUrl="/platform"
+          signUpFallbackRedirectUrl="/platform"
           afterSignOutUrl="/"
           appearance={{
             cssLayerName: "clerk",

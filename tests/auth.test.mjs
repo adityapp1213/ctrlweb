@@ -19,7 +19,7 @@ const doesProxyMatch = testing.unstable_doesProxyMatch ?? testing.unstable_doesM
 function loadSource(file, mocks = {}) {
   const filename = path.resolve(root, file);
   const source = ts.transpileModule(readFileSync(filename, "utf8"), {
-    fileName: filename,
+    fileName: filename.endsWith('.mjs') ? `${filename}.ts` : filename,
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2017, jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true },
   }).outputText;
   const mod = { exports: {} };
@@ -27,10 +27,13 @@ function loadSource(file, mocks = {}) {
     if (Object.hasOwn(mocks, specifier)) return mocks[specifier];
     if (specifier.endsWith(".module.css")) return new Proxy({}, { get: (_, name) => name === "__esModule" ? false : String(name) });
     if (specifier.startsWith("./") || specifier.startsWith("../")) {
+      if (specifier.endsWith('.json')) return JSON.parse(readFileSync(path.resolve(path.dirname(filename), specifier), 'utf8'));
       return loadSource(path.resolve(path.dirname(filename), `${specifier}.ts`), mocks);
     }
     if (specifier.startsWith("@/")) {
       const sourcePath = specifier.slice(2);
+      if (sourcePath.endsWith('.json')) return JSON.parse(readFileSync(path.resolve(root, sourcePath), 'utf8'));
+      if (sourcePath.endsWith('.mjs')) return loadSource(sourcePath, mocks);
       return loadSource(`${sourcePath}${existsSync(path.resolve(root, `${sourcePath}.ts`)) ? ".ts" : ".tsx"}`, mocks);
     }
     return nativeRequire(specifier);
@@ -47,7 +50,7 @@ const signedOutAuth = Object.assign(async () => ({ isAuthenticated: false }), {
 
 test("Clerk runs on auth, API, auto-proxy, and all platform paths while skipping public assets", () => {
   const { config } = loadSource("proxy.ts", { "@clerk/nextjs/server": { clerkMiddleware: (handler) => handler } });
-  for (const url of ["/sign/login", "/sign/register/verify-email-address", "/platform", "/platform/private.json", "/api/private", "/__clerk/v1/client"]) {
+  for (const url of ["/sign/login", "/sign/register/verify-email-address", "/platform", "/platform/playground", "/platform/playground/franka-emika-panda/open-floor", "/platform/research", "/platform/library/models", "/platform/private.json", "/api/private", "/__clerk/v1/client"]) {
     assert.equal(doesProxyMatch({ config, nextConfig: {}, url }), true, url);
   }
   for (const url of ["/_next/static/chunk.js", "/assets/auth/grain-study.png", "/fonts/mona.ttf"]) {
@@ -57,7 +60,7 @@ test("Clerk runs on auth, API, auto-proxy, and all platform paths while skipping
 
 test("existing host routing cannot rewrite login or protected platform resources into /lab", async () => {
   const { default: proxy } = loadSource("proxy.ts", { "@clerk/nextjs/server": { clerkMiddleware: (handler) => handler } });
-  for (const pathname of ["/sign/login", "/sign/register", "/platform", "/platform/settings", "/api/webhooks/clerk"]) {
+  for (const pathname of ["/sign/login", "/sign/register", "/platform", "/platform/playground/franka-emika-panda/open-floor", "/platform/library/models", "/platform/research", "/api/webhooks/clerk"]) {
     const response = await proxy({}, new NextRequest(`https://lab.atomctrl.com${pathname}`, { headers: { host: "lab.atomctrl.com" } }));
     assert.equal(response.headers.get("x-middleware-rewrite"), null, pathname);
   }
@@ -77,11 +80,12 @@ test("signed-out platform requests stop before any user profile is read", async 
   const { default: Layout } = loadSource("app/platform/layout.tsx", {
     "@clerk/nextjs/server": { auth: signedOutAuth },
     "@/lib/sync-platform-user": { syncPlatformUser: async () => { throw new Error("must not sync before auth"); } },
+    '@/components/platform-mode': () => null,
   });
   await assert.rejects(Layout({ children: "private content" }), /unauthenticated/);
 });
 
-test("signed-in platform renders its mode toggle and account menu without profile content", async () => {
+test("platform entry redirects to the designated playground route", async () => {
   const auth = Object.assign(async () => ({ isAuthenticated: true }), { protect: async () => ({ userId: "user_test" }) });
   const { default: Page } = loadSource("app/platform/page.tsx", {
     "@clerk/nextjs/server": {
@@ -90,14 +94,9 @@ test("signed-in platform renders its mode toggle and account menu without profil
     },
     "@clerk/nextjs": { UserButton: () => React.createElement("span", null, "account menu") },
     "geist/font/pixel": { GeistPixelCircle: { className: "pixel" } },
+    'next/navigation': { redirect },
   });
-  const html = renderToStaticMarkup(await Page());
-  assert.doesNotMatch(html, /ada@example\.com/);
-  assert.doesNotMatch(html, /other@example\.com/);
-  assert.doesNotMatch(html, /Ada|Welcome|Account active/);
-  assert.match(html, /account menu/);
-  assert.match(html, /Playground/);
-  assert.match(html, /Research/);
+  await assert.rejects(Page(), /redirect:\/platform\/playground/);
 });
 
 for (const [route, component] of [["login", "SignIn"], ["register", "SignUp"]]) {
@@ -113,7 +112,8 @@ for (const [route, component] of [["login", "SignIn"], ["register", "SignUp"]]) 
     const form = (await loadSource(file, mocks).default()).props.children;
     assert.equal(form.props.path, `/sign/${route}`);
     assert.equal(form.props.routing, "path");
-    assert.equal(form.props.forceRedirectUrl, "/platform");
+    assert.equal(form.props.fallbackRedirectUrl, "/platform");
+    assert.equal(form.props.forceRedirectUrl, undefined, 'must respect the protected deep-link return URL');
     assert.equal(route === "login" ? form.props.signUpUrl : form.props.signInUrl, route === "login" ? "/sign/register" : "/sign/login");
   });
 }
@@ -180,7 +180,74 @@ test("platform layout synchronizes only its authenticated Clerk identity", async
   const { default: Layout } = loadSource("app/platform/layout.tsx", {
     "@clerk/nextjs/server": { auth: { protect: async () => ({ userId: "user_authenticated" }) } },
     "@/lib/sync-platform-user": { syncPlatformUser: async (id) => calls.push(id) },
+    '@/components/platform-mode': () => null,
   });
-  assert.equal(await Layout({ children: "workspace" }), "workspace");
+  assert.equal((await Layout({ children: "workspace" })).props.children.props.children, "workspace");
   assert.deepEqual(calls, ["user_authenticated"]);
+});
+
+test('workspace mode follows the route and the shared shell renders route content', () => {
+  let pathname = '/platform/playground/franka-emika-panda/open-floor';
+  const { PlatformMode } = loadSource('components/platform-mode.tsx', {
+    'next/navigation': { usePathname: () => pathname, useRouter: () => ({ push: () => {} }) },
+    '@clerk/nextjs': { UserButton: () => React.createElement('span', null, 'account menu') },
+    '@/components/playground-sidebar': { PlaygroundSidebar: () => null },
+  });
+  const playground = renderToStaticMarkup(React.createElement(PlatformMode, null, 'route content'));
+  assert.match(playground, /data-mode="playground"/);
+  assert.match(playground, /account menu/);
+  assert.match(playground, /route content/);
+  pathname = '/platform/research';
+  const research = renderToStaticMarkup(React.createElement(PlatformMode, null));
+  assert.match(research, /data-mode="research"/);
+});
+
+const privatePages = [
+  ['app/platform/playground/page.tsx', {}],
+  ['app/platform/playground/[robot]/page.tsx', { params: Promise.resolve({ robot: 'franka-emika-panda' }) }],
+  ['app/platform/playground/[robot]/[scenario]/page.tsx', { params: Promise.resolve({ robot: 'franka-emika-panda', scenario: 'open-floor' }), searchParams: Promise.resolve({}) }],
+  ['app/platform/research/page.tsx', {}],
+  ['app/platform/library/[section]/page.tsx', { params: Promise.resolve({ section: 'models' }) }],
+];
+for (const [file, props] of privatePages) {
+  test(`${file} rejects unauthenticated direct requests`, async () => {
+    const { default: Page } = loadSource(file, {
+      '@clerk/nextjs/server': { auth: signedOutAuth },
+      '@/components/simulation/playground-browser': () => null,
+      '@/components/simulation/simulation-session': () => null,
+    });
+    await assert.rejects(Page(props), /unauthenticated/);
+  });
+}
+
+test('robot and scenario routes validate parameters and restore URL scene props', async () => {
+  const mocks = {
+    '@clerk/nextjs/server': { auth: { protect: async () => ({ userId: 'user_test' }) } },
+    'next/navigation': { notFound: () => { throw new Error('not-found'); } },
+    '@/components/simulation/playground-browser': () => null,
+    '@/components/simulation/simulation-session': () => null,
+  };
+  const RobotPage = loadSource('app/platform/playground/[robot]/page.tsx', mocks).default;
+  await assert.rejects(RobotPage({ params: Promise.resolve({ robot: 'unknown' }) }), /not-found/);
+  const SimulationPage = loadSource('app/platform/playground/[robot]/[scenario]/page.tsx', mocks).default;
+  const params = { robot: 'franka-emika-panda', scenario: 'workbench' };
+  await assert.rejects(SimulationPage({ params: Promise.resolve({ ...params, scenario: 'unknown' }), searchParams: Promise.resolve({}) }), /not-found/);
+  const simulation = await SimulationPage({ params: Promise.resolve(params), searchParams: Promise.resolve({ props: 'sphere,block,sphere,unknown' }) });
+  assert.deepEqual(simulation.props.setup, { robotId: 'franka_emika_panda', environment: 'workbench', props: ['block', 'lemon'] });
+});
+
+test('every robot and scenario has an unambiguous canonical route', () => {
+  const { ROBOT_CATALOG } = loadSource('lib/simulation/panda.ts');
+  const { SCENARIOS, robotSlug, robotPath, findRobot, findScenario, simulationPath } = loadSource('lib/simulation/routes.ts');
+  assert.equal(new Set(ROBOT_CATALOG.map((robot) => robotSlug(robot.id))).size, ROBOT_CATALOG.length);
+  for (const robot of ROBOT_CATALOG) {
+    assert.equal(findRobot(robotSlug(robot.id)).id, robot.id);
+    assert.equal(robotPath(robot.id), `/platform/playground/${robotSlug(robot.id)}`);
+    for (const scenario of SCENARIOS) {
+      assert.equal(findScenario(scenario.slug).id, scenario.id);
+      assert.equal(simulationPath({ robotId: robot.id, environment: scenario.id, props: [] }), `${robotPath(robot.id)}/${scenario.slug}`);
+    }
+  }
+  assert.equal(simulationPath({ robotId: ROBOT_CATALOG[0].id, environment: 'ground', props: ['sphere', 'block', 'sphere', 'unknown'] }), `${robotPath(ROBOT_CATALOG[0].id)}/open-floor?props=block,lemon`);
+  assert.throws(() => simulationPath({ robotId: 'unknown', environment: 'ground', props: [] }), /Unknown simulation/);
 });

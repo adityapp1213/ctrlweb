@@ -3,11 +3,14 @@
 import { useCallback, useId, useState } from "react";
 import { UserButton } from "@clerk/nextjs";
 import { Menu } from "lucide-react";
+import { usePathname, useRouter } from 'next/navigation';
 import { PlaygroundSidebar } from "@/components/playground-sidebar";
 import styles from "@/app/platform/platform.module.css";
 
-export function PlatformMode() {
-  const [mode, setMode] = useState<"playground" | "research">("playground");
+export function PlatformMode({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const mode = pathname === '/platform/research' ? 'research' : 'playground';
   const groupId = useId();
   const [mobileOpen, setMobileOpen] = useState(false);
   const openSidebar = useCallback(() => {
@@ -32,7 +35,7 @@ export function PlatformMode() {
                 name={groupId}
                 value={value}
                 checked={mode === value}
-                onChange={() => { setMode(value); setMobileOpen(false); }}
+                onChange={() => { router.push(`/platform/${value}`); setMobileOpen(false); }}
                 aria-controls={`${groupId}-workspace`}
                 title={value === "playground" ? "Explore predefined environments" : "Build custom simulations"}
               />
@@ -42,7 +45,9 @@ export function PlatformMode() {
         </fieldset>
         <div className={styles.account}><UserButton /></div>
       </header>
-      <section id={`${groupId}-workspace`} className={styles.workspace} data-mode={mode} aria-label={`${mode === "playground" ? "Playground" : "Research"} workspace`} />
+      <section id={`${groupId}-workspace`} className={styles.workspace} data-mode={mode} aria-label={`${mode === "playground" ? "Playground" : "Research"} workspace`}>
+        {children}
+      </section>
       </div>
     </div>
   );

@@ -1,6 +1,107 @@
 
 # Atom ctrl ( redesign ) :)
 
+## Browser simulation
+
+Protected workspace routes:
+
+- `/platform` redirects to `/platform/playground`.
+- `/platform/playground` is the robot collection; `arms`, `environment`, and `q`
+  query parameters preserve filters and search.
+- `/platform/playground/[robot]` lists that robot's scenarios (hyphenated model ID).
+- `/platform/playground/[robot]/[scenario]` opens a simulation, e.g.
+  `/platform/playground/franka-emika-panda/open-floor`. Additional scene props
+  are encoded in `?props=block,lemon` so refresh restores the configuration.
+  `view=scene` and `view=policy` also restore the selected inspector view.
+- `/platform/research` is the research workspace.
+- `/platform/library/[section]` provides the existing library destinations;
+  models, modules, environments, and tasks are currently empty-state pages.
+
+Pages enforce Clerk authentication before rendering. The shared layout also
+checks authentication and synchronizes the signed-in profile. Navigation uses
+Next.js links and browser history; invalid models/scenarios return not found.
+Private routes are excluded from search-engine indexing. Clerk fallback
+redirects preserve an intended deep link after sign-in rather than forcing
+every sign-in to the platform entry page.
+
+The Playground opens as a searchable, bordered robot collection. Select a robot,
+then an environment card to open the simulation. Robot previews are original
+published images from MuJoCo Menagerie, downloaded unchanged with source links
+and per-model licenses under `public/previews/`. Regenerate them with
+`node scripts/fetch-robot-previews.mjs`. Scenario cards use the robot's published
+preview; their labels and object tags describe the scene that opens.
+
+The protected Playground offers 26 official MuJoCo Menagerie arm models from a
+pinned upstream revision. Panda's XML and 67 meshes are vendored unchanged;
+other models load on selection from the pinned official source and use the
+browser asset cache. Asset symlinks are resolved in the catalog. Each model links
+to its upstream source/license. The library is regenerated with
+`node scripts/prepare-robot-catalog.mjs` and checked with
+`node scripts/validate-robot-catalog.mjs` (network access; ignored local test cache).
+
+Physics uses the official single-threaded MuJoCo WASM engine in a worker.
+Three.js renders its actual visual meshes/transforms. Controls come from each
+model's actuator modes and ranges, including position, velocity, or effort.
+Effort-controlled models require a controller for position holding. This is
+browser CPU simulation with WebGL rendering; Google Cloud is not involved.
+
+- Joint edits never teleport coordinates. They start physics and apply
+  rate-limited actuator commands. Play/pause and reset remain available.
+- MuJoCo solves contacts continuously with implicit-fast integration, a timestep
+  of at most 1 ms, Newton solving, speculative contacts, 1 mm contact margins,
+  and stiffer contact impedance. Robot actuator gains, torque limits, inertias,
+  joint limits and non-adjacent self-collision geometry come from Menagerie.
+  Contacts do not rewind state or pause time. Native soft contacts can still
+  permit small residual overlap; the regression checks bound sampled overlap.
+- The Kinova adapter excludes only the mechanically joined base/shoulder shells
+  that overlap in its upstream home pose. Other upstream exclusions remain.
+  Scenes with an intersecting default pose settle through MuJoCo before the
+  initial frame, and reset restores that settled configuration.
+- Three presets (open floor, workbench, object sorting) reuse the original
+  Menagerie ALOHA table meshes/texture/collider and Panda calibration block,
+  plus robosuite can/lemon meshes, textures, and sorting-bin geometry.
+  Original files, licenses, and source links are under `public/environments/`.
+  `node scripts/fetch-environment-assets.mjs` re-fetches the pinned sources.
+  The unused robosuite Python controller files are attribution/reference
+  material; runtime controllers are the native Menagerie actuator definitions.
+- `workspace-profiles.json` contains measured robot-specific workspace layouts.
+  Bench variants change table XY dimensions, never robot dimensions. The floor
+  is below the table and fixed robot bases mount at the work surface. WXAI keeps
+  its original built-in table. Objects sit within the configured workspace.
+  Regenerate profiles with `node scripts/prepare-workspace-profiles.mjs` after
+  populating the catalog validation cache. Legacy sphere/tray links and saved
+  scenes normalize to the community lemon/bin assets.
+- The renderer preserves original mesh UVs and 2D textures. Collision-only
+  geometry stays hidden; the renderer does not create substitute robot meshes.
+- The inspector has Controls, Scene, and Python views. Scene configurations and
+  policy drafts can be explicitly saved/loaded in this browser, scoped to the
+  signed-in account. They are not yet stored in Neon or shared between devices.
+- Python policies run locally through Pyodide in a separate worker at up to
+  10 Hz. Define `policy(obs)` and return one target per actuator in the UI units.
+  Observations include time, positions, targets, home commands, and control
+  metadata. Results are checked, clamped, and passed through the same physics.
+  Policies currently support the Python standard library, not PyTorch or RL
+  training. Only code the user explicitly runs is executed.
+- Stop, reset, mode changes, and scene replacement terminate policy execution.
+  Initialization/step timeouts terminate an unresponsive policy worker. Hidden
+  browser tabs pause physics. Research mode unmounts the scene and frees workers
+  and graphics resources.
+
+`npm run dev` and `npm run build` prepare local MuJoCo and Python assets under
+`public/vendor/`. They also compile the unchanged default Panda to a cached MJB
+using MuJoCo. Bulk WASM filesystem writes avoid slow per-byte VFS transfer.
+Generated runtime assets and the validation cache are ignored by Git. Deployments
+must include generated public assets. Runtime licenses are preserved under
+`public/MUJOCO-LICENSE.txt` and `public/PYODIDE-LICENSE.txt`; Panda's own license
+is under `public/models/franka-emika-panda/`.
+
+`npm run test:simulation` covers real-WASM actuator motion, no-teleport controls,
+continuous native contacts, gripper coupling, sourced props and UVs, binary
+round-trip, and reset. The catalog validator checks all three presets for every
+robot; `node scripts/validate-robot-motion.mjs` stress-tests joint-limit targets
+against native floor/self contacts using the same downloaded validation cache.
+`node scripts/fetch-panda.mjs` re-fetches the pinned default source assets.
+
 ## Authentication
 
 Clerk is configured through `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and

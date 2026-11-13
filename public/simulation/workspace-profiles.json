@@ -1,0 +1,340 @@
+{
+  "franka_emika_panda": {
+    "reach": 1.2123,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.242,
+      0
+    ],
+    "objectX": 0.4243,
+    "objectY": 0
+  },
+  "franka_fr3": {
+    "reach": 1.2123,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.242,
+      0
+    ],
+    "objectX": 0.4243,
+    "objectY": 0
+  },
+  "franka_fr3_v2": {
+    "reach": 1.2123,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.242,
+      0
+    ],
+    "objectX": 0.4243,
+    "objectY": 0
+  },
+  "franka_fr3_duo": {
+    "reach": 1.2922,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.6,
+    "tableWidth": 1,
+    "center": [
+      0.2584,
+      0
+    ],
+    "objectX": 0.4523,
+    "objectY": 0
+  },
+  "universal_robots_ur5e": {
+    "reach": 1.3647,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.242,
+      0
+    ],
+    "objectX": 0.4776,
+    "objectY": 0
+  },
+  "universal_robots_ur10e": {
+    "reach": 1.8111,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.6,
+    "tableWidth": 1,
+    "center": [
+      0.32,
+      0
+    ],
+    "objectX": 0.6339,
+    "objectY": 0
+  },
+  "ufactory_xarm7": {
+    "reach": 1.0869,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.2174,
+      0
+    ],
+    "objectX": 0.3804,
+    "objectY": 0
+  },
+  "ufactory_lite6": {
+    "reach": 0.7499,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.15,
+      0
+    ],
+    "objectX": 0.2625,
+    "objectY": 0
+  },
+  "kinova_gen3": {
+    "reach": 1.1263,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.2253,
+      0
+    ],
+    "objectX": 0.3942,
+    "objectY": 0
+  },
+  "kuka_iiwa_14": {
+    "reach": 1.261,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.242,
+      0
+    ],
+    "objectX": 0.4413,
+    "objectY": 0
+  },
+  "rethink_robotics_sawyer": {
+    "reach": 1.4054,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.6,
+    "tableWidth": 1,
+    "center": [
+      0.2811,
+      0
+    ],
+    "objectX": 0.4919,
+    "objectY": 0
+  },
+  "agilex_piper": {
+    "reach": 0.8858,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.1772,
+      0
+    ],
+    "objectX": 0.31,
+    "objectY": 0
+  },
+  "arx_l5": {
+    "reach": 0.9125,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.1825,
+      0
+    ],
+    "objectX": 0.3194,
+    "objectY": 0
+  },
+  "fanuc_crx5ia": {
+    "reach": 1.155,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.231,
+      0
+    ],
+    "objectX": 0.4042,
+    "objectY": 0
+  },
+  "flexiv_rizon4": {
+    "reach": 1.2913,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.242,
+      0
+    ],
+    "objectX": 0.452,
+    "objectY": 0
+  },
+  "flexiv_rizon4s": {
+    "reach": 1.2913,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.242,
+      0
+    ],
+    "objectX": 0.452,
+    "objectY": 0
+  },
+  "unitree_z1": {
+    "reach": 0.798,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.1596,
+      0
+    ],
+    "objectX": 0.2793,
+    "objectY": 0
+  },
+  "trossen_vx300s": {
+    "reach": 0.8713,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.1743,
+      0
+    ],
+    "objectX": 0.305,
+    "objectY": 0
+  },
+  "trossen_wx250s": {
+    "reach": 0.7466,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.1493,
+      0
+    ],
+    "objectX": 0.2613,
+    "objectY": 0
+  },
+  "trossen_wxai": {
+    "reach": 0.8489,
+    "floorZ": -0.75,
+    "nativeTable": true,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.1698,
+      -0.019
+    ],
+    "objectX": 0.2971,
+    "objectY": -0.019
+  },
+  "robotstudio_so101": {
+    "reach": 0.4892,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 0.65,
+    "tableWidth": 0.5,
+    "center": [
+      0.0978,
+      0
+    ],
+    "objectX": 0.1712,
+    "objectY": 0
+  },
+  "trs_so_arm100": {
+    "reach": 0.4979,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 0.65,
+    "tableWidth": 0.5,
+    "center": [
+      0.0996,
+      0
+    ],
+    "objectX": 0.1743,
+    "objectY": 0
+  },
+  "low_cost_robot_arm": {
+    "reach": 0.3464,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 0.65,
+    "tableWidth": 0.5,
+    "center": [
+      0.0693,
+      0
+    ],
+    "objectX": 0.1212,
+    "objectY": 0
+  },
+  "i2rt_yam": {
+    "reach": 0.8428,
+    "floorZ": -0.01,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.1686,
+      0
+    ],
+    "objectX": 0.295,
+    "objectY": 0
+  },
+  "robotis_omy_3m": {
+    "reach": 1.0194,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.2039,
+      0
+    ],
+    "objectX": 0.3568,
+    "objectY": 0
+  },
+  "seeed_rebot_devarm": {
+    "reach": 1.0007,
+    "floorZ": 0,
+    "nativeTable": false,
+    "tableLength": 1.21,
+    "tableWidth": 0.76,
+    "center": [
+      0.2001,
+      0
+    ],
+    "objectX": 0.3502,
+    "objectY": 0
+  }
+}

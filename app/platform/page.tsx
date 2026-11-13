@@ -1,13 +1,9 @@
-import { PlatformMode } from "@/components/platform-mode";
 import { auth } from "@clerk/nextjs/server";
-import styles from "./platform.module.css";
+import { redirect } from 'next/navigation';
+import { PLAYGROUND_PATH } from '@/lib/simulation/routes';
 
 export default async function PlatformPage() {
   await auth.protect();
 
-  return (
-    <main className={styles.page}>
-      <PlatformMode />
-    </main>
-  );
+  redirect(PLAYGROUND_PATH);
 }

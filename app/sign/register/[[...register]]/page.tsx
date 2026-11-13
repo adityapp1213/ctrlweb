@@ -17,8 +17,8 @@ export default async function RegisterPage() {
         routing="path"
         path="/sign/register"
         signInUrl="/sign/login"
-        forceRedirectUrl="/platform"
-        signInForceRedirectUrl="/platform"
+        fallbackRedirectUrl="/platform"
+        signInFallbackRedirectUrl="/platform"
         appearance={authAppearance}
       />
     </Suspense>

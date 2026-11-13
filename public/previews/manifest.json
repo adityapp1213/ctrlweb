@@ -1,0 +1,158 @@
+[
+  {
+    "robotId": "franka_emika_panda",
+    "src": "/previews/franka_emika_panda.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/franka_emika_panda/panda.png",
+    "license": "/previews/franka_emika_panda.LICENSE.txt"
+  },
+  {
+    "robotId": "franka_fr3",
+    "src": "/previews/franka_fr3.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/franka_fr3/fr3.png",
+    "license": "/previews/franka_fr3.LICENSE.txt"
+  },
+  {
+    "robotId": "franka_fr3_v2",
+    "src": "/previews/franka_fr3_v2.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/franka_fr3_v2/fr3v2.png",
+    "license": "/previews/franka_fr3_v2.LICENSE.txt"
+  },
+  {
+    "robotId": "franka_fr3_duo",
+    "src": "/previews/franka_fr3_duo.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/franka_fr3_duo/fr3_duo.png",
+    "license": "/previews/franka_fr3_duo.LICENSE.txt"
+  },
+  {
+    "robotId": "universal_robots_ur5e",
+    "src": "/previews/universal_robots_ur5e.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/universal_robots_ur5e/ur5e.png",
+    "license": "/previews/universal_robots_ur5e.LICENSE.txt"
+  },
+  {
+    "robotId": "universal_robots_ur10e",
+    "src": "/previews/universal_robots_ur10e.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/universal_robots_ur10e/ur10e.png",
+    "license": "/previews/universal_robots_ur10e.LICENSE.txt"
+  },
+  {
+    "robotId": "ufactory_xarm7",
+    "src": "/previews/ufactory_xarm7.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/ufactory_xarm7/xarm7.png",
+    "license": "/previews/ufactory_xarm7.LICENSE.txt"
+  },
+  {
+    "robotId": "ufactory_lite6",
+    "src": "/previews/ufactory_lite6.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/ufactory_lite6/lite6.png",
+    "license": "/previews/ufactory_lite6.LICENSE.txt"
+  },
+  {
+    "robotId": "kinova_gen3",
+    "src": "/previews/kinova_gen3.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/kinova_gen3/gen3.png",
+    "license": "/previews/kinova_gen3.LICENSE.txt"
+  },
+  {
+    "robotId": "kuka_iiwa_14",
+    "src": "/previews/kuka_iiwa_14.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/kuka_iiwa_14/iiwa_14.png",
+    "license": "/previews/kuka_iiwa_14.LICENSE.txt"
+  },
+  {
+    "robotId": "rethink_robotics_sawyer",
+    "src": "/previews/rethink_robotics_sawyer.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/rethink_robotics_sawyer/sawyer.png",
+    "license": "/previews/rethink_robotics_sawyer.LICENSE.txt"
+  },
+  {
+    "robotId": "agilex_piper",
+    "src": "/previews/agilex_piper.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/agilex_piper/piper.png",
+    "license": "/previews/agilex_piper.LICENSE.txt"
+  },
+  {
+    "robotId": "arx_l5",
+    "src": "/previews/arx_l5.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/arx_l5/arx_l5.png",
+    "license": "/previews/arx_l5.LICENSE.txt"
+  },
+  {
+    "robotId": "fanuc_crx5ia",
+    "src": "/previews/fanuc_crx5ia.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/fanuc_crx5ia/crx5ia.png",
+    "license": "/previews/fanuc_crx5ia.LICENSE.txt"
+  },
+  {
+    "robotId": "flexiv_rizon4",
+    "src": "/previews/flexiv_rizon4.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/flexiv_rizon4/flexiv_rizon4.png",
+    "license": "/previews/flexiv_rizon4.LICENSE.txt"
+  },
+  {
+    "robotId": "flexiv_rizon4s",
+    "src": "/previews/flexiv_rizon4s.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/flexiv_rizon4s/flexiv_rizon4s.png",
+    "license": "/previews/flexiv_rizon4s.LICENSE.txt"
+  },
+  {
+    "robotId": "unitree_z1",
+    "src": "/previews/unitree_z1.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/unitree_z1/z1.png",
+    "license": "/previews/unitree_z1.LICENSE.txt"
+  },
+  {
+    "robotId": "trossen_vx300s",
+    "src": "/previews/trossen_vx300s.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/trossen_vx300s/vx300s.png",
+    "license": "/previews/trossen_vx300s.LICENSE.txt"
+  },
+  {
+    "robotId": "trossen_wx250s",
+    "src": "/previews/trossen_wx250s.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/trossen_wx250s/wx250s.png",
+    "license": "/previews/trossen_wx250s.LICENSE.txt"
+  },
+  {
+    "robotId": "trossen_wxai",
+    "src": "/previews/trossen_wxai.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/trossen_wxai/trossen_wxai.png",
+    "license": "/previews/trossen_wxai.LICENSE.txt"
+  },
+  {
+    "robotId": "robotstudio_so101",
+    "src": "/previews/robotstudio_so101.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/robotstudio_so101/so101.png",
+    "license": "/previews/robotstudio_so101.LICENSE.txt"
+  },
+  {
+    "robotId": "trs_so_arm100",
+    "src": "/previews/trs_so_arm100.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/trs_so_arm100/so_arm100.png",
+    "license": "/previews/trs_so_arm100.LICENSE.txt"
+  },
+  {
+    "robotId": "low_cost_robot_arm",
+    "src": "/previews/low_cost_robot_arm.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/low_cost_robot_arm/low_cost_robot_arm.png",
+    "license": "/previews/low_cost_robot_arm.LICENSE.txt"
+  },
+  {
+    "robotId": "i2rt_yam",
+    "src": "/previews/i2rt_yam.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/i2rt_yam/yam.png",
+    "license": "/previews/i2rt_yam.LICENSE.txt"
+  },
+  {
+    "robotId": "robotis_omy_3m",
+    "src": "/previews/robotis_omy_3m.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/robotis_omy_3m/omy_3m.png",
+    "license": "/previews/robotis_omy_3m.LICENSE.txt"
+  },
+  {
+    "robotId": "seeed_rebot_devarm",
+    "src": "/previews/seeed_rebot_devarm.png",
+    "source": "https://github.com/google-deepmind/mujoco_menagerie/blob/370c43965323c0944b433b202aac5058b5f907a9/seeed_rebot_devarm/seeed_rebot_devarm.png",
+    "license": "/previews/seeed_rebot_devarm.LICENSE.txt"
+  }
+]

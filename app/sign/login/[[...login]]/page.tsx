@@ -17,8 +17,8 @@ export default async function LoginPage() {
         routing="path"
         path="/sign/login"
         signUpUrl="/sign/register"
-        forceRedirectUrl="/platform"
-        signUpForceRedirectUrl="/platform"
+        fallbackRedirectUrl="/platform"
+        signUpFallbackRedirectUrl="/platform"
         appearance={authAppearance}
         withSignUp={false}
       />

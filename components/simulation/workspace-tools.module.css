@@ -1,0 +1,17 @@
+.panelHeading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.panelHeading h2 { margin: 0; color: #ddd; font-size: 13px; font-weight: 500; }
+.panelHeading span { color: #777; font-size: 10px; }
+.help { margin: 12px 0; color: #888891; font-size: 11px; line-height: 1.7; }
+.help code { color: #c3c3cc; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.actions button { padding: 7px 11px; border: 1px solid #3b3b42; border-radius: 5px; background: #222226; color: #ccc; font: inherit; font-size: 11px; cursor: pointer; }
+.actions button:disabled { opacity: .4; cursor: not-allowed; }
+.console { max-height: 180px; overflow: auto; padding: 12px; border: 1px solid #2e2e34; border-radius: 5px; background: #101012; color: #a6a6b1; font-size: 10px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.policy { min-width: 0; }
+.policy :global(.cm-editor) { border: 1px solid #33333b; border-radius: 5px; overflow: hidden; font-size: 11px; }
+.policy :global(.cm-scroller) { font-family: 'Courier New', monospace; }
+.field { display: flex; flex-direction: column; gap: 7px; margin: 18px 0; color: #aaaab3; font-size: 11px; }
+.field select { min-width: 0; padding: 8px; border: 1px solid #3b3b42; border-radius: 5px; background: #202024; color: #ddd; font: inherit; }
+.prop { display: flex; align-items: center; gap: 9px; margin: 12px 0; color: #aaaab3; font-size: 12px; }
+.prop input { accent-color: #ccc; }
+.notice { padding: 10px 12px; border: 1px solid #49494f; border-radius: 6px; color: #c2c2ca; font-size: 11px; line-height: 1.6; }
