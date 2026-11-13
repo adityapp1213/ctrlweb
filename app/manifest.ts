@@ -16,8 +16,7 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/png",
       },
       {
-        src: "/apple-icon",
-        sizes: "180x180",
+        src: "/assets/atom-mark-favicon.png",
         type: "image/png",
       },
     ],

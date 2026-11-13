@@ -20,10 +20,12 @@ export function SiteLoaderScreen({
         "fixed inset-0 z-[200] flex items-center justify-center bg-white px-6 transition-opacity duration-500 ease-out",
         visible ? "opacity-100" : "pointer-events-none opacity-0",
       ].join(" ")}
+      role="status"
       aria-live="polite"
       aria-busy={visible}
     >
       <Spin />
+      <span className="sr-only">Loading page</span>
     </div>
   );
 }

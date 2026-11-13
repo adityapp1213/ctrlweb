@@ -120,7 +120,7 @@ export function createArticleJsonLd(article: ArticleSeo) {
     author: {
       "@type": "Person",
       name: FOUNDER_NAME,
-      url: `${SITE_URL}/#about-us`,
+      url: `${SITE_URL}/team#aditya`,
     },
     publisher: {
       "@id": `${SITE_URL}/#organization`,

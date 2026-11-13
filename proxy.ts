@@ -1,37 +1,19 @@
 import { NextResponse, type NextRequest } from "next/server";
-
-const LAB_HOST = "lab.atomctrl.com";
-
-function getHostname(request: NextRequest) {
-  return (
-    request.headers.get("x-forwarded-host") ??
-    request.headers.get("host") ??
-    ""
-  )
-    .split(",")[0]
-    .split(":")[0]
-    .trim()
-    .toLowerCase();
-}
+import { SITE_URL } from "@/lib/seo";
 
 export function proxy(request: NextRequest) {
-  const hostname = getHostname(request);
+  // There are no /lab routes in this app. Send legacy lab URLs to the
+  // corresponding public page instead of rewriting them to a missing route.
   const url = request.nextUrl.clone();
-  const { pathname } = url;
-
-  if (pathname.includes(".")) {
-    return NextResponse.next();
+  const hostname = (request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? url.host)
+    .split(",")[0].trim().split(":")[0].toLowerCase();
+  const isLabPath = url.pathname === "/lab" || url.pathname.startsWith("/lab/");
+  if (hostname === "lab.atomctrl.com" || isLabPath) {
+    const target = new URL(SITE_URL);
+    target.pathname = isLabPath ? url.pathname.slice(4) || "/" : url.pathname;
+    target.search = url.search;
+    return NextResponse.redirect(target);
   }
-
-  if (hostname === LAB_HOST && !pathname.startsWith("/lab")) {
-    url.pathname = pathname === "/" ? "/lab" : `/lab${pathname}`;
-    return NextResponse.rewrite(url);
-  }
-
-  if (hostname !== LAB_HOST && pathname.startsWith("/lab")) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
   return NextResponse.next();
 }
 

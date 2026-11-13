@@ -35,12 +35,11 @@ export function MoversCanvas() {
       return;
     }
 
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    const isMobile = window.matchMedia("(max-width: 700px)").matches;
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    canvas.width = CANVAS_WIDTH * pixelRatio;
-    canvas.height = CANVAS_HEIGHT * pixelRatio;
-    context.scale(pixelRatio, pixelRatio);
+    const mobileQuery = window.matchMedia("(max-width: 700px)");
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let visible = false;
+    let animationFrame = 0;
+    let lastFrame = 0;
 
     const movers: Mover[] = Array.from({ length: MOVER_COUNT }, () => ({
       x: MOVER_SIZE + Math.random() * (CANVAS_WIDTH - MOVER_SIZE * 2),
@@ -59,6 +58,7 @@ export function MoversCanvas() {
       pointer.x = ((event.clientX - bounds.left) / bounds.width) * CANVAS_WIDTH;
       pointer.y = ((event.clientY - bounds.top) / bounds.height) * CANVAS_HEIGHT;
       pointer.active = true;
+      startAnimation();
     };
 
     const clearPointer = () => {
@@ -68,21 +68,19 @@ export function MoversCanvas() {
     canvas.addEventListener("pointermove", updatePointer);
     canvas.addEventListener("pointerleave", clearPointer);
 
-    let animationFrame = 0;
-
-    const draw = () => {
+    const draw = (advance = true, delta = 1) => {
       const time = performance.now() / 1000;
       context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
       context.fillStyle = "#000000";
 
       for (const mover of movers) {
-        if (isMobile && !prefersReducedMotion) {
+        if (advance && mobileQuery.matches && !motionQuery.matches) {
           // Mobile gets a quiet preset flow so the component is alive without touch.
           mover.accelerationX = Math.sin(time * 0.65 + mover.y * 0.012) * 0.045;
           mover.accelerationY = Math.cos(time * 0.55 + mover.x * 0.008) * 0.045;
           mover.velocityX *= 0.995;
           mover.velocityY *= 0.995;
-        } else if (pointer.active) {
+        } else if (advance && pointer.active && !motionQuery.matches) {
           const directionX = pointer.x - mover.x;
           const directionY = pointer.y - mover.y;
           const distance = Math.hypot(directionX, directionY);
@@ -115,8 +113,10 @@ export function MoversCanvas() {
           mover.velocityY = (mover.velocityY / speed) * TOP_SPEED;
         }
 
-        mover.x += mover.velocityX;
-        mover.y += mover.velocityY;
+        if (advance) {
+          mover.x += mover.velocityX * delta;
+          mover.y += mover.velocityY * delta;
+        }
 
         if (mover.x < MOVER_SIZE / 2 || mover.x > CANVAS_WIDTH - MOVER_SIZE / 2) {
           mover.velocityX *= -1;
@@ -135,26 +135,96 @@ export function MoversCanvas() {
         context.fill();
       }
 
-      animationFrame = window.requestAnimationFrame(draw);
     };
 
-    draw();
+    const stopAnimation = () => {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      lastFrame = 0;
+    };
+
+    const tick = (timestamp: number) => {
+      animationFrame = 0;
+      if (!visible || document.hidden || motionQuery.matches) return;
+      const delta = lastFrame ? Math.min((timestamp - lastFrame) / (1000 / 60), 2) : 1;
+      lastFrame = timestamp;
+      draw(true, delta);
+      const moving = movers.some((mover) => Math.abs(mover.velocityX) + Math.abs(mover.velocityY) > 0.02);
+      if (mobileQuery.matches || pointer.active || moving) {
+        animationFrame = window.requestAnimationFrame(tick);
+      } else {
+        lastFrame = 0;
+      }
+    };
+
+    function startAnimation() {
+      if (visible && !document.hidden && !motionQuery.matches && !animationFrame) {
+        animationFrame = window.requestAnimationFrame(tick);
+      }
+    }
+
+    const resizeCanvas = () => {
+      const bounds = canvas.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const width = Math.max(1, Math.round(bounds.width * ratio));
+      const height = Math.max(1, Math.round(bounds.height * ratio));
+      if (canvas.width === width && canvas.height === height) return;
+      canvas.width = width;
+      canvas.height = height;
+      context.setTransform(canvas.width / CANVAS_WIDTH, 0, 0, canvas.height / CANVAS_HEIGHT, 0, 0);
+      draw(false);
+      startAnimation();
+    };
+    const syncAnimation = () => {
+      stopAnimation();
+      pointer.active = false;
+      if (motionQuery.matches) {
+        movers.forEach((mover) => {
+          mover.velocityX = 0;
+          mover.velocityY = 0;
+        });
+        draw(false);
+      }
+      startAnimation();
+    };
+    const intersection = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) startAnimation();
+      else stopAnimation();
+    });
+    const resize = new ResizeObserver(resizeCanvas);
+    intersection.observe(canvas);
+    resize.observe(canvas);
+    motionQuery.addEventListener("change", syncAnimation);
+    mobileQuery.addEventListener("change", syncAnimation);
+    document.addEventListener("visibilitychange", syncAnimation);
+    resizeCanvas();
 
     return () => {
-      window.cancelAnimationFrame(animationFrame);
+      stopAnimation();
+      intersection.disconnect();
+      resize.disconnect();
+      motionQuery.removeEventListener("change", syncAnimation);
+      mobileQuery.removeEventListener("change", syncAnimation);
+      document.removeEventListener("visibilitychange", syncAnimation);
       canvas.removeEventListener("pointermove", updatePointer);
       canvas.removeEventListener("pointerleave", clearPointer);
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="simple-home-section-image"
-      width={CANVAS_WIDTH}
-      height={CANVAS_HEIGHT}
-      aria-label="Interactive field of moving particles"
-      role="img"
-    />
+    <div
+      className="simple-home-section-image simple-home-particles"
+      style={{ aspectRatio: `${CANVAS_WIDTH} / ${CANVAS_HEIGHT}` }}
+    >
+      <canvas
+        ref={canvasRef}
+        className="simple-home-particle-canvas"
+        width={CANVAS_WIDTH}
+        height={CANVAS_HEIGHT}
+        aria-label="Interactive field of moving particles"
+        role="img"
+      />
+    </div>
   );
 }

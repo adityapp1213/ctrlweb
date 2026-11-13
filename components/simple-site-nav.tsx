@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { GeistPixelCircle } from "geist/font/pixel";
 import { Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { CONTACT_URL } from "@/lib/seo";
 
 const navItems = [
@@ -13,15 +13,19 @@ const navItems = [
 ];
 
 export function SimpleSiteNav({ active }: { active: string }) {
+  const menuId = useId();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!menuOpen) return;
 
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
     };
 
     document.addEventListener("keydown", closeOnEscape);
@@ -45,10 +49,16 @@ export function SimpleSiteNav({ active }: { active: string }) {
   }, [menuOpen]);
 
   return (
-    <aside className="simple-site-nav" aria-label="Main navigation">
-      <div className={`simple-site-nav-brand ${GeistPixelCircle.className}`}>
+    <aside
+      className="simple-site-nav"
+      aria-label="Main navigation"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false);
+      }}
+    >
+      <Link href="/" aria-label="atom ctrl home" className={`simple-site-nav-brand ${GeistPixelCircle.className}`}>
         atom
-      </div>
+      </Link>
       <nav>
         <ul className="simple-site-links">
           {navItems.map((item) => (
@@ -95,17 +105,17 @@ export function SimpleSiteNav({ active }: { active: string }) {
         type="button"
         aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
         aria-expanded={menuOpen}
+        aria-controls={menuId}
         onClick={() => setMenuOpen((open) => !open)}
       >
         <Menu className="simple-site-mobile-menu-icon" aria-hidden="true" />
         <X className="simple-site-mobile-menu-close-icon" aria-hidden="true" />
       </button>
       {menuOpen ? (
-        <div
+        <nav
+          id={menuId}
           ref={menuRef}
           className="simple-site-mobile-menu"
-          role="dialog"
-          aria-modal="true"
           aria-label="Navigation menu"
         >
           <div className="simple-site-mobile-menu-links">
@@ -119,8 +129,9 @@ export function SimpleSiteNav({ active }: { active: string }) {
                 {item.label}
               </Link>
             ))}
+            <a href={CONTACT_URL}>Let&apos;s talk</a>
           </div>
-        </div>
+        </nav>
       ) : null}
     </aside>
   );

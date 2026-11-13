@@ -1,52 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const processSteps = [
-  {
-    number: "01",
-    title: "WAM-0.1 dataset",
-    description:
-      "A custom 150 GB robosuite-based dataset built for training H-JEPA to predict action and change.",
-    image: "/assets/blog-cards/5.2.png",
-    alt: "A simulated robotics environment for the WAM-0.1 dataset",
-    href: "/research/wam-0-1-dataset",
-  },
-  {
-    number: "02",
-    title: "Monarch",
-    description:
-      "A thought-grounded multimodal architecture for memory, reasoning, and persistent state.",
-    image: "/assets/blog-cards/1.png",
-    alt: "A landscape moving past a train window",
-    href: "/research/monarch",
-  },
-  {
-    number: "03",
-    title: "Interaction system",
-    description:
-      "A real-time voice architecture for conversations that understand while they unfold.",
-    image: "/assets/blog-cards/2.2.png",
-    alt: "A blurred landscape in motion",
-    href: "/research/interaction-systems",
-  },
-  {
-    number: "04",
-    title: "Godel model",
-    description:
-      "A hybrid local-cloud language model architecture that routes work where it fits.",
-    image: "/assets/blog-cards/3.png",
-    alt: "A landscape with red birds moving through the sky",
-    href: "/research/godel-model",
-  },
-  {
-    number: "05",
-    title: "Scaling synthetic data",
-    description: "A practical study of turning raw web text into cleaner training data.",
-    image: "/assets/blog-cards/4.png",
-    alt: "Trees moving past a train window",
-    href: "/research/scaling-synthetic-data",
-  },
-];
+import { blogArticles, researchOrder } from "@/lib/research";
 
 export function SimpleResearchProcess() {
   return (
@@ -60,26 +15,30 @@ export function SimpleResearchProcess() {
       </div>
 
       <div className="simple-research-process-steps">
-        {processSteps.map((step) => (
-          <Link
-            className="simple-research-process-step"
-            href={step.href}
-            key={step.number}
-            aria-label={`${step.title} blog`}
-          >
-            <div className="simple-research-process-copy">
-              <h2>{step.title}</h2>
-              <p>{step.description}</p>
-            </div>
-            <Image
-              className="simple-research-process-image"
-              src={step.image}
-              alt={step.alt}
-              width={220}
-              height={124}
-            />
-          </Link>
-        ))}
+        {researchOrder.map((slug) => {
+          const step = blogArticles[slug];
+          return (
+            <Link
+              className="simple-research-process-step"
+              href={step.seo.path}
+              key={slug}
+              aria-label={`${step.label} research article`}
+            >
+              <div className="simple-research-process-copy">
+                <h2>{step.label}</h2>
+                <p>{step.summary}</p>
+              </div>
+              <Image
+                className="simple-research-process-image"
+                src={step.heroImageSrc}
+                alt={step.heroImageAlt}
+                width={220}
+                height={124}
+                sizes="(max-width: 700px) calc(100vw - 2.5rem), 220px"
+              />
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

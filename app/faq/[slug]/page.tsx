@@ -5,7 +5,7 @@ import { SimpleSiteCta } from "@/components/simple-site-cta";
 import { SimpleSiteFooter } from "@/components/simple-site-footer";
 import { SimpleSiteNav } from "@/components/simple-site-nav";
 import { faqItems, getFaqItem } from "@/lib/faq";
-import { absoluteUrl, createPageMetadata } from "@/lib/seo";
+import { absoluteUrl, createPageMetadata, serializeJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return faqItems.map((item) => ({ slug: item.slug }));
@@ -47,7 +47,7 @@ export default async function FaqPage({ params }: { params: Promise<{ slug: stri
             <p className="simple-site-number">FAQ</p>
             <h1>{item.title}</h1>
             <p className="faq-page-answer">{item.answer}</p>
-            <Link className="simple-site-text-link" href="/">
+            <Link className="simple-site-text-link" href={`/#${item.slug}`}>
               back to the questions <span aria-hidden="true" />
             </Link>
           </article>
@@ -55,7 +55,7 @@ export default async function FaqPage({ params }: { params: Promise<{ slug: stri
         <SimpleSiteCta />
       </main>
       <SimpleSiteFooter />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
     </div>
   );
 }

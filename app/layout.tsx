@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { SitePreloader } from "@/components/site-preloader";
 import {
   FOUNDER_NAME,
   serializeJsonLd,
@@ -8,7 +7,7 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/seo";
-import { instrumentSerif, monaSans, shadowsIntoLight } from "./fonts";
+import { instrumentSerif, monaSans } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
     "robot control",
     "Project Monarch",
   ],
-  authors: [{ name: FOUNDER_NAME, url: `${SITE_URL}/#about-us` }],
+  authors: [{ name: FOUNDER_NAME, url: `${SITE_URL}/team#aditya` }],
   creator: FOUNDER_NAME,
   publisher: SITE_NAME,
   category: "ai research",
@@ -94,7 +93,7 @@ const siteJsonLd = {
       founder: {
         "@type": "Person",
         name: FOUNDER_NAME,
-        url: `${SITE_URL}/#about-us`,
+        url: `${SITE_URL}/team#aditya`,
       },
       sameAs: [
         "https://www.linkedin.com/in/aditya-prasad-panigrahi/",
@@ -134,7 +133,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${monaSans.variable} ${instrumentSerif.variable} ${shadowsIntoLight.variable} ${monaSans.className} h-full bg-white antialiased`}
+      className={`${monaSans.variable} ${instrumentSerif.variable} ${monaSans.className} h-full bg-white antialiased`}
     >
       <head>
         <link rel="alternate" type="text/plain" href="/llms.txt" title="atom ctrl llm index" />
@@ -144,7 +143,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full bg-white text-black">
-        <SitePreloader>{children}</SitePreloader>
+        {children}
         <Analytics />
       </body>
     </html>
