@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { faqItems } from "@/lib/faq";
+import { blogArticles, researchOrder } from "@/lib/research";
 import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -22,36 +23,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.85,
     },
-    {
-      url: `${SITE_URL}/research/monarch`,
-      lastModified: "2026-07-04",
-      changeFrequency: "monthly",
-      priority: 0.75,
-    },
-    {
-      url: `${SITE_URL}/research/interaction-systems`,
-      lastModified: "2026-07-04",
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/research/godel-model`,
-      lastModified: "2026-07-04",
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/research/scaling-synthetic-data`,
-      lastModified: "2026-07-04",
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/research/wam-0-1-dataset`,
-      lastModified: "2026-10-25",
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    ...researchOrder.map((slug) => {
+      const { seo } = blogArticles[slug];
+      return {
+        url: `${SITE_URL}${seo.path}`,
+        lastModified: seo.dateModified ?? seo.datePublished,
+        changeFrequency: "monthly" as const,
+        priority: 0.75,
+      };
+    }),
     ...faqItems.map((item) => ({
       url: `${SITE_URL}/faq/${item.slug}`,
       lastModified: "2026-07-04",

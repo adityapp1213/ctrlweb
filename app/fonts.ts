@@ -22,11 +22,3 @@ export const instrumentSerif = localFont({
   display: "swap",
   variable: "--font-instrument-serif",
 });
-
-export const shadowsIntoLight = localFont({
-  src: "../public/fonts/ShadowsIntoLight/shadows-into-light-v22.ttf",
-  display: "swap",
-  weight: "400",
-  style: "normal",
-  variable: "--font-shadows-into-light",
-});

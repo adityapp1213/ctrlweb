@@ -1,17 +1,7 @@
-"use client";
-
 import Image from "next/image";
-import NumberFlow from "@number-flow/react";
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import { useRef, useState } from "react";
 import type { BlogArticle } from "@/lib/blog-article";
 import { BlogBody } from "./blog-body";
+import { BlogReadingProgress } from "./blog-reading-progress";
 import { BlogToc } from "./blog-toc";
 
 export function BlogContent({
@@ -33,47 +23,11 @@ export function BlogContent({
     tone: "rose" | "blue" | "teal" | "amber";
   }>;
 }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [progressPercent, setProgressPercent] = useState(0);
-
-  const { scrollYProgress: loaderProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 92%", "end 12%"],
-  });
-
-  const clampedLoaderProgress = useTransform(loaderProgress, (value) =>
-    Math.min(Math.max(value, 0), 1),
-  );
-  const progressAsPercent = useTransform(clampedLoaderProgress, (value) =>
-    Math.round(value * 100),
-  );
-
-  useMotionValueEvent(progressAsPercent, "change", (value) => {
-    setProgressPercent(value);
-  });
-  const smoothProgress = useSpring(clampedLoaderProgress, {
-    damping: 28,
-    stiffness: 110,
-    mass: 0.75,
-  });
-  const loaderOpacity = useTransform(
-    clampedLoaderProgress,
-    [0, 0.035, 0.965, 1],
-    [0, 1, 1, 0],
-  );
-  const smoothLoaderOpacity = useSpring(loaderOpacity, {
-    damping: 30,
-    stiffness: 120,
-    mass: 0.7,
-  });
-
-  const svgRadius = 18;
-  const circumference = 2 * Math.PI * svgRadius;
   const isSvgHero = heroImageSrc.toLowerCase().endsWith(".svg");
 
   return (
     <section
-      ref={sectionRef}
+      id="research-article"
       className="simple-blog-content relative mx-auto w-full px-4 pb-16 sm:px-6 lg:px-0 lg:pb-24"
     >
       <div className="mx-auto max-w-4xl text-center">
@@ -93,7 +47,8 @@ export function BlogContent({
           alt={heroImageAlt}
           width={1600}
           height={900}
-          priority
+          preload
+          sizes="(max-width: 700px) calc(100vw - 2.5rem), 700px"
           className={`aspect-[16/8.8] w-full object-cover ${
             isSvgHero ? "grayscale saturate-0 contrast-110" : ""
           }`}
@@ -131,44 +86,7 @@ export function BlogContent({
       ) : null}
 
       <div className="relative mt-12 lg:grid lg:gap-16">
-        <motion.div
-          style={{ opacity: smoothLoaderOpacity }}
-          className="group fixed bottom-6 right-6 z-30 hidden items-center gap-1 lg:flex"
-        >
-          <NumberFlow
-            value={progressPercent}
-            className="text-foreground/20 absolute top-1 flex h-8 -translate-y-full items-center justify-center px-4 text-xs font-medium tabular-nums opacity-0 group-hover:opacity-100"
-            suffix="%"
-          />
-          <div className="bg-background/85 flex size-12 items-center justify-center rounded-2xl border border-black/12 backdrop-blur-md">
-            <svg className="size-10" viewBox="0 0 48 48" role="presentation">
-              <circle
-                cx="24"
-                cy="24"
-                r={svgRadius}
-                stroke="currentColor"
-                strokeWidth="3"
-                className="opacity-30"
-                fill="none"
-              />
-              <motion.circle
-                cx="24"
-                cy="24"
-                r={svgRadius}
-                stroke="currentColor"
-                strokeWidth="3"
-                fill="none"
-                strokeLinecap="round"
-                strokeDasharray={`${circumference}`}
-                style={{
-                  pathLength: smoothProgress,
-                  rotate: -90,
-                  transformOrigin: "50% 50%",
-                }}
-              />
-            </svg>
-          </div>
-        </motion.div>
+        <BlogReadingProgress />
 
         <article className="min-w-0">
           <BlogBody

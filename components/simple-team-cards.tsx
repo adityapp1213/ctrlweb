@@ -21,8 +21,8 @@ const members = [
     ],
     heading: "built close to the problem.",
     paragraphs: [
-      "i'm aditya panigrahi (chief everything officer), 18 have been working on atom ctrl since last year have built, ideated and shipped multiple things.",
-      "now have shifted my focus on WAM, because i feel ai is not just about predicting the next word rather to be a truely thinking machine....",
+      "I'm Aditya Panigrahi, founder of atom ctrl. Since starting the lab, I have explored, built, and shipped projects across machine learning.",
+      "My current focus is World Action Models: systems that learn how actions change the world and help robots choose what to do next.",
     ],
   },
   {
@@ -57,8 +57,12 @@ export function SimpleTeamCards() {
 
     syncExpandedMember();
     window.addEventListener("popstate", syncExpandedMember);
+    window.addEventListener("hashchange", syncExpandedMember);
 
-    return () => window.removeEventListener("popstate", syncExpandedMember);
+    return () => {
+      window.removeEventListener("popstate", syncExpandedMember);
+      window.removeEventListener("hashchange", syncExpandedMember);
+    };
   }, []);
 
   const toggleMember = (memberId: string) => {
@@ -85,7 +89,7 @@ export function SimpleTeamCards() {
           const expanded = expandedId === member.id;
 
           return (
-            <article className={`simple-team-card${expanded ? " is-expanded" : ""}`} key={member.id}>
+            <article id={member.id} className={`simple-team-card${expanded ? " is-expanded" : ""}`} key={member.id}>
               <button
                 className="simple-team-card-toggle"
                 type="button"

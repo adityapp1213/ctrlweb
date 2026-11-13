@@ -32,7 +32,30 @@ research/blog page for interaction-systems
 research/blog page
 
 `research/scaling-synthetic-data`
-research/blog page for godel-model
+research/blog page for synthetic data
+
+`/research/wam-0-1-dataset`
+research/blog page for the WAM-0.1 dataset
+
+`/llms.txt` and `/llms-full.txt`
+statically generated machine-readable indexes
+
+## article rendering
+
+Research content lives in the version-controlled HTML files in `content/`.
+`lib/blog-article.ts` extracts the article sections, and `BlogBody` renders them
+on the server with `html-react-parser`. Only trusted repository content should
+be passed to this renderer. Links, section IDs, figures, emphasis, and tables
+are preserved, and article images use Next.js image optimization.
+
+`lib/research.ts` is the shared registry for article metadata, research cards,
+the sitemap, and both machine-readable indexes. Update it when adding an article.
+The reading indicator and table of contents are separate client components.
+The particle canvas is contained in a fixed-aspect-ratio wrapper; bitmap size
+changes do not participate in page layout.
+
+This app has no `/lab` routes. Legacy lab-host and `/lab/*` requests redirect to
+the corresponding page on `atomctrl.com` until a dedicated lab app is available.
 
 ## stack
 
@@ -42,7 +65,6 @@ research/blog page for godel-model
 - Tailwind CSS 4
 - Framer Motion
 - Lucide React
-- shadcn/ui bits
 - custom article parsing for the research pages
 
 ## project shape
@@ -64,11 +86,8 @@ app/
     page.tsx
   team/
     page.tsx
-  apple-icon.tsx
-  favicon.ico
   fonts.ts
   globals.css
-  icon.tsx
   layout.tsx
   loading.tsx
   manifest.ts
@@ -80,6 +99,7 @@ components/
   blog/
     blog-body.tsx
     blog-content.tsx
+    blog-reading-progress.tsx
     blog-toc.tsx
     blog.module.css
     blog.tsx
@@ -90,16 +110,18 @@ components/
   simple-site-nav.tsx
   simple-team-cards.tsx
   site-loader-screen.tsx
-  site-preloader.tsx
 
 content/
   godel-source.html
   interaction-systems-source.html
   monarch-source.html
   scaling-source.html
+  wam-0-1-dataset-source.html
 
 lib/
   blog-article.ts
+  research.ts
+  llms.ts
   seo.ts
   utils.ts
 
@@ -118,14 +140,10 @@ public/
     gmail.svg
     instagram.svg
     linkedin.svg
-    monarch-simulation-grid.png
   fonts/
     Instrument_Serif/
     Mona_Sans/
     Shadows_Into_Light/
-  favicon.ico
-  llms-full.txt
-  llms.txt
 
 root files/
   package.json
@@ -147,7 +165,7 @@ root files/
 install deps:
 
 ```bash
-npm install
+npm ci
 ```
 
 start dev server:
@@ -168,6 +186,8 @@ other commands:
 npm run build
 npm run start
 npm run lint
+npm run typecheck
+npm test
 ```
 
 ## build status
@@ -176,6 +196,8 @@ good news, this thing is healthy rn :)
 
 - `npm.cmd run build` passes
 - `npm.cmd run lint` passes clean
+- `npm.cmd run typecheck` checks TypeScript
+- `npm.cmd test` covers article markup, metadata, canvas lifecycle, and lab redirects
 - all current app routes are statically prerendered
 
 ## main flow
@@ -190,8 +212,8 @@ pretty simple:
 ## branding notes
 
 - site metadata points to `https://atomctrl.com`
-- favicon lives in `app/favicon.ico`
-- the visible logo is the custom `AtomLogo` svg component
+- favicon and manifest icons use `public/assets/atom-mark-favicon.png`
+- the visible wordmark uses Geist Pixel Circle
 - the font is loaded locally from `public/fonts/`
 
 

@@ -37,33 +37,6 @@
   }
 }
 
-.shadows-into-light-regular {
-  font-family: var(--font-shadows-into-light), cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
-@keyframes butterfly-flap {
-  0%,
-  24.99% {
-    opacity: 1;
-  }
-  25%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes loader-logo-sway {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-4deg);
-  }
-  50% {
-    transform: translateY(-4px) rotate(4deg);
-  }
-}
-
 @keyframes site-loader-spin {
   0% {
     inset: 0 35px 35px 0;
@@ -101,85 +74,6 @@
 
 .site-loader-spin-delay {
   animation-delay: -1.25s;
-}
-
-@keyframes research-frame-cycle {
-  0% {
-    opacity: 0;
-  }
-  4.167%,
-  20.833% {
-    opacity: 1;
-  }
-  25%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes lab-nav-frame-cycle {
-  0% {
-    opacity: 1;
-  }
-  4% {
-    opacity: 1;
-  }
-  4.01%,
-  100% {
-    opacity: 0;
-  }
-}
-
-.research-frame {
-  opacity: 0;
-  transform: translate3d(
-    var(--research-frame-x, 0),
-    var(--research-frame-y, 0),
-    0
-  );
-  will-change: opacity, transform;
-  animation: none;
-}
-
-.lab-nav-frame {
-  opacity: 0;
-  will-change: opacity;
-  animation: none;
-}
-
-@media (min-width: 640px) {
-  .research-sequence-desktop-active .research-frame {
-    animation: research-frame-cycle 2400ms linear infinite;
-    animation-delay: var(--research-frame-delay, 0ms);
-  }
-
-  .lab-nav-sequence-active .lab-nav-frame {
-    animation: lab-nav-frame-cycle 6500ms linear infinite;
-    animation-delay: var(--lab-nav-frame-delay, 0ms);
-  }
-}
-
-@media (max-width: 639px) {
-  .research-sequence-mobile-active .research-frame {
-    animation: research-frame-cycle 2400ms linear infinite;
-    animation-delay: var(--research-frame-delay, 0ms);
-  }
-}
-
-.research-frame:first-child {
-  opacity: 1;
-}
-
-.lab-nav-frame:first-child {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .research-frame,
-  .lab-nav-frame {
-    animation: none;
-  }
-
 }
 
 .simple-site-shell {
@@ -763,43 +657,24 @@
   line-height: 0.9;
 }
 
-.simple-site-cta-form {
-  display: flex;
+.simple-site-cta-link {
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  width: min(100%, 22rem);
-  padding: 0.45rem;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 1.2rem;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(12px);
-}
-
-.simple-site-cta-form input {
-  min-width: 0;
-  flex: 1;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: #ffffff;
-  padding-left: 0.75rem;
-  font-family: var(--font-mona-sans), Arial, sans-serif;
-  font-size: 0.95rem;
-}
-
-.simple-site-cta-form input::placeholder {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.simple-site-cta-form button {
-  flex: 0 0 auto;
-  border: 0;
+  justify-content: center;
+  min-height: 3rem;
   border-radius: 0.85rem;
-  padding: 0.8rem 1.1rem;
+  padding: 0.8rem 1.5rem;
   background: #ffffff;
   color: #171717;
-  font-family: var(--font-mona-sans), Arial, sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.simple-site-cta-link:focus-visible,
+.simple-site-mobile-menu-button:focus-visible,
+.simple-site-mobile-menu-links a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
 }
 
 .simple-site-nav {
@@ -1472,6 +1347,20 @@
   border: 1px solid #dededb;
 }
 
+/* The wrapper owns layout; bitmap resizes must never size the page. */
+.simple-home-particles {
+  position: relative;
+  overflow: hidden;
+}
+
+.simple-home-particle-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .simple-site-text-link {
   display: inline-flex;
   align-items: center;
@@ -1873,10 +1762,6 @@
     font-size: clamp(2.7rem, 12vw, 4.5rem);
   }
 
-  .simple-site-cta-form {
-    width: min(100%, 21rem);
-  }
-
   .simple-site-nav {
     position: fixed;
     top: 0;
@@ -1895,7 +1780,7 @@
     transform: none;
   }
 
-  .simple-site-nav > nav {
+  .simple-site-nav > nav:not(.simple-site-mobile-menu) {
     display: none;
   }
 
@@ -2008,7 +1893,7 @@
     font-size: clamp(2.5rem, 14vw, 3.5rem);
   }
 
-  .simple-team h1 {
+  .simple-team-cards h1 {
     max-width: 300px;
     font-size: clamp(2.5rem, 14vw, 3.5rem);
   }
@@ -2112,7 +1997,7 @@
   }
 
   .simple-site-content h1,
-  .simple-team h1 {
+  .simple-team-cards h1 {
     font-size: clamp(2.2rem, 12vw, 3rem);
     line-height: 1.02;
   }
@@ -2332,5 +2217,22 @@
 
   .logo-bg-ss-wordmark {
     font-size: clamp(4.25rem, 17vw, 7rem);
+  }
+}
+
+.simple-site-first-section,
+.faq-accordion-item,
+.simple-team-card {
+  scroll-margin-top: 6.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-loader-spin {
+    animation: none;
+  }
+
+  .simple-site-mobile-menu-icon,
+  .simple-site-mobile-menu-close-icon {
+    transition: none;
   }
 }

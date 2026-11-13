@@ -21,10 +21,14 @@ export default function Home() {
             <div className="simple-site-intro">
               <p>
                 We are building thinking machines that can understand, reason,
-                and learn from the world around them and take actions after detering 
-                the outcome of it.
+                and learn from the world around them, then choose actions by
+                predicting their likely outcomes.
               </p>
               <p>Our work starts with a simple question: what should intelligence feel like in the physical world?</p>
+              <p className="simple-site-supporting-note">
+                Our WAM-0.1 dataset contains 300,029 physical transitions for
+                studying action and change. <a href="/research/wam-0-1-dataset">Explore the dataset <span aria-hidden="true" /></a>.
+              </p>
             </div>
 
             <div className="simple-site-divider" />
@@ -47,7 +51,9 @@ export default function Home() {
               <h2 id="jepa-section-title">Understanding the world <a className="simple-site-section-hash" href="#understanding-the-world" aria-label="Link to understanding the world">#</a></h2>
               <h3>Predicting the outcome of an action </h3>
               <p className="simple-section-description">
-                A robot needs more than an Internal representation of what the actions cause in the real world and space around it, how things change, adapt, and interact with an action 
+                A robot needs to understand how its actions affect the space
+                around it. We study how objects move and interact so a model can
+                predict what may change before choosing its next action.
               </p>
             </section>
 
@@ -79,7 +85,8 @@ export default function Home() {
               <p className="simple-section-description">
                 Joint Embedding Predictive Architectures let a model focus on
                 the parts of an observation that matter for understanding and
-                action. This was created by one of the forefathers of AI, Mr. Yann le Cun, and we adapted towards this idea and paradigm of models. 
+                action. Our research builds on the predictive learning approach
+                proposed by Yann LeCun.
               </p>
               <a
                 className="simple-site-text-link"
@@ -127,6 +134,7 @@ export default function Home() {
                 alt="Robot manipulation scenes from simulation"
                 width={2048}
                 height={691}
+                sizes="(max-width: 700px) calc(100vw - 2.5rem), 700px"
               />
             </section>
 
@@ -135,9 +143,10 @@ export default function Home() {
               <h2 id="monarch-section-title">Project Monarch <a className="simple-site-section-hash" href="#project-monarch" aria-label="Link to Project Monarch">#</a></h2>
               <h3>Our earlier model.</h3>
               <p className="simple-section-description">
-                Project Monarch is the internal name for our first model. We were
-                building it to Before adapting towards world action models ( WAM-1 ), 
-                Which, after internal assessment and testing, was found to be a best fit for use cases like robotics and automations where there is a defined action rather than Concepts which have meaning and are hard to divide in an abstract sense 
+                Project Monarch was our earlier model and research direction.
+                After internal assessment and testing, we shifted our focus to
+                World Action Models for robotics and automation, where actions
+                have observable effects that a model can learn to predict.
               </p>
               <a className="simple-site-text-link" href="/research/monarch">
                 read about Project Monarch <span aria-hidden="true" />
