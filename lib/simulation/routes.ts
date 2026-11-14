@@ -2,6 +2,7 @@ import { ROBOT_CATALOG, type SimulationSetup } from './panda';
 import { normalizeSceneProps } from '@/public/simulation/asset-options.mjs';
 
 export const PLAYGROUND_PATH = '/platform/playground';
+export const EXPLORE_PATH = `${PLAYGROUND_PATH}/explore`;
 export const SCENARIOS = [
   { id: 'ground', slug: 'open-floor', label: 'Open floor', description: 'Inspect the arm in its original scene.', objects: ['Ground plane', 'Robot'] },
   { id: 'workbench', slug: 'workbench', label: 'Workbench', description: 'An ALOHA workbench with a calibration block.', objects: ['ALOHA table', 'Block'] },

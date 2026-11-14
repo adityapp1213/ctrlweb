@@ -188,22 +188,49 @@ test("platform layout synchronizes only its authenticated Clerk identity", async
 
 test('workspace mode follows the route and the shared shell renders route content', () => {
   let pathname = '/platform/playground/franka-emika-panda/open-floor';
+  let params = new URLSearchParams();
   const { PlatformMode } = loadSource('components/platform-mode.tsx', {
-    'next/navigation': { usePathname: () => pathname, useRouter: () => ({ push: () => {} }) },
+    'next/navigation': { usePathname: () => pathname, useRouter: () => ({ push: () => {} }), useSearchParams: () => params },
     '@clerk/nextjs': { UserButton: () => React.createElement('span', null, 'account menu') },
-    '@/components/playground-sidebar': { PlaygroundSidebar: () => null },
+    '@/components/playground-sidebar': { PlaygroundSidebar: ({ mode }) => React.createElement('aside', { 'data-sidebar-mode': mode }, 'Shared navigation') },
   });
   const playground = renderToStaticMarkup(React.createElement(PlatformMode, null, 'route content'));
   assert.match(playground, /data-mode="playground"/);
   assert.match(playground, /account menu/);
   assert.match(playground, /route content/);
+  assert.match(playground, /data-sidebar-mode="playground"/);
   pathname = '/platform/research';
   const research = renderToStaticMarkup(React.createElement(PlatformMode, null));
   assert.match(research, /data-mode="research"/);
+  assert.match(research, /data-sidebar-mode="research"/);
+  pathname = '/platform/library/models';
+  params = new URLSearchParams({ mode: 'research' });
+  const library = renderToStaticMarkup(React.createElement(PlatformMode, null));
+  assert.match(library, /data-sidebar-mode="research"/);
+});
+
+test('research sidebar preserves the selected scene and links to working workspace actions', () => {
+  const params = new URLSearchParams({ robot: 'franka-fr3', environment: 'workbench', props: 'can' });
+  const { PlaygroundSidebar } = loadSource('components/playground-sidebar.tsx', {
+    'next/navigation': { usePathname: () => '/platform/research', useSearchParams: () => params },
+    'geist/font/pixel': { GeistPixelCircle: { className: 'pixel' } },
+  });
+  const props = { mode: 'research', mobileOpen: false, onMobileOpen: () => {}, onClose: () => {}, onToggleCollapse: () => {} };
+  const html = renderToStaticMarkup(React.createElement(PlaygroundSidebar, props));
+  assert.match(html, /aria-label="Research navigation"/);
+  assert.match(html, /aria-label="Collapse sidebar"/);
+  assert.match(html, /robot=franka-fr3&amp;environment=workbench&amp;props=can&amp;view=policy/);
+  assert.match(html, /<a(?=[^>]*aria-label="Code editor")(?=[^>]*aria-current="page")[^>]*>/);
+  assert.match(html, /robot=franka-fr3&amp;environment=workbench&amp;props=can&amp;presets=dual/);
+  assert.match(html, /\/platform\/library\/models\?mode=research/);
+  const collapsed = renderToStaticMarkup(React.createElement(PlaygroundSidebar, { ...props, collapsed: true }));
+  assert.match(collapsed, /data-collapsed="true"/);
+  assert.match(collapsed, /aria-label="Expand sidebar"/);
 });
 
 const privatePages = [
   ['app/platform/playground/page.tsx', {}],
+  ['app/platform/playground/explore/page.tsx', {}],
   ['app/platform/playground/[robot]/page.tsx', { params: Promise.resolve({ robot: 'franka-emika-panda' }) }],
   ['app/platform/playground/[robot]/[scenario]/page.tsx', { params: Promise.resolve({ robot: 'franka-emika-panda', scenario: 'open-floor' }), searchParams: Promise.resolve({}) }],
   ['app/platform/research/page.tsx', {}],
@@ -214,11 +241,31 @@ for (const [file, props] of privatePages) {
     const { default: Page } = loadSource(file, {
       '@clerk/nextjs/server': { auth: signedOutAuth },
       '@/components/simulation/playground-browser': () => null,
+      '@/components/simulation/playground-home': () => null,
       '@/components/simulation/simulation-session': () => null,
+      '@/components/simulation/research-workspace': () => null,
     });
     await assert.rejects(Page(props), /unauthenticated/);
   });
 }
+
+test('playground home and Explore have distinct protected routes and old filters keep working', async () => {
+  const Home = () => null;
+  const Collection = () => null;
+  let protections = 0;
+  const mocks = {
+    '@clerk/nextjs/server': { auth: { protect: async () => { protections++; } } },
+    'next/navigation': { redirect },
+    '@/components/simulation/playground-home': Home,
+    '@/components/simulation/playground-browser': Collection,
+  };
+  const HomePage = loadSource('app/platform/playground/page.tsx', mocks).default;
+  const ExplorePage = loadSource('app/platform/playground/explore/page.tsx', mocks).default;
+  assert.equal((await HomePage({})).type, Home);
+  assert.equal((await ExplorePage()).type, Collection);
+  await assert.rejects(HomePage({ searchParams: Promise.resolve({ arms: 'dual', environment: 'workbench', q: 'Franka Panda' }) }), /redirect:\/platform\/playground\/explore\?arms=dual&environment=workbench&q=Franka\+Panda/);
+  assert.equal(protections, 3);
+});
 
 test('robot and scenario routes validate parameters and restore URL scene props', async () => {
   const mocks = {
@@ -250,4 +297,26 @@ test('every robot and scenario has an unambiguous canonical route', () => {
   }
   assert.equal(simulationPath({ robotId: ROBOT_CATALOG[0].id, environment: 'ground', props: ['sphere', 'block', 'sphere', 'unknown'] }), `${robotPath(ROBOT_CATALOG[0].id)}/open-floor?props=block,lemon`);
   assert.throws(() => simulationPath({ robotId: 'unknown', environment: 'ground', props: [] }), /Unknown simulation/);
+});
+
+test('research starts empty and all 26 presets round-trip through protected workspace URLs', async () => {
+  const { researchSetup, researchPath } = loadSource('lib/simulation/research.ts');
+  const { ROBOT_CATALOG } = loadSource('lib/simulation/panda.ts');
+  assert.deepEqual(researchSetup({}), { robotId: 'empty', environment: 'ground', props: [] });
+  assert.equal(researchPath(researchSetup({})), '/platform/research');
+  assert.equal(researchSetup({ robot: 'unknown' }), null);
+  assert.equal(researchSetup({ robot: 'franka-fr3', environment: 'unknown' }), null);
+  for (const robot of ROBOT_CATALOG) {
+    const setup = { robotId: robot.id, environment: 'workbench', props: ['can', 'lemon'] };
+    const url = new URL(researchPath(setup), 'http://localhost');
+    assert.equal(url.pathname, '/platform/research');
+    assert.deepEqual(researchSetup(Object.fromEntries(url.searchParams)), setup);
+  }
+  const { default: ResearchPage } = loadSource('app/platform/research/page.tsx', {
+    '@clerk/nextjs/server': { auth: { protect: async () => ({ userId: 'user_test' }) } },
+    '@/components/simulation/research-workspace': () => null,
+    'next/navigation': { notFound: () => { throw new Error('not-found'); } },
+  });
+  assert.deepEqual((await ResearchPage({ searchParams: Promise.resolve({}) })).props.setup, researchSetup({}));
+  await assert.rejects(ResearchPage({ searchParams: Promise.resolve({ robot: 'unknown' }) }), /not-found/);
 });

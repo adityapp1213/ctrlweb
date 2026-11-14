@@ -14,6 +14,20 @@ Protected workspace routes:
   are encoded in `?props=block,lemon` so refresh restores the configuration.
   `view=scene` and `view=policy` also restore the selected inspector view.
 - `/platform/research` is the research workspace.
+- Research starts with an empty MuJoCo scene and a Python editor in the right
+  sidebar. Add/change a preset from the same 26-model collection, configure the
+  environment and community props, or clear the scene back to blank. Each
+  workspace has one active robot preset (including the catalog's dual-arm models).
+  The selected robot, environment, props, and inspector view live in URL query
+  parameters, so history and refresh preserve the scene configuration. Code
+  survives preset and scene changes within the workspace; use Save/Load draft
+  for persistence across refreshes. Research scene saves and policy drafts are
+  scoped to the signed-in user in this browser and separate from Playground.
+- The left sidebar is shared by Playground, Research, and their library pages.
+  Its desktop collapse button switches to an icon rail; this state stays in the
+  shared platform layout when switching modes. In Research, sidebar links open
+  Code/Scene/Controls, filter the robot preset picker, and apply environments to
+  the current scene. On small screens, the same navigation opens as a drawer.
 - `/platform/library/[section]` provides the existing library destinations;
   models, modules, environments, and tasks are currently empty-state pages.
 

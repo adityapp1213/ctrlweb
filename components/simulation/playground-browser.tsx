@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { ArrowRight, ArrowUpRight, Bot, ChevronRight, Search, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Bot, ChevronRight, Search, X } from 'lucide-react';
 import { ROBOT_GALLERY, SCENARIO_GALLERY } from '@/lib/simulation/gallery';
-import { PLAYGROUND_PATH, robotPath, simulationPath } from '@/lib/simulation/routes';
+import { EXPLORE_PATH, PLAYGROUND_PATH, robotPath, simulationPath } from '@/lib/simulation/routes';
 import styles from './playground-browser.module.css';
 
 export default function PlaygroundBrowser({ robotId }: { robotId?: string }) {
@@ -20,7 +20,7 @@ export default function PlaygroundBrowser({ robotId }: { robotId?: string }) {
   if (query) collectionQuery.set('q', query);
   if (SCENARIO_GALLERY.some((scenario) => scenario.slug === environment)) collectionQuery.set('environment', environment!);
   const suffix = collectionQuery.size ? `?${collectionQuery}` : '';
-  const collectionHref = `${PLAYGROUND_PATH}${suffix}`;
+  const collectionHref = `${EXPLORE_PATH}${suffix}`;
   const robots = ROBOT_GALLERY.filter((robot) =>
     (!['single', 'dual'].includes(initialFilter) || (initialFilter === 'dual' ? robot.paired : !robot.paired)) &&
     `${robot.label} ${robot.id}`.toLowerCase().includes(query.trim().toLowerCase())
@@ -31,15 +31,18 @@ export default function PlaygroundBrowser({ robotId }: { robotId?: string }) {
     if (value) params.set('q', value); else params.delete('q');
     // Next.js integrates native history with useSearchParams; filtering stays
     // immediate and does not add a browser-history entry per keystroke.
-    window.history.replaceState(null, '', `${PLAYGROUND_PATH}${params.size ? `?${params}` : ''}`);
+    window.history.replaceState(null, '', `${EXPLORE_PATH}${params.size ? `?${params}` : ''}`);
   }
 
   return <div className={styles.browser}>
     <div className={styles.bar}>
-      <nav className={styles.breadcrumbs} aria-label="Playground location">
-        <Link href={PLAYGROUND_PATH}>Playground</Link><span>/</span>
-        {selected ? <><Link href={collectionHref}>Robots</Link><span>/</span><strong>{selected.label}</strong></> : <strong>{initialFilter === 'dual' ? 'Dual arms' : initialFilter === 'single' ? 'Single arms' : 'Robots'}</strong>}
-      </nav>
+      <div className={styles.location}>
+        <Link href={selected ? collectionHref : PLAYGROUND_PATH} className={styles.back} aria-label={selected ? 'Back to Explore' : 'Back to Home'} title={selected ? 'Back to Explore' : 'Back to Home'}><ArrowLeft size={17} aria-hidden="true" /></Link>
+        <nav className={styles.breadcrumbs} aria-label="Playground location">
+          <Link href={PLAYGROUND_PATH}>Home</Link><span>/</span>
+          {selected ? <><Link href={collectionHref}>Explore</Link><span>/</span><strong>{selected.label}</strong></> : <strong>{initialFilter === 'dual' ? 'Dual arms' : initialFilter === 'single' ? 'Single arms' : 'Explore'}</strong>}
+        </nav>
+      </div>
       {!selected ? <label className={styles.search}><Search size={15} aria-hidden="true"/><input type="search" placeholder="Search robots" aria-label="Search robots" value={query} onChange={(event) => setQuery(event.target.value)}/>{query && <button onClick={() => setQuery('')} aria-label="Clear search"><X size={13}/></button>}</label> : <a className={styles.source} href={selected.preview.source} target="_blank" rel="noreferrer">Model preview source <ArrowUpRight size={13}/></a>}
     </div>
     {selected ? <>

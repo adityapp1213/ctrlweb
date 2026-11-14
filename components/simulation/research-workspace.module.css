@@ -1,0 +1,26 @@
+.studio { max-width: none; padding: 0 24px 24px; }
+.studio .heading { margin-bottom: 0; }
+.dialog { width: min(850px, calc(100vw - 40px)); max-height: 84svh; padding: 0; border: 1px solid #36363d; border-radius: 14px; background: #151517; color: #eee; box-shadow: 0 30px 100px #0009; font-family: var(--font-mona-sans), Arial, sans-serif; }
+.dialog::backdrop { background: #0009; backdrop-filter: blur(6px); }
+.dialogHeader { display: flex; justify-content: space-between; gap: 20px; padding: 26px 26px 18px; }
+.dialogHeader span { color: #73737c; font-size: 9px; letter-spacing: .14em; }
+.dialogHeader h2 { margin: 8px 0 6px; font-size: 24px; font-weight: 500; letter-spacing: -.035em; }
+.dialogHeader p { margin: 0; color: #898992; font-size: 12px; }
+.dialogHeader button { display: grid; place-items: center; align-self: flex-start; width: 30px; height: 30px; border: 1px solid #33333a; border-radius: 6px; background: transparent; color: #aaa; cursor: pointer; }
+.search { display: flex; align-items: center; gap: 10px; margin: 0 26px 22px; padding: 12px; border: 1px solid #38383f; border-radius: 7px; background: #111113; color: #777; }
+.search input { flex: 1; min-width: 0; padding: 0; border: 0; outline: 0; background: none; color: #eee; font: inherit; font-size: 12px; }
+.search span { color: #666671; font-size: 10px; white-space: nowrap; }
+.search:focus-within { border-color: #888; }
+.presetGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; padding: 0 26px 24px; }
+.preset { overflow: hidden; min-width: 0; padding: 0; border: 1px solid #303036; border-radius: 7px; background: #1b1b1e; color: #c9c9d0; text-align: left; cursor: pointer; transition: border-color 150ms, transform 150ms; }
+.preset:hover { border-color: #777; transform: translateY(-3px); }
+.presetImage { position: relative; aspect-ratio: 4 / 3; background: #20242a; }
+.presetImage img { object-fit: cover; }
+.preset > span { display: flex; align-items: center; gap: 7px; padding: 12px 10px; font-size: 11px; line-height: 1.5; }
+.preset > span svg { flex-shrink: 0; color: #888; }
+.preset > span svg:last-child { margin-left: auto; }
+.dialogFooter { padding: 17px 26px; border-top: 1px solid #2a2a30; color: #777781; font-size: 11px; }
+.emptyResults { padding: 30px; color: #aaa; text-align: center; }
+.dialog button:focus-visible { outline: 2px solid #bbb; outline-offset: 3px; }
+@media (max-width: 600px) { .presetGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-inline: 16px; } .dialogHeader { padding-inline: 16px; } .search { margin-inline: 16px; } }
+@media (prefers-reduced-motion: reduce) { .preset { transition: none; } }

@@ -4,6 +4,7 @@ import test from 'node:test';
 import loadMujoco from '@mujoco/mujoco';
 import { ArmSimulation } from '../public/simulation/physics.mjs';
 import { composeScene } from '../public/simulation/scene.mjs';
+import { emptyScene } from '../public/simulation/empty-scene.mjs';
 
 const root = new URL('../public/models/franka-emika-panda/', import.meta.url);
 const manifest = JSON.parse(readFileSync(new URL('manifest.json', root), 'utf8'));
@@ -12,6 +13,23 @@ const environmentManifest = JSON.parse(readFileSync(new URL('../public/environme
 const environmentAssets = environmentManifest.files.filter((file: { name: string }) => /\.(xml|obj|msh|png)$/.test(file.name)).map((file: { name: string }) => ({ name: 'environment/' + file.name, bytes: new Uint8Array(readFileSync(new URL('../public/environments/' + file.name, import.meta.url))) }));
 const profiles = JSON.parse(readFileSync(new URL('../public/simulation/workspace-profiles.json', import.meta.url), 'utf8'));
 const profile = profiles.franka_emika_panda;
+
+test('blank research canvas is a real MuJoCo scene without a robot or actuators', async () => {
+  const mujoco = await loadMujoco();
+  const scene = files.find((file: { name: string }) => file.name === 'scene.xml');
+  const sim = new ArmSimulation(mujoco, emptyScene(scene.bytes));
+  try {
+    assert.equal(sim.model.nu, 0);
+    assert.equal(sim.model.nq, 0);
+    assert.deepEqual(sim.controls, []);
+    assert.ok(sim.geometry().some((geom) => geom.type === 0));
+    sim.step(100);
+    assert.ok(sim.data.time > .09);
+    sim.reset();
+    assert.equal(sim.data.time, 0);
+    assert.ok(sim.snapshot().transforms.every(Number.isFinite));
+  } finally { sim.dispose(); }
+});
 
 test('every catalog robot has an original preview, pinned source, and bundled license', () => {
   const catalog = JSON.parse(readFileSync(new URL('../public/simulation/robot-catalog.json', import.meta.url), 'utf8'));

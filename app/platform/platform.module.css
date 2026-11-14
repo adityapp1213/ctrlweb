@@ -5,8 +5,14 @@
   background: #f7f7f5;
 }
 
-.layout { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 100svh; }
-.layout[data-mode="playground"] { grid-template-columns: 264px minmax(0, 1fr); background: #111; color: #f5f5f5; color-scheme: dark; }
+.layout { --platform-sidebar-width: 264px; display: grid; grid-template-columns: var(--platform-sidebar-width) minmax(0, 1fr); min-height: 100svh; transition: grid-template-columns 180ms ease; }
+.layout[data-sidebar-collapsed="true"] { --platform-sidebar-width: 64px; }
+.layout[data-mode="playground"] { background: #111; color: #f5f5f5; color-scheme: dark; }
+.layout[data-mode="research"] { background: #111; color: #f5f5f5; color-scheme: dark; }
+.layout[data-mode="research"] .modeToggle { background: #202020; }
+.layout[data-mode="research"] .selection { background: #333; border-color: #444; box-shadow: 0 1px 5px #0003; }
+.layout[data-mode="research"] .option { color: #999; }
+.layout[data-mode="research"] .option:has(input:checked) { color: #f5f5f5; }
 .stage { display: flex; flex-direction: column; min-width: 0; min-height: 100svh; }
 .menuButton { display: none; }
 .layout[data-mode="playground"] .modeToggle { background: #202020; }
@@ -24,6 +30,10 @@
 
 .account { grid-column: 3; justify-self: end; }
 .workspace { flex: 1; }
+.layout[data-home="true"] .stage { position: relative; height: 100dvh; min-height: 0; overflow: hidden; }
+.layout[data-home="true"] .header { position: absolute; inset: 0 0 auto; z-index: 5; pointer-events: none; }
+.layout[data-home="true"] .header > * { pointer-events: auto; }
+.layout[data-home="true"] .workspace { min-height: 0; }
 .simulationLoading { padding: 24px 32px; color: #888; font-size: 13px; }
 .library { padding: 32px; color: #999; font-size: 13px; }
 .library h1 { margin: 0 0 12px; color: #eee; font-size: 24px; font-weight: 500; }
@@ -85,9 +95,9 @@
 }
 @media (max-width: 380px) { .option { font-size: 13px; } }
 @media (max-width: 760px) {
-  .layout[data-mode="playground"] { grid-template-columns: minmax(0, 1fr); }
+  .layout, .layout[data-sidebar-collapsed="true"] { grid-template-columns: minmax(0, 1fr); }
   .header { padding: 18px 20px; }
   .menuButton { position: absolute; left: 18px; display: grid; place-items: center; width: 32px; height: 36px; padding: 0; border: 0; border-radius: 5px; background: transparent; color: #ccc; cursor: pointer; }
   .menuButton:focus-visible { outline: 2px solid #aaa; outline-offset: 2px; }
 }
-@media (prefers-reduced-motion: reduce) { .selection, .option { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .layout, .selection, .option { transition: none; } }

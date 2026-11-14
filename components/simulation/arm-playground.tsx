@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { Crosshair, LoaderCircle, Pause, Play, RotateCcw } from "lucide-react";
+import { Bot, Crosshair, LoaderCircle, Pause, Play, Plus, RotateCcw, Trash2 } from "lucide-react";
 import { useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { PLAYGROUND_PATH, robotPath } from '@/lib/simulation/routes';
+import { EXPLORE_PATH, PLAYGROUND_PATH, robotPath } from '@/lib/simulation/routes';
 import { SCENE_ASSETS, normalizeSceneProps } from '@/public/simulation/asset-options.mjs';
 import { ENVIRONMENTS } from '@/public/simulation/scene.mjs';
 import { ROBOT_CATALOG, type RobotControl, type SimulationSetup } from "@/lib/simulation/panda";
@@ -14,7 +14,7 @@ import type { ArmRuntime, SimulationState } from "@/lib/simulation/arm-runtime";
 import styles from "./arm-playground.module.css";
 import tools from './workspace-tools.module.css';
 
-export default function ArmPlayground({ initialSetup, onConfigure }: { initialSetup?: SimulationSetup; onConfigure?: (setup: SimulationSetup) => void }) {
+export default function ArmPlayground({ initialSetup, onConfigure, research = false, onChooseRobot, onClear, policySource, onPolicySourceChange }: { initialSetup?: SimulationSetup; onConfigure?: (setup: SimulationSetup) => void; research?: boolean; onChooseRobot?: () => void; onClear?: () => void; policySource?: string; onPolicySourceChange?: (source: string) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const runtime = useRef<ArmRuntime | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -27,7 +27,7 @@ export default function ArmPlayground({ initialSetup, onConfigure }: { initialSe
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const view = searchParams.get('view');
-  const tab = view === 'scene' || view === 'policy' ? view : 'controls';
+  const tab = view === 'scene' || view === 'policy' || view === 'controls' ? view : research ? 'policy' : 'controls';
   const [policyOpened, setPolicyOpened] = useState(false);
   const [policyActive, setPolicyActive] = useState(false);
   const [progress, setProgress] = useState('');
@@ -35,6 +35,9 @@ export default function ArmPlayground({ initialSetup, onConfigure }: { initialSe
   const { user } = useUser();
   const policy = useRef<PolicyHandle>(null);
   const robot = ROBOT_CATALOG.find((item) => item.id === setup.robotId) || ROBOT_CATALOG[0];
+  const empty = setup.robotId === 'empty';
+  const label = empty ? 'Untitled scene' : robot.label;
+  const sceneStorageKey = `${research ? 'atom-research-scene' : 'atom-scene'}:${user?.id || 'local'}`;
   const presetProps = ENVIRONMENTS.find((environment) => environment.id === setup.environment)?.props || [];
   const id = useId();
 
@@ -61,7 +64,7 @@ export default function ArmPlayground({ initialSetup, onConfigure }: { initialSe
   function reset() { policy.current?.stop(); runtime.current?.reset(); setTargets(joints.map((joint) => joint.home)); }
   function selectView(view: 'controls' | 'scene' | 'policy') {
     const params = new URLSearchParams(searchParams);
-    if (view === 'controls') params.delete('view'); else params.set('view', view);
+    if (view === (research ? 'policy' : 'controls')) params.delete('view'); else params.set('view', view);
     window.history.replaceState(null, '', `${pathname}${params.size ? `?${params}` : ''}`);
     if (view === 'policy') setPolicyOpened(true);
   }
@@ -74,50 +77,55 @@ export default function ArmPlayground({ initialSetup, onConfigure }: { initialSe
     prepareReload(); setSetup(next);
   }
   function saveScene() {
-    try { localStorage.setItem(`atom-scene:${user?.id || 'local'}`, JSON.stringify(setup)); setSceneMessage('Scene saved in this browser.'); }
+    try { localStorage.setItem(sceneStorageKey, JSON.stringify(setup)); setSceneMessage('Scene saved in this browser.'); }
     catch { setSceneMessage('Browser storage is unavailable.'); }
   }
   function loadScene() {
     try {
-      const saved = JSON.parse(localStorage.getItem(`atom-scene:${user?.id || 'local'}`) || 'null');
-      if (!saved || !ROBOT_CATALOG.some((model) => model.id === saved.robotId) || !['ground','workbench','sorting'].includes(saved.environment) || !Array.isArray(saved.props) || !saved.props.every((prop: unknown) => typeof prop === 'string')) { setSceneMessage('No compatible saved scene found.'); return; }
+      const saved = JSON.parse(localStorage.getItem(sceneStorageKey) || 'null');
+      if (!saved || !(ROBOT_CATALOG.some((model) => model.id === saved.robotId) || research && saved.robotId === 'empty') || !['ground','workbench','sorting'].includes(saved.environment) || !Array.isArray(saved.props) || !saved.props.every((prop: unknown) => typeof prop === 'string')) { setSceneMessage('No compatible saved scene found.'); return; }
       configure({ ...saved, props: normalizeSceneProps(saved.props) }); setSceneMessage('Saved scene loaded.');
     } catch { setSceneMessage('The saved scene could not be read.'); }
   }
 
   return (
-    <div className={styles.playground}>
+    <div className={`${styles.playground} ${research ? styles.research : ''}`}>
       <div className={styles.heading}>
-        <div><p className={styles.eyebrow}>PLAYGROUND / MUJOCO MENAGERIE</p><h1>{robot.label}</h1><p className={styles.subtitle}>Official models · Physical contacts · Local Python policies</p></div>
+        <div><p className={styles.eyebrow}>{research ? 'RESEARCH WORKSPACE' : 'PLAYGROUND / MUJOCO MENAGERIE'}</p><h1>{research ? 'Untitled workspace' : label}</h1><p className={styles.subtitle}>{research ? empty ? 'A clean scene. A place to begin.' : `${label} · Custom scene` : 'Official models · Physical contacts · Local Python policies'}</p></div>
         <div className={styles.transportButtons}>
-          <button className={styles.primaryButton} disabled={status !== "ready"} onClick={() => { if (state.running) { policy.current?.stop(); runtime.current?.pause(); } else runtime.current?.play(); }}>{state.running ? <Pause size={16} /> : <Play size={16} />} {state.running ? "Pause" : "Play"}</button>
+          {research && <button className={styles.secondaryButton} onClick={onChooseRobot}><Plus size={16}/>{empty ? 'Add robot' : 'Change robot'}</button>}
+          <button className={styles.primaryButton} disabled={status !== "ready" || empty} onClick={() => { if (state.running) { policy.current?.stop(); runtime.current?.pause(); } else runtime.current?.play(); }}>{state.running ? <Pause size={16} /> : <Play size={16} />} {state.running ? "Pause" : "Play"}</button>
           <button className={styles.secondaryButton} disabled={status !== "ready"} onClick={reset}><RotateCcw size={15} />Reset</button>
+          {research && <button className={styles.iconButton} disabled={empty} onClick={() => { policy.current?.stop(); runtime.current?.pause(); onClear?.(); }} title="Remove robot and return to a blank scene" aria-label="Clear research scene"><Trash2 size={15}/></button>}
         </div>
       </div>
-      <nav className={styles.sessionBar} aria-label="Simulation location">
+      {!research && <nav className={styles.sessionBar} aria-label="Simulation location">
         <Link href={PLAYGROUND_PATH}>Playground</Link><span>/</span>
+        <Link href={EXPLORE_PATH}>Explore</Link><span>/</span>
         <Link href={robotPath(setup.robotId)}>{robot.label}</Link><span>/</span>
         <span>{setup.environment === 'ground' ? 'Open floor' : setup.environment === 'workbench' ? 'Workbench' : 'Object sorting'}</span>
-      </nav>
+      </nav>}
       {state.blocked && <p className={tools.notice} role="status">{state.blocked}</p>}
       <div className={styles.simulation}>
         <div className={styles.scene}>
           <div className={styles.sceneToolbar}>
-            <span className={styles.sceneLabel}>{robot.label} <span>{joints.length ? `${joints.length} ACTUATORS` : 'OFFICIAL MJCF'}</span></span>
+            <span className={styles.sceneLabel}>{label} <span>{empty ? 'EMPTY SCENE' : joints.length ? `${joints.length} ACTUATORS` : 'OFFICIAL MJCF'}</span></span>
             <button className={styles.iconButton} onClick={() => runtime.current?.home()} disabled={status !== "ready"} aria-label="Reset camera" title="Reset camera"><Crosshair size={17} /></button>
           </div>
           <div ref={host} className={styles.viewport} />
+          {research && empty && status === 'ready' && <div className={styles.blankPrompt}><Bot size={30} strokeWidth={1}/><h2>Start with an empty world.</h2><p>Add a robot preset, build your scene,<br/>and bring your policy to life.</p><button className={styles.primaryButton} onClick={onChooseRobot}><Plus size={15}/>Browse robot presets</button></div>}
           {status !== "ready" && <div className={styles.overlay} role={status === "error" ? "alert" : "status"}>
-            {status === "loading" ? <><LoaderCircle className={styles.spinner} size={24} /><p>{progress || `Loading ${robot.label}…`}</p></> : <><p>{error}</p><button className={styles.secondaryButton} onClick={reload}>Reload scene</button></>}
+            {status === "loading" ? <><LoaderCircle className={styles.spinner} size={24} /><p>{progress || `Loading ${empty ? 'blank scene' : label}…`}</p></> : <><p>{error}</p><button className={styles.secondaryButton} onClick={reload}>Reload scene</button></>}
           </div>}
           <div className={styles.sceneFooter}><span>Drag to orbit · Scroll to zoom</span><span aria-label="Simulation time">{state.time.toFixed(2)} s</span></div>
         </div>
-        <aside className={styles.inspector} aria-label="Robot controls">
+        <aside className={styles.inspector} aria-label={research ? 'Research code and scene' : 'Robot controls'}>
           <div className={styles.tabs} role="group" aria-label="Inspector view">
-            {(['controls', 'scene', 'policy'] as const).map((view) => <button key={view} aria-pressed={tab === view} onClick={() => selectView(view)}>{view === 'controls' ? 'Controls' : view === 'scene' ? 'Scene' : 'Python'}</button>)}
+            {(research ? ['policy', 'scene', 'controls'] as const : ['controls', 'scene', 'policy'] as const).map((view) => <button key={view} aria-pressed={tab === view} onClick={() => selectView(view)}>{view === 'controls' ? 'Controls' : view === 'scene' ? 'Scene' : research ? 'Code' : 'Python'}</button>)}
           </div>
           <div className={styles.controlPanel} hidden={tab !== 'controls'}>
           <div className={styles.inspectorHeading}><h2>Actuators</h2><p>Original Menagerie actuators and torque limits. Targets move through MuJoCo dynamics.</p></div>
+          {empty && <p className={tools.help}>Add a robot preset to access its joint controls.</p>}
           <div className={styles.joints}>
             {joints.map((joint, index) => <div className={styles.joint} key={joint.id}>
               <div className={styles.jointLabel}><label htmlFor={`${id}-actuator-${joint.id}`}>{joint.label}</label><output htmlFor={`${id}-actuator-${joint.id}`}>{targets[index]?.toFixed(1)}{joint.unit}</output></div>
@@ -132,22 +140,23 @@ export default function ArmPlayground({ initialSetup, onConfigure }: { initialSe
           </div>
           <div className={styles.toolPanel} hidden={tab !== 'scene'}>
             <div className={tools.panelHeading}><h2>Scene composition</h2></div>
+            {research && <label className={tools.field}>Environment<select aria-label="Research environment" value={setup.environment} disabled={empty} onChange={(event) => configure({ ...setup, environment: event.target.value, props: [] })}>{ENVIRONMENTS.map((environment) => <option key={environment.id} value={environment.id}>{environment.label}</option>)}</select></label>}
             <p className={tools.help}>Community assets with robot-specific mounting and workspace dimensions. Applying a scene restores its starting pose.</p>
-            {SCENE_ASSETS.map(({ id: prop, label, source }) => <label className={tools.prop} key={prop}><input type="checkbox" checked={presetProps.includes(prop) || setup.props.includes(prop)} disabled={presetProps.includes(prop)} title={`${source}${presetProps.includes(prop) ? ' · Included in this preset' : ''}`} onChange={(event) => configure({ ...setup, props: event.target.checked ? [...setup.props, prop] : setup.props.filter((item) => item !== prop) })}/>{label}</label>)}
+            {SCENE_ASSETS.map(({ id: prop, label, source }) => <label className={tools.prop} key={prop}><input type="checkbox" checked={presetProps.includes(prop) || setup.props.includes(prop)} disabled={empty || presetProps.includes(prop)} title={`${source}${presetProps.includes(prop) ? ' · Included in this preset' : ''}`} onChange={(event) => configure({ ...setup, props: event.target.checked ? [...setup.props, prop] : setup.props.filter((item) => item !== prop) })}/>{label}</label>)}
             <p className={tools.help}>Props supplied by an environment preset remain in that preset. Switch to Open floor to build your own combination.</p>
             <div className={tools.actions}><button onClick={saveScene}>Save scene</button><button onClick={loadScene}>Load scene</button></div>
             {sceneMessage && <p className={tools.help} role="status">{sceneMessage}</p>}
             <p className={tools.help}>MuJoCo solves floor, fixture, object, and self contacts continuously. Mechanically connected parts retain their contact exclusions.</p>
             <a className={styles.modelLink} href="/environments/ATTRIBUTION.md" target="_blank" rel="noreferrer">Environment sources & licenses ↗</a>
-            <a href={robot.license} target="_blank" rel="noreferrer" className={styles.modelLink}>Model source & license ↗</a>
+            {!empty && <a href={robot.license} target="_blank" rel="noreferrer" className={styles.modelLink}>Model source & license ↗</a>}
           </div>
-          {(policyOpened || tab === 'policy') && <div className={styles.toolPanel} hidden={tab !== 'policy'}><PythonPolicy key={setup.robotId + setup.environment + setup.props.join(',')} ref={policy} runtime={runtime} state={state} controls={joints} robotId={setup.robotId} enabled={status === 'ready'} onActive={setPolicyActive}/></div>}
+          {(policyOpened || tab === 'policy') && <div className={styles.toolPanel} hidden={tab !== 'policy'}><PythonPolicy key={setup.robotId + setup.environment + setup.props.join(',')} ref={policy} runtime={runtime} state={state} controls={joints} robotId={research ? 'research-workspace' : setup.robotId} enabled={status === 'ready' && !empty} onActive={setPolicyActive} expanded={research} source={policySource} onSourceChange={onPolicySourceChange}/></div>}
         </aside>
       </div>
-      <div className={styles.transport}>
+      {!research && <div className={styles.transport}>
         <a href={robot.license.replace('/blob/', '/tree/').replace('/LICENSE', '')} target="_blank" rel="noreferrer">Model: Google DeepMind / MuJoCo Menagerie ↗</a>
         <span>Reset restores the official home keyframe.</span>
-      </div>
+      </div>}
     </div>
   );
 }

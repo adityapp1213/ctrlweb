@@ -1,6 +1,7 @@
 import loadMujoco from "/vendor/mujoco/mujoco.js";
 import { ArmSimulation } from "./physics.mjs";
 import { composeScene } from "./scene.mjs";
+import { emptyScene } from './empty-scene.mjs';
 
 let simulation;
 let running = false;
@@ -41,6 +42,13 @@ self.onmessage = async ({ data: message }) => {
   try {
     if (message.type === "init") {
       const mujoco = await loadMujoco({ locateFile: (file) => `/vendor/mujoco/${file}` });
+      if (message.robotId === 'empty') {
+        const response = await fetch('/models/franka-emika-panda/scene.xml');
+        if (!response.ok) throw new Error('The blank scene could not load.');
+        simulation = new ArmSimulation(mujoco, emptyScene(new Uint8Array(await response.arrayBuffer())));
+        self.postMessage({ type: 'ready', geoms: simulation.geometry(), textures: simulation.textures(), controls: simulation.controls });
+        publish(); return;
+      }
       const catalog = await (await fetch('/simulation/robot-catalog.json')).json();
       const robot = catalog.find(item => item.id === message.robotId);
       if (!robot) throw new Error('Unknown robot.');

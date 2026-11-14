@@ -15,3 +15,11 @@
 .prop { display: flex; align-items: center; gap: 9px; margin: 12px 0; color: #aaaab3; font-size: 12px; }
 .prop input { accent-color: #ccc; }
 .notice { padding: 10px 12px; border: 1px solid #49494f; border-radius: 6px; color: #c2c2ca; font-size: 11px; line-height: 1.6; }
+.policy[data-expanded="true"] :global(.cm-editor) { font-size: 12px; }
+.policy[data-expanded="true"] .console { min-height: 62px; max-height: 130px; }
+.policy[data-expanded="true"] .help { margin-block: 10px; }
+.policy[data-expanded="true"] { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.policy[data-expanded="true"] .panelHeading, .policy[data-expanded="true"] .help, .policy[data-expanded="true"] .actions { flex-shrink: 0; }
+.policy[data-expanded="true"] .editor { flex: 1; min-height: 190px; }
+.policy[data-expanded="true"] .console { flex: 0 0 60px; min-height: 60px; max-height: 60px; margin: 12px 0 0; }
+.policy :global(.cm-scroller) { scrollbar-width: thin; scrollbar-color: #484851 transparent; }
